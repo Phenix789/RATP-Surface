@@ -1,0 +1,1 @@
+<?php echo surface_select_tag('view[type]', options_for_select(e_TYPE_GRAPHIC::getList(), $view->getType())) ?>

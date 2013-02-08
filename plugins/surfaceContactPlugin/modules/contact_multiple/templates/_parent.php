@@ -1,0 +1,1 @@
+<?php echo surface_link_to($contact_multiple->getParent(), 'structure_ex/show?id=' . $contact_multiple->getParentId(), 'tg_east') ?>

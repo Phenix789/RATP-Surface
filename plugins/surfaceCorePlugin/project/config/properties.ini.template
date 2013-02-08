@@ -1,0 +1,14 @@
+[symfony]
+  name=<project_name>
+  
+[staging]
+  host=synergie.elogys.fr
+  port=22
+  user=elogys
+  dir=/home/elogys/<project_name>
+  
+[hebergement]
+  host=hebergement.elogys.fr
+  port=22
+  user=elogys
+  dir=/home/elogys/<project_name>

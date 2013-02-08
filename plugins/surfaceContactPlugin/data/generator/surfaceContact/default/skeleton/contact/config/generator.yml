@@ -1,0 +1,138 @@
+################################################################################
+# Module  ##############################################################
+# Generateur du module %%OBJECT_NAME%%
+#
+# @brief Generateur du module %%OBJECT_NAME%%
+# @package Plugin
+# @subpackage surfaceContact.%%OBJECT_NAME%%
+#
+# @author %%AUTHOR%%
+# @date %%DATE%%
+# @version %%VERSION%%
+#
+################################################################################
+generator:
+  class:															sfSurfaceGenerator
+  param:
+    model_class:											%%OBJECT_NAME%%
+    theme:														default
+
+################################################################################
+# Fields #######################################################################
+# Definition des attributs interne et externe
+################################################################################
+#	ATTRIBUTS														DETAIL
+# Base =========================================================================
+#
+# Sup ==========================================================================
+#
+# Show =========================================================================
+#
+# Edit =========================================================================
+#
+# Filter =======================================================================
+#
+################################################################################
+    fields:
+# Base =========================================================================
+<?php if($this->isPhysical()) : ?><?php echo generator_contact_get_physical_fields($this) ?><?php endif ?>
+<?php if($this->isMoral()) : ?><?php echo generator_contact_get_moral_fields($this) ?><?php endif ?>
+<?php echo generator_contact_get_address_fields($this) ?>
+<?php echo generator_contact_get_phone_fields($this) ?>
+<?php echo generator_contact_get_other_fields($this) ?>
+# Sup ==========================================================================
+<?php echo generator_contact_get_foreign_fields($this) ?>
+# Show =========================================================================
+<?php echo generator_contact_get_show_fields($this) ?>
+# Edit =========================================================================
+<?php echo generator_contact_get_edit_fields($this) ?>
+# Filter =======================================================================
+<?php echo generator_contact_get_filter_fields($this) ?>
+
+################################################################################
+# Actions ######################################################################
+# Definition des credentials neccessaire pour executer l'actions
+################################################################################
+#	ACTION															DETAIL
+# create
+# show
+# edit
+# delete_confirm
+#===============================================================================
+# exports
+################################################################################
+    actions:
+      _show:
+      _create:
+      _edit:
+      _delete_confirm:
+#===============================================================================
+    exports:
+      default:
+        name:													Exporter
+
+################################################################################
+# Fieldsets ####################################################################
+# Definition des sections
+################################################################################
+    fieldsets:
+<?php echo generator_contact_getfieldsets($this) ?>
+
+################################################################################
+# Create #######################################################################
+# Creation d'un nouvel element
+################################################################################
+    create:
+      title:													<?php echo generator_contact_create_title($this) ?>
+      display:
+<?php echo generator_contact_get_create_display($this) ?>
+<?php echo generator_contact_get_create_options($this) ?>
+
+################################################################################
+# Show #########################################################################
+# Visionnage d'un element existant
+################################################################################
+    show:
+      title:													<?php echo generator_contact_show_title($this) ?>
+      display:
+<?php echo generator_contact_get_show_display($this) ?>
+<?php echo generator_contact_get_show_options($this) ?>
+
+################################################################################
+# Edit #########################################################################
+# Modification d'un element existant
+################################################################################
+    edit:
+      title:													<?php echo generator_contact_edit_title($this) ?>
+      display:
+<?php echo generator_contact_get_edit_display($this) ?>
+<?php echo generator_contact_get_edit_options($this) ?>
+
+################################################################################
+# Delete confirm ###############################################################
+# Suppression d'un element
+################################################################################
+    delete_confirm:
+      title:													<?php echo generator_contact_edit_title($this) ?>
+      display:
+<?php echo generator_contact_get_edit_display($this) ?>
+<?php echo generator_contact_get_edit_options($this) ?>
+
+################################################################################
+# List #########################################################################
+# Liste des elements
+################################################################################
+    list:
+      title:													<?php echo generator_contact_list_title($this) ?>
+      display:
+<?php echo generator_contact_get_list_display($this) ?>
+<?php echo generator_contact_get_list_options($this) ?>
+
+################################################################################
+# Component ####################################################################
+# Liste des composants spécifiques
+################################################################################
+    components:
+<?php echo generator_contact_get_components($this) ?>
+
+################################################################################

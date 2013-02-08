@@ -1,0 +1,28 @@
+################################################################################
+# Modele du plugin Option ######################################################
+################################################################################
+#			Nom													Class					Detail
+# plugin_options_behavior			Option				Representation d'une option
+################################################################################
+propel:
+  _attributes:		{ package: plugins.sfPropelOptionsBehaviorPlugin.lib.model }
+
+################################################################################
+# Table Option #################################################################
+################################################################################
+#			Nom														Detail
+# id														Identifiant
+# model_name										Nom de la class model de l'option
+# model_id											Identifiant du model
+# name													Nom de l'option
+# value													Valeur de l'option
+################################################################################
+  plugin_options_behavior:
+    _attributes:								{ phpName: Options }
+    id:													~
+    model_name:									{ type: varchar, size: 255 }
+    model_id:										{ type: integer }
+    name:												{ type: varchar, size: 255 }
+    value:											{ type: varchar, size: 255 }
+
+################################################################################

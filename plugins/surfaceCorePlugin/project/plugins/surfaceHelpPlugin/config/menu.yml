@@ -1,0 +1,20 @@
+################################################################################
+# DECLARATION DES MENUS PROJECT ################################################
+################################################################################
+sfc_menu_generator:
+
+  items:
+    
+    help:
+      label:                      Informations
+      link:                       'help/index'
+      target:					  tg_lightbox
+      #items:                      [ about ]
+      icon:                       /sfcThemePlugin/common/icons/infos.png
+      class:											connect
+      
+    about:
+      label:                      À propos
+      link:                       'help/index'
+      target:					  tg_lightbox
+        

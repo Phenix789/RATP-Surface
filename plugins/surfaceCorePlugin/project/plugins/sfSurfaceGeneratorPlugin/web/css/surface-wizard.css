@@ -1,0 +1,182 @@
+.striked {
+	text-decoration: line-through;
+}
+
+div.wizardwrapper {
+	margin-bottom: 0px;
+}
+
+.dumpSteps {
+	
+}
+
+.dumpSteps ul {
+	padding: 0 10px;
+	}
+
+
+.wizardSummary {
+	background-color: #DEDEDE;
+	padding:10px;
+	border: dotted 1px #333;
+}
+
+.wizardButtons {
+	clear:both;
+	background-color:#DEDEDE;
+	padding:6px;
+	margin-top:3px;
+	border-bottom: solid 1px #AAA;
+	border-top: solid 1px #CCC;
+	margin-bottom: 15px;
+}
+
+.wizardButtons li {
+	display: inline;
+	padding:0 20px 0 0px;
+}
+
+.wizardButtons li input {
+	border: dotted 1px #333;
+	font-size: 1.3em;
+	padding:3px 10px;
+	cursor: pointer;
+	}
+
+h1.x-panel-header {
+	margin-bottom:3px; 
+	background-color:#CCC; 
+	color: #333; 
+	font-size: 1.2em;
+	padding:6px 6px 6px 9px;
+}
+
+
+.wizardNav {
+	height:71px;
+	width:100%;
+	padding: 0;
+}
+
+.wizardNav li a em, h4 {font-size: 114%} /* =15 */
+
+.wizardNav h1 a{
+	width:360px;
+	height:46px;
+	text-indent:-999em;
+	background-image: url(/images/logoPlaceHolder.gif);
+	background-repeat: no-repeat;
+	display:block;
+}
+
+.wizardNav li {
+	height:71px;
+	list-style:none;
+	float:left;
+	background-color:#EBEBEB;
+	background-image: url(../images/wizard/navBtn.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+
+.wizardNav li.current{
+	background-color:#6199F0;
+	background-image: url(../images/wizard/navCurrentBtn.gif);
+}
+
+.wizardNav li.lastDone{
+	background-color:#113554;
+	background-image: url(../images/wizard/navLastDoneBtn.gif);
+}
+
+.wizardNav li.done{
+	background-color:#113554;
+	background-image: url(../images/wizard/navDoneBtn.gif);
+}
+
+.wizardNav li a, .wizardNav li a:link, .wizardNav li a:visited, .wizardNav li a:hover, .wizardNav li a:active {
+color:#ccc;
+}
+
+.wizardNav li.lastDone a, .wizardNav li.lastDone a:link, .wizardNav li.lastDone a:visited, .wizardNav li.lastDone a:hover, .wizardNav li.lastDone a:active, .wizardNav li.current a, .wizardNav li.current a:link, .wizardNav li.current a:visited, .wizardNav li.current a:hover, .wizardNav li.current a:active, .wizardNav li.done a, .wizardNav li.done a:link, .wizardNav li.done a:visited, .wizardNav li.done a:hover, .wizardNav li.done a:active {
+color:#fff;
+}
+
+.wizardNav li.done a:hover, .wizardNav li.lastDone a:hover  {
+color:#FFFF99;
+cursor:hand;
+}
+
+.wizardNav li a em{
+width:150px;
+display:block;
+margin:6px 0 0 10px;
+font-style:normal;
+font-weight:bold;
+}
+
+.wizardNav li a span{
+width:140px;
+display:block;
+margin-left:10px;
+font-weight:normal;
+}
+
+.wizardNav li.wizardNavNoBg{
+background-image:none;
+}
+
+.wizardNav li a{
+height:71px;
+display:block;
+}
+
+/* #wizardNav.fiveStep */
+.wizardNav.fiveStep li {width:182px;}
+.wizardNav.fiveStep li a {width:182px;}
+
+
+/* #wizardNav.fourStep */
+.wizardNav.fourStep li{width:227px;}
+.wizardNav.fourStep li.wizardNavNoBg{width:229px;}
+.wizardNav.fourStep li a{width:227px;}
+
+/* #wizardNav.threeStep */
+.wizardNav.threeStep li{width:303px;}
+.wizardNav.threeStep li.wizardNavNoBg{width:304px;}
+.wizardNav.threeStep li a{width:303px;}
+
+/* #wizardNav.twoStep */
+.wizardNav.twoStep li{width:455px;}
+.wizardNav.twoStep li a{width:455px;}
+
+
+.wizardNav.stepsBy1 li {width:180px;}
+.wizardNav.stepsBy2 li {width:180px;}
+.wizardNav.stepsBy3 li {width:180px;}
+.wizardNav.stepsBy4 li {width:180px;}
+.wizardNav.stepsBy5 li {width:180px;}
+.wizardNav.stepsBy6 li {width:150px;}
+.wizardNav.stepsBy7 li {width:130px;}
+.wizardNav.stepsBy8 li {width:110px;}
+.wizardNav.stepsBy9 li {width:100px;}
+.wizardNav.stepsBy10 li {width:90px;}
+
+
+.wizardNav p {
+	font-style:normal;
+	line-height:15px;
+	padding:10px 20px 20px 5px;
+	color: #333333;
+}
+
+.wizard_step_title{
+	margin-top:3px;
+	height:36px;
+	background-color:#EEEEEE;
+	color:#333333;
+}
+.wizard_step_title h1{
+	float: left;
+	color: #666;
+}

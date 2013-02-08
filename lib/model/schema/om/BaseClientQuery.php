@@ -1,0 +1,883 @@
+<?php
+
+
+/**
+ * Base class that represents a query for the 'ratp_client' table.
+ *
+ * 
+ *
+ * @method     ClientQuery orderById($order = Criteria::ASC) Order by the id column
+ * @method     ClientQuery orderByLastname($order = Criteria::ASC) Order by the lastname column
+ * @method     ClientQuery orderByFirstname($order = Criteria::ASC) Order by the firstname column
+ * @method     ClientQuery orderByBirthdate($order = Criteria::ASC) Order by the birthdate column
+ * @method     ClientQuery orderByAddress($order = Criteria::ASC) Order by the address column
+ * @method     ClientQuery orderByCity($order = Criteria::ASC) Order by the city column
+ * @method     ClientQuery orderByZipCode($order = Criteria::ASC) Order by the zip_code column
+ * @method     ClientQuery orderByCreatedAt($order = Criteria::ASC) Order by the created_at column
+ * @method     ClientQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
+ * @method     ClientQuery orderByCreatedBy($order = Criteria::ASC) Order by the created_by column
+ * @method     ClientQuery orderByUpdatedBy($order = Criteria::ASC) Order by the updated_by column
+ *
+ * @method     ClientQuery groupById() Group by the id column
+ * @method     ClientQuery groupByLastname() Group by the lastname column
+ * @method     ClientQuery groupByFirstname() Group by the firstname column
+ * @method     ClientQuery groupByBirthdate() Group by the birthdate column
+ * @method     ClientQuery groupByAddress() Group by the address column
+ * @method     ClientQuery groupByCity() Group by the city column
+ * @method     ClientQuery groupByZipCode() Group by the zip_code column
+ * @method     ClientQuery groupByCreatedAt() Group by the created_at column
+ * @method     ClientQuery groupByUpdatedAt() Group by the updated_at column
+ * @method     ClientQuery groupByCreatedBy() Group by the created_by column
+ * @method     ClientQuery groupByUpdatedBy() Group by the updated_by column
+ *
+ * @method     ClientQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
+ * @method     ClientQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
+ * @method     ClientQuery innerJoin($relation) Adds a INNER JOIN clause to the query
+ *
+ * @method     ClientQuery leftJoinsfGuardUserRelatedByCreatedBy($relationAlias = null) Adds a LEFT JOIN clause to the query using the sfGuardUserRelatedByCreatedBy relation
+ * @method     ClientQuery rightJoinsfGuardUserRelatedByCreatedBy($relationAlias = null) Adds a RIGHT JOIN clause to the query using the sfGuardUserRelatedByCreatedBy relation
+ * @method     ClientQuery innerJoinsfGuardUserRelatedByCreatedBy($relationAlias = null) Adds a INNER JOIN clause to the query using the sfGuardUserRelatedByCreatedBy relation
+ *
+ * @method     ClientQuery leftJoinsfGuardUserRelatedByUpdatedBy($relationAlias = null) Adds a LEFT JOIN clause to the query using the sfGuardUserRelatedByUpdatedBy relation
+ * @method     ClientQuery rightJoinsfGuardUserRelatedByUpdatedBy($relationAlias = null) Adds a RIGHT JOIN clause to the query using the sfGuardUserRelatedByUpdatedBy relation
+ * @method     ClientQuery innerJoinsfGuardUserRelatedByUpdatedBy($relationAlias = null) Adds a INNER JOIN clause to the query using the sfGuardUserRelatedByUpdatedBy relation
+ *
+ * @method     ClientQuery leftJoinClientSubscription($relationAlias = null) Adds a LEFT JOIN clause to the query using the ClientSubscription relation
+ * @method     ClientQuery rightJoinClientSubscription($relationAlias = null) Adds a RIGHT JOIN clause to the query using the ClientSubscription relation
+ * @method     ClientQuery innerJoinClientSubscription($relationAlias = null) Adds a INNER JOIN clause to the query using the ClientSubscription relation
+ *
+ * @method     Client findOne(PropelPDO $con = null) Return the first Client matching the query
+ * @method     Client findOneOrCreate(PropelPDO $con = null) Return the first Client matching the query, or a new Client object populated from the query conditions when no match is found
+ *
+ * @method     Client findOneById(int $id) Return the first Client filtered by the id column
+ * @method     Client findOneByLastname(string $lastname) Return the first Client filtered by the lastname column
+ * @method     Client findOneByFirstname(string $firstname) Return the first Client filtered by the firstname column
+ * @method     Client findOneByBirthdate(string $birthdate) Return the first Client filtered by the birthdate column
+ * @method     Client findOneByAddress(string $address) Return the first Client filtered by the address column
+ * @method     Client findOneByCity(string $city) Return the first Client filtered by the city column
+ * @method     Client findOneByZipCode(string $zip_code) Return the first Client filtered by the zip_code column
+ * @method     Client findOneByCreatedAt(string $created_at) Return the first Client filtered by the created_at column
+ * @method     Client findOneByUpdatedAt(string $updated_at) Return the first Client filtered by the updated_at column
+ * @method     Client findOneByCreatedBy(int $created_by) Return the first Client filtered by the created_by column
+ * @method     Client findOneByUpdatedBy(int $updated_by) Return the first Client filtered by the updated_by column
+ *
+ * @method     array findById(int $id) Return Client objects filtered by the id column
+ * @method     array findByLastname(string $lastname) Return Client objects filtered by the lastname column
+ * @method     array findByFirstname(string $firstname) Return Client objects filtered by the firstname column
+ * @method     array findByBirthdate(string $birthdate) Return Client objects filtered by the birthdate column
+ * @method     array findByAddress(string $address) Return Client objects filtered by the address column
+ * @method     array findByCity(string $city) Return Client objects filtered by the city column
+ * @method     array findByZipCode(string $zip_code) Return Client objects filtered by the zip_code column
+ * @method     array findByCreatedAt(string $created_at) Return Client objects filtered by the created_at column
+ * @method     array findByUpdatedAt(string $updated_at) Return Client objects filtered by the updated_at column
+ * @method     array findByCreatedBy(int $created_by) Return Client objects filtered by the created_by column
+ * @method     array findByUpdatedBy(int $updated_by) Return Client objects filtered by the updated_by column
+ *
+ * @package    propel.generator.lib.model.schema.om
+ */
+abstract class BaseClientQuery extends ModelCriteria
+{
+    
+    /**
+     * Initializes internal state of BaseClientQuery object.
+     *
+     * @param     string $dbName The dabase name
+     * @param     string $modelName The phpName of a model, e.g. 'Book'
+     * @param     string $modelAlias The alias for the model in this query, e.g. 'b'
+     */
+    public function __construct($dbName = 'propel', $modelName = 'Client', $modelAlias = null)
+    {
+        parent::__construct($dbName, $modelName, $modelAlias);
+    }
+
+    /**
+     * Returns a new ClientQuery object.
+     *
+     * @param     string $modelAlias The alias of a model in the query
+     * @param     ClientQuery|Criteria $criteria Optional Criteria to build the query from
+     *
+     * @return ClientQuery
+     */
+    public static function create($modelAlias = null, $criteria = null)
+    {
+        if ($criteria instanceof ClientQuery) {
+            return $criteria;
+        }
+        $query = new ClientQuery();
+        if (null !== $modelAlias) {
+            $query->setModelAlias($modelAlias);
+        }
+        if ($criteria instanceof Criteria) {
+            $query->mergeWith($criteria);
+        }
+
+        return $query;
+    }
+
+    /**
+     * Find object by primary key.
+     * Propel uses the instance pool to skip the database if the object exists.
+     * Go fast if the query is untouched.
+     *
+     * <code>
+     * $obj  = $c->findPk(12, $con);
+     * </code>
+     *
+     * @param mixed $key Primary key to use for the query 
+     * @param     PropelPDO $con an optional connection object
+     *
+     * @return   Client|Client[]|mixed the result, formatted by the current formatter
+     */
+    public function findPk($key, $con = null)
+    {
+        if ($key === null) {
+            return null;
+        }
+        if ((null !== ($obj = ClientPeer::getInstanceFromPool((string) $key))) && !$this->formatter) {
+            // the object is alredy in the instance pool
+            return $obj;
+        }
+        if ($con === null) {
+            $con = Propel::getConnection(ClientPeer::DATABASE_NAME, Propel::CONNECTION_READ);
+        }
+        $this->basePreSelect($con);
+        if ($this->formatter || $this->modelAlias || $this->with || $this->select
+         || $this->selectColumns || $this->asColumns || $this->selectModifiers
+         || $this->map || $this->having || $this->joins) {
+            return $this->findPkComplex($key, $con);
+        } else {
+            return $this->findPkSimple($key, $con);
+        }
+    }
+
+    /**
+     * Find object by primary key using raw SQL to go fast.
+     * Bypass doSelect() and the object formatter by using generated code.
+     *
+     * @param     mixed $key Primary key to use for the query
+     * @param     PropelPDO $con A connection object
+     *
+     * @return   Client A model object, or null if the key is not found
+     * @throws   PropelException
+     */
+    protected function findPkSimple($key, $con)
+    {
+        $sql = 'SELECT `ID`, `LASTNAME`, `FIRSTNAME`, `BIRTHDATE`, `ADDRESS`, `CITY`, `ZIP_CODE`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `ratp_client` WHERE `ID` = :p0';
+        try {
+            $stmt = $con->prepare($sql);
+			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
+            $stmt->execute();
+        } catch (Exception $e) {
+            Propel::log($e->getMessage(), Propel::LOG_ERR);
+            throw new PropelException(sprintf('Unable to execute SELECT statement [%s]', $sql), $e);
+        }
+        $obj = null;
+        if ($row = $stmt->fetch(PDO::FETCH_NUM)) {
+            $obj = new Client();
+            $obj->hydrate($row);
+            ClientPeer::addInstanceToPool($obj, (string) $key);
+        }
+        $stmt->closeCursor();
+
+        return $obj;
+    }
+
+    /**
+     * Find object by primary key.
+     *
+     * @param     mixed $key Primary key to use for the query
+     * @param     PropelPDO $con A connection object
+     *
+     * @return Client|Client[]|mixed the result, formatted by the current formatter
+     */
+    protected function findPkComplex($key, $con)
+    {
+        // As the query uses a PK condition, no limit(1) is necessary.
+        $criteria = $this->isKeepQuery() ? clone $this : $this;
+        $stmt = $criteria
+            ->filterByPrimaryKey($key)
+            ->doSelect($con);
+
+        return $criteria->getFormatter()->init($criteria)->formatOne($stmt);
+    }
+
+    /**
+     * Find objects by primary key
+     * <code>
+     * $objs = $c->findPks(array(12, 56, 832), $con);
+     * </code>
+     * @param     array $keys Primary keys to use for the query
+     * @param     PropelPDO $con an optional connection object
+     *
+     * @return PropelObjectCollection|Client[]|mixed the list of results, formatted by the current formatter
+     */
+    public function findPks($keys, $con = null)
+    {
+        if ($con === null) {
+            $con = Propel::getConnection($this->getDbName(), Propel::CONNECTION_READ);
+        }
+        $this->basePreSelect($con);
+        $criteria = $this->isKeepQuery() ? clone $this : $this;
+        $stmt = $criteria
+            ->filterByPrimaryKeys($keys)
+            ->doSelect($con);
+
+        return $criteria->getFormatter()->init($criteria)->format($stmt);
+    }
+
+    /**
+     * Filter the query by primary key
+     *
+     * @param     mixed $key Primary key to use for the query
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByPrimaryKey($key)
+    {
+
+        return $this->addUsingAlias(ClientPeer::ID, $key, Criteria::EQUAL);
+    }
+
+    /**
+     * Filter the query by a list of primary keys
+     *
+     * @param     array $keys The list of primary key to use for the query
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByPrimaryKeys($keys)
+    {
+
+        return $this->addUsingAlias(ClientPeer::ID, $keys, Criteria::IN);
+    }
+
+    /**
+     * Filter the query on the id column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterById(1234); // WHERE id = 1234
+     * $query->filterById(array(12, 34)); // WHERE id IN (12, 34)
+     * $query->filterById(array('min' => 12)); // WHERE id > 12
+     * </code>
+     *
+     * @param     mixed $id The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterById($id = null, $comparison = null)
+    {
+        if (is_array($id) && null === $comparison) {
+            $comparison = Criteria::IN;
+        }
+
+        return $this->addUsingAlias(ClientPeer::ID, $id, $comparison);
+    }
+
+    /**
+     * Filter the query on the lastname column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByLastname('fooValue');   // WHERE lastname = 'fooValue'
+     * $query->filterByLastname('%fooValue%'); // WHERE lastname LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $lastname The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByLastname($lastname = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($lastname)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $lastname)) {
+                $lastname = str_replace('*', '%', $lastname);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::LASTNAME, $lastname, $comparison);
+    }
+
+    /**
+     * Filter the query on the firstname column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByFirstname('fooValue');   // WHERE firstname = 'fooValue'
+     * $query->filterByFirstname('%fooValue%'); // WHERE firstname LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $firstname The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByFirstname($firstname = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($firstname)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $firstname)) {
+                $firstname = str_replace('*', '%', $firstname);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::FIRSTNAME, $firstname, $comparison);
+    }
+
+    /**
+     * Filter the query on the birthdate column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByBirthdate('2011-03-14'); // WHERE birthdate = '2011-03-14'
+     * $query->filterByBirthdate('now'); // WHERE birthdate = '2011-03-14'
+     * $query->filterByBirthdate(array('max' => 'yesterday')); // WHERE birthdate > '2011-03-13'
+     * </code>
+     *
+     * @param     mixed $birthdate The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByBirthdate($birthdate = null, $comparison = null)
+    {
+        if (is_array($birthdate)) {
+            $useMinMax = false;
+            if (isset($birthdate['min'])) {
+                $this->addUsingAlias(ClientPeer::BIRTHDATE, $birthdate['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($birthdate['max'])) {
+                $this->addUsingAlias(ClientPeer::BIRTHDATE, $birthdate['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::BIRTHDATE, $birthdate, $comparison);
+    }
+
+    /**
+     * Filter the query on the address column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByAddress('fooValue');   // WHERE address = 'fooValue'
+     * $query->filterByAddress('%fooValue%'); // WHERE address LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $address The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByAddress($address = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($address)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $address)) {
+                $address = str_replace('*', '%', $address);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::ADDRESS, $address, $comparison);
+    }
+
+    /**
+     * Filter the query on the city column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByCity('fooValue');   // WHERE city = 'fooValue'
+     * $query->filterByCity('%fooValue%'); // WHERE city LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $city The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByCity($city = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($city)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $city)) {
+                $city = str_replace('*', '%', $city);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::CITY, $city, $comparison);
+    }
+
+    /**
+     * Filter the query on the zip_code column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByZipCode('fooValue');   // WHERE zip_code = 'fooValue'
+     * $query->filterByZipCode('%fooValue%'); // WHERE zip_code LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $zipCode The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByZipCode($zipCode = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($zipCode)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $zipCode)) {
+                $zipCode = str_replace('*', '%', $zipCode);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::ZIP_CODE, $zipCode, $comparison);
+    }
+
+    /**
+     * Filter the query on the created_at column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByCreatedAt('2011-03-14'); // WHERE created_at = '2011-03-14'
+     * $query->filterByCreatedAt('now'); // WHERE created_at = '2011-03-14'
+     * $query->filterByCreatedAt(array('max' => 'yesterday')); // WHERE created_at > '2011-03-13'
+     * </code>
+     *
+     * @param     mixed $createdAt The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByCreatedAt($createdAt = null, $comparison = null)
+    {
+        if (is_array($createdAt)) {
+            $useMinMax = false;
+            if (isset($createdAt['min'])) {
+                $this->addUsingAlias(ClientPeer::CREATED_AT, $createdAt['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($createdAt['max'])) {
+                $this->addUsingAlias(ClientPeer::CREATED_AT, $createdAt['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::CREATED_AT, $createdAt, $comparison);
+    }
+
+    /**
+     * Filter the query on the updated_at column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByUpdatedAt('2011-03-14'); // WHERE updated_at = '2011-03-14'
+     * $query->filterByUpdatedAt('now'); // WHERE updated_at = '2011-03-14'
+     * $query->filterByUpdatedAt(array('max' => 'yesterday')); // WHERE updated_at > '2011-03-13'
+     * </code>
+     *
+     * @param     mixed $updatedAt The value to use as filter.
+     *              Values can be integers (unix timestamps), DateTime objects, or strings.
+     *              Empty strings are treated as NULL.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByUpdatedAt($updatedAt = null, $comparison = null)
+    {
+        if (is_array($updatedAt)) {
+            $useMinMax = false;
+            if (isset($updatedAt['min'])) {
+                $this->addUsingAlias(ClientPeer::UPDATED_AT, $updatedAt['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($updatedAt['max'])) {
+                $this->addUsingAlias(ClientPeer::UPDATED_AT, $updatedAt['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::UPDATED_AT, $updatedAt, $comparison);
+    }
+
+    /**
+     * Filter the query on the created_by column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByCreatedBy(1234); // WHERE created_by = 1234
+     * $query->filterByCreatedBy(array(12, 34)); // WHERE created_by IN (12, 34)
+     * $query->filterByCreatedBy(array('min' => 12)); // WHERE created_by > 12
+     * </code>
+     *
+     * @see       filterBysfGuardUserRelatedByCreatedBy()
+     *
+     * @param     mixed $createdBy The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByCreatedBy($createdBy = null, $comparison = null)
+    {
+        if (is_array($createdBy)) {
+            $useMinMax = false;
+            if (isset($createdBy['min'])) {
+                $this->addUsingAlias(ClientPeer::CREATED_BY, $createdBy['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($createdBy['max'])) {
+                $this->addUsingAlias(ClientPeer::CREATED_BY, $createdBy['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::CREATED_BY, $createdBy, $comparison);
+    }
+
+    /**
+     * Filter the query on the updated_by column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByUpdatedBy(1234); // WHERE updated_by = 1234
+     * $query->filterByUpdatedBy(array(12, 34)); // WHERE updated_by IN (12, 34)
+     * $query->filterByUpdatedBy(array('min' => 12)); // WHERE updated_by > 12
+     * </code>
+     *
+     * @see       filterBysfGuardUserRelatedByUpdatedBy()
+     *
+     * @param     mixed $updatedBy The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function filterByUpdatedBy($updatedBy = null, $comparison = null)
+    {
+        if (is_array($updatedBy)) {
+            $useMinMax = false;
+            if (isset($updatedBy['min'])) {
+                $this->addUsingAlias(ClientPeer::UPDATED_BY, $updatedBy['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($updatedBy['max'])) {
+                $this->addUsingAlias(ClientPeer::UPDATED_BY, $updatedBy['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(ClientPeer::UPDATED_BY, $updatedBy, $comparison);
+    }
+
+    /**
+     * Filter the query by a related sfGuardUser object
+     *
+     * @param   sfGuardUser|PropelObjectCollection $sfGuardUser The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   ClientQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterBysfGuardUserRelatedByCreatedBy($sfGuardUser, $comparison = null)
+    {
+        if ($sfGuardUser instanceof sfGuardUser) {
+            return $this
+                ->addUsingAlias(ClientPeer::CREATED_BY, $sfGuardUser->getId(), $comparison);
+        } elseif ($sfGuardUser instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(ClientPeer::CREATED_BY, $sfGuardUser->toKeyValue('PrimaryKey', 'Id'), $comparison);
+        } else {
+            throw new PropelException('filterBysfGuardUserRelatedByCreatedBy() only accepts arguments of type sfGuardUser or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the sfGuardUserRelatedByCreatedBy relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function joinsfGuardUserRelatedByCreatedBy($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('sfGuardUserRelatedByCreatedBy');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'sfGuardUserRelatedByCreatedBy');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the sfGuardUserRelatedByCreatedBy relation sfGuardUser object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   sfGuardUserQuery A secondary query class using the current class as primary query
+     */
+    public function usesfGuardUserRelatedByCreatedByQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinsfGuardUserRelatedByCreatedBy($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'sfGuardUserRelatedByCreatedBy', 'sfGuardUserQuery');
+    }
+
+    /**
+     * Filter the query by a related sfGuardUser object
+     *
+     * @param   sfGuardUser|PropelObjectCollection $sfGuardUser The related object(s) to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   ClientQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterBysfGuardUserRelatedByUpdatedBy($sfGuardUser, $comparison = null)
+    {
+        if ($sfGuardUser instanceof sfGuardUser) {
+            return $this
+                ->addUsingAlias(ClientPeer::UPDATED_BY, $sfGuardUser->getId(), $comparison);
+        } elseif ($sfGuardUser instanceof PropelObjectCollection) {
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+
+            return $this
+                ->addUsingAlias(ClientPeer::UPDATED_BY, $sfGuardUser->toKeyValue('PrimaryKey', 'Id'), $comparison);
+        } else {
+            throw new PropelException('filterBysfGuardUserRelatedByUpdatedBy() only accepts arguments of type sfGuardUser or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the sfGuardUserRelatedByUpdatedBy relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function joinsfGuardUserRelatedByUpdatedBy($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('sfGuardUserRelatedByUpdatedBy');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'sfGuardUserRelatedByUpdatedBy');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the sfGuardUserRelatedByUpdatedBy relation sfGuardUser object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   sfGuardUserQuery A secondary query class using the current class as primary query
+     */
+    public function usesfGuardUserRelatedByUpdatedByQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinsfGuardUserRelatedByUpdatedBy($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'sfGuardUserRelatedByUpdatedBy', 'sfGuardUserQuery');
+    }
+
+    /**
+     * Filter the query by a related ClientSubscription object
+     *
+     * @param   ClientSubscription|PropelObjectCollection $clientSubscription  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   ClientQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByClientSubscription($clientSubscription, $comparison = null)
+    {
+        if ($clientSubscription instanceof ClientSubscription) {
+            return $this
+                ->addUsingAlias(ClientPeer::ID, $clientSubscription->getClientId(), $comparison);
+        } elseif ($clientSubscription instanceof PropelObjectCollection) {
+            return $this
+                ->useClientSubscriptionQuery()
+                ->filterByPrimaryKeys($clientSubscription->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByClientSubscription() only accepts arguments of type ClientSubscription or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the ClientSubscription relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function joinClientSubscription($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('ClientSubscription');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'ClientSubscription');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the ClientSubscription relation ClientSubscription object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   ClientSubscriptionQuery A secondary query class using the current class as primary query
+     */
+    public function useClientSubscriptionQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinClientSubscription($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'ClientSubscription', 'ClientSubscriptionQuery');
+    }
+
+    /**
+     * Exclude object from result
+     *
+     * @param   Client $client Object to remove from the list of results
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function prune($client = null)
+    {
+        if ($client) {
+            $this->addUsingAlias(ClientPeer::ID, $client->getId(), Criteria::NOT_EQUAL);
+        }
+
+        return $this;
+    }
+
+} // BaseClientQuery

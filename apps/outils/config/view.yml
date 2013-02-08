@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Elogys Surface Project - Dashboard
+    robots:       index, follow
+    description:  surface project
+    keywords:     symfony, surface, elogys, project
+    language:     fr
+
+  stylesheets:    []
+
+  javascripts:    []
+
+  has_layout:     off
+  layout:         layout
+

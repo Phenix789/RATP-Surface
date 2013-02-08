@@ -1,0 +1,9 @@
+all:
+  surface_stat:
+    cache_dir: /uploads/surfaceStatCache/
+
+#    color_palettes:
+#      default: []
+#      <name>:		[]
+#    view_namespaces:	[]
+#    namespaces:				[]

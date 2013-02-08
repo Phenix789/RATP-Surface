@@ -1,0 +1,128 @@
+################################################################################
+# Module Alert #################################################################
+# Generateur du module
+#
+# @brief Generateur du module
+# @package Application
+# @subpackage
+#
+# @author Claude <claude@elogys.fr>
+# @date 28 oct. 2010
+# @version 1.0
+#
+################################################################################
+generator:
+  class:															sfSurfaceGenerator
+  param:
+    model_class:											Alert
+    theme:														default
+
+################################################################################
+# Fields #######################################################################
+# Definition des attributs interne et externe
+################################################################################
+#	ATTRIBUTS														DETAIL
+# Base =========================================================================
+#
+# Sup ==========================================================================
+#
+# Show =========================================================================
+#
+# Edit =========================================================================
+#
+# Filter =======================================================================
+#
+################################################################################
+    fields:
+# Base =========================================================================
+      id:															{ name: Id }
+      recipient_id:										{ name: Destinataire }
+      trigger_at:											{ name: Déclenchement }
+      message:												{ name: Message }
+      sent:														{ name: Envoyé par mail }
+      acquitted_at:										{ name: Acquité le }
+      acquitted_by:										{ name: Acquité par }
+      model_id:												~
+      model_class:										~
+# Sup ==========================================================================
+      target_object:									{ name: Objet concerné, type: surface_link_to, params: "text_method=toStringWithType"}
+      recipient:											{ name: Destinataire, type: surface_link_to }
+      is_active:											{ name: Acquittée }
+# Show =========================================================================
+      show_alert_state:								{ label: off}
+      show_is_active:									{ name: Acquittée }
+# Edit =========================================================================
+      edit_is_acquitted:							{ name: Acquittée }
+# List =========================================================================
+      list_alert_state:								{ name: Etat }
+# Filter =======================================================================
+      model_class:										{ name: Type d'objet }
+      filter_time_left:								{ name: Echéances }
+      filter_is_acquitted:						{ name: Acquittées }
+      filter_recipient_id:						{ name: Destinataire  }
+      
+################################################################################
+# Actions ######################################################################
+# Definition des credentials neccessaire pour executer l'actions
+################################################################################
+#	ACTION															DETAIL
+# create
+# show
+# edit
+# delete_confirm
+#===============================================================================
+# exports
+################################################################################
+    actions:
+      _show:
+      _create:
+      _edit:
+      _delete_confirm:
+#===============================================================================
+    exports:
+      default:
+        name:													Exporter
+
+################################################################################
+# Create #######################################################################
+# Creation d'un nouvel element
+################################################################################
+    create:
+      title:													Action impossible
+      display:												[]
+
+################################################################################
+# Show #########################################################################
+# Visionnage d'un element existant
+################################################################################
+    show:
+      title:													Alerte
+      display:												[ _show_alert_state, recipient, trigger_at, message, target_object ]
+
+################################################################################
+# Edit #########################################################################
+# Modification d'un element existant
+################################################################################
+    edit:
+      title:													Modifier une alerte
+      display:												[ _show_alert_state, recipient_id, trigger_at, message, _edit_is_acquitted ]
+
+################################################################################
+# Delete confirm ###############################################################
+# Suppression d'un element
+################################################################################
+    delete_confirm:
+      title:													Supprimer cette alerte ?
+      display:												[ _show_alert_state, recipient, trigger_at, message, target_object ]
+
+################################################################################
+# List #########################################################################
+# Liste des elements
+################################################################################
+    list:
+      title:													Liste des alertes
+      display:												[ _list_alert_state, =message, target_object, recipient ]
+      filters:												[ _model_class, _filter_recipient_id, _filter_time_left, _filter_is_acquitted ]
+      actions:												[]
+
+################################################################################

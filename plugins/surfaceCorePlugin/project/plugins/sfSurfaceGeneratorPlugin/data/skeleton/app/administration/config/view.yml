@@ -1,0 +1,18 @@
+default:
+  http_metas:
+    content-type: text/html
+
+  metas:
+    title:        Gestion en ligne
+    robots:       index, follow
+    description:  Logiciel de gestion en ligne
+    keywords:     surface
+    language:     fr
+
+  stylesheets:    []
+
+  javascripts:    []
+  
+  has_layout:     off
+  layout:         layout
+

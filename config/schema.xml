@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="propel" package="lib.model.schema">
+	<table name="ratp_station" phpName="Station">
+		<column name="id" type="integer" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="code" type="varchar" size="20" />
+		<column name="name" type="varchar" size="255" />
+		<column name="geo_x" type="double" />
+		<column name="geo_y" type="double" />
+
+		<column name="created_at" type="timestamp"/>
+		<column name="updated_at" type="timestamp"/>
+		<column name="created_by" type="integer"/>
+		<column name="updated_by" type="integer"/>
+
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+	</table>
+        
+	<table name="ratp_transport_type" phpName="TransportType">
+		<column name="id" type="integer" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="type" type="varchar" size="255" />
+
+		<column name="created_at" type="timestamp"/>
+		<column name="updated_at" type="timestamp"/>
+		<column name="created_by" type="integer"/>
+		<column name="updated_by" type="integer"/>
+
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+	</table>
+
+	<table name="ratp_station_type" phpName="StationType">
+		<column name="station_id" type="integer" primaryKey="true" />
+		<column name="type_id" type="integer" primaryKey="true" />
+
+		<foreign-key foreignTable="ratp_station" onDelete="cascade">
+			<reference local="station_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="ratp_transport_type" onDelete="cascade">
+			<reference local="type_id" foreign="id"/>
+		</foreign-key>
+	</table>
+
+	<table name="ratp_subscription" phpName="Subscription">
+		<column name="id" type="integer" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="name" type="varchar" size="255" />
+		<column name="price" type="integer" />
+		<column name="duration" type="integer" />
+
+		<column name="created_at" type="timestamp"/>
+		<column name="updated_at" type="timestamp"/>
+		<column name="created_by" type="integer"/>
+		<column name="updated_by" type="integer"/>
+
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+	</table>
+
+	<table name="ratp_client" phpName="Client">
+		<column name="id" type="integer" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="lastname" type="varchar" size="255" />
+		<column name="firstname" type="varchar" size="255" />
+		<column name="birthdate" type="timestamp" />
+		<column name="address" type="varchar" size="255" />
+		<column name="city" type="varchar" size="255" />
+		<column name="zip_code" type="varchar" size="255" />
+
+		<column name="created_at" type="timestamp"/>
+		<column name="updated_at" type="timestamp"/>
+		<column name="created_by" type="integer"/>
+		<column name="updated_by" type="integer"/>
+
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+	</table>
+
+	<table name="ratp_client_subscription" phpName="ClientSubscription">
+		<column name="id" type="integer" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="client_id" type="integer" />
+		<column name="subscription_id" type="integer" />
+		<column name="begin_date" type="timestamp" />
+
+		<column name="created_at" type="timestamp"/>
+		<column name="updated_at" type="timestamp"/>
+		<column name="created_by" type="integer"/>
+		<column name="updated_by" type="integer"/>
+
+		<foreign-key foreignTable="ratp_client" onDelete="cascade">
+			<reference local="client_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="ratp_subscription" onDelete="setnull">
+			<reference local="subscription_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+	</table>
+
+</database>

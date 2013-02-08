@@ -1,0 +1,67 @@
+################################################################################
+# Schema  ##############################################################
+# Schema 
+#
+# @brief Schema
+# @package Plugin
+# @subpackage sfAnalyticPlugin
+#
+# @author Claude <claude@elogys.fr>
+# @date 1 déc. 2009
+# @version 1.0
+# @license LGPL
+#
+################################################################################
+propel:
+  _attributes:						{ package: plugins.surfaceAnalyticPlugin.lib.model }
+
+################################################################################
+# Table ########################################################################
+# 
+################################################################################
+#			ATTRIBUTS								DETAIL
+# id											Identifiant unique
+# username								Nom utilisé pour la connection
+# user_id									Identifiant sfGuardUser si la connection a reussit
+# connection							Vrai si la connection a reussit
+# ip											Ip utilisé
+# user_agent							L'user agent recu par le serveur
+# broswer_id							Code du navigateur
+# broswer_version					Numero de version du navigateur
+# os_id										Code du systeme d'exploitation
+# os_version							Numero de version du systeme d'exploitation
+# screen_width						Resolution de l'ecran
+# screen_height						Resolution de l'ecran
+# screen_inner_width			Place dedié pour l'affichage
+# screen_inner_height			Place dedié pour l'affichage
+# cookie_enabled					Cookie accepté ?
+# language								Langue du navigateur
+# platform								Platforme d'execution client
+# product									Nom du produit
+# product_sub							Numero produit
+# vendor
+# vendor_sub
+# created_at							Date de creation
+################################################################################
+  sfc_plugin_analytic:
+    _attributes:					{ phpName: Analytic }
+    id:										~
+    username:							{ type: varchar, size: 255 }
+    user_id:							{ type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    connection:						{ type: integer }
+    ip:										{ type: varchar, size: 255 }
+    user_agent:						{ type: varchar, size: 255 }
+    screen_width:					{ type: integer }
+    screen_height:				{ type: integer }
+    screen_inner_width:		{ type: integer }
+    screen_inner_height:	{ type: integer }
+    cookie_enabled:				{ type: boolean }
+    language:							{ type: varchar, size: 255 }
+    platform:							{ type: varchar, size: 255 }
+    product:							{ type: varchar, size: 255 }
+    product_sub:					{ type: varchar, size: 255 }
+    vendor:								{ type: varchar, size: 255 }
+    vendor_sub:						{ type: varchar, size: 255 }
+    created_at:						~
+
+################################################################################

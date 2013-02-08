@@ -1,0 +1,8 @@
+all:
+  i18n:
+    fr:
+      input:							fr.xml
+      output:							compile.fr.xml
+      deploy:							messages.fr.xml
+      force:							-f
+      exclude:						[]

@@ -1,0 +1,43 @@
+################################################################################
+# PERSONNALISATION DU PLUGIN ###################################################
+################################################################################
+#all:
+#
+################################################################################
+# OPTIONS DU PLUGIN ############################################################
+################################################################################
+#  contact:
+#    group:
+#      namespace:								[ NONE_GROUP, person_group, structure_group ]
+#      type:
+#        physical:								[ NONE_GROUP, person_group ]
+#        moral:									[ NONE_GROUP, structure_group ]
+#    service:
+#      namespace:								[ NONE_SERVICE, person_service, structure_service ]
+#      type:
+#        physical:								[ NONE_SERVICE, person_service ]
+#    civility:
+#      namespace:								[ NONE_CIVILITY, person_civility, structure_civility ]
+#      type:
+#        physical:								[ NONE_CIVILITY, person_civility ]
+#        moral:									[ NONE_CIVILITY, structure_civility ]
+#    inheritance:
+#      PhysicalPerson1:
+#        class:									Person
+#        peer:										PersonPeer
+#        path:										plugins.surfaceContactPlugin.lib.contact
+#        group:
+#          active:								true
+#          multiple:							true
+#          type:									physical
+#        service:
+#          type:									physical
+#      MoralPerson1:
+#        class:									Structure
+#        peer:										StructurePeer
+#        path:										plugins.surfaceContactPlugin.lib.contact
+#        group:
+#          active:								true
+#          type:									moral
+#
+################################################################################

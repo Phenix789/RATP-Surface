@@ -1,0 +1,59 @@
+# @brief Generateur du module ##MODULE_NAME##
+# @package Application
+# @subpackage ##MODULE_NAME##
+#
+# @author Elogys <contact@elogys.fr>
+# @date ##DATE##
+# @version ##VERSION##
+
+generator:
+  class:                          sfSurfaceGenerator
+  param:
+    model_class:                  ##MODEL_CLASS##
+    theme:                        ##THEME##
+
+    fields:
+      ##GENERATOR_FIELDS_PARAMS##
+
+#    actions:
+#      _create:                        { }
+#      _edit:                          { }
+#      _show:                          { }
+#      _delete_confirm:                { }
+#      _save:                          { }
+#      _delete:                        { }
+#      _cancel:                        { }
+
+    exports:
+      default:                        { name: Exporter }
+
+    create:
+      title:                          Nouveau ##MODULE_TITLE##
+      display:                        [ ##GENERATOR_FIELDS_LIST## ]
+
+    edit:
+      title:                          Modifier ##MODULE_TITLE## "##GENERATOR_FIELD_TITLE##"
+      display:                        [ ##GENERATOR_FIELDS_LIST## ]
+
+    show:
+      title:                          ##MODULE_TITLE## "##GENERATOR_FIELD_TITLE##"
+      display:                        [ ##GENERATOR_FIELDS_LIST## ]
+
+    delete_confirm:
+      title:                          Supprimer ##MODULE_TITLE## "##GENERATOR_FIELD_TITLE##" ?
+      display:                        [ ##GENERATOR_FIELDS_LIST## ]
+
+    list:
+      title:                          ##MODULE_TITLE##s
+      display:                        [ ##GENERATOR_FIELDS_LIST## ]
+      #filters:                       [ ##GENERATOR_FIELDS_LIST## ]
+      #sort:                          [ ##GENERATOR_FIELD_SORT##, asc]
+      #max_per_page:                  20
+
+    components:
+      search_bar:
+        type:                         list
+        display:                      [ ##GENERATOR_FIELDS_LIST## ]
+        sort:                         [ ##GENERATOR_FIELD_SORT##, asc ]
+        searchable:                   [ ]
+        max_per_page:                 5

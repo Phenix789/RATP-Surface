@@ -1,0 +1,1 @@
+<?php include_component('statUtility', $component, array('table_name' => $table_name)) ?>

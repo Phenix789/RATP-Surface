@@ -1,0 +1,68 @@
+generator:
+  class:              sfSurfaceGenerator
+  param:
+    model_class:      sfGuardGroup
+    theme:            default
+
+    fields:
+      name:               { name: Nom du groupe }
+      description:        { name: Description, type: textarea_tag }
+      edit_permissions:   { label: off }
+      list_permissions:   { name : Permissions }
+      list_ip:						{ name: Pare-feu }
+      edit_ip:            { name: IP autorisées, type: surface_double_list } # type nécessaire pour activer le callback du form permettant de sélectionner les items avant de poster
+      show_ip:            { name: IP autorisées }
+      ip:									{ name: IP autorisées }
+
+    fieldsets:
+      general:            { name: Général }
+      default:            { name: Compte }
+      permissions:        { name: Permissions }
+      ip:                 { name: Restriction à certaines adresses IP }
+      firewall:           { name: Pare-feu }
+      
+    actions:
+      _list:                          { credentials: [ admin ] }
+      _show:                          { credentials: [ admin ] }
+      _create:                        { credentials: [ admin ] }
+      _edit:                          { credentials: [ admin ] }
+      _delete_confirm:                { credentials: [ admin ] }
+      _delete:                        { credentials: [ admin ] }
+
+    exports:
+      default:
+        name:                         Exporter
+        credentials:                  { credentials: [ admin ] }
+      
+    list:
+      title:          Group list
+      display:        [=name, _list_permissions, _list_ip]
+      
+    show:
+      title:          Show group "%%name%%"
+      display:
+        general:      [ name, description ]
+        permissions:  [ _list_permissions ]
+        ip:           [ _show_ip ]
+
+    delete_confirm:
+      title:          Delete group "%%name%%" ?
+      display:
+        general:      [ name, description ]
+        permissions:  [ _list_permissions ]
+        ip:           [ _show_ip ]
+
+    edit:
+      title:          Edit group "%%name%%"
+      display:        
+        general:      [ name, description ]
+        permissions:  [ _edit_permissions ]
+        ip:           [ _edit_ip ]
+      
+    create:
+      title:          Create group
+      display:        
+        general:      [ name, description ]
+        permissions:  [ _edit_permissions ]
+        ip:           [ _edit_ip ]
+      

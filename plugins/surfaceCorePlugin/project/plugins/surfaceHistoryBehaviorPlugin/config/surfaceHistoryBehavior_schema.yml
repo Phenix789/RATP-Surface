@@ -1,0 +1,54 @@
+################################################################################
+# Schema  ##############################################################
+# Schema 
+#
+# @brief Schema
+# @package Plugin
+# @subpackage surfaceHistoryBehavior
+#
+# @author Claude <claude@elogys.fr>
+# @date 22 déc. 2009
+# @version 1.0
+# @license 
+#
+################################################################################
+propel:
+  _attributes:								{ package: plugins.surfaceHistoryBehaviorPlugin.lib.model }
+
+################################################################################
+# Table ########################################################################
+# 
+################################################################################
+#	ATTRIBUTS														DETAIL
+#
+################################################################################
+  plugin_history:
+    _attributes:							{ phpName: History }
+    id:												~
+    date_ref:									{ type: timestamp }
+    description:							{ type: longvarchar }
+    object_id:								{ type: integer }
+    object_name:							{ type: varchar, size: 255 }
+    type:											{ type: varchar, size: 255 }
+    name_space:							  { type: varchar, size: 255 }
+    group_id:								  { type: integer }
+    created_at:								{ type: timestamp }
+    created_by:								{ type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    updated_at:								{ type: timestamp }
+    updated_by:								{ type: integer, foreignTable: sf_guard_user, foreignReference: id }
+
+################################################################################
+# Table ########################################################################
+#
+################################################################################
+#	ATTRIBUTS														DETAIL
+#
+################################################################################
+  plugin_history_contact:
+    _attributes:							{ phpName: HistoryContact }
+    id:												~
+    history_id:								{ type: integer, foreignTable: plugin_history, foreignReference: id }
+    contact_id:								{ type: integer }
+    contact_name:							{ type: varchar, size: 255 }
+
+################################################################################

@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+<file orginal="global" source-language="en_US" datatype="plaintext">
+	<body>
+		<trans-unit><source>simple search</source><target>Recherche simple</target></trans-unit>
+		<trans-unit><source>multi-criteria</source><target>Recherche</target></trans-unit>
+	</body>
+</file>
+</xliff>

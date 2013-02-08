@@ -1,0 +1,1 @@
+<?php echo surface_link_to($contact_multiple->getContact(), 'person_ex/show?id=' . $contact_multiple->getContactId(), 'tg_east') ?>

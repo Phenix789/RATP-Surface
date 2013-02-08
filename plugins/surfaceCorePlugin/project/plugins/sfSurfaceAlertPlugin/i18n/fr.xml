@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+<file orginal="global" source-language="en_US" datatype="plaintext">
+	<body>
+		<trans-unit><source>1 day</source><target>1 jour</target></trans-unit>
+		<trans-unit><source>%days% days</source><target>%days% jours</target></trans-unit>
+		<trans-unit><source>about %hours% hours</source><target>%hours% heures environ</target></trans-unit>
+		<trans-unit><source>%minutes% minutes</source><target>%minutes% minutes</target></trans-unit>
+		<trans-unit><source>about 1 month</source><target>1 mois environ</target></trans-unit>
+		<trans-unit><source>%months% months</source><target>%months% mois</target></trans-unit>
+		<trans-unit><source>less than 5 seconds</source><target>moins de 5 secondes</target></trans-unit>
+		<trans-unit><source>less than 10 seconds</source><target>moins de 10 secondes</target></trans-unit>
+		<trans-unit><source>less than 20 seconds</source><target>moins de 20 secondes</target></trans-unit>
+		<trans-unit><source>half a minute</source><target>30 secondes</target></trans-unit>
+		<trans-unit><source>less than a minute</source><target>moins d'une minute</target></trans-unit>
+		<trans-unit><source>1 minute</source><target>une minute</target></trans-unit>
+		<trans-unit><source>about 1 hour</source><target>1 heure environ</target></trans-unit>
+		<trans-unit><source>about 1 year</source><target>1 an environ</target></trans-unit>
+		<trans-unit><source>over %years% years</source><target>plus de %years% an</target></trans-unit>
+		<trans-unit><source>acquit</source><target>Acquitter</target></trans-unit>
+		<trans-unit><source>alert is active</source><target>Une alerte est déclenchée.</target></trans-unit>
+	</body>
+</file>
+</xliff>

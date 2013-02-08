@@ -1,0 +1,11 @@
+rendering: ~
+web_debug:        { class:  sfAjaxDebugFilter       }
+security:         { class:  sfGuardExSecurityFilter }
+
+# generally, you will want to insert your own filters here
+sfRequestHistory: { class:  sfSurfaceHistoryFilter  }
+
+cache:     ~
+common:    ~
+flash:     ~
+execution: ~

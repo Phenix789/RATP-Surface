@@ -1,0 +1,14 @@
+/* Stat */
+div#stat_controls {}
+
+div#stat_controls .general_form label { width: 150px; }
+
+div#stat_controls thead th { background: #CCC; }
+div#stat_controls tbody td { background: #AAA; }
+
+div#choose_graphic {}
+div#choose_graphic img {vertical-align:middle;}
+
+div.stats_results {}
+/*div.stats_results .table_wrapper th { border-top: solid 1px #000; }*/
+#graphic .table_wrapper th { text-align: left; }

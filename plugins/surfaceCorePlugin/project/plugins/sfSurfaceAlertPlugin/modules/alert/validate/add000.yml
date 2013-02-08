@@ -1,0 +1,33 @@
+#methods:
+#  post: [ triggerDateTime ]
+#
+#names:
+#  triggerDateTime:
+#    required:     true
+#    required_msg: une date de déclenchement est requise
+
+#    validators: stringValidator
+#  hypothese_2:
+#    required:     true
+#    required_msg: une deuxième hypothèse est requise
+#    validators: stringValidator
+#  conclusion:
+#    required:     true
+#    required_msg: une conclusion est requise
+#    validators: stringValidator
+#  tags:
+#    required:     true
+#    required_msg: des tags sont requis
+#    validators: stringValidator
+#  posted_by:
+#    required:     true
+#    required_msg: faites vous connaitre
+#    validators: stringValidator
+#
+#stringValidator:  
+#  class:  sfStringValidator
+#  param:
+#    min: 2
+#    min_error: la chaine saisie est trop courte
+#    max: 100    
+#    max_error: la chaine saisie est trop longue

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" package="plugins.sfPropelOptionsBehaviorPlugin.lib.model" defaultIdMethod="native" noXsd="true">
+
+  <table name="plugin_options_behavior" phpName="Options">
+    <column name="id" type="integer" required="true" primaryKey="true" autoincrement="true" />
+    <column name="model_name" type="varchar" size="255" />
+    <column name="model_id" type="integer" />
+    <column name="name" type="varchar" size="255" />
+    <column name="value" type="varchar" size="255" />
+  </table>
+
+</database>

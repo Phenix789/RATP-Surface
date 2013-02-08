@@ -1,0 +1,1 @@
+<?php echo surface_select_tag('filters[object_name]', options_for_select(HistoryPeer::getObjectNames(), get('object_name', $filters), array('include_blank' => true)), array()) ?>

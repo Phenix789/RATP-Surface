@@ -1,0 +1,59 @@
+#sf_surface_history table {
+	width: 100%;
+	padding: 2px;
+}
+
+#sf_surface_history tr {
+  height: 24px;
+  padding: 0px;
+}
+
+#sf_surface_history td {
+  padding: 0px;
+}
+
+#sf_surface_history td.sf_surface_history_links {
+  padding: 0px;
+  text-align: left;
+}
+
+#sf_surface_history td.sf_surface_history_last {
+  padding: 0px;
+  text-align: right;
+}
+
+#sf_surface_history input {
+  margin: 3px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  border: 1px solid #ddd;
+  vertical-align:middle;
+  background-color: #FFFFFF;
+}
+
+#sf_surface_history a {
+  margin: 3px;
+  height: 16px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  border: 1px solid #ddd;
+  vertical-align: middle;
+  background-color: #FFFFFF;
+  text-decoration: none; 
+}
+
+#sf_surface_history a img {
+  height: 16px;
+  vertical-align: middle;
+/*  background-position: center center; */
+  background-color: #FFFFFF;
+}
+
+#surface_history {
+background:transparent url(../images/default/panel/tool-sprites.gif) no-repeat scroll 0%;
+cursor:pointer;
+height:15px;
+margin-left:2px;
+overflow:hidden;
+width:15px;
+}

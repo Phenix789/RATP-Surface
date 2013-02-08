@@ -1,0 +1,126 @@
+################################################################################
+# DECLARATION DES MENUS PROJECT ################################################
+################################################################################
+sfc_menu_generator:
+
+################################################################################
+# ITEMS ########################################################################
+################################################################################
+  items:
+    permalink:
+      label:											<span class="permalink"></span>Lien permanent
+      is_ajax:										false
+      target:                     _blank
+      
+    context_create:
+      label:											<span class="menu_context_item"></span>
+      title:											Action contextuelle
+      is_ajax:										false
+      items:											[ permalink, feedback ]
+      
+    context_show:
+      label:											<span class="menu_context_item"></span>
+      title:											Action contextuelle
+      is_ajax:										false
+      items:											[ permalink, print_view, feedback ]
+
+    context_view:
+      label:											<span class="menu_context_item"></span>
+      title:											Action contextuelle
+      is_ajax:										false
+      items:											[ permalink, print_view, feedback ]
+      
+    context_edit:
+      label:											<span class="menu_context_item"></span>
+      title:											Action contextuelle
+      is_ajax:										false
+      items:											[ permalink, feedback ]
+      
+    context_delete_confirm:
+      label:											<span class="menu_context_item"></span>
+      title:											Action contextuelle
+      is_ajax:										false
+      items:											[ permalink, feedback ]
+      
+    context_list:
+      label:											<span class="menu_context_item"></span>
+      title:											Action contextuelle
+      is_ajax:										false
+      items:											[ permalink, print_view, feedback ]
+
+    print_view:
+      label:                      Impression
+      title:                      Imprimer la vue courante
+      is_ajax:                    false
+      target:                     _blank
+
+    feedback:
+      label:                      Support technique
+      title:                      Faire une suggestion d'amélioration ou déclarer un incident
+      target:                     tg_lightbox
+      
+################################################################################
+# EXEMPLE TOUTES OPTIONS #######################################################
+################################################################################
+#    <name>:											nom de l'entré, necessaire pour la retrouver
+#      label:											contenue de la balise <a>
+#      icon:											icon qui se positionne avant le label
+#      title:											valeur de l'attribut title de la balise <a>
+#      link:											lien href ou onclick
+#      target:										target pour les liens ajax
+#      is_ajax:										precise si le lien est une action ajax
+#      skip_navigate:							s'ajoute ou pas dans l'historique de navigation
+#      is_controller:							precise si le lien est un controller
+#      allow:											droit necessaire
+#      class:											class css apposé a la balise <li>
+#      class_link:								class css apposé a la balise <a>
+#      items:											definition du sous menu
+#      render:										rendu different
+#        helper:									nom du helper
+#        function:								fonction du helper
+#
+################################################################################
+# MENUS ########################################################################
+################################################################################
+  menus:
+
+    menu_context_create:
+      items:											[ context_create ]
+      target:											menu_context_create
+      class:                      menu_context navigation
+      
+    menu_context_show:
+      items:											[ context_show ]
+      target:											menu_context_show
+      class:                      menu_context navigation
+
+    menu_context_view:
+      items:											[ context_view ]
+      target:											menu_context_view
+      class:                      menu_context navigation
+
+    menu_context_edit:
+      items:											[ context_edit ]
+      target:											menu_context_edit
+      class:                      menu_context navigation
+      
+    menu_context_delete_confirm:
+      items:											[ context_delete_confirm ]
+      target:											menu_context_delete_confirm
+      class:                      menu_context navigation
+      
+    menu_context_list:
+      items:											[ context_list ]
+      target:											menu_context_list
+      class:                      menu_context navigation
+
+################################################################################
+# EXEMPLE TOUTES OPTIONS #######################################################
+################################################################################
+#    <name>:											nom du menu, necessaire pour le retrouver avec getInstance()
+#      items:											les entrées du menu
+#      target:										element cible du menu, utile pour l'update de menu
+#      class:											class css aposer sur la balise <ul>
+#      allow:											droit necessaire pour afficher le menu
+#
+################################################################################

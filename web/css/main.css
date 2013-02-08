@@ -1,0 +1,60 @@
+div.calendar {
+  position: relative;
+  z-index: 9999;
+}
+
+ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,body,html,p,blockquote,fieldset,input
+{ margin: 0; padding: 0; }
+a img,:link img,:visited img { border: none; }
+
+a
+{
+  text-decoration: none;
+}
+
+a:hover
+{
+  text-decoration: underline;
+}
+
+body, td
+{
+  margin: 0;
+  padding: 0;
+  font-family: Arial, Verdana, sans-serif;
+  font-size: 11px;
+  background-color: #fff;
+}
+
+body
+{
+  padding: 20px;
+}
+
+em
+{
+  font-style: italic;
+}
+  
+strong {
+  font-weight: bold;
+}
+
+.input_search_bar {
+	font-size: 20px;
+	text-align: left;
+	width: 300px;
+	float: left;
+}
+
+.button_search_bar {
+	
+}
+
+.div_search_bar {
+	
+}
+
+.component_search_bar {
+	
+}

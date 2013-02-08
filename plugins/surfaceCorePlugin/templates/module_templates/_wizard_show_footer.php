@@ -1,0 +1,1 @@
+<?php echo include_partial($module_name.'/wizard_actions', array("wizard" => $wizard)); ?>

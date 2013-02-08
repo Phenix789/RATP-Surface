@@ -1,0 +1,125 @@
+
+generator:
+  class:															sfSurfaceGenerator
+  param:
+    model_class:											sfGuardUser
+    theme:														default
+
+    fields:
+      username:												{ name: Identifiant }
+      password:												{ name: Mot de passe }
+      password_bis:										{ name: Vérification }
+      profile_show:                   { name: Collaborateur  }
+      profile:                        { name: Collaborateur }
+      last_login:                     { name: Dernière connexion }
+      edit_last_login:                { name: Dernière connexion }
+      is_active:											{ name: Actif, type: surface_boolean_tag, params: "default=1 filter_default=1" }
+      is_sudoer:                      { name: Droits étendus, type: surface_boolean_tag, params: "default=0" }
+      time_sudoer:                    { name: Temps max. }
+
+      list_permissions:								{ name: Permissions }
+      show_permissions:               { name: Permissions }
+      show_total_permissions:         { name: Permissions }
+      edit_permissions:               { label: off }
+      filter_group_id:								{ name: Groupes }
+      list_groups:                    { name: Groupes }
+      groups:                         { label: off, type: surface_double_list, params: through_class=sfGuardUserGroup }
+
+      list_ips:												{ name: Pare-feu }
+      show_total_ips:									{ name: IPs autorisées }
+      show_ips:                       { name: IPs autorisées }
+      ip:															{ name: IPs autorisées }
+      ip_list:												{ name:  "" }
+
+    fieldsets:
+      general:                        { name: Général }
+      default:                        { name: Compte }
+      information:                    { name: Connexions }
+      groups:                         { name: Groupes }
+      groups_and_perms:               { name: Permissions }
+      total_permissions:              { name: Ensemble des permissions actives }
+      entities:                       { name: Entités }
+      permissions:                    { name: Permissions }
+      ip:                             { name: Restriction à certaines adresses IP, allow_method: ipIsEdit }
+      total_ips:                      { name: Ensemble des IP autorisées }
+      superadmin:                     { name: Options d'administrateur }
+      firewall:                       { name: Pare-feu}
+
+    actions:
+      _list:													{ credentials: [ admin ] }
+      _show:													{ credentials: [ admin ] }
+      _create:												{ credentials: [ admin ] }
+      _edit:													{ credentials: [ admin ] }
+      _delete_confirm:								{ credentials: [ admin ] }
+      _delete:								        { credentials: [ admin ] }
+
+    exports:
+      default:
+        name:													Exporter
+        credentials:									{ credentials: [ admin ] }
+
+    show:
+      title:													Show user "%%username%%"
+      render:													vTab
+      display:
+        general:
+          default:										[ username, _profile_show ]
+          information:								[ is_active, last_login ]
+          superadmin:									[ is_sudoer, time_sudoer ]
+        groups_and_perms:
+          permissions:							  [ _list_groups, _show_permissions ]
+          total_permissions:          [ _show_total_permissions ]
+        firewall:
+          ip:													[ _list_groups, _show_ips ]
+          total_ips:                  [ _show_total_ips ]
+
+    delete_confirm:
+      title:                          Delete user "%%username%%" ?
+      render:                         vTab
+      display:
+        general:
+          default:                    [ username, _profile_show ]
+          information:                [ is_active, last_login ]
+          superadmin:                 [ is_sudoer, time_sudoer ]
+        groups_and_perms:
+          permissions:                [ _list_groups, _show_permissions ]
+          total_permissions:          [ _show_total_permissions ]
+        firewall:
+          ip:                         [ _list_groups, _show_ips ]
+          total_ips:                  [ _show_total_ips ]
+
+    create:
+      title:                          Create user
+      render:                         vTab
+      display:
+        general:
+          default:                      [ username, _password, _password_bis, _profile ]
+          information:                  [ is_active ]
+          superadmin:                   [ is_sudoer, time_sudoer ]
+        groups_and_perms:
+          groups:                       [ groups ]
+          permissions:                  [ _edit_permissions ]
+        firewall:
+          ip:                           [ _ip, _ip_list ]
+
+    edit:
+      title:													Edit user "%%username%%"
+      render:                         vTab
+      display:
+        general:
+          default:											[ username, _password, _password_bis, _profile ]
+          information:                  [ is_active, _edit_last_login ]
+          superadmin:                   [ is_sudoer, time_sudoer ]
+        groups_and_perms:
+          groups:                       [ groups ]
+          permissions:                  [ _edit_permissions ]
+        firewall:
+          ip:														[ _ip, _ip_list ]
+
+    list:
+      title:													User list
+      display:												[ =username, created_at, last_login, _profile_show, is_active, is_sudoer, _list_groups, _list_permissions, _list_ips ]
+      filters:												[ username, _filter_group_id, is_active ]
+      sort:														[ username, asc ]
+
+################################################################################

@@ -1,0 +1,1 @@
+<?php include_partial('edit_layout', getCurrentViewParameters()) ?>

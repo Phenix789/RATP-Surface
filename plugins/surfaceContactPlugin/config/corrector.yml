@@ -1,0 +1,7 @@
+
+corrections:
+  130104:
+    comment: Ajout de la colonne zone_id
+    error: Undefined column*sfc_abk_contact.zone_id
+    correction: sql
+    sql: ALTER TABLE sfc_abk_contact ADD zone_id int

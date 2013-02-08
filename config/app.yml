@@ -1,0 +1,45 @@
+################################################################################
+# CONFIGURATION DU PROJET ######################################################
+################################################################################
+all:
+
+################################################################################
+# CONFIGURATION DE SURFACE #####################################################
+################################################################################
+  surface:
+    theme_color:											blue																			# red, green, grey
+    auto_update:											true
+
+    default_target_edit:							tg_east
+    default_target_show:							tg_east
+    default_target_create:						tg_east
+    default_target_save:							tg_east
+    default_target_save_and_add:			tg_east
+    default_target_list:							tg_center
+    default_target_pager:							tg_center
+    default_target_filters:						tg_center
+    default_target_delete:						tg_east
+    default_target_delete_confirm:		tg_east
+    default_target_cancel:						tg_east
+    default_target_duplicate:					tg_east
+
+    north_panel:											north
+    south_panel:											south
+    east_panel:												east
+    west_panel:												west
+    center_panel:											tg_center
+
+    default_save_redirect_action:			show																			# redirection action after a successfull save (edit by default)
+
+    default_app:											dashboard
+
+################################################################################
+# SECURITE ET ANALYSE ##########################################################
+################################################################################
+  analytic:
+    active:											true
+
+  sf_guard_plugin:
+    filtering_ip:								false
+
+################################################################################

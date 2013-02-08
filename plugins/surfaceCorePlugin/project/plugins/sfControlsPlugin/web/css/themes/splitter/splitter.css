@@ -1,0 +1,127 @@
+
+.splitter .pane {
+   position: absolute;
+   overflow: auto;
+   background-color: #FFFFFF;
+   border-style: solid;
+   border-color: #D0D0D0;
+   border-width:  thin;
+}
+
+.splitter .splitbar {
+   position: absolute;
+   cursor:   default;
+}
+
+.splitter .sizable {
+   cursor: move !important;
+}
+
+.splitter .verticalbar {
+   width:               3px;
+   background-color:    #D5D5D5;
+   border-style:        solid;
+   border-width:        thin;
+   border-top-color:    #D0D0D0;
+   border-bottom-color: #D0D0D0;
+   border-left-color:   #C0C0C0;
+   border-right-color:  #C0C0C0;
+}
+
+.splitter .horizontalbar {
+   height:              3px;
+   background-color:    #D5D5D5;
+   border-style:        solid;
+   border-width:        thin;
+   border-top-color:    #C0C0C0;
+   border-bottom-color: #C0C0C0;
+   border-left-color:   #D0D0D0;
+   border-right-color:  #D0D0D0;
+}
+
+.splitter a.collapse_pane1_v {
+   position:         absolute;
+   width:            12px;
+   height:           12px;
+   border-style:     solid;
+   border-width:     thin;
+   border-color:     #D0D0D0;
+   background:       transparent url(default/collapse.gif) no-repeat;
+   right:            3px;
+}
+
+.splitter a.collapse_pane2_v {
+   position:         absolute;
+   width:            12px;
+   height:           12px;
+   border-style:     solid;
+   border-width:     thin;
+   border-color:     #D0D0D0;
+   background:       transparent url(default/expand.gif) no-repeat; 
+   left:             3px;
+}
+
+.splitter a.collapse_pane1_h {
+   position:         absolute;
+   width:            12px;
+   height:           12px;
+   border-style:     solid;
+   border-width:     thin;
+   background:       transparent url(default/ns-collapse.gif) no-repeat;
+   bottom:           3px;
+}
+
+.splitter a.collapse_pane2_h {
+   position:         absolute;
+   width:            12px;
+   height:           12px;
+   border-style:     solid;
+   border-width:     thin;
+   border-color:     #D0D0D0;
+   background:       transparent url(default/ns-expand.gif) no-repeat; 
+   top:              3px;
+}
+
+.splitter a.collapse_restore_v.pane1 {
+   position:         absolute;
+   width:            12px;
+   height:           12px;
+   border-style:     solid;
+   border-width:     thin;
+   border-color:     #D0D0D0;
+   background:       transparent url(default/expand.gif) no-repeat; 
+   left:             3px;
+}
+
+.splitter a.collapse_restore_v.pane2 {
+   position:         absolute;
+   width:            12px;
+   height:           12px;
+   border-style:     solid;
+   border-width:     thin;
+   border-color:     #D0D0D0;
+   background:       transparent url(default/collapse.gif) no-repeat; 
+   right:            3px;
+}
+
+.splitter a.collapse_restore_h.pane1 {
+   position:         absolute;
+   width:            12px;
+   height:           12px;
+   border-style:     solid;
+   border-width:     thin;
+   border-color:     #D0D0D0;
+   background:       transparent url(default/ns-expand.gif) no-repeat; 
+   top:              3px;
+}
+
+.splitter a.collapse_restore_h.pane2 {
+   position:         absolute;
+   width:            12px;
+   height:           12px;
+   border-style:     solid;
+   border-width:     thin;
+   border-color:     #D0D0D0;
+   background:       transparent url(default/ns-collapse.gif) no-repeat; 
+   bottom:           3px;
+}

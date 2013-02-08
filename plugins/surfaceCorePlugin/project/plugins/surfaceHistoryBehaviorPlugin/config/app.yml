@@ -1,0 +1,50 @@
+################################################################################
+# Configuration par defaut #####################################################
+################################################################################
+#			NAME										DETAIL
+#  default:									Configuration pour tous
+#   personal_action					Active/Désactive l'action personnalisable (neccessite de definir la function history_personal_action_tag($history) )
+#   personal_to_string			Active/Désactive le toString() personnalisable de l'history (neccessite de definir la function history_personal_toString($history) )
+#   action_with_create			Action qui autorise l'ajout d'historique dans l'onglet en cours
+#   contact
+#     active								Active/Désactive les contacts
+#     object								Nom de l'objet contact
+#     autocomplete_url			Url utilisé pour l'autocompletion
+#   type
+#     active								Active/Désactive le type d'historique
+#     list									Liste des type possibles
+#     add_list							Liste a ajouté a la liste par defaut
+#   date
+#     modify								Autorise la modification de la date
+#     withtime							Active/Désactive la prise en charge de l'heure dans la date
+#   callback:								Nom de la fonction a appeller en callback au moment d'enregistrer l'historique
+#   updated_at:							Mets a jour le champs updated_at en meme temps que l'enregistrement de l'historique
+#
+#  <Class>									Configuration spécifique a une class donnée
+#    <config_specifique>
+################################################################################
+#all:
+#  history:
+#    default:
+#      personal_action:				false
+#      personal_to_string:		false
+#      action_with_create:		[show]
+#      contact:
+#        active:							true
+#        object:							Contact
+#        autocomplete_url:		contact/autocompleteSearch
+#        add_url:							contact/create
+#      type:
+#        active:							true
+#        list:								[ phone, letter, reunion, fax, mail ]
+#        add_list:						[]
+#      date:
+#        modify:							true
+#        withtime:						true
+#      callback:							~
+#      updated_at:						false
+#
+#    <Class>:
+#      <config_specifique>:
+#
+################################################################################

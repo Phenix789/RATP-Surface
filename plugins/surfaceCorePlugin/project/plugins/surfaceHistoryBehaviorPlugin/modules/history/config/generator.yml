@@ -1,0 +1,109 @@
+
+generator:
+  class:															sfSurfaceGenerator
+  param:
+    model_class:											History
+    theme:														default
+
+    fields:
+      id:													{ name: Identifiant }
+      date_ref:										{ name: Date }
+      description:								{ name: Description, params: 'size=30x7' }
+      object_id:									{ label: off, type: input_hidden_tag }
+      object_name:								{ label: off, type: input_hidden_tag }
+      show_date:									{ name: Date, field_name: date_ref }
+      show_type:									{ label: off }
+      show_contact:								{ label: off }
+      show_list_type:							{ name: Type }
+      show_list_contact:					{ name: Interlocuteur(s) }
+      show_object:                { name: Objet associé }
+      history_info:								{ name: Date }
+      edit_date:									{ name: Date, field_name: date_ref }
+      edit_type:									{ label: off }
+      edit_contact:								{ label: off }
+      list_object:                { name: Objet associé, field_name: object_name }
+      list_date:									{ name: Date, field_name: date_ref }
+      list_description:           { name: Description, field_name: description }
+      contact:                    { name: Contact, type: autocomplete_peer }
+      filter_type:                { name: Type, field_name: type }
+      filter_object_name:         { name: Type d'objet, field_name: object_name }
+
+    fieldset:
+      empty1:                     { name: "" }
+
+    actions:
+      _show:
+      _create:
+      _edit:
+        target:											history_for_new_'.$history->getObjectUid().'
+      _delete_confirm:
+        target:											history_for_new_'.$history->getObjectUid().'
+      _save:
+        redirect_action:						blank
+      _delete:
+        target:											history_for_new_'.$history->getObjectUid().'
+      _cancel:
+        target:											history_for_new_'.$history->getObjectUid().'
+
+    exports:
+      default:
+        name:													Exporter
+
+    show:
+      title:													Voir l'événement
+      display:												[ _show_object, _show_date, description, _show_type, _show_contact ]
+      actions:
+        _cancel:
+          name:                       Fermer
+
+
+    delete_confirm:
+      title:													Supprimer l'événement ?
+      display:												[ _show_object, _show_date, description, _show_type, _show_contact ]
+          
+    create:
+      title:													Nouvel événement
+      display:												[ object_id, object_name, _edit_date, description, _edit_type, _edit_contact ]
+
+    edit:
+      title:													Modifier l'événement
+      display:												[ object_id, object_name, _show_object, _edit_date, description, _edit_type, _edit_contact ]
+
+    list:
+      title:													Liste des événements
+      display:												[ _list_date, _list_object, _list_description, _show_list_type, _show_list_contact ]
+      filters:
+        empty1:                       [ date_ref, _filter_object_name, description, _filter_type, contact ]
+      sort:												  	[ date_ref, desc ]
+      td_class:										  	[ TdClass ]
+      actions:
+        _create:
+          disabled:                   true
+      object_actions:                 []
+
+    components:
+      list_history_object:
+        type:													list
+        display:											[ _history_info, description ]
+        sort:													[ date_ref, desc ]
+        max_per_page:									5
+        td_class:											[ TdClass ]
+        top_pager_skip:									true
+        object_actions:
+          show_component:
+            name:											show
+            action:										show
+            target:										history_for_new_'.$history->getObjectUid().'
+            icon:											/sfSurfaceGeneratorPlugin/images/filter.png
+          edit_component:
+            name:											edit
+            action:										edit
+            target:										history_for_new_'.$history->getObjectUid().'
+            icon:											/sfSurfaceGeneratorPlugin/images/edit.png
+          delete_component:
+            name:											delete
+            action:										delete_confirm
+            target:										history_for_new_'.$history->getObjectUid().'
+            icon:											/sfSurfaceGeneratorPlugin/images/delete_icon.png
+
+################################################################################

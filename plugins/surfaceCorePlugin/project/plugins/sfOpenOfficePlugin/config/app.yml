@@ -1,0 +1,51 @@
+all:
+  sfOpenOfficePlugin:
+
+    xmlconvert_to_utf8: false
+
+# these are the default filters used for convertion (they must be available in the installed OpenOffice
+# see http://wiki.services.openoffice.org/wiki/Framework/Article/Filter/FilterList_OOo_2_1
+    filters:
+      ods:
+        pdf:    { name: calc_pdf_Export   }
+        xls:    { name: MS Excel 97       }
+        xlsx:   { name: MS Excel 2007 XML }
+        ods:    { name: calc              }
+      odt:
+        pdf:    { name: writer_pdf_Export }
+        doc:    { name: MS Word 97        }
+        docx:   { name: MS Word 2007 XML }
+        odt:    { name: writer            }
+      html:
+        pdf:    { name: writer_pdf_Export,  loadFilter: HTML (StarWriter)       }
+        doc:    { name: MS Word 97,         loadFilter: HTML (StarWriter)       }
+        docx:   { name: MS Word 2007 XML,   loadFilter: HTML (StarWriter)       }
+        odt:    { name: writer,             loadFilter: HTML (StarWriter)       }
+        xls:    { name: MS Excel 2007 XML,  loadFilter: HTML (StarCalc)         }
+        ods:    { name: calc,               loadFilter: HTML (StarCalc)         }
+
+# these are the http headers to send to the client
+    headers:
+      all:
+        Cache-Control:              'must-revalidate, post-check=0, pre-chech=0'
+        Content-Type:               'application/force-download'
+        Content-Transfer-Encoding:  binary
+        Pragma:                     public
+
+      pdf:      { Content-Type: application/pdf                                 }
+      xls:      { Content-Type: application/vnd.ms-excel                        }
+      ods:      { Content-Type: application/vnd.oasis.opendocument.spreadsheet  }
+      doc:      { Content-Type: application/vnd.ms-word                         }
+      odt:      { Content-Type: application/vnd.oasis.opendocument.text         }
+      docx:     { Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document }
+      xlsx:     { Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet }
+
+# OpenOffice conversion call options
+    convert:
+      lang:     fr_FR.UTF-8
+      locale:   fr_FR
+      home:     /var/www/openoffice
+      temp:     /tmp
+      display:  ":99"
+      bin:      ooffice
+      bin_opt:  " --norestore --invisible --headless --nologo"

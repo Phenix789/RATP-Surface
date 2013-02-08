@@ -1,0 +1,801 @@
+/*PROJECT GENERAL DEBUT*/
+#wrapper {
+	background-color:#F9F9F9;
+}
+
+
+body{
+	background: #3E8262;
+	background: -moz-linear-gradient(top,  #3E8262 0%, #33AA60 10%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3E8262), color-stop(10%,#33AA60));
+	background: -webkit-linear-gradient(top,  #3E8262 0%,#33AA60 10%);
+	background: -o-linear-gradient(top,  #3E8262 0%,#33AA60 10%);
+	background: -ms-linear-gradient(top,  #3E8262 0%,#33AA60 10%);
+	background: linear-gradient(to bottom,  #3E8262 0%,#33AA60 10%);
+	/*filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3E8262', endColorstr='#33AA60',GradientType=0 );*/
+}
+
+a:link, a:visited, a:active {
+	color:#396;
+	text-decoration: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+.title_wrapper {
+	border: solid #eee;
+	border-width: 0;
+}
+
+.title_wrapper h2 {
+	color: #29323F;
+	font-weight: bold;
+}
+
+.title_wrapper h2 {
+	color:#5D616B;
+	font-size:18px;
+	font-weight: normal;
+	line-height: 35px;
+}
+
+.title_wrapper {
+	border-bottom-color:#eee;
+	border-bottom-style:solid;
+	border-bottom-width:0px;
+}
+.general_form label{
+	color: #666;
+}
+h2.title_delete_confirm {
+	color: #990000;
+}
+/* gwidget overide */
+
+div.gtab ul.gtab-controllers li a {
+	background:#EEEEEE url(../images/small_tabs_middle.gif) repeat-x 0 -26px;
+	border: solid 1px #D0D0D0;
+	color: #575757;
+	font-weight: bold;
+	-moz-border-radius-topleft:0 !important;
+	-moz-border-radius-topright:0 !important;
+	color:#AAAAAA;
+}
+
+div.gtab ul.gtab-controllers li a.gtab-active {
+	background: url(../images/small_tabs_middle.gif) repeat-x;
+	font-weight: bold;
+	background-color:#FFFFFF;
+	background-position:0 -1px;
+	border-bottom-width:1px;
+	border-bottom-color:#FFFFFF;
+	color:#99CC33;
+}
+
+div.gtab ul.gtab-controllers li a:hover,
+div.gtab ul.gtab-controllers li a.gtab-active:hover {
+	background: url(../images/small_tabs_middle.gif) repeat-x;
+	background-position:0 -1px;
+	background-color: #fefefe;
+	color:#99CC99;
+}
+
+.surface_mask {
+	position:absolute;
+	z-index:10000;
+}
+.tips {
+	background:#FFFFDD url(../images/tip.png) no-repeat scroll 5px 10px;
+	border-bottom:1px solid #DDDDDD;
+	border-top:1px solid #DDDDDD;
+	margin:10px 0;
+	padding:5px 20px 5px 45px;
+}
+
+#project_menu {
+	background: #43454d url(../images/bandeau_menu_bg.gif) repeat-x 0 -1px;
+}
+
+#project_menu .inner {
+}
+
+#content {
+	background:#F9F9F9;
+}
+
+.surface_help{
+	background: url(/sfcThemePlugin/common/icons/infos.png) no-repeat center center;
+}
+/*PROJECT GENERAL FIN*/
+
+/*PROJECT NAVIGATION DEBUT*/
+
+#eastNavigation{
+	border-left: solid 1px #555;
+}
+
+/*COLORS MAIN MENU*/
+#main_menu a:link, #main_menu a:visited, #main_menu a:active {
+	color: #bbb;
+	background-image:url(../images/menu_item_bg.gif);
+	border-top: solid 1px #aaa;
+	border-left: solid 1px #aaa;
+	border-right: solid 1px #aaa;
+	text-shadow:0 -1px #555555;
+}
+
+#main_menu a:hover {
+	color: #eee;
+}
+
+#main_menu a.selected:link,
+#main_menu a.selected:visited,
+#main_menu a.selected:hover,
+#main_menu a.selected:active {
+	color: #fff;
+}
+
+#main_menu a:hover,
+#main_menu a.selected:link,
+#main_menu a.selected:visited,
+#main_menu a.selected:hover,
+#main_menu a.selected:active {
+	border-top: solid 1px #b7bcc8;
+	border-left: solid 1px #b7bcc8;
+	border-right: solid 1px #b7bcc8;
+}
+
+/*COLORS logNavigation*/
+#logNavigation{
+	background-color:transparent;
+}
+
+#logNavigation:hover{
+	background-color:#99CC66;
+}
+
+#logNavigation .navigation {
+	font-size:11px;
+	background:transparent;
+	margin-left:10px;
+}
+ 
+#logNavigation .navigation ul {
+	background-color:#396; 
+	border-top:1px solid #3C9;
+}
+
+#logNavigation .navigation li li {
+	border-bottom:1px solid #3C9;
+}
+
+#logNavigation .navigation li a {
+	color:#ddd;
+}
+
+#logNavigation .navigation li a.down {
+	background-color:transparent;
+}
+
+#logNavigation .navigation li li a.fly {
+	background-color:#cd1b16;
+}
+
+#logNavigation .navigation li.cssplay_hover a {
+	color:#a62e24;
+}
+
+#logNavigation .navigation li li a {
+	color:#ddd;
+}
+
+#logNavigation.navigation li li.cssplay_hover a {
+	color:#fff; 
+	background-color:#95bce9;
+}
+
+/* show path followed */
+#logNavigation .navigation li:hover > a {
+	color:#fff;
+}
+
+#logNavigation .navigation li li:hover > a {
+	color:#fff; 
+	background-color:#95bce9;
+}
+
+#logNavigation .navigation li li:hover > a:hover {
+	color:#fff;
+	background-color:#3C9;
+}
+
+/* but IE5.x and IE6 need this lot to style the flyouts*/
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover a,
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a {
+	color:#fff;
+	background-color:#95bce9;
+}
+
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover li a,
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#logNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a{
+	color:#fff;
+	background-color:#95bce9;
+}
+
+/*COLORS appNavigation & eastNavigation */
+
+#appNavigation .navigation, 
+#eastNavigation .navigation {
+	background:transparent;
+}
+ 
+#appNavigation .navigation ul, 
+#eastNavigation .navigation ul {
+	background:#5b5e68;
+	border-top:1px solid #43454d;
+}
+
+#appNavigation .navigation li li, 
+#eastNavigation .navigation li li {
+	border-bottom:1px solid #696d79;
+}
+
+#appNavigation .navigation li a, 
+#eastNavigation .navigation li a {
+	color:#ddd;
+}
+
+#appNavigation .navigation li a.down, 
+#eastNavigation .navigation li a.down {
+	background:transparent;
+}
+
+#appNavigation .navigation li li a.fly, 
+#eastNavigation .navigation li li a.fly {
+	background:#9699a1;
+}
+
+#appNavigation .navigation li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover a {
+	color:#ddd;
+}
+
+#appNavigation .navigation li li a,
+#eastNavigation .navigation li li a {
+	color:#ddd;
+}
+
+#appNavigation .navigation li li.cssplay_hover a,
+#eastNavigation .navigation li li.cssplay_hover a {
+	color:#fff; 
+	background-color:#9699a1;
+}
+
+/* show path followed */
+#appNavigation .navigation li:hover > a,
+#eastNavigation .navigation li:hover > a {
+	color:#fff;
+}
+
+#appNavigation .navigation li li:hover > a,
+#eastNavigation .navigation li li:hover > a {
+	color:#fff;
+	background-color:#9699a1;
+}
+
+#appNavigation .navigation li li:hover > a:hover,
+#eastNavigation .navigation li li:hover > a:hover {
+	color:#fff;
+	background-color:#b9bcc6;
+}
+
+/* but IE5.x and IE6 need this lot to style the flyouts*/
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a {
+	color:#fff;
+	background-color:#9699a1;
+}
+
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a {
+	color:#fff;
+	background-color:#b9bcc6;
+}
+
+/* but IE5.x and IE6 need this lot to style the flyouts*/
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a {
+	color:#fff;
+	background-color:#9699a1;
+}
+
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a {
+	color:#fff;
+	background-color:#b9bcc6;
+}
+
+
+/*CONTEXT MENU COLORS*/
+.menu_context ul {
+	background-color:#396; 
+	border-top:1px solid #3C9;
+}
+
+.menu_context li li {
+	border-bottom:1px solid #3C9;
+}
+
+.menu_context li a {
+	color:#ddd;
+}
+
+.menu_context li a.down {
+	background-color:transparent;
+}
+
+.menu_context li li a.fly {
+	background-color:#cd1b16;
+}
+
+.menu_context li.cssplay_hover a {
+	color:#a62e24;
+}
+
+.menu_context li li a {
+	color:#ddd;
+}
+
+.menu_context li li.cssplay_hover a {
+	color:#fff; 
+	background-color:#95bce9;
+}
+
+.menu_context li:hover > a {
+	color:#fff;
+}
+
+.menu_context li li:hover > a {
+	color:#fff; 
+	background-color:#95bce9;
+}
+
+.menu_context li li:hover > a:hover {
+	color:#fff;
+	background-color:#3C9;
+}
+
+/*MENU CONNEXION*/
+#userNavigation .navigation li ul li{
+	background-color:#396;
+	border-bottom:1px solid #3C9;
+}
+#userNavigation .navigation ul {
+	background:#396;
+	border-top:1px solid #3C9;
+}
+
+#userNavigation li.connect a span{
+	background-image: url(/sfcThemePlugin/common/icons/standby.png);
+	background-repeat:  no-repeat;
+	background-position:  left center;
+}
+
+#userNavigation li.connect a{
+	color:#ddd;
+}
+
+#userNavigation li.connect:hover{
+	color: #fff;
+	background-color:#99CC99;
+}
+
+#userNavigation li.connect a:hover{
+	color: #fff;
+	background-color:#99CC99;
+}
+/*AJOUT BORDURE COULEUR MENU PRINCIPAL*/
+.noir {
+	border-top:solid 3px #000 !important;
+	line-height: 28px !important;
+}
+.blanc {
+	border-top:solid 3px #FFF !important;
+	line-height: 28px !important;
+}
+.rouge_max {
+	border-top:solid 3px #ff0000 !important;
+	line-height: 28px !important;
+}
+.orange_max {
+	border-top:solid 3px #ffcc00 !important;
+	line-height: 28px !important;
+}
+.vert_max {
+	border-top:solid 3px #66FF00 !important;
+	line-height: 28px !important;
+}
+.bleu_max {
+	border-top:solid 3px #3366FF !important;
+	line-height: 28px !important;
+}
+.violet_max {
+	border-top:solid 3px #9900CC !important;
+	line-height: 28px !important;
+}
+.turquoise_max {
+	border-top:solid 3px #00CCFF !important;
+	line-height: 28px !important;
+}
+.gris_max {
+	border-top:solid 3px #CCC !important;
+	line-height: 28px !important;
+}
+.rouge_min {
+	border-top:solid 3px #CC0000 !important;
+	line-height: 28px !important;
+}
+.orange_min {
+	border-top:solid 3px #CC9900 !important;
+	line-height: 28px !important;
+}
+.vert_min {
+	border-top:solid 3px #00CC66 !important;
+	line-height: 28px !important;
+}
+.bleu_min {
+	border-top:solid 3px #0066CC !important;
+	line-height: 28px !important;
+}
+.violet_min {
+	border-top:solid 3px #660066 !important;
+	line-height: 28px !important;
+}
+.turquoise_min {
+	border-top:solid 3px #00CCCC !important;
+	line-height: 28px !important;
+}
+.gris_min {
+	border-top:solid 3px #333 !important;
+	line-height: 28px !important;
+}
+/*PROJECT NAVIGATION FIN*/
+
+/*PROJECT PORTAL DEBUT*/
+
+div.portal_box{
+	background-color: #fff;
+	border: solid 1px #eee;
+}
+
+div.portal_box p,
+div.portal_box ol, 
+div.portal_box ul{
+	color:#808594;
+}
+
+div.portal_box .speed_access{
+	background-color: #F9F9F9;
+	border: solid 1px #eee;
+	background-repeat: no-repeat;
+	background-position: center 10px;
+}
+
+div.portal_box .speed_access:hover{
+	border: solid 1px #CCFFCC;
+	background-color: #CCFFCC;
+}
+
+div.portal_box .speed_access a{
+	color: #808594;
+	border:solid 1px #fff;
+}
+
+div.portal_box .speed_access a:hover{
+	color:#096;
+}
+
+.portal_inner h3 {
+	color:#808594;
+	background-color: transparent;
+	border-bottom:solid 1px #EFEFEF;
+	border-right:solid 1px #fff;
+	border-left:solid 1px #fff;
+	background-image:url("../images/h3.gif");
+	background-position:0 1px;
+}
+
+.portal_inner h3.welcome_title {
+	background: transparent;
+	color:#88ABD5;
+}
+
+.portal_inner h3.welcome_title span{
+	color:#88ABD5;
+}
+
+/* Couleurs recherche */
+#searchbar input.text{
+	border: solid 1px #cecece;
+	background: #fefefe url("../images/white_message.gif") repeat-x center top;
+}
+
+#searchbar input.btn{
+	background: #555 url(../images/menu_item_bg.gif) repeat-x left bottom;
+	color: #EEE;
+}
+
+#searchbar input.btn:hover{
+	background-position: left top;
+	color: #444;
+}
+/*PROJECT PORTAL FIN*/
+
+/*PROJECT TABLES DEBUT*/
+
+.table_wrapper_inner {
+	border: solid #dbdbdb;
+	border-width:  0 0 0 1px;
+}
+
+.table_wrapper td, .table_wrapper th {
+	border: solid #dbdbdb;
+	border-width: 0 1px 1px 0;
+}
+
+.table_wrapper th a:link, .table_wrapper th a:visited, .table_wrapper th a:hover, .table_wrapper th a:active {
+	color: #1f476f;
+}
+
+.approved {
+	background:url(../icons/accept.png) no-repeat right center;
+}
+
+.pending {
+	background:url(../images/clock.png) no-repeat right center;
+	color: #b86464;
+}
+
+.asc {
+	background-image:url(/sfcThemePlugin/common/images/sort_asc.gif);
+}
+
+.desc {
+	background-image:url(/sfcThemePlugin/common/images/sort_desc.gif);
+}
+
+.table_wrapper th {
+	background: #fff;
+}
+
+.table_wrapper td {
+	background: #fefefe url(/sfcThemePlugin/common/images/td_bg1.gif) repeat-x;
+}
+
+.table_wrapper tr.second td {
+	background: #f2f2f2 url(/sfcThemePlugin/common/images/td_bg2.gif) repeat-x;
+}
+
+.table_wrapper tr.second:hover {
+	background: #f2f2f2;
+}
+
+.action1 {
+	background-image:url(../images/action1.gif);
+}
+.action2 {
+	background-image:url(../images/action2.gif);
+}
+.action3 {
+	background-image:url(../images/action3.gif);
+}
+.action4 {
+	background-image:url(../images/action4.gif);
+}
+
+.update em {
+	background:url(../icons/add.png) no-repeat left center;
+}
+
+div.table_legend {
+	color: #444;
+}
+
+.selected td {
+  background : #F0F0FF;
+}
+
+.table_wrapper tr:hover td {
+	background: #EAEFEF;
+}
+
+.current td {
+	background: #E0EAEA;
+}
+
+.table_wrapper td.green {
+	background: #3D3;
+	color: #000;
+}
+
+.table_wrapper td.green a {
+	color: #000;
+}
+
+.table_wrapper td.dark_green {
+	background: #383;
+	color: #fff;
+}
+
+.table_wrapper td.dark_green a {
+	color: #fff;
+}
+
+.table_wrapper td.orange {
+	background: #E3C362;
+}
+
+.table_wrapper td.grey {
+	background: #AAA;
+	color: #000;
+}
+
+.table_wrapper td.grey a {
+	color: #000;
+}
+.table_wrapper td.dark_grey {
+	background: #888;
+	color: #fff;
+}
+
+.table_wrapper td.dark_grey a {
+	color: #fff;
+}
+
+.table_wrapper td.red {
+	background: #E30;
+	color: #fff;
+}
+
+.table_wrapper td.red a {
+	color: #fff;
+}
+
+.table_wrapper td.soft_green {
+	background: #E0EAE0;
+}
+.table_wrapper td.soft_dark_green {
+	background: #A0EAA0;
+}
+.table_wrapper td.soft_orange {
+	background: #EEEAE0;
+}
+
+.table_wrapper td.soft_grey {
+	background: #EEEEEE;
+}
+
+.table_wrapper td.soft_dark_grey {
+	background: #AAAAAA;
+}
+
+.table_wrapper td.soft_red {
+	background: #EAA0A0;
+}
+
+.table_wrapper_select .spacer {
+	background: transparent url(../images/cr_bottom.png) no-repeat scroll 1px 0;
+}
+
+/*PROJECT TABLES FIN*/
+
+.button  {
+	background-image:url("../images/button_bg.gif");
+}
+
+.button:hover {
+	background-position:0 -52px;
+}
+
+.general_form h3{
+	border-bottom-color:#99CC66;
+	border-bottom-style:solid;
+	border-bottom-width:1px;
+	color:#99CC99;
+}
+/*LOGIN*/
+/* header */
+#login_header{
+	background-color: #4d98b2;
+	background-image: url(/sfcThemePlugin/green/images/bandeau_menu_bg.gif);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+}
+/* welcome */
+.login_box h3 {
+	color:#9ba8b0;
+}
+/* logo */
+#logo_login {
+	background-color: #fefefe;
+	background-image:  url(../../../images/logo.png);
+	background-repeat:  no-repeat;
+	background-position:  center center;
+}
+/* boutons & champs */
+#login_submit_btn{
+	background-color: #555;
+	background-image: url(/sfcThemePlugin/green/images/menu_item_bg.gif); 
+	background-repeat:repeat-x ;
+	background-position: left bottom;
+	color: #EEE;	
+}
+
+#login_submit_btn:hover{
+	background-position: left top;
+	color: #444;	
+}
+
+/*MODAL BOX*/
+.whale_nw {
+	background: transparent url(/sfcThemePlugin/green/images/bandeau_menu_bg.gif) repeat-x left bottom;			
+}
+
+.whale_n {
+	background: transparent url(/sfcThemePlugin/green/images/bandeau_menu_bg.gif) repeat-x left bottom;			
+}
+
+.whale_ne {
+	background: transparent url(/sfcThemePlugin/green/images/bandeau_menu_bg.gif) repeat-x left bottom;			
+}
+.whale_content {
+	color: #444;
+}
+.whale_content h3 {
+	color: #888;
+}
+/*WIZARD*/
+.wizardNav li.done {
+    background-color: #415e2e;
+    background-image: url("../images/navDoneBtn.gif");
+}
+.wizardNav li.lastDone {
+    background-color: #415e2e;
+    background-image: url("../images/navLastDoneBtn.gif");
+}
+.wizardNav li.current {
+    background-color: #71a251;
+    background-image: url("../images/navCurrentBtn.gif");
+}
+.wizardNav li.done, .wizardNav li.lastDone{
+	color:#FFF;
+}
+.wizardNav li.done p, .wizardNav li.lastDone p{
+    color:#CCC;
+}
+.wizardNav li.current p{
+    color:#FFF;
+}
+/*FORMS*/
+h2 {
+	color:#29323f;
+}
+
+h3 {
+	color: #096;
+}

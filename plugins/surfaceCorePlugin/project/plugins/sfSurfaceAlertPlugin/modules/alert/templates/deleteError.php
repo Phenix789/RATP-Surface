@@ -1,0 +1,1 @@
+<?php echo "la suppression n'a pu se faire";?>

@@ -1,0 +1,148 @@
+.overlay_whale {
+	background-color: #3f5771;
+	filter:alpha(opacity=80);
+	-moz-opacity: 0.8;
+	opacity: 0.8;
+}
+
+div.dialog{
+	background: #fefefe;
+	border: solid 1px #CCC;
+}
+
+.whale_nw {
+	width:10px;
+	height:25px;
+}
+
+.whale_n {
+	height:25px;
+}
+
+.whale_ne {
+	width:10px;	  
+	height:25px;
+}
+
+.whale_w {
+	background: transparent;			
+	width:7px;
+}
+
+.whale_e {
+	background: transparent url;			
+	width:0;	  
+}
+
+.whale_sw {
+	background: transparent;			
+	width:7px;
+	height:7px;
+}
+
+.whale_s whale/
+
+.whale_se, .whale_sizer  {
+	background: transparent;			
+	width:7px;
+	height:7px;
+}
+
+.whale_sizer {
+	cursor:se-resize;	
+}
+
+.whale_close {
+	width: 20px;
+	height: 20px;
+	background: transparent url(whale/cross.png) no-repeat 0 0;			
+	position:absolute;
+	top:3px;
+	right:0px;
+	cursor:pointer;
+	z-index:1000;
+}
+
+.whale_minimize {
+	width: 23px;
+	height: 23px;
+	background: transparent url(whale/button-min-focus.gif) no-repeat 0 0;			
+	position:absolute;
+	top:0px;
+	right:55px;
+	cursor:pointer;
+	z-index:1000;
+}
+
+.whale_maximize {
+	width: 23px;
+	height: 23px;
+	background: transparent url(whale/button-max-focus.gif) no-repeat 0 0;			
+	position:absolute;
+	top:0px;
+	right:33px;
+	cursor:pointer;
+	z-index:1000;
+}
+
+.whale_title  {
+	color:#AAAAAA;
+	float:left;
+	font-size:12px;
+	font-weight:bold;
+	height:14px;
+	margin-top:2px;
+	text-align:left;
+	width:100%;
+}
+
+.whale_content {
+	overflow:hidden;
+	font-family: Tahoma, Arial, sans-serif;
+ 	font: 12px arial;
+	background:transparent;
+	margin-top: 10px;
+}
+
+/* For alert/confirm dialog */
+.whale_window {
+	border:1px solid #F00;	
+	background: #FFF;
+	padding:20px;
+	margin-left:auto;
+	margin-right:auto;
+	width:400px;
+}
+
+.whale_message {
+	font: 12px arial;
+	text-align:center;
+	width:100%;
+	padding-bottom:10px;
+}
+
+.whale_buttons {
+	text-align:center;
+	width:100%;
+}
+
+.whale_buttons input {
+	width:20%;
+	margin:10px;
+}
+
+.whale_progress {
+	float:left;
+	margin:auto;
+	text-align:center;
+	width:100%;
+	height:16px;
+	background: #FFF url('alert/progress.gif') no-repeat center center
+}
+
+.whale_wired_frame {
+	background: #FFF;
+	filter:alpha(opacity=60);
+	-moz-opacity: 0.6;
+	opacity: 0.6;	
+}

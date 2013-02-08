@@ -1,0 +1,518 @@
+/*MAIN MENU*/
+
+#main_menu {
+	margin-top:14px;
+}
+
+#main_menu li {
+	list-style: none;
+	margin: 0;
+	margin: 0 1px 0 0;
+	float: left;
+}
+
+#main_menu a:link, #main_menu a:visited, #main_menu a:active {
+	display: block;
+	white-space:nowrap;
+	padding-left:5px;
+	padding-right:5px;
+	line-height: 30px;
+	font-weight: bold;
+	font-size: 11px;
+	white-space: nowrap;
+	float: left;
+	text-decoration: none;
+}
+#main_menu a:active {
+	line-height: 35px;
+}
+
+#main_menu a:hover, #main_menu a.selected:link, #main_menu a.selected:visited, #main_menu a.selected:hover, #main_menu a.selected:active {
+	background-position: 0 -5px;
+	text-decoration: none;
+}
+
+/*COLORS MAIN MENU*/
+
+#main_menu li{}
+#main_menu a:link, #main_menu a:visited, #main_menu a:active {
+	color: #ddd;
+	background-color:#3a3a3a;
+	border-left: 0px;
+	margin-top:1px;
+}
+
+#main_menu a:hover {
+	color: #fff;
+	background-color:#787878;
+	margin-top:-2px;
+	line-height: 32px;
+	border-top: solid 1px #8f8f8f;
+}
+
+#main_menu a.selected:link,
+#main_menu a.selected:visited,
+#main_menu a.selected:hover,
+#main_menu a.selected:active {
+	color: #fff;
+	background-color:#787878;
+	margin-top:-2px;
+	line-height: 32px;
+	border-top: solid 1px #8f8f8f;
+}
+
+/* MISE EN FORME DES MENUS CLASS=NAVIGATION */
+
+.navigation {
+	/* padding:0;
+	margin:0;
+	font: 12px arial;
+	position:relative;
+	z-index:200;
+	width:100%; */
+	list-style:none;
+	height:25px;
+
+}
+ 
+.navigation ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+
+}
+
+.navigation li {
+	float:left;
+}
+.navigation li li {
+	float:none;
+}
+
+/* a hack for  IE6 */
+* html .navigation li li {
+	float:left;
+}
+
+.navigation li a {
+	display:block;
+	float:left;
+	height:25px; 
+	padding:0 5px 0 5px;
+	line-height:25px; 
+	text-decoration:none;
+	white-space:nowrap; 
+	font-weight:normal;
+}
+
+.navigation li li a {
+	display:block;
+	height:25px;
+	line-height:25px;
+	float:none;
+	padding:0 25px 0 5px;
+	font-weight:normal;
+	font-size:11px;
+}
+
+.navigation li:hover {
+	position:relative;
+	z-index:300;
+}
+
+.navigation li.cssplay_hover {
+	position:relative;
+	z-index:300;
+}
+
+.navigation li:hover ul {
+	left:0;
+	top:25px;
+	z-index:500;
+}
+
+.navigation li.cssplay_hover ul {
+	left:0;
+	top:25px; 
+	z-index:500;
+}
+
+.navigation ul {
+	position:absolute;
+	left:-9999px;
+	top:-9999px;
+}
+
+* html .navigation ul {
+	width:2px;
+}
+/* it could have been this simple if all browsers understood */
+/* show next level */
+.navigation li:hover li:hover > ul {
+	left:-5px;
+	margin-left:100%;
+	top:-1px;
+	z-index:500;
+}
+#appNavigation .navigation li:hover li:hover > ul {
+	left:-5px;
+	margin-left:100%;
+	top:-1px;
+	z-index:500;
+}
+/* keep further levels hidden */
+.navigation li:hover > ul ul {
+	position:absolute;
+	left:-9999px;
+	top:-9999px;
+	width:auto;
+}
+
+/* show next level */
+.navigation li.cssplay_hover li.cssplay_hover ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover ul {
+	left:100%;
+	margin-left:-5px;
+	top:-1px;
+}
+
+/* keep further levels hidden */
+.navigation li.cssplay_hover ul ul,
+.navigation li.cssplay_hover li.cssplay_hover ul ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover ul ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover ul ul
+{
+	position:absolute; 
+	left:-9999px;
+	top:-9999px;
+}
+
+.navigation li ul li a img{
+	border: none;
+	margin:4px 2px 0 -2px;
+	float: left;
+}
+
+#logNavigation {
+	position: relative;
+	z-index: 9999;
+	height: 25px;
+}
+
+#appNavigation {
+	clear: both;
+	padding:0 0 1px 5px;
+}
+
+#eastNavigation{
+	position: absolute;
+	right: 0;
+	bottom: 1px;
+	width:400px;
+	border-left: solid 1px #555;
+}
+
+#eastNavigation ul{
+	float: left;
+	padding-left:5px;
+}
+
+/*mise en forme outils de panneau*/
+li.panel_tools {
+	line-height: 25px;
+	margin-right:4px;
+	padding: 0;
+	list-style-position: inherit;
+}
+
+.panel_tools a{
+	padding:0 !important;
+}
+
+.panel_tools a span{
+	display: block;
+	margin: 5px 0 0 0;
+	width:16px;
+	height: 16px;
+}
+
+.panel_previous_btn, .panel_next_btn, .panel_refresh_btn{
+	background-position: center bottom;
+}
+
+.panel_previous_btn:hover, .panel_next_btn:hover, .panel_refresh_btn:hover {
+	background-position: center top;
+}
+
+.panel_close_btn, .panel_size_btn {
+	background-position: center bottom;
+}
+
+.panel_close_btn:hover, .panel_size_btn:hover {
+	background-position: center top;
+}
+
+/*MENU CONNEXION*/
+#userNavigation{
+	position:absolute;
+	right:0;
+	top:0;
+	z-index:9999;
+}
+#userNavigation li.connect a span{
+	display: block;
+	padding-left: 18px;
+	height:24px;
+}
+
+#userNavigation li.connect a{
+	font-weight: bold;
+	font-size:11px;
+}
+
+#userNavigation li.connect a:hover{}
+
+/*debut surcharge pour super user*/
+#userNavigation a.down img{
+	margin-top:4px;
+	margin-right:2px;
+	float:left;
+}
+
+#notices .input_pwd {
+	margin-top:20px;
+	margin-left:80px;
+	width:160px;
+	float:left;
+}
+
+#notices .button {
+	margin-top:20px;
+	margin-left: 5px;
+}
+
+/*ACTIONS sur Panneaux*/
+.panel_previous_btn{
+	background-image:url(../icons/previous_btn.png);
+}
+
+.panel_next_btn{
+	background-image:url(../icons/next_btn.png);
+}
+
+.panel_refresh_btn{
+	background-image:url(../icons/refresh_btn.png);
+}
+
+.panel_close_btn{
+	background-image:url(../icons/close_btn.png);
+}
+
+.panel_size_btn{
+	background-image:url(../icons/size_btn.png);
+}
+/*SMALL NAVIGATION*/
+ul.small_navigation{
+	margin-left: 3px;
+	
+}
+ul.small_navigation li{
+	float: left;
+	
+}
+ul.small_navigation a{
+	display: block;
+	padding-left: 20px;
+	margin-right: 10px;
+	
+}
+.small_navigation a.printer{
+	background: url(../icons/printer.png) no-repeat left center;
+}
+
+#appNavigation .navigation .active > a:first-child{
+	height:23px;
+	margin-top: 4px;
+}
+/*COLORS appNavigation & eastNavigation */
+
+#appNavigation {
+	width:100%;
+	background-color: #787878;
+}
+
+#appNavigation .navigation, 
+#eastNavigation .navigation {
+	background:transparent;
+}
+ 
+#appNavigation .navigation ul, 
+#eastNavigation .navigation ul {
+	background:#787878;
+	border-top:1px solid #696d79;
+}
+
+#appNavigation .navigation li li, 
+#eastNavigation .navigation li li {
+	border-bottom:1px solid #999;
+}
+
+#appNavigation .navigation li a, 
+#eastNavigation .navigation li a {
+	color:#ddd;
+}
+
+#appNavigation .navigation li a.down, 
+#eastNavigation .navigation li a.down {
+	background:transparent;
+}
+
+#appNavigation .navigation li li a.fly, 
+#eastNavigation .navigation li li a.fly {
+	background:#9699a1;
+}
+
+#appNavigation .navigation li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover a {
+	color:#ddd;
+}
+
+#appNavigation .navigation li li a,
+#eastNavigation .navigation li li a {
+	color:#ddd;
+}
+
+#appNavigation .navigation li li.cssplay_hover a,
+#eastNavigation .navigation li li.cssplay_hover a {
+	color:#fff; 
+	background-color:#787878;
+}
+
+/* show path followed */
+#appNavigation .navigation li:hover > a,
+#eastNavigation .navigation li:hover > a {
+	color:#fff;
+}
+
+#appNavigation .navigation li li:hover > a,
+#eastNavigation .navigation li li:hover > a {
+	color:#333;
+	background-color:#fff;
+}
+
+#appNavigation .navigation li li:hover > a:hover,
+#eastNavigation .navigation li li:hover > a:hover {
+	color:#333;
+	background-color:#fff;
+}
+
+#appNavigation .navigation .active > a:first-child{
+	color:#333 ;
+	background: #FFF !important;
+}
+
+/* but IE5.x and IE6 need this lot to style the flyouts*/
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a {
+	color:#fff;
+	background-color:#9699a1;
+}
+
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#appNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a {
+	color:#fff;
+	background-color:#b9bcc6;
+}
+
+/* but IE5.x and IE6 need this lot to style the flyouts*/
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover a {
+	color:#fff;
+	background-color:#9699a1;
+}
+
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a,
+#eastNavigation .navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li a {
+	color:#fff;
+	background-color:#b9bcc6;
+}
+
+
+
+/*CONTEXT MENU COLORS*/
+.menu_context{
+	background: transparent url(/qkThemePlugin/common/icons/menu_open.png) no-repeat center center;
+}
+
+.menu_context .navigation {
+	background:transparent;
+}
+ 
+.menu_context .navigation ul {
+	background:#787878;
+	border-top:1px solid #696d79;
+}
+
+.menu_context .navigation li {}
+ 
+.menu_context .navigation li:hover ul {}
+
+.menu_context .navigation li li {
+	border-bottom:1px solid #999;
+}
+
+.menu_context .navigation li a {
+	color:#ddd;
+}
+
+.menu_context .navigation li a.down {
+	background-color:transparent;
+}
+
+.menu_context .navigation li li a.fly {
+	background:#9699a1;
+}
+
+.menu_context .navigation li.cssplay_hover a {
+	color:#ddd;
+}
+
+.menu_context .navigation li li a {
+	color:#ddd;
+}
+
+.menu_context .navigation li li.cssplay_hover a {
+	color:#fff; 
+	background-color:#787878;
+}
+
+.menu_context .navigation li:hover > a {
+	color:#fff;
+}
+
+.menu_context .navigation li li:hover > a {
+	color:#333;
+	background-color:#fff;
+}
+
+.menu_context .navigation li li:hover > a:hover {
+	color:#333;
+	background-color:#fff;
+}
+
+.menu_context .navigation .active > a:first-child{
+	color:#333 ;
+	background: #FFF !important;
+}

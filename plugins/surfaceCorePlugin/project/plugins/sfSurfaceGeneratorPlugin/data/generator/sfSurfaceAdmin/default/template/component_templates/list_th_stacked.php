@@ -1,0 +1,1 @@
+[?php include_partial(  '<?php echo $this->getModuleName() ?>/<?php echo $component_name; ?>_th_tabular', array('list_target' => $list_target, 'basket_key' => isset($basket) ? $basket->getKey() : null)) ?]

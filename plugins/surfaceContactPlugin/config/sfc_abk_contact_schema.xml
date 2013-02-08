@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ Schema du plugin SurfaceContact ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~ La table CONTACT represente un contact avec un maximum de caractéristique.
+~ Que celui ci soit une personne moral ou physique. A ceci, plusieurs table le
+~ complete.
+~ La table CONTACTMULTIPLE permet de lié plusieurs contacts a un seul
+~ La table CIVILITY permet de mettre en liste les civilité qu'il est possible
+~ d'affecté au contact.
+~ La table SERVICE permet d'affecté un service a un contact.
+~ La table GROUP permet de definir des groupes.
+~ La table CONTACTGROUP permet de faire le lien entre un contact et un groupe.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-->
+<database defaultIdMethod="native" name="propel" package="plugins.surfaceContactPlugin.lib.model">
+
+	<table name="sfc_abk_civility" phpName="Civility">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="short_name" type="varchar" size="255" />
+		<column name="long_name" type="varchar" size="255" />
+		<column name="genre" type="integer" />
+		<column name="name_space" type="varchar" size="255" />
+	</table>
+
+	<table name="sfc_abk_service" phpName="Service">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="short_name" type="varchar" size="255" />
+		<column name="long_name" type="varchar" size="255" />
+		<column name="name_space" type="varchar" size="255" />
+	</table>
+
+	<table name="sfc_abk_group" phpName="Group">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="name" type="varchar" size="255" />
+		<column name="code_name" type="varchar" size="255" />
+		<column name="comment" type="longvarchar" />
+		<column name="name_space" type="varchar" size="255" />
+	</table>
+
+	<table name="sfc_abk_contact" phpName="Contact">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="parent_id" type="integer" />
+		<column name="civility_id" type="integer" />
+		<column name="service_id" type="integer" />
+		
+		<column name="role" type="varchar" size="255" />
+
+		<column name="title" type="varchar" size="255" />
+		<column name="first_name" type="varchar" size="255" />
+		<column name="last_name" type="varchar" size="255" />
+		<column name="maiden_name" type="varchar" size="255" />
+		<column name="complement_name" type="varchar" size="255" />
+
+
+		<column name="name" type="varchar" size="255" />
+		<column name="short_name" type="varchar" size="255" />
+
+		<column name="zone_id" type="integer" />
+
+		<column name="address1" type="varchar" size="255" />
+		<column name="address2" type="varchar" size="255" />
+		<column name="city" type="varchar" size="255" />
+		<column name="postal_code" type="varchar" size="255" />
+		<column name="country" type="varchar" size="255" />
+
+		<column name="phone" type="varchar" size="255" />
+		<column name="fax" type="varchar" size="255" />
+		<column name="mobile" type="varchar" size="255" />
+		<column name="email" type="varchar" size="255" />
+		<column name="web" type="varchar" size="255" />
+
+		<column name="comment" type="longvarchar" />
+		<column name="hidden_comment" type="longvarchar" />
+		
+		<column name="birth_date" type="date" />
+		<column name="birth_place" type="varchar" size="255" />
+		<column name="birth_place_code" type="varchar" size="255" />
+		
+
+		<column name="is_archive" type="boolean" default="0"/>
+		<column name="archive_date" type="date" />
+		<column name="archive_comment" type="longvarchar" />
+		
+		<column name="secu_number" type="varchar" size="255" />
+		<column name="siret" type="varchar" size="255" />
+		<column name="siren" type="varchar" size="255" />
+		<column name="naf_code" type="varchar" size="255" />
+		<column name="ape_code" type="varchar" size="255" />
+
+		<column name="type" type="integer" required="true" inheritance="single">
+			<inheritance key="0" class="PhysicalPerson" extends="plugins.surfaceContactPlugin.lib.model.Contact" />
+			<inheritance key="1" class="PhysicalPerson1" extends="plugins.surfaceContactPlugin.lib.model.PhysicalPerson" />
+			<inheritance key="2" class="PhysicalPerson2" extends="plugins.surfaceContactPlugin.lib.model.PhysicalPerson" />
+			<inheritance key="3" class="PhysicalPerson3" extends="plugins.surfaceContactPlugin.lib.model.PhysicalPerson" />
+			<inheritance key="4" class="PhysicalPerson4" extends="plugins.surfaceContactPlugin.lib.model.PhysicalPerson" />
+			<inheritance key="5" class="PhysicalPerson5" extends="plugins.surfaceContactPlugin.lib.model.PhysicalPerson" />
+			
+			<inheritance key="100" class="MoralPerson" extends="plugins.surfaceContactPlugin.lib.model.Contact" />
+			<inheritance key="101" class="MoralPerson1" extends="plugins.surfaceContactPlugin.lib.model.MoralPerson" />
+			<inheritance key="102" class="MoralPerson2" extends="plugins.surfaceContactPlugin.lib.model.MoralPerson" />
+			<inheritance key="103" class="MoralPerson3" extends="plugins.surfaceContactPlugin.lib.model.MoralPerson" />
+			<inheritance key="104" class="MoralPerson4" extends="plugins.surfaceContactPlugin.lib.model.MoralPerson" />
+			<inheritance key="105" class="MoralPerson5" extends="plugins.surfaceContactPlugin.lib.model.MoralPerson" />
+		</column>
+
+		<column name="created_at" type="timestamp" />
+		<column name="created_by" type="integer" />
+		<column name="updated_at" type="timestamp" />
+		<column name="updated_by" type="integer" />
+
+		<foreign-key foreignTable="sfc_abk_contact" onDelete="setNull">
+			<reference local="parent_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="sfc_abk_civility" onDelete="setNull">
+			<reference local="civility_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="sfc_abk_service" onDelete="setNull">
+			<reference local="service_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setNull">
+			<reference local="created_by" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setNull">
+			<reference local="updated_by" foreign="id" />
+		</foreign-key>
+	</table>
+
+	<table name="sfc_abk_contact_multiple" phpName="ContactMultiple">
+		<column name="contact_id" type="integer" required="true" primaryKey="true" />
+		<column name="parent_id" type="integer" required="true" primaryKey="true" />
+		<column name="role" type="varchar" size="255" />
+		<foreign-key foreignTable="sfc_abk_contact" onDelete="cascade">
+			<reference local="contact_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="sfc_abk_contact" onDelete="cascade">
+			<reference local="parent_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+	<table name="sfc_abk_contact_group" phpName="ContactGroup">
+		<column name="contact_id" type="integer" required="true" primaryKey="true" />
+		<column name="group_id" type="integer" required="true" primaryKey="true" />
+		<foreign-key foreignTable="sfc_abk_contact" onDelete="cascade">
+			<reference local="contact_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="sfc_abk_group" onDelete="cascade">
+			<reference local="group_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+	<table name="sfc_abk_mailling_list" phpName="MaillingList">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="name" type="varchar" size="255" required="true" />
+		<column name="comment" type="longvarchar" />
+		<column name="is_private" type="boolean" default="0" />
+		<column name="archive" type="boolean" default="0" />
+
+		<column name="created_at" type="timestamp" />
+		<column name="created_by" type="integer" />
+		<column name="updated_at" type="timestamp" />
+		<column name="updated_by" type="integer" />
+
+		<foreign-key foreignTable="sf_guard_user" onDelete="setNull">
+			<reference local="created_by" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setNull">
+			<reference local="updated_by" foreign="id" />
+		</foreign-key>
+	</table>
+
+	<table name="sfc_abk_mailling_list_contact" phpName="MaillingListContact">
+		<column name="contact_id" type="integer" required="true" primaryKey="true" />
+		<column name="mailling_list_id" type="integer" required="true" primaryKey="true" />
+
+		<foreign-key foreignTable="sfc_abk_contact" onDelete="cascade">
+			<reference local="contact_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="sfc_abk_mailling_list" onDelete="cascade">
+			<reference local="mailling_list_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+</database>

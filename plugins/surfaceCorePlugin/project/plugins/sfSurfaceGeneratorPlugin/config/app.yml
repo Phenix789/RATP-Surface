@@ -1,0 +1,20 @@
+################################################################################
+# Default Configuration Generator ##############################################
+################################################################################
+app:
+
+################################################################################
+# Default Print Configuration ##################################################
+################################################################################
+  print:
+    list_default_marge:						[ 0, 0, 0, 0 ]
+    list_default_backmarge:				[ 14, 8, 14, 8 ]
+    list_default_page_header:			'print_list_header_%s'
+    list_default_page_footer:			'print_list_footer_%s'
+    list_default_style:						'print_list_style_%s'
+
+    show_default_marge:						[ 0, 0, 0, 0 ]
+    show_default_backmarge:				[ 14, 8, 14, 8 ]
+    show_default_page_header:			'print_show_header_%s'
+    show_default_page_footer:			'print_show_footer_%s'
+    show_default_style:						'print_show_style_%s'

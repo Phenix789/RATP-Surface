@@ -1,0 +1,1 @@
+<?php echo surface_link_to($mailling_list_contact->getContact(), 'person_ex/show?id=' . $mailling_list_contact->getContactId(), 'tg_east') ?>

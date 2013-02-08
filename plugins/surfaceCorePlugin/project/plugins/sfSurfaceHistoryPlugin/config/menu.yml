@@ -1,0 +1,80 @@
+################################################################################
+# HISTORY NAVIGATION ###########################################################
+################################################################################
+sfc_menu_generator:
+  items:
+    history_prev_center:
+      label:											<span class="panel_previous_btn"></span>
+      title:											Précédent
+      link:												sfSurfaceHistoryNavigate/previous?skipNav=true
+      target:											tg_center
+      class:											panel_tools
+
+    history_next_center:
+      label:											<span class="panel_next_btn"></span>
+      title:											Suivant
+      link:												sfSurfaceHistoryNavigate/next?skipNav=true
+      target:											tg_center
+      class:											panel_tools
+
+    history_reload_center:
+      label:											<span class="panel_refresh_btn"></span>
+      title:											Actualiser l'affichage
+      link:												sfSurfaceHistoryNavigate/refresh?skipNav=true
+      target:											tg_center
+      class:											panel_tools
+
+    history_prev_east:
+      label:											<span class="panel_previous_btn"></span>
+      title:											Précédent
+      link:												sfSurfaceHistoryNavigate/previous?skipNav=true
+      target:											tg_east
+      class:											panel_tools
+
+    history_next_east:
+      label:											<span class="panel_next_btn"></span>
+      title:											Suivant
+      link:												sfSurfaceHistoryNavigate/next?skipNav=true
+      target:											tg_east
+      class:											panel_tools
+
+    history_reload_east:
+      label:											<span class="panel_refresh_btn"></span>
+      title:											Actualiser l'affichage
+      link:												sfSurfaceHistoryNavigate/refresh?skipNav=true
+      target:											tg_east
+      class:											panel_tools
+
+################################################################################
+# EAST #########################################################################
+################################################################################
+    close_east:
+      label:											<span class="panel_close_btn" onclick="surface.close_east();return false;"></span>
+      title:											Fermer le panneau
+      is_ajax:										false
+      class:											panel_tools
+
+    extend_east:
+      label:											<span class="panel_size_btn spacer" onclick="surface.toggle_east_width();return false;"></span>
+      title:											Agrandir/Réduire le panneau
+      is_ajax:										false
+      class:											panel_tools
+
+################################################################################
+# SUB MENU #####################################################################
+################################################################################
+    nav_tg_center:
+      items:											[ history_prev_center, history_next_center, history_reload_center ]
+      target:											appNavigation
+      render:
+        helper:										HistoryMenu
+        function:									history_menu_nav_tg_center_tag
+
+    nav_tg_east:
+      items:											[ close_east, extend_east, history_prev_east, history_next_east, history_reload_east ]
+      target:											eastNavigation
+      render:
+        helper:										HistoryMenu
+        function:									history_menu_nav_tg_east_tag
+
+################################################################################

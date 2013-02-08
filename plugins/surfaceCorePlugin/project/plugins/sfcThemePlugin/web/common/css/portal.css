@@ -1,0 +1,346 @@
+/*MISE EN FORME TABLEAU DE BORD*/
+
+/* BOXES */
+
+.portal_inner {
+	width: 1000px;
+	margin: 0 auto;
+	position: relative;
+}
+
+.portal_box{
+	display: inline-block;
+	vertical-align: top;
+	margin-bottom: 6px;
+}
+
+.portal_box p {
+	margin-left: 10px;
+}
+/* date + bienvenue */
+div#welcome img {
+	float:right;
+	margin:0 10px 5px 5px;
+	width:70px;
+}
+
+div#welcome p{
+	padding-right: 10px;
+	padding-bottom: 5px;
+}
+/* nom d'utilisateur */
+div#welcome span{
+	font-weight: bold;
+}
+
+/* acces rapides */
+.portal_box .speed_access{
+	display:inline-block;
+	margin: 0 0 7px 7px;
+	padding: 0;
+	width: 100px;
+	height: 100px;
+}
+
+.portal_box .speed_access a{
+	margin:0;
+	padding: 0;
+	line-height: 160px;
+	font-weight: bold;
+	width: 98px;
+	height: 98px;
+	text-align: center;
+	display: block;
+	text-decoration: none;
+}
+
+.portal_box .speed_access a:hover{
+	text-decoration: none;
+}
+
+/* COLONNES PORTAIL */
+/*colonne simple*/
+.portal_box.single{
+	width: 328px;
+	min-height:150px;
+}
+/*colonne double*/
+.portal_box.double{
+	width: 663px;
+}
+
+/* titres */
+#content .title_wrapper {
+	padding: 0 0 4px;
+	margin-top:10px;
+	border:none;
+}
+
+.portal_inner .title_wrapper {
+	min-height: 33px;
+	margin-top: 0 !important;
+	padding-top: 0;
+}
+
+.portal_inner h3 {
+	font-weight: bold;
+	text-align: center;
+	line-height: 26px;
+}
+
+.portal_inner .general_form h3 {
+    background: none;
+    text-align: left;    
+}
+
+h3.today {
+	padding-left: 0;
+	text-transform: capitalize;
+}
+
+/* listes */
+
+#welcome ol, 
+#welcome ul{
+	margin:5px 0 5px 20px;
+}
+
+#welcome ul{
+	list-style-type: disc;
+}
+
+#welcome ol{
+	list-style-type: decimal;
+}
+
+div.speed ul {
+	list-style-type: none;
+	margin:0;
+}
+
+div.full ul {
+	list-style-type: none;
+	margin:0;
+}
+
+/* RECHERCHE */
+
+#searchbar{
+	height:30px;
+	margin-bottom:20px;
+	margin-left:184px;
+	margin-top:20px;
+}
+
+#searchbar input.text{
+	padding: 0;
+	margin: 0;
+	width: 400px;
+	display: block;
+	height:30px;
+	float: left;
+}
+
+#searchbar input.btn{
+	display: block;
+	width:200px;
+	height: 32px;
+	line-height: 32px;
+	font-weight: bold;
+	font-size: 1.1em;
+	padding: 0;
+	margin: 0 0 0 20px;
+	float: left;
+	border: none;
+}
+/*PORTAIL ACCES RAPIDES*/
+/* Icones acces rapides */
+
+.portal_box .bati{
+	background-image:  url(../icons/bati.png);
+}
+
+.portal_box .cont{
+	background-image:  url(../icons/cont.png);
+}
+
+.portal_box .stat{
+	background-image:  url(../icons/stat.png);
+}
+
+.portal_box .cada{
+	background-image:  url(../icons/cada.png);
+}
+
+.portal_box .exposition{
+	background-image:  url(../icons/exposition.png);
+}
+
+.portal_box .doss{
+	background-image:  url(../icons/doss.png);
+}
+
+.portal_box .power{
+	background-image:  url(../icons/power.png);
+}
+
+.portal_box .doss_un{
+	background-image:  url(../icons/doss_un.png);
+}
+
+.portal_box .doss_deux{
+	background-image:  url(../icons/doss_deux.png);
+}
+
+.portal_box .doss_trois{
+	background-image:  url(../icons/doss_trois.png);
+}
+
+div.portal_box .doss_blue{
+	background-image:  url(../icons/doss_blue.png);
+}
+
+div.portal_box .doss_grey{
+	background-image:  url(../icons/doss_grey.png);
+}
+
+div.portal_box .doss_green{
+	background-image:  url(../icons/doss_green.png);
+}
+
+div.portal_box .doss_pink{
+	background-image:  url(../icons/doss_pink.png);
+}
+
+div.portal_box .doss_orange{
+	background-image:  url(../icons/doss_orange.png);
+}
+
+div.portal_box .doss_red{
+	background-image:  url(../icons/doss_red.png);
+}
+
+
+.portal_box .dev_eco{
+	background-image:  url(../icons/dev_eco.png);
+}
+
+.portal_box .admi{
+	background-image:  url(../icons/admi.png);
+}
+
+.portal_box .urba{
+	background-image:  url(../icons/urba.png);
+}
+
+.portal_box .tool{
+	background-image:  url(../icons/tool.png);
+}
+
+.portal_box .cms{
+	background-image:  url(../icons/textes.png);
+}
+
+.portal_box .qual{
+	background-image:  url(../icons/qual.png);
+}
+
+.portal_box .chim{
+	background-image:  url(../icons/chim.png);
+}
+
+.portal_box .fact{
+	background-image:  url(../icons/euro.png);
+}
+
+.portal_box .data{
+	background-image:  url(../icons/donnees.png);
+}
+
+.portal_box .zone{
+	background-image:  url(../icons/territoires.png);
+}
+
+.portal_box .quest{
+	background-image:  url(../icons/questions.png);
+}
+
+.portal_box .access{
+	background-image:  url(../icons/acces.png);
+}
+
+.portal_box .backlist{
+	background-image:  url(../icons/back_list.png);
+}
+
+.portal_box .gibson{
+	background-image:  url(../icons/gibson.png);
+}
+
+.portal_box .fender{
+	background-image:  url(../icons/fender.png);
+}
+
+.portal_box .studio{
+	background-image:  url(../icons/studio.png);
+}
+.portal_box .skull{
+	background-image:  url(../icons/skull.png);
+}
+
+
+.portal_box .news{
+    background-image:  url(../icons/newsletter.png);
+}
+
+
+.portal_box .tasks{
+	background-image:  url(../icons/tasks.png);
+}
+
+.portal_box .save {
+	background-image: url(../icons/save.png);
+}
+.portal_box .val {
+	background-image: url(../icons/accept_big.png);
+}
+.portal_box .calc {
+	background-image: url(../icons/page_process.png);
+}
+.portal_box .devis {
+	background-image: url(../icons/price.png);
+}
+.portal_box .canc {
+	background-image: url(../icons/canceled.png);
+}
+.portal_box .print {
+	background-image: url(../icons/print.png);
+}
+.portal_box .mail {
+	background-image: url(../icons/mail_send.png);
+}
+.portal_box .edit {
+	background-image: url(../icons/edit.png);
+}
+.portal_box .del {
+	background-image: url(../icons/trash.png);
+}
+.portal_box .dupl {
+	background-image: url(../icons/add_pages.png);
+}
+.portal_box .label{
+	background-image: url(../icons/label.png);
+}
+.portal_box .home{
+	background-image: url(../icons/home.png);
+}
+
+.portal_box .back{
+	background-image: url(../icons/folder_accept.png);
+}
+
+.section_inner .portal_box {
+	border: none;
+	min-height: 90px;
+	margin-top: 5px;
+}

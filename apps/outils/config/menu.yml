@@ -1,0 +1,57 @@
+################################################################################
+# DECLARATION DES MENUS PROJECT ################################################
+################################################################################
+sfc_menu_generator:
+
+################################################################################
+# ITEMS ########################################################################
+################################################################################
+  items:
+
+    dashboard_message_module:
+      label:                      Message d'accueil
+      link:                       dashboard_message/list
+      items:                      [ dashboard_message_create ]
+
+    dashboard_message_create:
+      label:                      Nouveau message
+      link:                       dashboard_message/create
+      target:                     tg_east
+
+################################################################################
+# EXEMPLE TOUTES OPTIONS #######################################################
+################################################################################
+#    <name>:											nom de l'entré, necessaire pour la retrouver
+#      label:											contenue de la balise <a>
+#      icon:											icon qui se positionne avant le label
+#      title:											valeur de l'attribut title de la balise <a>
+#      link:											lien href ou onclick
+#      target:										target pour les liens ajax
+#      is_ajax:										precise si le lien est une action ajax
+#      skip_navigate:							s'ajoute ou pas dans l'historique de navigation
+#      is_controller:							precise si le lien est un controller
+#      allow:											droit necessaire
+#      class:											class css apposer a la balise <li>
+#      items:											definition du sous menu
+#      render:										rendu different
+#        helper:									nom du helper
+#        function:								fonction du helper
+#
+################################################################################
+# MENUS ########################################################################
+################################################################################
+  menus:
+
+    app_navigation:
+      items:                      [ nav_tg_center, dashboard_message_module ]
+
+################################################################################
+# EXEMPLE TOUTES OPTIONS #######################################################
+################################################################################
+#    <name>:											nom du menu, necessaire pour le retrouver avec getInstance()
+#      items:											les entrées du menu
+#      target:										element cible du menu, utile pour l'update de menu
+#      class:											class css aposer sur la balise <ul>
+#      allow:											droit necessaire pour afficher le menu
+#
+################################################################################

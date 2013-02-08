@@ -1,0 +1,1 @@
+<?php surface_include_component('alert','alertListener') ?>

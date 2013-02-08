@@ -1,0 +1,41 @@
+generator:
+  class:              sfSurfaceGenerator
+  param:
+    model_class:      sfGuardPermission
+    theme:            default
+    
+    fields:
+      name:           { name: Nom  }
+      description:    { name: Description  }
+    
+    actions:
+      _list:
+        credentials:    [[security/show, security/edit]]
+      _show:
+        credentials:    [[security/show, security/edit]]
+      _create:		    { credentials: [security/edit] }
+      _edit:		    { credentials: [security/edit] }
+      _delete_confirm:	{ credentials: [security/edit] }
+
+    exports:
+      default:		{ credentials: [security/export] }
+      
+    list:
+      title:          Permission list
+      display:        [=name, description]
+      
+    show:
+      title:          Show permission "%%name%%"
+      display:        [name, description]
+
+    edit:
+      title:          Edit permission "%%name%%"
+      display:        [name, description]
+      
+    create:
+      title:          Create permission
+      display:        [name, description]
+      
+    delete_confirm:
+      title:          Delete permission "%%name%%" ?
+      display:        [name, description]

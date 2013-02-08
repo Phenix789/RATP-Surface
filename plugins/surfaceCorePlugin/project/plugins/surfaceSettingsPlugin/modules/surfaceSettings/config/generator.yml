@@ -1,0 +1,57 @@
+generator:
+  class:                          sfSurfaceGenerator
+  param:
+    model_class:                  sfcSetting
+    theme:                        default
+
+    fields:
+      id:                  { name: Id }
+      name:                { name: Paramètre }
+      type:                { name: Type, credentials: [ admin ] }
+      options:             { name: Options d'affichage, credentials: [ admin ]  }
+      category:            { name: Catégorie, credentials: [ admin ] }
+      value:               { name: Valeur actuelle }
+      default_value:       { name: Valeur par défaut }
+
+    actions:
+      _create:                        { credentials: [ admin ] }
+      # _edit:                          {  }
+      # _show:                          {  }
+      _delete_confirm:                { credentials: [ admin ] }
+      # _save:                          { }
+      _delete:                        { credentials: [ admin ] }
+      # _cancel:                        { }
+
+    exports:
+      default:                        { name: Exporter }
+
+    create:
+      title:                          Nouveau paramètre
+      display:                        
+        Paramètre:                   [ category, name, value ]
+        Gestion avancée:             [ type, options, default_value ]
+
+    edit:
+      title:                          Modifier le paramètre "%%name%%"
+      render:                         vTab
+      display:                        
+        Paramètre:                   [ category, name, value ]
+        Gestion avancée:             [ type, options, default_value ]
+
+    show:
+      title:                          Paramètre "%%name%%"
+      render:                         vTab
+      display:                        
+        Paramètre:                   [ category, name, value ]
+        Gestion avancée:             [ type, options, default_value ]
+
+    delete_confirm:
+      title:                          Supprimer le paramètre ?
+      display:                        
+        Paramètre:                   [ category, name, value ]
+        Gestion avancée:             [ type, options, default_value ]
+
+    list:
+      title:                          Paramètres de l'application
+      display:                        [ category, name, value, default_value ]
+      filters:                        [ category, name, value ]

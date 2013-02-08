@@ -1,0 +1,56 @@
+################################################################################
+# Schema  ##############################################################
+# Schema 
+#
+# @brief Schema
+# @package Plugin
+# @subpackage surfaceCart
+#
+# @author Claude <claude@elogys.fr>
+# @date 12 févr. 2010
+#
+################################################################################
+propel:
+  _attributes:								{ package: plugins.surfaceCartPlugin.lib.model }
+
+################################################################################
+# Table ########################################################################
+# 
+################################################################################
+#	ATTRIBUTS														DETAIL
+#
+################################################################################
+  plugin_cart:
+    _attributes:							{ phpName: Cart }
+    id:												~
+    name:											{ type: varchar, size: 255 }
+    description:							{ type: longvarchar }
+    selected:									{ type: boolean }
+    archive:									{ type: boolean }
+    user_id:									{ type: integer, foreignTable: sf_guard_user, foreignReference: id }
+
+    created_at:								{ type: timestamp }
+    created_by:								{ type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    updated_at:								{ type: timestamp }
+    updated_by:								{ type: integer, foreignTable: sf_guard_user, foreignReference: id }
+
+################################################################################
+# Table ########################################################################
+#
+################################################################################
+#	ATTRIBUTS														DETAIL
+#
+################################################################################
+  plugin_cart_item:
+    _attributes:							{ phpName: CartItem }
+    id:												~
+    cart_id:									{ type: integer, foreignTable: plugin_cart, foreignReference: id }
+    object_id:								{ type: integer }
+    object_name:							{ type: varchar, size: 255 }
+
+    created_at:								{ type: timestamp }
+    created_by:								{ type: integer, foreignTable: sf_guard_user, foreignReference: id }
+    updated_at:								{ type: timestamp }
+    updated_by:								{ type: integer, foreignTable: sf_guard_user, foreignReference: id }
+
+################################################################################

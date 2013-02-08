@@ -1,0 +1,23 @@
+sfc_contact_plugin:
+  civility:
+    active:										true
+    module_name:							civility
+    module_dir:								plugins.deployingContactPlugin.modules
+  group:
+    active:										true
+    module_name:							group
+    module_dir:								plugins.deployingContactPlugin.modules
+  service:
+    active:										true
+    module_name:							service
+    module_dir:								plugins.deployingContactPlugin.modules
+
+  contact:
+    Person:
+      base_class:							PhysicalPerson1
+      module_name:						person
+      module_dir:							plugins.commonModulesPlugin.modules
+      parent:
+        type:									multiple																					#simple / none
+        parent_class:					Structure
+        parent_name:					Structure

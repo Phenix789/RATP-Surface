@@ -1,0 +1,67 @@
+################################################################################
+# DECLARATION DES MENUS PROJECT ################################################
+################################################################################
+sfc_menu_generator:
+
+################################################################################
+# ITEMS ########################################################################
+################################################################################
+  items:
+    collaborator_module:
+      label:											Collaborateurs
+      link:												collaborator/list
+
+    sf_user_module:
+      label:											Comptes
+      link:												sfGuardUser/list
+
+    sf_group_module:
+      label:											Groupes
+      link:												sfGuardGroup/list
+
+    sf_entity_module:
+      label:											Entités
+      link:												sfGuardEntity/list
+
+    sf_permission_module:
+      label:											Permissions
+      link:												sfGuardPermission/list
+
+################################################################################
+# USER NAVIGATION ##############################################################
+################################################################################
+    logout:
+      label:											<span>Déconnexion</span>
+      link:												'@sf_guard_signout'
+      is_ajax:										false
+      class:											connect
+
+    user_info:
+      items:											[ sudoer, change_password, clear_cache ]
+      render:
+        helper:										sfGuard
+        function:									sf_guard_menu_user_info_tag
+
+    sudoer:
+      target:											notices
+      render:
+        helper:										sfGuard
+        function:									sf_guard_menu_sudoer_tag
+
+    change_password:
+      label:											Changer de mot de passe
+      link:												sfGuardAuth/changePassword
+      target:											popup
+      render:
+        helper:										sfGuard
+        function:									sf_guard_menu_change_password_tag
+
+    clear_cache:
+      label:											Vider le cache
+      link:												default/clearCache
+      is_ajax:										false
+      render:
+        helper:										sfGuard
+        function:									sf_guard_menu_clear_cache_tag
+
+################################################################################

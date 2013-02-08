@@ -1,0 +1,63 @@
+################################################################################
+# DECLARATION DES MENUS DOSSIER ################################################
+################################################################################
+sfc_menu_generator:
+  items:
+
+################################################################################
+# EXEMPLE TOUTES OPTIONS #######################################################
+################################################################################
+#    <name>:											nom de l'entré, necessaire pour la retrouver
+#      label:											contenue de la balise <a>
+#      icon:											icon qui se positionne avant le label
+#      title:											valeur de l'attribut title de la balise <a>
+#      link:											lien href ou onclick
+#      target:										target pour les liens ajax
+#      is_ajax:										precise si le lien est une action ajax
+#      skip_navigate:							s'ajoute ou pas dans l'historique de navigation
+#      is_controller:							precise si le lien est un controller
+#      allow:											droit necessaire
+#      class:											class css apposer a la balise <li>
+#      items:											definition du sous menu
+#      render:										rendu different
+#        helper:									nom du helper
+#        function:								fonction du helper
+#
+################################################################################
+
+    data_source_module:
+      label:											Source de données
+      link:												dataSource/list
+
+    continue_field_module:
+      label:											Valeurs continues
+      link:												continueField/list
+
+    discrete_field_module:
+      label:											Valeurs discrètes
+      link:												discreteField/list
+
+    worksheet_module:
+      label:											Worksheet
+      link:												worksheet/list
+
+    view_module:
+      label:											Vues
+      link:												view/list
+
+    graphic_module:
+      label:											Graphiques et tableaux
+      link:												graphic/index
+
+    configuration_stat_plugin:
+      label:											Configuration
+      link:												#nogo
+      is_ajax:										false
+      items:											[ data_source_module, continue_field_module, discrete_field_module, worksheet_module, view_module ]
+
+    stat_module:
+      label:											Statistiques
+      link:												graphic/index
+      items:											[ graphic_module, configuration_stat_plugin ]
+
+################################################################################

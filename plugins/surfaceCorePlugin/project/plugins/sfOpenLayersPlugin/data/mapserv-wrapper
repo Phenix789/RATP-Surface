@@ -1,0 +1,29 @@
+#!/usr/bin/php
+<?php
+
+$sf_root_dir = dirname(__FILE__);
+$pos = strpos($sf_root_dir, '/plugins/', true);
+if ($pos !== FALSE) {
+    $sf_root_dir = substr($sf_root_dir, 0, $pos);
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+    
+    // Exec mapserver
+    parse_str($_SERVER['QUERY_STRING'], $query);
+    
+    if (isset($query['map'])) {
+        $query['map'] =  $sf_root_dir . '/data/carto/' . $query['map'];
+    }
+    $query['database']   = 'sy_af25_intranet';
+    $query['uid']        = 'admin';
+    $query['passwd']     = 'gu1tarH';
+   
+    $_SERVER['QUERY_STRING'] = http_build_query($query);
+    
+    passthru('/usr/lib/cgi-bin/mapserv "QUERY_STRING='.$_SERVER['QUERY_STRING'].'"');
+}
+else {
+  echo "Sorry, I only understand GET requests.\n";
+}
+

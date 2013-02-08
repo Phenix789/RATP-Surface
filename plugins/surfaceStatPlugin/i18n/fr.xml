@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+<file orginal="global" source-language="en_US" datatype="plaintext">
+<body>
+<trans-unit><source>all apps</source><target>Toutes applications</target></trans-unit>
+<trans-unit><source>none namespace</source><target>Aucun namespace</target></trans-unit>
+
+</body>
+</file>
+</xliff>

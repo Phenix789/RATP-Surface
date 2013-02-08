@@ -1,0 +1,4 @@
+all:
+  sfPropelFileAssocPlugin:
+    dir:      /sfPropelFileAssocPlugin
+    temp_dir: /sfPropelFileAssocPlugin/tmp

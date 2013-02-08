@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="propel" package="plugins.surfaceSettingsPlugin.lib.model">
+
+  <table name="sfc_setting" phpName="sfcSetting">
+    <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+    <column name="name" type="VARCHAR" size="255"/>
+    <column name="type" type="VARCHAR" size="255"/>
+    <column name="options" type="LONGVARCHAR"/>
+    <column name="value" type="LONGVARCHAR"/>
+    <column name="category"  type="VARCHAR" size="255"/>
+    <column name="default_value"  type="LONGVARCHAR"/>
+
+    <column name="created_at" type="TIMESTAMP"/>
+    <column name="updated_at" type="TIMESTAMP"/>
+    <column name="created_by" type="INTEGER"/>
+    <column name="updated_by" type="INTEGER"/>
+    
+    <foreign-key foreignTable="sf_guard_user" onDelete="setnull"><reference local="created_by" foreign="id"/></foreign-key>
+    <foreign-key foreignTable="sf_guard_user" onDelete="setnull"><reference local="updated_by" foreign="id"/></foreign-key>
+  </table>
+</database>

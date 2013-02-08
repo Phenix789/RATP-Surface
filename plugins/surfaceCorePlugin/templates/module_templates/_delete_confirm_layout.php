@@ -1,0 +1,1 @@
+<?php include_partial('show_layout', array_merge(getCurrentViewParameters(), array('categories' => $categories))) ?>

@@ -1,0 +1,22 @@
+methods:
+  post:
+    - "sf_guard_group{name}"
+    - "sf_guard_group{associated_ip}"
+
+names:
+  sf_guard_group{name}:
+    required:     yes
+    required_msg: Please, enter a name
+    validators:   nameUniqueValidator
+  sf_guard_group{associated_ip}:
+    required: no
+    validators: IpValidator
+
+nameUniqueValidator:
+  class:          sfPropelUniqueValidator
+  param:
+    class:        sfGuardGroup
+    column:       name
+    unique_error: This group name already exists
+IpValidator:
+  class:					IpValidator

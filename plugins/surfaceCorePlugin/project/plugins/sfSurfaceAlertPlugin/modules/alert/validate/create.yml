@@ -1,0 +1,20 @@
+methods:
+  post:
+    - "alert{id}"
+    - "alert{triggered_at}"
+    - "alert{message}"
+    - "alert{model_id}"
+    - "alert{model_class}"
+    
+names:
+  alert{id}:
+    required:      No
+  alert{triggered_at}:
+    required:      No
+  alert{message}:
+    required:      No
+  alert{model_id}:
+    required:      No
+  alert{model_class}:
+    required:      No
+  

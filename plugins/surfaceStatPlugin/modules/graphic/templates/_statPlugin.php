@@ -1,0 +1,2 @@
+<div id="control"> <?php include_component('graphic', 'control', array('default' => $default, 'options' => $options_control)) ?> </div>
+<div id="graphic"> <?php include_component('graphic', 'graphic', array('default' => $default)) ?> </div>

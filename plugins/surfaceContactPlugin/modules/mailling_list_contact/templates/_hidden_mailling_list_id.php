@@ -1,0 +1,1 @@
+<?php echo surface_input_hidden_tag('mailling_list_contact[mailling_list_id]', $mailling_list_contact->getMaillingListId()) ?>

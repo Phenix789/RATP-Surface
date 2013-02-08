@@ -1,0 +1,49 @@
+generator:
+  class:              sfSurfaceGenerator
+  param:
+    model_class:      Collaborator
+    theme:            default
+    
+    fields:
+      collaborator_id:    { name: Collaborateur   }
+      show_collaborator:  { name: Collaborateur   }
+      
+      contact_id:    { name: Contact,  type: surface_autocomplete_peer, params: "size=50 related_class=Contact completion_url='contact/autocompletePeerFullname'"   }
+      show_contact:  { name: Contact   }
+      
+      wiz_newuser_login:        { name: Identifiant de connexion    }
+      wiz_newuser_password:     { name: Mot de passe                }
+      wiz_newuser_role:         { name: Type de profil            }
+      wiz_newuser_collaborator: { label: off                      }
+      wiz_newuser_contact:      { label: off                      }
+      wiz_newuser_role_profil:  { label: off                      }
+      wiz_newuser_summary:      { label: off                      }
+
+    edit:
+      display:      [ collaborator_id    ]
+
+    show:
+      display:      [ _show_collaborator  ]
+
+    wizards:
+      new_user:
+        title:      Assistant de création d'un nouvel utilisateur
+        steps:
+          role:
+            title:       Type d'utilisateur
+            fields:      [wiz_newuser_role]
+          identity:
+            title:       Identité de l'utilisateur
+            fields:      [wiz_newuser_role_profil]
+          account:
+            title:       Compte utilisateur
+            #note:       ## Subtitle of the step
+            #header:     ## Message displayed on top of the content
+            fields:      [wiz_newuser_login, wiz_newuser_password]            
+          confirm:
+            title:       Confirmation
+            header:      Veuillez vérifier que les informations du compte à créer sont correctes.
+            fields:      [wiz_newuser_summary]
+          end:
+            title:       Fin
+            header:      L'utilisateur a été créé correctement.

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="propel" package="plugins.sfSurfaceAlertPlugin.lib.model">
+      <!-- alertBehavior -->
+	<table name="sfc_plugin_alert" phpName="Alert">
+		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+		<column name="recipient_id" type="INTEGER"/>
+		<column name="trigger_at" type="DATE"/>
+		<column name="message" type="LONGVARCHAR"/>
+		<column name="model_id" type="INTEGER"/>
+		<column name="model_class" type="VARCHAR" size="45"/>
+		<!-- Inutilisé <column name="state" type="INTEGER"/> -->
+		<!-- Obsolete <column name="target_url" type="VARCHAR" size="45"/> -->
+		<column name="sent" type="TIMESTAMP"/>
+		<column name="acquitted_at" type="DATE"/>
+		<column name="acquitted_by" type="INTEGER"/>
+		
+		<column name="created_at" type="TIMESTAMP"/>
+		<column name="updated_at" type="TIMESTAMP"/>
+		<column name="created_by" type="INTEGER"/>
+		<column name="updated_by" type="INTEGER"/>
+		
+		<foreign-key name="fk_alert_acquitted_by" foreignTable="collaborator" >
+			<reference local="acquitted_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key name="fk_alert_recipient_id" foreignTable="collaborator" >
+			<reference local="recipient_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key name="fk_alert_updated_by" foreignTable="sf_guard_user" >
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key name="fk_alert_created_by" foreignTable="sf_guard_user" >
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+	</table>
+  
+</database>

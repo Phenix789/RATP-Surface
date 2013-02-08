@@ -1,0 +1,11 @@
+all:
+  surface:
+    default_index:                      default/show
+
+  dashboard:
+    logo:
+      source:										logo.png
+      options:									{}
+    message:
+      active:										true
+      allow:										[]

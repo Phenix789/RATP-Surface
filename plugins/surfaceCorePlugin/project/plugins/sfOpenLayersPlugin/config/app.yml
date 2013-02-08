@@ -1,0 +1,10 @@
+all:
+  sf_openlayers:
+    mapserver-bin:    /usr/lib/cgi-bin/mapserv  # full path to mapserver cgi-bin
+    carto_path:       /data/carto               # path to gis datas (relative to project root)
+  
+# Can be overide, use /config/databases.yml informations by default
+#    database:
+#      name:         database
+#      username:     user
+#      password:     passwd

@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+	<file orginal="global" source-language="en_US" datatype="plaintext">
+		<body>
+			<trans-unit><source>phone</source><target>Téléphone</target></trans-unit>
+			<trans-unit><source>letter</source><target>Courrier</target></trans-unit>
+			<trans-unit><source>reunion</source><target>Réunion</target></trans-unit>
+			<trans-unit><source>fax</source><target>Fax</target></trans-unit>
+			<trans-unit><source>mail</source><target>Mail</target></trans-unit>
+			<trans-unit><source>press</source><target>Presse</target></trans-unit>
+			<trans-unit><source>prospecting</source><target>Prospection terrain</target></trans-unit>
+			<trans-unit><source>status</source><target>Etat d'avancement / Suivi</target></trans-unit>
+			<trans-unit><source>other</source><target>Autre</target></trans-unit>
+			<trans-unit><source>unknow</source><target>Autre</target></trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,36 @@
+.history_tab {
+	float: left;
+	width: 100%;
+	padding: 5px;
+}
+
+.history_action {
+	float: left;
+	width: 100%;
+	padding: 5px;
+}
+
+.history_for_new {
+	float: left;
+	width: 100%;
+	padding: 5px;
+}
+
+.history_list {
+	float: left;
+	width: 100%;
+	padding: 5px;
+	border: 1px groove #CCCCCC;
+}
+
+.history_no_padding {
+	padding: 0;
+}
+
+.history_personal_action {
+	float: right;
+}
+
+.history_border {
+	border-top: solid 1px #CCCCCC;
+}

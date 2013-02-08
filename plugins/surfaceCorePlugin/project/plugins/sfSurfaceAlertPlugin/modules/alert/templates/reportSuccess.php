@@ -1,0 +1,1 @@
+<?php echo javascript_tag("surface.link_to('alert/refresh?alert_id=".$alert_id."&load=all','dashboard_alerts')");?>

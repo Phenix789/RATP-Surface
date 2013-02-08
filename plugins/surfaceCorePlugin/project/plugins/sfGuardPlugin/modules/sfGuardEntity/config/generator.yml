@@ -1,0 +1,41 @@
+generator:
+  class:              sfSurfaceGenerator
+  param:
+    model_class:      sfGuardEntity
+    theme:            default
+    
+    fields:
+      name:           { name: Nom  }
+     
+    actions:
+      _list:
+        credentials:    [[security/show, security/edit]]
+      _show:
+        credentials:    [[security/show, security/edit]]
+      _create:		    { credentials: [security/edit] }
+      _edit:		    { credentials: [security/edit] }
+      _delete_confirm:	{ credentials: [security/edit] }
+
+    exports:
+      default:		{ credentials: [security/export] }
+      
+    list:
+      title:          Entity list
+      display:        [=name]
+      
+    show:
+      title:          Show entity "%%name%%"
+      display:        [name]
+
+    edit:
+      title:          Edit entity "%%name%%"
+      display:        [name]
+      
+    create:
+      title:          Create entity
+      display:        [name]
+      
+    delete_confirm:
+      title:          Delete entity "%%name%%" ?
+      display:        [name]
+

@@ -1,0 +1,69 @@
+################################################################################
+# DECLARATION DES MENUS PROJECT ################################################
+################################################################################
+sfc_menu_generator:
+
+################################################################################
+# ITEMS ########################################################################
+################################################################################
+  items:
+    collaborator_module:
+      label:											Collaborateurs
+      link:												collaborator/list
+
+    sf_user_module:
+      label:											Utilisateurs
+      link:												sfGuardUser/list
+
+    sf_group_module:
+      label:											Groupes
+      link:												sfGuardGroup/list
+
+    sf_entity_module:
+      label:											Entités
+      link:												sfGuardEntity/list
+
+    sf_permission_module:
+      label:											Permissions
+      link:												sfGuardPermission/list
+
+    analytic_module:
+      label:											Analyse de connexion
+      link:												analytic/list
+
+################################################################################
+# EXEMPLE TOUTES OPTIONS #######################################################
+################################################################################
+#    <name>:											nom de l'entré, necessaire pour la retrouver
+#      label:											contenue de la balise <a>
+#      icon:											icon qui se positionne avant le label
+#      title:											valeur de l'attribut title de la balise <a>
+#      link:											lien href ou onclick
+#      target:										target pour les liens ajax
+#      is_ajax:										precise si le lien est une action ajax
+#      skip_navigate:							s'ajoute ou pas dans l'historique de navigation
+#      is_controller:							precise si le lien est un controller
+#      allow:											droit necessaire
+#      class:											class css apposer a la balise <li>
+#      items:											definition du sous menu
+#      render:										rendu different
+#        helper:									nom du helper
+#        function:								fonction du helper
+#
+################################################################################
+# MENUS ########################################################################
+################################################################################
+  menus:
+    app_navigation:
+      items:											[ nav_tg_center, collaborator_module, sf_user_module, sf_group_module, sf_entity_module, sf_permission_module, analytic_module ]
+
+################################################################################
+# EXEMPLE TOUTES OPTIONS #######################################################
+################################################################################
+#    <name>:											nom du menu, necessaire pour le retrouver avec getInstance()
+#      items:											les entrées du menu
+#      target:										element cible du menu, utile pour l'update de menu
+#      class:											class css aposer sur la balise <ul>
+#      allow:											droit necessaire pour afficher le menu
+#
+################################################################################

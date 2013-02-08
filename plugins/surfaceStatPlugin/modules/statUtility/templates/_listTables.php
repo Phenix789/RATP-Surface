@@ -1,0 +1,1 @@
+<?php echo surface_select_tag($name, options_for_select($list, $default)) ?>

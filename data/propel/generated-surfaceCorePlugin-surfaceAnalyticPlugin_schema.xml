@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" package="plugins.surfaceAnalyticPlugin.lib.model" defaultIdMethod="native" noXsd="true">
+
+  <table name="sfc_plugin_analytic" phpName="Analytic">
+    <column name="id" type="integer" required="true" primaryKey="true" autoincrement="true" />
+    <column name="username" type="varchar" size="255" />
+    <column name="user_id" type="integer" />
+    <foreign-key foreignTable="sf_guard_user">
+      <reference local="user_id" foreign="id" />
+    </foreign-key>
+    <column name="connection" type="integer" />
+    <column name="ip" type="varchar" size="255" />
+    <column name="user_agent" type="varchar" size="255" />
+    <column name="screen_width" type="integer" />
+    <column name="screen_height" type="integer" />
+    <column name="screen_inner_width" type="integer" />
+    <column name="screen_inner_height" type="integer" />
+    <column name="cookie_enabled" type="boolean" />
+    <column name="language" type="varchar" size="255" />
+    <column name="platform" type="varchar" size="255" />
+    <column name="product" type="varchar" size="255" />
+    <column name="product_sub" type="varchar" size="255" />
+    <column name="vendor" type="varchar" size="255" />
+    <column name="vendor_sub" type="varchar" size="255" />
+    <column name="created_at" type="timestamp" />
+  </table>
+
+</database>

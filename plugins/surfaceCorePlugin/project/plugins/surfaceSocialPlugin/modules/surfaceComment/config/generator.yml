@@ -1,0 +1,101 @@
+
+generator:
+  class:															sfSurfaceGenerator
+  param:
+    model_class:											SfcComment
+    theme:														default
+
+    fields:
+      id:													{ name: Identifiant }
+      date_ref:										{ name: Date }
+      comment:										{ name: Commentaire, params: 'size=30x7' }
+      object_id:									{ label: off, type: input_hidden_tag }
+      object_name:								{ label: off, type: input_hidden_tag }
+      show_date:									{ name: Date, field_name: date_ref }
+      collaborator_id:						{ name: Utilisateur }
+      show_object:                { name: Objet associé }
+      
+      list_object:                { name: Objet associé, field_name: object_name }
+      filter_object_name:         { name: Type d'objet, field_name: object_name }
+
+    fieldset:
+      empty1:                     { name: "" }
+
+    actions:
+      _show:
+      _create:
+      _edit:
+        target:											sfc_comment_for_new_'.$sfc_comment->getObjectUid().'
+      _delete_confirm:
+        target:											sfc_comment_for_new_'.$sfc_comment->getObjectUid().'
+      _save:
+        redirect_action:						blank
+      _delete:
+        target:											sfc_comment_for_new_'.$sfc_comment->getObjectUid().'
+      _cancel:
+        target:											sfc_comment_for_new_'.$sfc_comment->getObjectUid().'
+
+    exports:
+      default:
+        name:													Exporter
+
+    show:
+      title:													Voir le commentaire
+      display:												[ comment ]
+      actions:
+        _cancel:
+          name:                       Fermer
+
+
+    delete_confirm:
+      title:													Supprimer le commentaire ?
+      display:												[  comment ]
+          
+    create:
+      title:													Nouveau commentaire
+      display:												[ object_id, object_name, comment ]
+
+    edit:
+      title:													Modifier le commentaire
+      display:												[ object_id, object_name, comment ]
+
+    list:
+      title:													Liste des commentaires
+      display:												[ object_name, date_ref ]
+      filters:
+        empty1:                       [ object_name, date_ref ]
+      sort:												  	[ date_ref, desc ]
+      td_class:										  	[ TdClass ]
+      actions:
+        _create:
+          disabled:                   true
+        _edit:
+          disabled:                   true
+      object_actions:                 []
+
+    components:
+      list_sfc_comment_object:
+        type:													list
+        display:											[ comment ]
+        sort:													[ date_ref, desc ]
+        max_per_page:									5
+        td_class:											[ TdClass ]
+        top_pager_skip:									true
+        object_actions:
+          show_component:
+            name:											show
+            action:										show
+            target:										sfc_comment_for_new_'.$sfc_comment->getObjectUid().'
+            icon:											/sfSurfaceGeneratorPlugin/images/filter.png
+          edit_component:
+            name:											edit
+            action:										edit
+            target:										sfc_comment_for_new_'.$sfc_comment->getObjectUid().'
+            icon:											/sfSurfaceGeneratorPlugin/images/edit.png
+          delete_component:
+            name:											delete
+            action:										delete_confirm
+            target:										sfc_comment_for_new_'.$sfc_comment->getObjectUid().'
+            icon:											/sfSurfaceGeneratorPlugin/images/delete_icon.png
+
+################################################################################

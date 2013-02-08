@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE script:module PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "module.dtd">
+<script:module xmlns:script="http://openoffice.org/2000/script" script:name="Convert" script:language="StarBasic">REM  *****  BASIC  *****
+
+Sub Main
+
+End Sub
+
+Sub ConvertTo( cFile, cOutFile, cFilter, cLoadFilter )
+        On Error Goto ErrorConv
+
+        cURL = ConvertToURL( cFile )
+        &apos; oDoc = StarDesktop.loadComponentFromURL( cURL, &quot;_blank&quot;, 0, Array( MakePropertyValue( &quot;FilterName&quot;, cFilter ) ))
+        if (cLoadFilter &lt;&gt; &quot;&quot;) then
+        	oDoc = StarDesktop.loadComponentFromURL( cURL, &quot;_blank&quot;, 0, Array(  MakePropertyValue(&quot;Hidde&quot;, False), MakePropertyValue( &quot;FilterName&quot;, cLoadFilter ) ))        	
+        else 
+        	oDoc = StarDesktop.loadComponentFromURL( cURL, &quot;_blank&quot;, 0, Array( MakePropertyValue(&quot;Hidde&quot;, False) ))
+        endif
+        cURL = ConvertToURL( cOutFile )
+        oDoc.storeToURL( cURL, Array( MakePropertyValue( &quot;Overwrite&quot;, True), MakePropertyValue( &quot;FilterName&quot;, cFilter ) ))
+        oDoc.close( True )
+
+        Exit Sub
+        
+        ErrorConv:
+        	StarDesktop.terminate()
+End Sub
+
+Function MakePropertyValue(Optional cName as String, Optional uValue) As com.sun.star.beans.PropertyValue
+        Dim oPropertyValue as New com.sun.star.beans.PropertyValue
+        If Not IsMissing( cName ) Then
+                oPropertyValue.Name = cName
+        EndIf
+        If Not IsMissing( uValue ) Then
+                oPropertyValue.Value = uValue
+        EndIf
+        MakePropertyValue()= oPropertyValue
+End Function
+
+</script:module>

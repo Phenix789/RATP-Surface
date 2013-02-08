@@ -1,0 +1,39 @@
+################################################################################
+# DECLARATION DES MENUS PROJECT ################################################
+################################################################################
+sfc_menu_generator:
+
+################################################################################
+# ITEMS ########################################################################
+################################################################################
+  items:
+    person_module:
+      label:                      Contacts
+      link:                       person/list
+
+    structure_module:
+      label:                      Structures
+      link:                       structure/list
+
+    group_module:
+      label:                      Groupes
+      link:                       group/list
+
+    civility_module:
+      label:                      Civilités
+      link:                       civility/list
+
+    service_module:
+      label:                      Services
+      link:                       service/list
+
+    mailling_list_module:
+      label:											Listes de diffusion
+      link:												mailling_list/list
+
+    contact_configuration:
+      label:                      Configuration
+      is_ajax:                    false
+      items:                      [ group_module, civility_module, service_module ]
+
+################################################################################

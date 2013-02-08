@@ -1,0 +1,67 @@
+generator:
+  class:              sfSurfaceGenerator
+  param:
+    model_class:      Collaborator
+    theme:            default
+    
+    helpers:                          [ ObjectFileAssoc ]
+    
+    fields:
+      first_name:							{ name: Prénom        }
+      last_name:							{ name: Nom           }
+      email:								{ name: E-mail,       params: "mailto=true"  }
+      job_role:								{ name: Fonction      }
+      signature:							{ name: Signature }
+      address:								{ name: Adresse,      type: textarea_tag, params: "size=51x5"  }
+      postal_code:							{ name: Code postal   }
+      city:									{ name: Ville         }
+      country:								{ name: Pays          }
+      phone_number:							{ name: Fixe          }
+      mobile_number:						{ name: Portable      }
+      fax_number:							{ name: Fax           }
+      comment:								{ name: Commentaire,  type: textarea_tag, params: "size=51x5"                       }
+      confidential:							{ name: Secret,       type: textarea_tag, params: "size=51x5", credentials:  admin  }
+      is_active:							{ name: 'Actif ?' }
+      list_account:							{ name: Compte utilisateur }
+      show_account:							{ name: Compte utilisateur }
+      avatar:								{ name: Photo, type: assoc_files, params: "file_type=avatar", help: Chargez une photo carrée }
+      show_avatar:							{ name: Photo }
+      list_avatar:							{ name: Photo }
+
+    create:
+      title:          Créer un collaborateur
+      display:
+        "Identité":   [first_name, last_name, avatar, signature, email, job_role, is_active]
+        "Adresse":    [address, postal_code, city, country]
+        "Téléphone":  [phone_number, mobile_number, fax_number]
+        "Divers":     [comment, confidential]
+        
+    edit:
+      title:          Modifier le collaborateur "%%first_name%% %%last_name%%"
+      display:
+        "Identité":   [first_name, last_name, avatar, signature, email, job_role, is_active]
+        "Adresse":    [address, postal_code, city, country]
+        "Téléphone":  [phone_number, mobile_number, fax_number]
+        "Divers":     [comment, confidential]
+    
+    show:
+      title:          Collaborateur "%%first_name%% %%last_name%%"
+      display:
+        "Identité":   [first_name, last_name, _show_avatar, signature, email, job_role, is_active]
+        "Adresse":    [address, postal_code, city, country]
+        "Téléphone":  [phone_number, mobile_number, fax_number]
+        "Divers":     [comment, confidential]
+    
+    delete_confirm:
+      title:          Supprimer le collaborateur "%%first_name%% %%last_name%%" ?
+      display:
+        "Identité":   [first_name, last_name, _show_avatar, signature, email, job_role, is_active]
+        "Adresse":    [address, postal_code, city, country]
+        "Téléphone":  [phone_number, mobile_number, fax_number]
+        "Divers":     [comment, confidential]
+        
+    list:
+      title:          Collaborateurs
+      display:        [ =_list_avatar, =last_name, =first_name, _list_account, signature, job_role, email, phone_number]
+      sort:           [last_name, asc]
+      filters:        [last_name, first_name, is_active]

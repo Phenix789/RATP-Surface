@@ -1,0 +1,1 @@
+<?php echo history_tag($object) ?>

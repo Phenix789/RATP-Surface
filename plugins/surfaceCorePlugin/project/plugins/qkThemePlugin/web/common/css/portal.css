@@ -1,0 +1,345 @@
+/*MISE EN FORME TABLEAU DE BORD*/
+
+/* BOXES */
+
+.portal_inner {
+	width: 1004px;
+	margin: 0 auto;
+	position: relative;
+	top: 0;
+	left: 0;
+	overflow: hidden;
+}
+
+div.portal_box {
+	background-color: #fff;
+	border: solid 1px #f4f4f4;
+
+	margin-bottom: 0;
+	padding: 0 0 5px 0;
+	float: left;
+}
+
+div.portal_box p {
+	margin-left: 10px;
+}
+div.portal_inner h3 {
+	color:#888;
+	background-color: #fff;
+	text-align:left;
+	padding:0 5px 0 5px;
+	font-size:16px;
+	letter-spacing: -1px;
+	display: table;
+	width: auto;
+	border-top:solid 1px #EEE;
+}
+div.portal_box .title_wrapper{
+	border:0;
+	height:auto;
+	background: #F4F4F4;
+}
+
+.portal_box div {
+	padding: 5px;
+}
+/* date + bienvenue */
+div#welcome img {
+	float:right;
+	margin:0 10px 5px 5px;
+	width:70px;
+}
+
+div#welcome p{
+	padding-right: 10px;
+	padding-bottom: 5px;
+}
+/* nom d'utilisateur */
+div#welcome span{
+	font-weight: bold;
+}
+
+/* acces rapides */
+div.portal_box .speed_access{
+	background-color: #fff;
+	background-repeat: no-repeat;
+	background-position: center center;
+	border-right: solid 1px #eee;
+	float: left;
+	margin: 0 0 0 0;
+	padding: 0;
+	width: auto;
+	height: 100px;
+}
+
+div.portal_box .speed_access a{
+	margin:0;
+	padding: 0 10px 0 10px;
+	line-height: 160px;
+	font-size: 13px;
+	font-weight: normal;
+	width: auto;
+	height: 98px;
+	text-align: center;
+	display: block;
+	text-decoration: none;
+}
+
+div.portal_box .speed_access a:hover{
+	text-decoration: none;
+}
+
+
+/* COLONNES PORTAIL */
+/*colonne simple*/
+.single{
+	width: 330px;
+	padding: 2px 0 0;
+	min-height:146px;
+}
+/*colonne double*/
+div.double{
+	width: 661px;
+	min-height:146px;
+}
+/*colonne triple*/
+div.full{
+	width: 998px;
+}
+/*hack pour troisième colonne*/
+.last {
+	margin-left: 4px;
+}
+.middle {
+	margin-left: 4px;
+}
+.first {
+	margin-left: 0px;
+}
+
+div.clear{
+	clear:both;
+}
+
+/* titres */
+#content .title_wrapper {
+	padding: 0 0 4px;
+	margin-top:10px;
+	border:none;
+}
+
+.portal_inner .title_wrapper {
+	margin-top:0 !important;
+	padding: 0 !important;
+	border:none;
+	/*margin-bottom:10px;*/
+}
+
+.portal_inner h3 {
+	font-size: 1em;
+	font-weight: normal;
+	text-align: center;
+	margin: 5px 0 0 0;
+	line-height: 30px;
+}
+
+h3.today {
+	padding-left: 0;
+	text-transform: capitalize;
+}
+
+/* listes */
+
+#welcome ol, 
+#welcome ul{
+	margin:5px 0 5px 20px;
+}
+
+#welcome ul{
+	list-style-type: disc;
+}
+
+#welcome ol{
+	list-style-type: decimal;
+}
+
+div.speed ul {
+	list-style-type: none;
+	margin:0;
+}
+
+div.full ul {
+	list-style-type: none;
+	margin:0;
+}
+
+/* RECHERCHE */
+
+#searchbar{
+	height:30px;
+	margin-bottom:20px;
+	margin-left:184px;
+	margin-top:20px;
+}
+
+#searchbar input.text{
+	padding: 0;
+	margin: 0;
+	width: 400px;
+	display: block;
+	height:30px;
+	float: left;
+}
+
+#searchbar input.btn{
+	display: block;
+	width:200px;
+	height: 32px;
+	line-height: 32px;
+	font-weight: bold;
+	font-size: 1.1em;
+	padding: 0;
+	margin: 0 0 0 20px;
+	float: left;
+	border: none;
+}
+/*PORTAIL ACCES RAPIDES*/
+/* Icones acces rapides */
+
+div.portal_box .bati{
+	background-image:  url(../icons/bati.png);
+}
+
+div.portal_box .cont{
+	background-image:  url(../icons/cont.png);
+}
+
+div.portal_box .stat{
+	background-image:  url(../icons/stat.png);
+}
+
+div.portal_box .cada{
+	background-image:  url(../icons/cada.png);
+}
+
+div.portal_box .doss{
+	background-image:  url(../icons/doss.png);
+}
+
+div.portal_box .doss_un{
+	background-image:  url(../icons/doss_un.png);
+}
+
+div.portal_box .doss_deux{
+	background-image:  url(../icons/doss_deux.png);
+}
+
+div.portal_box .doss_trois{
+	background-image:  url(../icons/doss_trois.png);
+}
+
+div.portal_box .admi{
+	background-image:  url(../icons/admi.png);
+}
+
+div.portal_box .urba{
+	background-image:  url(../icons/urba.png);
+}
+
+div.portal_box .tool{
+	background-image:  url(../icons/tool.png);
+}
+
+div.portal_box .cms{
+	background-image:  url(../icons/textes.png);
+}
+
+div.portal_box .qual{
+	background-image:  url(../icons/qual.png);
+}
+
+div.portal_box .chim{
+	background-image:  url(../icons/chim.png);
+}
+
+div.portal_box .fact{
+	background-image:  url(../icons/euro.png);
+}
+
+div.portal_box .data{
+	background-image:  url(../icons/donnees.png);
+}
+
+div.portal_box .zone{
+	background-image:  url(../icons/territoires.png);
+}
+
+div.portal_box .quest{
+	background-image:  url(../icons/questions.png);
+}
+
+div.portal_box .access{
+	background-image:  url(../icons/acces.png);
+}
+
+div.portal_box .backlist{
+	background-image:  url(../icons/back_list.png);
+}
+
+
+div.portal_box .tasks{
+	background-image:  url(../icons/tasks.png);
+}
+
+div.portal_box .save {
+	background-image: url(../icons/save.png);
+}
+div.portal_box .val {
+	background-image: url(../icons/accept_big.png);
+}
+div.portal_box .calc {
+	background-image: url(../icons/page_process.png);
+}
+div.portal_box .devis {
+	background-image: url(../icons/price.png);
+}
+div.portal_box .canc {
+	background-image: url(../icons/canceled.png);
+}
+div.portal_box .print {
+	background-image: url(../icons/print.png);
+}
+div.portal_box .mail {
+	background-image: url(../icons/mail_send.png);
+}
+div.portal_box .edit {
+	background-image: url(../icons/edit.png);
+}
+div.portal_box .del {
+	background-image: url(../icons/trash.png);
+}
+div.portal_box .dupl {
+	background-image: url(../icons/add_pages.png);
+}
+div.portal_box .label{
+	background-image: url(../icons/label.png);
+}
+div.portal_box .home{
+	background-image: url(../icons/home.png);
+}
+div.portal_box .agenda{
+	background-image: url(../icons/agenda.png);
+}
+
+div.portal_box .exposition{
+	background-image:  url(../icons/arrow_up.png);
+}
+
+
+div.portal_box .back{
+	background-image: url(../icons/folder_accept.png);
+}
+
+.section_inner div.portal_box {
+	border: none;
+}

@@ -1,0 +1,142 @@
+################################################################################
+# Module  ##############################################################
+# Generateur du module
+#
+# @brief Generateur du module
+# @package Plugin
+# @subpackage surfaceAnalytic
+#
+# @author Claude <claude@elogys.fr>
+# @date 22 janv. 2010
+# @version 1.0
+# @license LGPL
+#
+################################################################################
+generator:
+  class:															sfSurfaceGenerator
+  param:
+    model_class:											Analytic
+    theme:														default
+
+################################################################################
+# Fields #######################################################################
+# Definition des attributs interne et externe
+################################################################################
+#	ATTRIBUTS														DETAIL
+# Base =========================================================================
+#
+# Sup ==========================================================================
+#
+# Show =========================================================================
+#
+# Edit =========================================================================
+#
+# Filter =======================================================================
+#
+################################################################################
+    fields:
+# Base =========================================================================
+      id:															{ name: Identifiant }
+      username:												{ name: Identifiant }
+      user_id:												{ name: Utilisateur }
+      connection:											{ name: Connexion }
+      ip:															{ name: Ip de connexion }
+      user_agent:											{ name: User Agent }
+      screen_width:										{ name: Résolution (largeur) }
+      screen_height:									{ name: Résolution (hauteur) }
+      screen_inner_width:							{ name: Zone d'affichage (largeur) }
+      screen_inner_height:						{ name: Zone d'affichage (hauteur) }
+      cookie_enabled:									{ name: Cookie activé }
+      language:												{ name: Langue définie }
+      platform:												{ name: Plateforme }
+      product:												{ name: Produit }
+      product_sub:										{ name: Produit (numéro) }
+      vendor:													{ name: Vendeur }
+      vendor_sub:											{ name: Vendeur (numéro) }
+      created_at:											{ name: Enregistré le }
+# Sup ==========================================================================
+      screen:													{ name: Résolution d'écran }
+      screen_inner:										{ name: Taille de la zone d'affichage }
+      list_locate:                                      { name: Localiser, credentials: admin }
+# Show =========================================================================
+      username_or_user_id:						{ name: Identifiant de connexion }
+# Edit =========================================================================
+
+# Filter =======================================================================
+      filter_connection:							{ name: Code connexion }
+
+
+################################################################################
+# Actions ######################################################################
+# Definition des credentials neccessaire pour executer l'actions
+################################################################################
+#	ACTION															DETAIL
+# create
+# show
+# edit
+# delete_confirm
+#===============================================================================
+# exports
+################################################################################
+    actions:
+      _show:
+        credentials:									[admin]
+      _create:												{ credentials: [admin] }
+      _edit:													{ credentials: [admin] }
+      _delete_confirm:								{ credentials: [admin] }
+#===============================================================================
+    exports:
+      default:
+        name:													Exporter
+        credentials:									[admin]
+
+# Create - Creation d'un nouvel element #
+    create:
+      title:													
+      display:												[  ]
+
+# Show - Visionnage d'un element existant #
+    show:
+      title:													Enregistrement du %%created_at%%
+      display:
+        "Général":										[ created_at, _username_or_user_id, _connection, ip ]
+        "Navigateur":									[ _screen, _screen_inner, cookie_enabled, language, platform, product, vendor, user_agent ]
+      actions:
+        _delete_confirm:
+          disabled: true
+        _edit:
+          disabled: true
+
+################################################################################
+# Edit #########################################################################
+# Modification d'un element existant
+################################################################################
+    edit:
+      title:													
+      display:												[  ]
+
+################################################################################
+# Delete confirm ###############################################################
+# Suppression d'un element
+################################################################################
+    delete_confirm:
+      title:													
+      display:												[  ]
+
+################################################################################
+# List #########################################################################
+# Liste des elements
+################################################################################
+    list:
+      title:													Liste des connexions
+      display:												[ =created_at, =username, _connection, ip, _list_locate ]
+      filters:												[ created_at, username, _filter_connection, ip ]
+      sort:														[ created_at, desc ]
+      td_class:												[ surface_generator_list_class_for_td ]
+      actions:
+        _create:
+          disabled:                   true
+      object_actions_skip:						true
+      exports:												[]
+
+################################################################################

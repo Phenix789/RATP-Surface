@@ -1,0 +1,9 @@
+sfGuardUser:
+  admin:
+    username:       admin
+    password:       admin
+    is_super_admin: true
+
+DashboardMessage:
+  welcome:
+    message: "<p><b>Bienvenue dans votre application Surface.</b></p><br/><p>Cette page est le point d'entrée de votre projet. Elle vous offre un accès rapide à toutes vos applications, ainsi qu'un aperçu rapide des éléments importants.</p><br/><p>Vous pouvez changer ce message en allant dans l'application 'Outils' puis dans le module 'message d'acceuil'.</p>"

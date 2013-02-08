@@ -1,0 +1,41 @@
+/**
+ * Styles for ColorPicker
+ */
+
+.colorDisplay {
+	height: 12px;
+	width: 18px;
+	border: 1px solid gray;
+	float:  left;
+}
+
+.colorpickerControlPanel {
+	border:				1px solid gray;
+	background-color:	#EEEEEE;
+	padding:			3px;
+	z-index: 800;
+}
+
+.colorpickerControlPanel input {
+	font-size:			8pt;
+	z-index: 800;
+}
+
+.colorpickerControl {
+}
+
+.colorpickerControlInput {
+}
+
+.colorpickerControlPicker {
+	border:  1px solid gray;
+	/* position: absolute; */
+	font-size: 1px;
+	width: 15px;
+	height: 15px;
+	
+	/*left: left;
+	top: top;
+	width: size + 'px';
+	height: size + 'px';*/
+}

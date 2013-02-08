@@ -1,0 +1,1 @@
+<?php echo surface_input_hidden_tag('contact_multiple[contact_id]', $contact_multiple->getContactId()) ?>

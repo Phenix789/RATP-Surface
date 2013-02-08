@@ -1,0 +1,168 @@
+################################################################################
+# Module  ##############################################################
+# Generateur du module structure
+#
+# @brief Generateur du module
+# @package Application
+# @subpackage
+#
+# @author Claude <claude@elogys.fr>
+# @date 17 mars 2010
+# @version 1.0
+#
+################################################################################
+generator:
+  class:															sfSurfaceGenerator
+  param:
+    model_class:											Structure
+    theme:														default
+
+################################################################################
+# Fields #######################################################################
+# Definition des attributs interne et externe
+################################################################################
+#	ATTRIBUTS														DETAIL
+# Base =========================================================================
+#
+# Sup ==========================================================================
+#
+# Show =========================================================================
+#
+# Edit =========================================================================
+#
+# Filter =======================================================================
+#
+################################################################################
+    fields:
+# Base =========================================================================
+      civility_id:										{ name: Forme juridique, params: "peer_method=doSelectMoralCivility" }
+      name:														{ name: Nom }
+      short_name:											{ name: Nom court }
+      address1:												{ name: Adresse }
+      address2:												{ name: Complément }
+      city:														{ name: Ville }
+      postal_code:										{ name: Code postal }
+      phone:													{ name: Téléphone }
+      fax:														{ name: Fax }
+      email:													{ name: eMail, params: "mailto=true" }
+      web:														{ name: Site web }
+      comment:												{ name: Commentaire }
+      hidden_comment:									{ name: Confidentiel }
+      is_archive:											{ name: Archivé }
+# Sup ==========================================================================
+      civility:												{ name: Forme juridique }
+# Show =========================================================================
+      show_group:											{ name: Groupes }
+# Edit =========================================================================
+      edit_group:											{ name: Groupes }
+# Filter =======================================================================
+
+
+################################################################################
+# Actions ######################################################################
+# Definition des credentials neccessaire pour executer l'actions
+################################################################################
+#	ACTION															DETAIL
+# create
+# show
+# edit
+# delete_confirm
+#===============================================================================
+# exports
+################################################################################
+    actions:
+      _show:
+      _create:
+      _edit:
+      _delete_confirm:
+#===============================================================================
+    exports:
+      default:
+        name:													Exporter
+
+################################################################################
+# Fieldsets ####################################################################
+# Definition des sections
+################################################################################
+    fieldsets:
+      information:										{ name: Information }
+      address:												{ name: Adresse }
+      contact:												{ name: Coordonnées }
+      group:													{ name: Groupes, allow_method: groupIsActived }
+      supplement:											{ name: Supplément }
+
+################################################################################
+# Create #######################################################################
+# Creation d'un nouvel element
+################################################################################
+    create:
+      title:													Créer une nouvelle structure
+      display:
+        information:									[ civility_id, name, short_name ]
+        address:											[ address1, address2, city, postal_code ]
+        contact:											[ phone, fax, email, web ]
+        group:												[ _edit_group ]
+        supplement:										[ comment, hidden_comment ]
+
+################################################################################
+# Show #########################################################################
+# Visionnage d'un element existant
+################################################################################
+    show:
+      title:													%%name%%
+      display:
+        information:									[ civility, name, short_name ]
+        address:											[ address1, address2, city, postal_code ]
+        contact:											[ phone, fax, email, web ]
+        group:												[ _show_group ]
+        supplement:										[ comment, hidden_comment, is_archive ]
+
+################################################################################
+# Edit #########################################################################
+# Modification d'un element existant
+################################################################################
+    edit:
+      title:													Modifier la structure %%name%%
+      display:
+        information:									[ civility_id, name, short_name ]
+        address:											[ address1, address2, city, postal_code ]
+        contact:											[ phone, fax, email, web ]
+        group:												[ _edit_group ]
+        supplement:										[ comment, hidden_comment, is_archive ]
+
+################################################################################
+# Delete confirm ###############################################################
+# Suppression d'un element
+################################################################################
+    delete_confirm:
+      title:													Supprimer la structure %%name%% ?
+      display:
+        information:									[ civility, name, short_name ]
+        address:											[ address1, address2, city, postal_code ]
+        contact:											[ phone, fax, email, web ]
+        group:												[ _show_group ]
+        supplement:										[ comment, hidden_comment, is_archive ]
+
+################################################################################
+# List #########################################################################
+# Liste des elements
+################################################################################
+    list:
+      title:													Liste des structures
+      display:												[ =name, short_name, is_archive ]
+      filters:												[ name ]
+      sort:														[ name, asc ]
+
+################################################################################
+# Component ####################################################################
+# Liste des composants spécifiques
+################################################################################
+    components:
+
+      search_bar:
+        type:													list
+        display:											[  ]
+        sort:													[  ]
+        searchable:										[  ]
+
+################################################################################

@@ -1,0 +1,1 @@
+<?php echo SfcUtils::summarize($history->getDescription(), 200) ?>

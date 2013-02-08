@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="propel" package="lib.model.collaborator">
+	<table name="collaborator" phpName="Collaborator">
+		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+		<column name="is_active" type="BOOLEAN" default="1" />
+    
+		<column name="first_name" type="VARCHAR" size="60" />
+		<column name="last_name" type="VARCHAR" size="60" required="true" />
+		<column name="email" type="VARCHAR" size="255" />
+		<column name="signature" type="varchar" size="255" />
+    
+		<column name="job_role" type="VARCHAR" size="128" />
+    
+		<column name="address" type="VARCHAR" size="255"/>
+		<column name="city" type="VARCHAR" size="60"/>
+		<column name="postal_code" type="VARCHAR" size="20"/>
+		<column name="country" type="VARCHAR" size="60"/>
+    
+		<column name="phone_number" type="VARCHAR" size="20"/>
+		<column name="mobile_number" type="VARCHAR" size="20"/>
+		<column name="fax_number" type="VARCHAR" size="20"/>
+    
+		<column name="comment" type="VARCHAR" size="255"/>
+		<column name="confidential" type="VARCHAR" size="255"/>
+    
+		<column name="created_at" type="TIMESTAMP"/>
+		<column name="updated_at" type="TIMESTAMP"/>
+		<column name="created_by" type="INTEGER"/>
+		<column name="updated_by" type="INTEGER"/>
+    
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+	</table>
+
+	<table name="sf_guard_user_profile" phpName="sfGuardUserProfile">
+		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true"/>
+		<column name="user_id" type="INTEGER" required="true"/>
+    
+		<column name="collaborator_id" type="INTEGER" />
+    
+		<foreign-key foreignTable="sf_guard_user" onDelete="cascade">
+			<reference local="user_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="collaborator" onDelete="cascade">
+			<reference local="collaborator_id" foreign="id"/>
+		</foreign-key>
+	</table>
+
+</database>

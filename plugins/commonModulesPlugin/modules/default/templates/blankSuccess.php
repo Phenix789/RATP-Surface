@@ -1,0 +1,1 @@
+<?php if ($sf_params->get('target') == 'tg_east') echo javascript_tag('surface.close_east();') ?>

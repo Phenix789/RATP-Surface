@@ -1,0 +1,3 @@
+all:
+  surface:
+    default_index:											dashboard_message/list

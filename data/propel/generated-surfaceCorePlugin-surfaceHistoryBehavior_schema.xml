@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="propel" package="plugins.surfaceHistoryBehaviorPlugin.lib.model" defaultIdMethod="native" noXsd="true">
+
+  <table name="plugin_history" phpName="History">
+    <column name="id" type="integer" required="true" primaryKey="true" autoincrement="true" />
+    <column name="date_ref" type="timestamp" />
+    <column name="description" type="longvarchar" />
+    <column name="object_id" type="integer" />
+    <column name="object_name" type="varchar" size="255" />
+    <column name="type" type="varchar" size="255" />
+    <column name="name_space" type="varchar" size="255" />
+    <column name="group_id" type="integer" />
+    <column name="created_at" type="timestamp" />
+    <column name="created_by" type="integer" />
+    <foreign-key foreignTable="sf_guard_user">
+      <reference local="created_by" foreign="id" />
+    </foreign-key>
+    <column name="updated_at" type="timestamp" />
+    <column name="updated_by" type="integer" />
+    <foreign-key foreignTable="sf_guard_user">
+      <reference local="updated_by" foreign="id" />
+    </foreign-key>
+  </table>
+
+  <table name="plugin_history_contact" phpName="HistoryContact">
+    <column name="id" type="integer" required="true" primaryKey="true" autoincrement="true" />
+    <column name="history_id" type="integer" />
+    <foreign-key foreignTable="plugin_history">
+      <reference local="history_id" foreign="id" />
+    </foreign-key>
+    <column name="contact_id" type="integer" />
+    <column name="contact_name" type="varchar" size="255" />
+  </table>
+
+</database>

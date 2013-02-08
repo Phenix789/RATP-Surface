@@ -1,0 +1,14 @@
+all:
+  propel:
+    class:          sfPropelDatabase
+    param:
+      dsn:          mysql://root:plout@localhost/<database_name>
+      phptype:      mysql
+      encoding:     utf8 
+      host:         localhost
+      
+#all:
+#  propel:
+#    class:          sfPropelDatabase
+#    param:
+#      dsn:          mysql://root@localhost/dbname

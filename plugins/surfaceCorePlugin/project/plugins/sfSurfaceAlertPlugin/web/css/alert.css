@@ -1,0 +1,118 @@
+ 
+div #alert_form  
+{
+    background-color:white;
+    height:100%;
+    padding:0;
+    vertical-align:top;
+}
+
+#alert_form form {
+    padding: 5px;
+}
+
+
+div #alert_form  td
+{
+ 
+    vertical-align:top;
+    white-space: nowrap;
+
+}
+
+
+
+div.alert_type_target_object
+{
+    border: 1px solid #e2e2e2;
+    float: left;
+    padding: 10px;
+    margin-right: 5px;
+    width: 320px;    
+}
+div.alert_container
+{
+    /* bakground-color:red; */
+    border: 1px solid #e2e2e2;
+    /* float: left; */
+    margin-right: 10px;
+    margin-top: 10px;
+    width: 100%;
+}
+.alert_title a img
+{
+    vertical-align:middle;
+
+}
+div.alert_title
+{
+    /*background-color:transparent;*/
+    line-height:25px;
+    background: url(/sfSurfaceAlertPlugin/images/bg.gif) scroll 0 -27px repeat-x;
+    padding-left:2px;
+    color:#444444;
+
+}
+div.alert_footer
+{
+    font-style:italic;
+    font-size:7pt;
+    text-align:right;
+    padding-right:5px;
+    color:#444444;
+
+}
+div.alert_button
+{
+    float: right;
+    padding-right:2px;
+    padding-left:2px;
+
+}
+div.alert_acquit_button
+{
+   float: right;
+   width: 40%;
+}
+div.alert_message
+{
+
+    
+    padding:5px;
+    vertical-align:top;
+    
+
+}
+div.alert_target_object
+{
+    text-align: right;
+    line-height: 20px;
+    background: url(/sfSurfaceAlertPlugin/images/bg.gif) repeat-x;
+    padding: 1px;
+    padding: 2px;
+    color: #2B6DA4;
+    clear: both;
+}
+div.alert_zoom
+{
+/*    background-color:green; */
+    float :right;
+    padding:2px;
+    margin-left:5px;
+    
+}
+
+img.alert_flag
+{
+    margin-top:3px;
+}
+
+/*.alert_acquit
+{
+    -moz-background-clip:border;
+    -moz-background-inline-policy:continuous;
+    -moz-background-origin:padding;
+    background:transparent url(../images/ok.png) no-repeat scroll left center;
+    padding-left:18px;
+}*/
+

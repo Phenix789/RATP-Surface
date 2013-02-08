@@ -1,0 +1,39 @@
+################################################################################
+# Configuration du cart ########################################################
+#		OPTIONS												DETAIL																						DEFAUT
+################################################################################
+#app:
+#  cart:
+#    global:
+#      autosave:							<active_l_autosave_pour_le_module>								true
+#      autoload:							<autorise_l_autoload>															false
+#      menu:
+#        finalize:						<function_pour_finaliser_le_menu>									null
+#        helper:							<helper_a_inclure_avant>													null
+#        render:							<fonction_pour_personaliser_son_menu>							null
+#        quick_select:				<changement_rapide>																true
+#        create:							<action_rapide_create>														true
+#      notice:
+#        target:							<target_de_notice>																notices
+#      order:
+#        statistic:						<tableau_avec_les_nom_des_elements_en_ordre>			[]
+#        associated_items:		<tableau_avec_les_nom_des_elements_en_ordre>			[]
+
+#    <class_name>:						<nom_de_la_class>
+#      peer:									<class_peer>																  		<class_name> . Peer
+#      app:										<application_pour_action_show>
+#      module:								<nom_du_module>																  	sfInflector::underscored(<class_name>)
+#      name:									<label_onglet>																	  <class_name>
+#        singular:						<nom_au_singulier>
+#        plural:							<nom_au_pluriel>
+#      partial_action:				<active_le_partial_action>												false
+#      autoload:							<recupere_tout_les_items_avec_le_cart>  					false
+#        app:									<app_avec_autoload_activé>												[]
+#        module:							<module_avec_autoload_activé>											[]
+#      menu:
+#        empty:								<vide_le_contenu>												  				true
+#        finalize:						<fonction_pour_finaliser_le_menu>									null
+#        helper:							<helper_a_inclure_avant>										  		null
+#        render:							<fonction_pour_personaliser_son_menu>			  			null
+#
+################################################################################

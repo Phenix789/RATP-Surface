@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+<file orginal="global" source-language="en_US" datatype="plaintext">
+	<body>
+		<trans-unit><source>cart</source><target>Session</target></trans-unit>
+		<trans-unit><source>add to cart</source><target>Ajouter a la session</target></trans-unit>
+		<trans-unit><source>remove from cart</source><target>Retirer de la session</target></trans-unit>
+		<trans-unit><source>session used: </source><target>Session en cours: </target></trans-unit>
+		<trans-unit><source>none</source><target>Aucune</target></trans-unit>
+		<trans-unit><source>active session : </source><target>Session active : </target></trans-unit>
+		<trans-unit><source>session selected: %name%</source><target>Session selectionnée: %name%</target></trans-unit>
+		<trans-unit><source>session unselected: %name%</source><target>Session déselectionnée: %name%</target></trans-unit>
+		<trans-unit><source>session %name% has been empty</source><target>La session %name% a été vidé</target></trans-unit>
+		<trans-unit><source>%object_name% has been added to session %name%</source><target>%object_name% a été ajouté à la session %name%</target></trans-unit>
+		<trans-unit><source>%object_name% has been removed to session %name%</source><target>%object_name% a été retiré de la session %name%</target></trans-unit>
+		<trans-unit><source>%type% of %from_cart% has been added to your cart.</source><target>Les %type%s de %from_cart% ont été ajoutés a votre session.</target></trans-unit>
+		<trans-unit><source>session %name%: %count% item(s)</source><target>Session %name%: %count% element(s)</target></trans-unit>
+		<trans-unit><source>not session</source><target>Aucune session</target></trans-unit>
+		<trans-unit><source>items of cart</source><target>Eléments de la session</target></trans-unit>
+		<trans-unit><source>filtering %%items%% of cart.</source><target>Filtrer avec les %%items%% de la session.</target></trans-unit>
+		<trans-unit><source>empty %name%</source><target>Enlever les éléments %name% de la session</target></trans-unit>
+		<trans-unit><source>confirm the action</source><target>Confirmer la suppression</target></trans-unit>
+		<trans-unit><source>create new cart</source><target>Nouvelle session ...</target></trans-unit>
+		<trans-unit><source>no item</source><target>Aucun element</target></trans-unit>
+		<trans-unit><source>%count% %type%s has been added to session %name%</source><target>%count% %type%s ont été ajoutés à la session</target></trans-unit>
+		<trans-unit><source>%count% %type% has been added to session %name%</source><target>%count% %type% a été ajouté à la session</target></trans-unit>
+		<trans-unit><source>%count% %type%s has been removed of session %name%</source><target>%count% %type%s ont été retirés de la session</target></trans-unit>
+		<trans-unit><source>%count% %type% has been removed of session %name%</source><target>%count% %type% a été retiré de la session</target></trans-unit>
+		<trans-unit><source>add selection</source><target>Ajouter la selection</target></trans-unit>
+		<trans-unit><source>remove selection</source><target>Retirer la selection</target></trans-unit>
+		<trans-unit><source>New session</source><target>Nouvelle session</target></trans-unit>
+		<trans-unit><source>Your sessions</source><target>Liste des sessions</target></trans-unit>
+		<trans-unit><source>Update this session</source><target>Mettre à jour cette session</target></trans-unit>
+		<trans-unit><source>Grab into my session</source><target>Ajouter à ma session</target></trans-unit>
+		
+	</body>
+</file>
+</xliff>

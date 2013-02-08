@@ -1,0 +1,79 @@
+.surface_layout {
+    overflow: hidden;
+    display: block;
+	font-size: 11px;
+}
+
+.surface_layout_west {
+    position: absolute;
+    border-right: solid 1px #D0D0D0;
+    overflow: hidden;
+}
+
+.surface_layout_east {
+    position: absolute;
+    border-left: solid 1px #D0D0D0;
+    overflow: hidden;
+}
+
+.surface_layout_center {
+    position: absolute;
+    overflow: hidden;
+}
+
+.surface_pane_head {
+    width: 100%;
+    display: block;
+    float: none;
+    clear: both;
+    min-height: 22px;
+    background-image: url(../images/surface-panel-header.gif);
+    padding: 0;
+}
+
+.surface_pane_head span {
+    display: block;
+    float: left;
+    padding-left: 5px;
+    padding-right: 5px;
+    line-height: 20px;
+    color: #5D5D5D;
+    font-weight: bold;
+}
+
+.surface_pane_content {
+  overflow: auto;
+  clear: both;
+  position: relative;
+}
+
+.surface_pane_collapsed {
+    overflow: hidden;
+    background: url(../images/surface-panel-expand-east.gif) left center no-repeat transparent ;
+    background-color: #E0E0E0;
+    height: 100%;
+    cursor: pointer;
+    display:block;
+}
+
+
+/*PROJECT LAYOUT DEBUT*/
+
+.surface_layout_west {
+    border-right: solid 1px #D0D0D0;
+}
+
+.surface_layout_east {
+    border-left: solid 1px #D0D0D0;
+}
+
+.surface_pane_collapsed {
+    background: url(../images/surface-panel-expand-east.gif) center center no-repeat transparent ;
+    background-color: #E0E0E0;
+}
+
+.surface_pane_collapsed:hover {
+    background: url(../images/surface-panel-expand-east.gif) left center no-repeat  ;
+    background-color: #CCC !important;
+}
+/*PROJECT LAYOUT FIN*/

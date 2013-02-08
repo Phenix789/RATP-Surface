@@ -1,0 +1,1 @@
+ALTER TABLE sfc_abk_contact ADD zone_id integer;

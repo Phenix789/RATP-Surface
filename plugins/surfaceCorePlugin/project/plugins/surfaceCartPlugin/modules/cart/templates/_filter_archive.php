@@ -1,0 +1,1 @@
+<?php echo surface_checkbox_with_label('filters[archive]', 1, isset($filters['archive']) ? $filters['archive'] : false, 'Inclure les sessions archivées') ?>

@@ -1,0 +1,6 @@
+1.0:
+base du plugin
+l'export passe par la mise en session des filtres
+	=> a changer par le post du formulaire
+1.1:
+le module utility devient statUtility

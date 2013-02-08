@@ -1,0 +1,10 @@
+.spinInput{float:left;border:0;color:#000;font-size:9pt;}
+.spinContainer{font-size:0;height:20px;}
+.spiner{float:left;width:15px;height:100%;overflow:hidden;}
+.spinUpBtn,.spinUpBtnHover,.spinUpBtnPress,.spinDownBtn,.spinDownBtnHover,.spinDownBtnPress{width:15px;height:8px;background-image:url('spin_control_buttons.png');background-repeat:no-repeat;background-color:#000;}
+.spinUpBtn{background-position:0 0;}
+.spinUpBtnHover{background-position:0 -16px;}
+.spinUpBtnPress{background-position:0 -32px;}
+.spinDownBtn{background-position:0 -8px;}
+.spinDownBtnHover{background-position:0 -24px;}
+.spinDownBtnPress{background-position:0 -40px;}

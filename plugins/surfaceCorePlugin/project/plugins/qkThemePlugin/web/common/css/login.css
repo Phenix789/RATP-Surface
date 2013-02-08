@@ -1,0 +1,191 @@
+* {
+	outline: none;
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial;
+	font-size: 11px;
+}
+
+#wrapper {
+	height: 100%;
+	min-height: 500px;
+	position: relative;
+	top: 0;
+	left: 0;
+}
+
+/* HEADER */
+#login_header{
+	height:95px;
+}
+
+/* CONTENU */
+#content {
+	height: 196px;
+}
+
+/* BOX LOGIN */
+#login_wrapper {
+	height:auto;
+	left:50%;
+	margin-left:-250px;
+	position:absolute;
+	top:120px;
+	width:500px;
+	border: solid;
+	border-width: 1px;
+}
+
+/* LOGO */
+#logo_login {
+	height:150px;
+	width:500px;
+	padding-top: 20px;
+}
+
+/* WELCOME */
+.login_box {
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+}
+
+.login_box h3 {
+	display:block;
+	font-size:1.2em;
+	font-weight:bold;
+	line-height:48px;
+	margin-bottom:0;
+	margin-left:à;
+	margin-right:0;
+	margin-top:0;
+}
+
+/* FORMULAIRE */
+#login_wrapper form, #login_wrapper fieldset {
+	margin: 0;
+	padding: 0;
+	border: 0;
+} 
+
+#login_wrapper form {
+	padding: 10px 0 0;
+}
+
+#login_wrapper .row {
+	overflow-x:hidden;
+	overflow-y:hidden;
+	padding-bottom:10px;
+	padding-left:60px;
+	padding-right:0;
+	padding-top:0;
+	width:360px;
+}
+
+#login_wrapper label {
+	display: block;
+	font-weight: bold;
+	float: left;
+	line-height: 30px;
+	font-size: 12px;
+}
+
+#login_wrapper label.inline, .inputs {
+	float:right;
+	width: 200px;
+	font-weight: normal;
+	font-size: 11px;	
+}
+/* BOUTONS & CHAMPS */
+
+#login_submit_btn{
+	font-weight: bold;
+	display: block;
+	width: 208px;
+	height: 30px;
+	border: none;
+	margin-left: 151px;
+	margin-top: 10px;
+	padding-bottom:3px;
+	font-size: 14px;	
+	margin-bottom:20px;
+}
+
+ .input_wrapper input {
+	display:block;
+	float:right;
+	padding:2px 4px;
+	width: 200px;
+	height:30px;
+	font-size:14px;
+}
+
+.input_wrapper input.text {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	display: block;
+	height:30px;
+}
+
+/*Message mauvais login*/
+.form_error {
+	margin-bottom:5px;
+	text-align:right;
+}
+
+/*PROJECT LOGIN DEBUT*/
+
+body {
+	background: #fff;
+}
+
+#wrapper {
+	background-color:  #F9F9F9;
+}
+
+/* box login */
+#login_wrapper {
+	background: #fefefe;
+	background-image: url(/qkThemePlugin/common/images/form_bg_login.gif);
+	background-repeat: repeat-x;
+	border: solid;
+	border-color: #dedede;
+	border-width: 1px;
+}
+
+/* formulaire */
+#login_wrapper label {
+	color:#999;
+}
+
+ .input_wrapper input {
+	background-color:transparent;
+	background-image:  url(/qkThemePlugin/common/images/input_bg.gif);
+	background-repeat:  repeat-x ;
+	background-position:  0 0;
+	border:1px solid #dedede;
+}
+
+.input_wrapper input.text {
+	background: transparent;
+}
+
+/*Message mauvais login*/
+.form_error {
+	color:#FF9900;
+	font-size:1em;
+	font-weight:bold;
+}
+/*PROJECT LOGIN FIN*/
+

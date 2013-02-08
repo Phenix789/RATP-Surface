@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Base de Données pour le plugin surfaceStat
+		NOM:				DETAIL:
+	DataSource			source de données
+	ContinueField			valeur continue de la source
+	DiscreteField			valeur discrete de la source
+	Worksheet			espace de travail
+	Value				valeur presenté pour l'espace de travail
+	Filter				filtre sur un espace de travail
+	View				representation d'un espace de travail
+<~~ ======================================================================== -->
+<database defaultIdMethod="native" name="propel" package="plugins.surfaceStatPlugin.lib.model">
+
+<!-- ======================================================================= -->
+<!-- Table DataSource - Represente une source de données
+		NOM:				DETAIL
+	id				identifiant unique
+	name				nom de la table qui sera la source de données
+<!~~ ======================================================================= -->
+	<table name="stat_datasource" phpName="DataSource">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+		<column name="table_ref" type="varchar" size="255" />
+	</table>
+
+<!-- ======================================================================= -->
+<!-- Table ContinueField - Represente une valeur continue d'une source de données
+		NOM:				DETAIL:
+	id				identifiant unique
+	datasource_id			identifiant de la source de données
+	field				champs cible de la source de données
+	name				nom de la valeur continue
+	operator			operateur de regroupement
+	options				liste des options
+<!~~ ======================================================================= -->
+	<table name="stat_continue_field" phpName="ContinueField">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="datasource_id" type="integer" required="true" />
+		<column name="field" type="varchar" size="255" required="true" />
+		<column name="name" type="varchar" size="255" required="true" />
+		<column name="operator" type="integer" required="true" />
+		<foreign-key foreignTable="stat_datasource">
+			<reference local="datasource_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+<!-- ======================================================================= -->
+<!-- Table DiscreteField - Represente une valeur discrete d'une source de données
+		NOM:				DETAIL:
+	id				identifiant unique
+	datasource_id			identifiant de la source de données
+	code_field			champs cible de la source de données
+	code_label			champs representatif de la données
+	name				nom de la valeur discrete
+	type				type de valeur discrete
+	options				liste des options
+<!~~ ======================================================================= -->
+	<table name="stat_discrete_field" phpName="DiscreteField">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="datasource_id" type="integer" required="true" />
+		<column name="code_field" type="varchar" size="255" required="true" />
+		<column name="label_field" type="varchar" size="255" />
+		<column name="name" type="varchar" size="255" required="true" />
+		<column name="type" type="integer" required="true" inheritance="single">
+			<inheritance key="1" class="DiscreteFieldID" extends="plugins.surfaceStatPlugin.lib.model.DiscreteField" />
+			<inheritance key="2" class="DiscreteFieldDATE" extends="plugins.surfaceStatPlugin.lib.model.DiscreteFieldPERIOD" />
+			<inheritance key="3" class="DiscreteFieldPERIOD" extends="plugins.surfaceStatPlugin.lib.model.DiscreteField" />
+			<inheritance key="4" class="DiscreteFieldTEXT" extends="plugins.surfaceStatPlugin.lib.model.DiscreteField" />
+			<inheritance key="5" class="DiscreteFieldNUMBER" extends="plugins.surfaceStatPlugin.lib.model.DiscreteField" />
+		</column>
+		<foreign-key foreignTable="stat_datasource">
+			<reference local="datasource_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+<!-- ======================================================================= -->
+<!-- Table Worksheet - Represente l'espace de travail pour l'extraction et le traitement des données
+		NOM:				DETAIL:
+	id				identifiant unique
+	name				nom de l'espace de travail
+	first_param			premiere valeur discrete
+	second_param			seconde valeur discrete (optionnelle)
+	options				liste des options
+<!~~ ======================================================================= -->
+	<table name="stat_worksheet" phpName="Worksheet">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="name" type="varchar" size="255" required="true" />
+		<column name="first_param" type="integer" required="true" />
+		<column name="second_param" type="integer" />
+		<foreign-key foreignTable="stat_discrete_field" onDelete="setnull">
+			<reference local="first_param" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="stat_discrete_field" onDelete="setnull">
+			<reference local="second_param" foreign="id" />
+		</foreign-key>
+	</table>
+
+<!-- ======================================================================= -->
+<!-- Table Value - Represente les valeurs retenue dans un espace de travail
+		NOM:				DETAIL:
+	id				identifiant unique
+	continue_field_id		valeur continue representé
+<!~~ ======================================================================= -->
+	<table name="stat_value" phpName="Value">
+		<column name="worksheet_id" type="integer" required="true" primaryKey="true" />
+		<column name="continue_field_id" type="integer" required="true" primaryKey="true" />
+		<foreign-key foreignTable="stat_worksheet" onDelete="cascade">
+			<reference local="worksheet_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="stat_continue_field" onDelete="cascade">
+			<reference local="continue_field_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+<!-- ======================================================================= -->
+<!-- Table Filter - Represente les filtres retenue dans un espace de travail
+		NOM:				DETAIL:
+	id				identifiant unique
+	discrete_field_id		valeur discrete filtrante
+<!~~ ======================================================================= -->
+	<table name="stat_filter" phpName="Filter">
+		<column name="worksheet_id" type="integer" required="true" primaryKey="true" />
+		<column name="discrete_field_id" type="integer" required="true" primaryKey="true" />
+		<foreign-key foreignTable="stat_worksheet" onDelete="cascade">
+			<reference local="worksheet_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="stat_discrete_field" onDelete="cascade">
+			<reference local="discrete_field_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+<!-- ======================================================================= -->
+<!-- Table View - Represente la vue d'un espace de travail
+		NOM:				DETAIL:
+	id				identifiant unique
+	worksheet_id			identifiant de l'espace de travail concerné
+	model_view_id			identifiant de la vue model
+	name				nom de la vue
+	options				liste des options
+<!~~ ======================================================================= -->
+	<table name="stat_view" phpName="View">
+		<column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true" />
+		<column name="worksheet_id" type="integer" />
+		<column name="model_view_id" type="integer" />
+		<column name="name" type="varchar" size="255" />
+		<column name="name_space" type="varchar" size="255" />
+		<column name="type" type="integer" required="true" inheritance="single">
+			<inheritance key="0" class="ModelView" extends="plugins.surfaceStatPlugin.lib.model.View" />
+			<inheritance key="1" class="ViewArray" extends="plugins.surfaceStatPlugin.lib.model.View" />
+			<inheritance key="2" class="ViewMultiBar" extends="plugins.surfaceStatPlugin.lib.model.View" />
+			<inheritance key="3" class="ViewPie" extends="plugins.surfaceStatPlugin.lib.model.View" />
+		</column>
+		<foreign-key foreignTable="stat_worksheet" onDelete="cascade">
+			<reference local="worksheet_id" foreign="id" />
+		</foreign-key>
+		<foreign-key foreignTable="stat_view" onDelete="setnull">
+			<reference local="model_view_id" foreign="id" />
+		</foreign-key>
+	</table>
+
+<!-- ======================================================================= -->
+<!-- Table MODELE - Represente
+		NOM:				DETAIL:
+<!~~ ======================================================================= ~~>
+	<table name="" phpName="">
+		<column name="id" type="integer" required="true" primaryKey="true" />
+		<column name="" type="" />
+		<foreign-key foreignTable="">
+			<reference local="" foreign="id" />
+		</foreign-key>
+	</table>
+-->
+</database>

@@ -1,0 +1,182 @@
+/*MAIN MENU*/
+
+
+
+/* MISE EN FORME DES MENUS CLASS=NAVIGATION */
+
+.navigation{list-style:none;}
+ 
+.navigation ul {
+	padding:0;
+	margin:0;
+	list-style:none;
+	position:absolute;
+	left:-9999px;
+	top:-9999px;
+	z-index: 9998;
+}
+
+.navigation li {
+	float:left;
+}
+.navigation li li {
+	float:none;
+}
+
+.navigation li a {
+	display:block;
+	float:left;
+	height:25px; 
+	padding:0 5px 0 5px;
+	line-height:25px; 
+	text-decoration:none;
+	white-space:nowrap; 
+	font-weight:normal;
+}
+
+.navigation li li a {
+	display:block;
+	height:25px;
+	line-height:25px;
+	float:none;
+	padding:0 25px 0 5px;
+	font-weight:bold;
+}
+
+.navigation li:hover {
+	position:relative;
+}
+
+.navigation li.cssplay_hover {
+	position:relative;
+}
+
+.navigation li:hover ul {
+	left:0;
+	top:25px;
+}
+
+.navigation li.cssplay_hover ul {
+	left:0;
+	top:25px;
+}
+
+/* it could have been this simple if all browsers understood */
+/* show next level */
+.navigation li:hover li:hover > ul {
+	left:-5px;
+	margin-left:100%;
+	top:-1px;
+}
+/* keep further levels hidden */
+.navigation li:hover > ul ul {
+	position:absolute;
+	left:-9999px;
+	top:-9999px;
+	width:auto;
+}
+
+/* show next level */
+.navigation li.cssplay_hover li.cssplay_hover ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover ul {
+	left:100%;
+	margin-left:-5px;
+	top:-1px;
+}
+
+/* keep further levels hidden */
+.navigation li.cssplay_hover ul ul,
+.navigation li.cssplay_hover li.cssplay_hover ul ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover ul ul,
+.navigation li.cssplay_hover li.cssplay_hover li.cssplay_hover li.cssplay_hover ul ul
+{
+	position:absolute; 
+	left:-9999px;
+	top:-9999px;
+}
+
+.navigation li ul li a img{
+	border: none;
+	margin:4px 2px 0 -2px;
+	float: left;
+}
+
+/*mise en forme outils de panneau*/
+li.panel_tools {
+	line-height: 25px;
+	margin-right:4px;
+	padding: 0;
+	list-style-position: inherit;
+}
+
+.panel_tools a{
+	padding:0 !important;
+}
+
+.panel_tools a span{
+	display: block;
+	margin: 5px 0 0 0;
+	width:16px;
+	height: 16px;
+}
+
+.panel_tools a span.spacer{
+	margin-right:5px;
+}
+
+.panel_previous_btn, .panel_next_btn, .panel_refresh_btn{
+	background-position: center top;
+}
+
+.panel_previous_btn:hover, .panel_next_btn:hover, .panel_refresh_btn:hover {
+	background-position: center bottom;
+}
+
+.panel_close_btn, .panel_size_btn {
+	background-position: center bottom;
+}
+
+.panel_close_btn:hover, .panel_size_btn:hover {
+	background-position: center top;
+}
+
+/*ACTIONS sur Panneaux*/
+.panel_previous_btn{
+	background-image:url(../icons/previous_btn.png);
+}
+
+.panel_next_btn{
+	background-image:url(../icons/next_btn.png);
+}
+
+.panel_refresh_btn{
+	background-image:url(../icons/refresh_btn.png);
+}
+
+.panel_close_btn{
+	background-image:url(../icons/close_btn.png);
+}
+
+.panel_size_btn{
+	background-image:url(../icons/size_btn.png);
+}
+/*SMALL NAVIGATION*/
+ul.small_navigation{
+	margin-left: 3px;
+	
+}
+ul.small_navigation li{
+	float: left;
+	
+}
+ul.small_navigation a{
+	display: block;
+	padding-left: 20px;
+	margin-right: 10px;
+	
+}
+.small_navigation a.printer{
+	background: url(../icons/printer.png) no-repeat left center;
+}

@@ -1,0 +1,157 @@
+################################################################################
+# Module  ##############################################################
+# Generateur du module
+#
+# @brief Generateur du module
+# @package Application
+# @subpackage
+#
+# @author Claude <claude@elogys.fr>
+# @date 12 févr. 2010
+#
+################################################################################
+generator:
+  class:															sfSurfaceGenerator
+  param:
+    model_class:											Cart
+    theme:														default
+
+################################################################################
+# Fields #######################################################################
+# Definition des attributs interne et externe
+################################################################################
+#	ATTRIBUTS																DETAIL
+# Base =========================================================================
+#
+# Sup ==========================================================================
+#
+# Show =========================================================================
+#
+# Edit =========================================================================
+#
+# Filter =======================================================================
+#
+################################################################################
+    fields:
+# Base =========================================================================
+      id:															{ name: Identifiant }
+      name:														{ name: Nom }
+      description:										{ name: Description }
+      archive:												{ name: Archive }
+      user_id:												{ name: Utilisateur }
+      updated_at:											{ name: Derniere mise à jour, params: "date_format=dd/MM/yyyy" }
+# Sup ==========================================================================
+      count:													{ name: Eléments }
+      update_menu:										{ label: off }
+# Show =========================================================================
+      content:												{ label: off }
+# Edit =========================================================================
+
+# Filter =======================================================================
+      filter_archive:									{ name: Archive }
+      filter_user_id:									{ name: Utilisateur }
+
+
+################################################################################
+# Actions ######################################################################
+# Definition des credentials neccessaire pour executer l'actions
+################################################################################
+#	ACTION															DETAIL
+# create
+# show
+# edit
+# delete_confirm
+#===============================================================================
+# exports
+################################################################################
+    actions:
+      _show:
+      _create:
+      _edit:
+      _delete_confirm:
+#===============================================================================
+      select_cart:
+        name:													Selectionner cette session
+        icon:													/surfaceCartPlugin/images/cart_select.png
+        target:												cart_notice
+        skip_navigation:							true
+        action:												selectCart
+        partial:											true
+      empty_cart:
+        name:													Vider cette session
+        icon:													/surfaceCartPlugin/images/cart_delete.png
+        target:												cart_notice
+        skip_navigation:							true
+        action:												emptyCart
+        params:												"confirm='Voulez vous vider cette session'"
+#===============================================================================
+    exports:
+      default:
+        name:													Exporter
+        credentials:									[admin]
+
+################################################################################
+# Create #######################################################################
+# Creation d'un nouvel element
+################################################################################
+    create:
+      title:													Créer une nouvelle session
+      display:												[ name, description ]
+
+################################################################################
+# Show #########################################################################
+# Visionnage d'un element existant
+################################################################################
+    show:
+      title:													%%name%%
+      display:												[ _user_id, description, _count, archive, _update_menu ]
+
+################################################################################
+# Edit #########################################################################
+# Modification d'un element existant
+################################################################################
+    edit:
+      title:													%%name%%
+      display:												[ name, description, archive ]
+
+################################################################################
+# Delete confirm ###############################################################
+# Suppression d'un element
+################################################################################
+    delete_confirm:
+      title:													Supprimer %%name%% ?
+      display:												[ name, description, archive ]
+
+################################################################################
+# List #########################################################################
+# Liste des elements
+################################################################################
+    list:
+      title:													Liste des sessions
+      display:												[ =name, _user_id, updated_at, _count, archive ]
+      filters:												[ _filter_user_id, _filter_archive ]
+      actions:												[]
+      exports:												[]
+      object_actions:
+        _show:
+        _edit:
+        _delete_confirm:
+#        select_cart:
+
+################################################################################
+    components:
+      
+      search_bar:
+        type:                         list
+        display:                      [  ]
+        sort:                         [  ]
+        searchable:                   [  ]
+        max_per_page:                 5
+
+      view_content_cart:
+        type:													list
+        display:											[]
+        sort:													[]
+        max_per_page:									10
+
+################################################################################

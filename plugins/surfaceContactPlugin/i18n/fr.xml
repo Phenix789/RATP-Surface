@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+<file orginal="global" source-language="en_US" datatype="plaintext">
+	<body>
+			<!-- Application -->
+		<trans-unit><source>no structure</source><target>Aucune structure</target></trans-unit>
+		<trans-unit><source>including archived contacts.</source><target>Inclure les contacts archivés.</target></trans-unit>
+		<trans-unit><source>including archived structures.</source><target>Inclure les structures archivées.</target></trans-unit>
+		<trans-unit><source>including archived mailling list.</source><target>Inclure les listes de diffusion archivés.</target></trans-unit>
+		<trans-unit><source>including private mailling list.</source><target>Inclure les listes de diffusion privées.</target></trans-unit>
+		<trans-unit><source>information</source><target>Information</target></trans-unit>
+		<trans-unit><source>address</source><target>Adresse</target></trans-unit>
+		<trans-unit><source>contact</source><target>Contact</target></trans-unit>
+		<trans-unit><source>group</source><target>Groupe</target></trans-unit>
+		<trans-unit><source>supplement</source><target>Supplement</target></trans-unit>
+		<trans-unit><source>Structure</source><target>Structure</target></trans-unit>
+			<!-- Group -->
+		<trans-unit><source>NONE_GROUP</source><target>Aucun espace</target></trans-unit>
+		<trans-unit><source>person_group</source><target>Contact</target></trans-unit>
+		<trans-unit><source>structure_group</source><target>Structure</target></trans-unit>
+		<trans-unit><source>no group</source><target>Aucun groupe</target></trans-unit>
+			<!-- Service -->
+		<trans-unit><source>NONE_SERVICE</source><target>Aucun espace</target></trans-unit>
+		<trans-unit><source>person_service</source><target>Contact</target></trans-unit>
+		<trans-unit><source>structure_service</source><target>Structure</target></trans-unit>
+			<!-- Civility -->
+		<trans-unit><source>NONE_CIVILITY</source><target>Aucun espace</target></trans-unit>
+		<trans-unit><source>person_civility</source><target>Contact</target></trans-unit>
+		<trans-unit><source>structure_civility</source><target>Structure</target></trans-unit>
+	</body>
+</file>
+</xliff>

@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+<file orginal="global" source-language="en_US" datatype="plaintext">
+	<body>
+		<trans-unit><source>cancel</source><target>Annuler</target></trans-unit>
+		<trans-unit><source>is empty</source><target>non renseigné</target></trans-unit>
+		<trans-unit><source>remove</source><target>Enlever</target></trans-unit>
+		<trans-unit><source>yes</source><target>Oui</target></trans-unit>
+		<trans-unit><source>no</source><target>Non</target></trans-unit>
+		<trans-unit><source>yes or no</source><target>Indifférent</target></trans-unit>
+
+		<trans-unit><source>results</source><target>resultats</target></trans-unit>
+		<trans-unit><source>no result</source><target>aucun résultat</target></trans-unit>
+		<trans-unit><source>[0] no result|[1] 1 result|(1,+Inf] %1% results</source>
+		<target>[0] aucun résultat|[1] 1 résultat|(1,+Inf] %1% résultats</target>
+		</trans-unit>
+		<trans-unit><source>filters</source><target>Critères de recherche</target></trans-unit>
+		<trans-unit><source>filter</source><target>Rechercher</target></trans-unit>
+		<trans-unit><source>reset</source><target>Nouvelle recherche</target></trans-unit>
+		<trans-unit><source>fetch all</source><target>Afficher tout</target></trans-unit>
+		<trans-unit><source>search or fetch all</source><target>Veuillez faire une recherche ou afficher tous les éléments de la liste...</target></trans-unit>
+
+		<trans-unit><source>list</source><target>Lister</target></trans-unit>
+		<trans-unit><source>first</source><target>Première page</target></trans-unit>
+		<trans-unit><source>Previous</source><target>Page précédente</target></trans-unit>
+		<trans-unit><source>Next</source><target>Page suivante</target></trans-unit>
+		<trans-unit><source>Last</source><target>Dernière page</target></trans-unit>
+
+
+		<trans-unit><source>create</source><target>Créer</target></trans-unit>
+		<trans-unit><source>edit</source><target>Modifier</target></trans-unit>
+		<trans-unit><source>save</source><target>Enregistrer</target></trans-unit>
+		<trans-unit><source>save_and_add</source><target>Enregistrer et nouveau</target></trans-unit>
+		<trans-unit><source>cancel</source><target>Annuler</target></trans-unit>
+		<trans-unit><source>duplicate</source><target>Dupliquer</target></trans-unit>
+		<trans-unit><source>calcul</source><target>Calculer</target></trans-unit>
+
+		<trans-unit><source>show</source><target>Voir</target></trans-unit>
+
+		<trans-unit><source>delete</source><target>Supprimer</target></trans-unit>
+		<trans-unit><source>delete confirm</source><target>Confirmer</target></trans-unit>
+
+		<trans-unit><source>Your modifications have been saved</source>
+		<target>Vos modifications ont été enregistrées</target>
+		</trans-unit>
+		<trans-unit><source>There are some errors that prevent the form to validate</source>
+		<target>Des erreurs empêchent l'enregistrement</target>
+		</trans-unit>
+		<trans-unit><source>There are some errors</source>
+		<target>Des erreurs empêchent l'enregistrement</target>
+		</trans-unit>
+
+		<trans-unit><source>Created at %1%.</source><target>Créé le %1%.</target></trans-unit>
+		<trans-unit><source>Created at %1% by %2%.</source><target>Créé le %1% par %2%.</target></trans-unit>
+		<trans-unit><source>Updated at %1%.</source><target>Mis à jour le %1%.</target></trans-unit>
+		<trans-unit><source>Updated at %1% by %2%.</source><target>Mis à jour le %1% par %2%.</target></trans-unit>
+
+		<trans-unit><source>export_list_default</source><target>Liste</target></trans-unit>
+
+	</body>
+</file>
+</xliff>

@@ -1,0 +1,1 @@
+UPDATE `file_associated` SET category = 'getAssociatedFiles' where category is null;

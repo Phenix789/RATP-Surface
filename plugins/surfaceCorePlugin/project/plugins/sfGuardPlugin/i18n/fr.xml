@@ -1,0 +1,71 @@
+<?xml version="1.0" ?>
+<xliff version="1.0">
+<file orginal="global" source-language="en_US" datatype="plaintext">
+	<body>
+		<trans-unit><source>Please, log in</source><target>Connexion</target></trans-unit>
+		<trans-unit><source>username :</source><target>identifiant :</target></trans-unit>
+		<trans-unit><source>password :</source><target>mot de passe :</target></trans-unit>
+		<trans-unit><source>login</source><target>S'identifier</target></trans-unit>
+		<trans-unit><source>Remember me ?</source><target>Se souvenir de moi ?</target></trans-unit>
+		<trans-unit><source>Sorry,</source><target>Désolé,</target></trans-unit>
+		<trans-unit><source>You don't have the required permissions to acces this page.</source><target>Vous n'avez pas les permissions requises pour accèder à cette page.</target></trans-unit>
+		<trans-unit><source>Your username is required</source><target>Votre identifiant est requis</target></trans-unit>
+		<trans-unit><source>Your password is required</source><target>Votre mot de passe est requis</target></trans-unit>
+		<trans-unit><source>Please, enter a name</source><target>Veuillez saisir un nom</target></trans-unit>
+		<trans-unit><source>Username or password is not valid</source><target>Identifiant ou mot de passe non valide</target></trans-unit>
+		<trans-unit><source>User has restricted access</source><target>Accès restreint pour cet utilisateur</target></trans-unit>
+                
+		<trans-unit><source>User list</source><target>Comptes utilisateurs</target></trans-unit>
+		<trans-unit><source>Show user "%%username%%"</source><target>Compte "%%username%%"</target></trans-unit>
+		<trans-unit><source>Create user</source><target>Créer un compte</target></trans-unit>
+		<trans-unit><source>Edit user "%%username%%"</source><target>Modifier le compte "%%username%%"</target></trans-unit>
+		<trans-unit><source>Delete user "%%username%%" ?</source><target>Supprimer le compte "%%username%%" ?</target></trans-unit>
+		<trans-unit><source>Username</source><target>Identifiant</target></trans-unit>
+		<trans-unit><source>Username:</source><target>Identifiant:</target></trans-unit>
+		<trans-unit><source>Password:</source><target>Mot de passe:</target></trans-unit>
+		<trans-unit><source>Password bis:</source><target>Mot de passe (vérification):</target></trans-unit>
+		<trans-unit><source>Last login</source><target>Dernière connexion</target></trans-unit>
+		<trans-unit><source>Last login:</source><target>Dernière connexion:</target></trans-unit>
+		<trans-unit><source>Is active:</source><target>Actif ?</target></trans-unit>
+		<trans-unit><source>Permissions and groups</source><target>Permissions et groupes</target></trans-unit>
+		<trans-unit><source>Groups/Roles:</source><target>Groupes/Rôles</target></trans-unit>
+		<trans-unit><source>Unassociated</source><target>disponibles</target></trans-unit>
+		<trans-unit><source>Associated</source><target>affectés</target></trans-unit>
+		<trans-unit><source>permissions:</source><target>Permissions:</target></trans-unit>
+		<trans-unit><source>Created at</source><target>Créé le</target></trans-unit>
+		<trans-unit><source>Name</source><target>Nom</target></trans-unit>
+		<trans-unit><source>Name:</source><target>Nom:</target></trans-unit>
+		<trans-unit><source>Please, enter a username</source><target>Veuillez saisir un identifiant</target></trans-unit>
+		<trans-unit><source>This username already exists</source><target>Un compte ayant cet identifiant existe déjà</target></trans-unit>
+		<trans-unit><source>The minimum length for the password is 4</source><target>Le mot de passe doit contenir au moins 4 caractères</target></trans-unit>
+		<trans-unit><source>Passwords do not match</source><target>Les mots de passe ne correspondent pas</target></trans-unit>
+		<trans-unit><source>Password is mandatory</source><target>Le mot de passe est obligatoire</target></trans-unit>
+		<trans-unit><source>Entity</source><target>Entité</target></trans-unit>
+		<trans-unit><source>Permission</source><target>Permission</target></trans-unit>
+
+		<trans-unit><source>Entity list</source><target>Entités</target></trans-unit>
+		<trans-unit><source>Show entity "%%name%%"</source><target>Entité "%%name%%"</target></trans-unit>
+		<trans-unit><source>Create entity</source><target>Créer une entité</target></trans-unit>
+		<trans-unit><source>Edit entity "%%name%%"</source><target>Modifier l'entité "%%name%%"</target></trans-unit>
+		<trans-unit><source>Delete entity "%%name%%" ?</source><target>Supprimer l'entité "%%name%%" ?</target></trans-unit>
+		<trans-unit><source>This entity name already exists</source><target>Une entité ayant ce nom existe déjà</target></trans-unit>
+
+		<trans-unit><source>Permission list</source><target>Permissions</target></trans-unit>
+		<trans-unit><source>Show permission "%%name%%"</source><target>Permission "%%name%%"</target></trans-unit>
+		<trans-unit><source>Create permission</source><target>Créer une permission</target></trans-unit>
+		<trans-unit><source>Edit permission "%%name%%"</source><target>Modifier la permission "%%name%%"</target></trans-unit>
+		<trans-unit><source>Delete permission "%%name%%" ?</source><target>Supprimer la permission "%%name%%" ?</target></trans-unit>
+		<trans-unit><source>This permission name already exists</source><target>Une permission ayant ce nom existe déjà</target></trans-unit>
+
+		<trans-unit><source>Group list</source><target>Groupes</target></trans-unit>
+		<trans-unit><source>Show group "%%name%%"</source><target>Groupe "%%name%%"</target></trans-unit>
+		<trans-unit><source>Create group</source><target>Créer un groupe</target></trans-unit>
+		<trans-unit><source>Edit group "%%name%%"</source><target>Modifier le groupe "%%name%%"</target></trans-unit>
+		<trans-unit><source>Delete group "%%name%%" ?</source><target>Supprimer le groupe "%%name%%" ?</target></trans-unit>
+		<trans-unit><source>This group name already exists</source><target>Un groupe ayant ce nom existe déjà</target></trans-unit>
+
+		<trans-unit><source>no profile.</source><target>Aucun profil.</target></trans-unit>
+		<trans-unit><source>no ip.</source><target>Pas de restriction.</target></trans-unit>
+	</body>
+</file>
+</xliff>

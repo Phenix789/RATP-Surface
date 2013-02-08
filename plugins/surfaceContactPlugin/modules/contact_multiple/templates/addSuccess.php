@@ -1,0 +1,1 @@
+<?php include_partial('create_form', getCurrentViewParameters()) ?>

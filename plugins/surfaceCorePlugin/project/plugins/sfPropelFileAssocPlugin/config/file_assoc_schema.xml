@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="propel" package="plugins.sfPropelFileAssocPlugin.lib.model">
+  
+  <table name="file_associated" >
+    <column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
+   
+    <column name="class_name" type="VARCHAR" size="100" />
+    <column name="category" type="VARCHAR" size="100" />
+    <column name="field_id" type="INTEGER" />
+
+    <column name="filepath" type="VARCHAR" size="255" />
+    <column name="filename" type="VARCHAR" size="255" />
+    <column name="orginal_filename" type="VARCHAR" size="255" />
+    <column name="title" type="VARCHAR" size="60" />
+  </table>
+
+</database>

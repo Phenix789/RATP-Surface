@@ -1,0 +1,13 @@
+<?php echo "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" ?>
+<office:document-meta xmlns:office="urn:oasis:names:tc:opendocument:xmlns:office:1.0" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="urn:oasis:names:tc:opendocument:xmlns:meta:1.0" xmlns:ooo="http://openoffice.org/2004/office" xmlns:grddl="http://www.w3.org/2003/g/data-view#" office:version="1.2" grddl:transformation="http://docs.oasis-open.org/office/1.2/xslt/odf2rdf.xsl">
+  <office:meta>
+    <meta:initial-creator>Phenix </meta:initial-creator>
+    <meta:creation-date>2011-03-23T14:50:22</meta:creation-date>
+    <dc:date>2011-03-24T17:21:16</dc:date>
+    <dc:creator>Phenix </dc:creator>
+    <meta:editing-duration>PT00H42M35S</meta:editing-duration>
+    <meta:editing-cycles>19</meta:editing-cycles>
+    <meta:generator>OpenOffice.org/3.2$Unix OpenOffice.org_project/320m19$Build-9505</meta:generator>
+    <meta:document-statistic meta:table-count="3" meta:cell-count="6" meta:object-count="0"/>
+  </office:meta>
+</office:document-meta>

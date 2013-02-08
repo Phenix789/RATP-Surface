@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database defaultIdMethod="native" name="propel" package="plugins.surfaceSocialPlugin.lib.model">
+  
+	<table name="sfc_social_comment" phpName="SfcComment" >
+		<column name="id" type="INTEGER" primaryKey="true" required="true" autoIncrement="true" />
+
+		<column name="object_name" type="VARCHAR" size="100" />
+		<column name="object_id" type="INTEGER" />
+		<column name="category" type="VARCHAR" size="100" />
+
+		<column name="comment" type="longvarchar"  />
+		<column name="date_ref" type="TIMESTAMP"/>
+
+		<column name="collaborator_id" type="INTEGER"/>
+
+		<column name="created_at" type="TIMESTAMP"/>
+		<column name="updated_at" type="TIMESTAMP"/>
+		<column name="created_by" type="INTEGER"/>
+		<column name="updated_by" type="INTEGER"/>
+
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+
+		<foreign-key foreignTable="collaborator" onDelete="setnull">
+			<reference local="collaborator_id" foreign="id"/>
+		</foreign-key>
+
+	</table>
+
+</database>

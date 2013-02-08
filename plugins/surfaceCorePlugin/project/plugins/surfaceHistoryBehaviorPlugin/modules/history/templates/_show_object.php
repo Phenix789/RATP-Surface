@@ -1,0 +1,1 @@
+<?php echo $history->getObject() ? $history->getObject()->getLinkTo() : surface_null_value('Aucun objet associé'), " ({$history->getObjectMetadata('name')})" ?>

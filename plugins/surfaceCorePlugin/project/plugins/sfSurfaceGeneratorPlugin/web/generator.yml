@@ -1,0 +1,203 @@
+generator:
+  class:                         sfSurfaceGenerator
+  param:
+    model_class:                 ObjectClass
+    singular_name:               object_name
+    row_marking_module:          object_class # In lowercase
+    theme:                       default # Perfectly useless
+
+    behaviors:
+      cart:
+        active:                  true|false
+        active_actions:          true|false
+        separate_actions:        true|false
+        filter:                  true|false
+        add_remove_all:          true|false
+
+      tree:
+        active:                  true|false
+
+    helpers:                     [ Tag, Date, Form ... ]
+
+    fields:
+      field_name:
+        name:                    Label of the field
+        type:                    input_tag
+        # type can be one of the following:
+        # textarea_tag, surface_autocomplete_peer, input_hidden_tag, input_time_tag,
+        # surface_boolean_tag, input_color_tag, input_number_tag, input_minutes_tag,
+        # checkbox_with_label, surface_link_to, workflow_view_mode, workflow_namespace,
+        # surface_autocomplete_list, surface_autocomplete, select_tag, input_tag,
+        # surface_double_list, assoc_files
+        label:                   on|off|top
+        params:
+          related_class:         ObjectClass
+          completion_url:        module/autocompleteObject
+          add_url:               module/add_object
+          add_target:            tg_east|tg_center|tg_lightbox|notices|popup|html_id
+          peer_method:           doSelectOne
+          mailto:                true|false
+          size:                  12
+          size:                  13x40
+          increment:             1
+          no_input:              true|false
+          min:                   1
+          max:                   10
+          unit:                  m²
+          decimals:              2
+          popup_height:          400
+          popup_width:           300
+          default:               1
+          filter_default:        0
+          default_value:         1
+          date_format:           d/m/Y
+          from_hour:             1
+          from_minutes:          1
+          step_minutes:          1
+          text_method:           getName
+          text:                  Help text
+          rich:                  My tailor is rich
+          tool:                  And I have no idea what it is
+          through_class:         OtherObject
+          readonly:              true|false
+          enforce_parent:        true|false
+          module_name:           module_name
+        class:                   css_class
+        help:                    Some help string
+        credentials:             [ entity/permission ]
+        allow_method:            getSomething
+        field_name:              other_field_name
+        export_params:           { weight: 1, label: Some string }
+        null_value:              String when no value is returned by getter
+        sort:                    true|false
+        parser:                  php_function
+        input_wrapper_id:        html_id
+        filter_type:             input_range_tag|surface_autocomplete_peer|surface_input_date_range_tag
+        creole_type:             10 #Date
+
+    fieldsets:
+      fieldset_name:
+        name:                    Some magic string %%field_name%%
+        credentials:             [ entity/permission ]
+        allow_method:            getSomething
+
+    actions:
+      _show|_create|_edit|_delete_confirm|action_name:
+        name:                    Button text
+        icon:                    /sfcThemePlugin/common/icons/image.png
+        no_label:                on|off
+        action:                  module/action?param=value
+        target:                  tg_east|tg_center|tg_lightbox|notices|popup|html_id
+        credentials:             [ entity/permission ]
+        params:
+          popup_height:          400
+          popup_width:           300
+        class:                   css_class
+        confirm:                 A confirmation message
+        redirect_url:            "http://www.elogys.fr/"
+        redirect_action:         module/action?param=value
+        skip_navigation:         true|false
+        component_class_update:  module
+        disabled:                true|false
+
+    exports:
+      action_key:
+        name:                    Some magic string %%field_name%%
+        outputType:              pdf|doc|xls|ods|odt
+        icon:                    /sfcThemePlugin/common/icons/image.png
+        action:                  module/action?param=value
+        credentials:             [ entity/permission ]
+        # For several credentials: [[ entity/permission, entity/permission ]]
+        template:                template.ods
+        selectable:              true|false
+        target:                  tg_east|tg_center|tg_lightbox|notices|popup|html_id
+        format:                  A4|A3|A5
+        filename:                template.ods
+        endpaper:                true|false
+        close_page:              true|false
+        display:                 [ field_name, _field_name, ~field_name ... ]
+        # Put a + in front of the other modifier to select the field by default
+        ajax_options:            { option: value }
+        params:
+          class:                 css_class
+          confirm:               A confirmation message
+
+    show|edit|create|delete_confirm:
+      title:                     Some magic string %%field_name%%
+      render:                    slots|tabs
+      display:                   # ARRAYS OF FIELDS ARE ALLOWED
+        fieldset_name:           [ field_name, _field_name, ~field_name ... ]
+        # Sub-arrays of fieldsets are allowed
+      menu:
+        disabled:                true|false
+        items:
+          menu_item:
+            label:                            Button text
+            icon:                /sfcThemePlugin/common/icons/image.png
+            title:               HTML Title (on over)
+            link:                module/action?param=value
+            target:              tg_east|tg_center|tg_lightbox|notices|popup|html_id
+            is_ajax:             true|false
+            skip_navigate:       true|false
+            is_controller:       true|false
+            allow:               [ entity/permission ]
+            class:               css_class
+            items:
+              menu_item:
+              # Other menu items
+            render:
+              helper:            helper_name
+              function:          function_name
+
+    list:
+      title:                     Some magic string %%field_name%%
+      display:                   [ field_name, =field_name, _field_name, ~field_name ... ]
+      filters:                   [ field_name ... ]
+      layout:                    stacked|tabular
+      sort:                      [ field_name, asc|desc ]
+      max_per_page:              100
+      object_actions_skip:       true|false
+      bottom_pager_skip:         true|false
+      top_pager_skip:            true|false
+      header_skip:               true|false
+      pager_steps:               [ 10, 20, 30 ]
+      tr_class:                  ClassForTR
+      td_class:                  ClassForTD
+      click_action:              show|edit
+      inline_editing:
+        type:                    full
+        display:                 [ field_name, =field_name, _field_name, ~field_name ... ]
+        hide_form:               true|false
+      exports:
+        # ...
+      actions:
+        # ...
+      object_actions:
+        # ...
+      cart:
+        active:                  true|false
+        active_actions:          true|false
+        separate_actions:        true|false
+        filter:                  true|false
+        add_remove_all:          true|false
+      batch_actions:
+        _delete:
+          name:                  Suppression
+
+    components:
+
+      component_name:
+        type:                    list|fields
+        # Then like list or show/edit/...
+
+    wizards:
+      wizard_name:
+        title:                   Some magic string %%field_name%%
+        showStepNumber:          true|false
+        steps:
+          wizard_step:
+            label:               Some string
+            title:               Step title
+            note:                note
+            header:              header string
+            fields:              [ field_name, =field_name, _field_name, ~field_name ... ]

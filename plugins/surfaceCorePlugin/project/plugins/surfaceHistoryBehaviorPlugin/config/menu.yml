@@ -1,0 +1,31 @@
+################################################################################
+# DECLARATION DES MENUS ########################################################
+################################################################################
+sfc_menu_generator:
+
+  items:
+
+    history_module:
+      label:											Historiques
+      link:												history/list
+
+################################################################################
+# EXEMPLE TOUTES OPTIONS #######################################################
+################################################################################
+#    <name>:											nom de l'entré, necessaire pour la retrouver
+#      label:											contenue de la balise <a>
+#      icon:											icon qui se positionne avant le label
+#      title:											valeur de l'attribut title de la balise <a>
+#      link:											lien href ou onclick
+#      target:										target pour les liens ajax
+#      is_ajax:										precise si le lien est une action ajax
+#      skip_navigate:							s'ajoute ou pas dans l'historique de navigation
+#      is_controller:							precise si le lien est un controller
+#      allow:											droit necessaire
+#      class:											class css apposer a la balise <li>
+#      items:											definition du sous menu
+#      render:										rendu different
+#        helper:									nom du helper
+#        function:								fonction du helper
+#
+################################################################################

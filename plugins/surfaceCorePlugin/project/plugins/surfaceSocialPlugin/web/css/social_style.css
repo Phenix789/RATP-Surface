@@ -1,0 +1,26 @@
+/* 
+    Document   : social_style
+    Created on : 21 janv. 2013, 11:26:51
+    Author     : mirza
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+.social_comment_list {
+	color: #555555;
+}
+
+.social_comment_detail img {
+}
+
+input.sf_admin_action_comment {
+    border: medium none;
+    color: inherit;
+    display: block;
+    font-weight: bold;
+    padding: 5px 4px 4px 19px;
+}
+
+.sf_admin_action_comment{
+	background-image: url("/sfcThemePlugin/common/images/blue_ico.png");
+}

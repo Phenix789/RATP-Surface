@@ -1,0 +1,19 @@
+= sfChartDirectorPlugin plugin =
+
+The `sfChartDirectorPlugin` provides abstraction for the ChartDirector library http://www.advsofteng.com/
+
+== Installation ==
+
+  * Install the plugin
+  
+  {{{
+    symfony plugin-install http://plugins.symfony-project.com/sfChartDirectorPlugin
+  }}}
+
+  * Clear you cache
+
+  {{{
+    symfony cc
+  }}}
+
+  * You're done.
