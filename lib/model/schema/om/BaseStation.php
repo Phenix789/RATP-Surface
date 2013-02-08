@@ -61,6 +61,12 @@ abstract class BaseStation extends BaseObject
     protected $geo_y;
 
     /**
+     * The value for the zone field.
+     * @var        int
+     */
+    protected $zone;
+
+    /**
      * The value for the created_at field.
      * @var        string
      */
@@ -172,6 +178,17 @@ abstract class BaseStation extends BaseObject
     {
 
         return $this->geo_y;
+    }
+
+    /**
+     * Get the [zone] column value.
+     * 
+     * @return   int
+     */
+    public function getZone()
+    {
+
+        return $this->zone;
     }
 
     /**
@@ -381,6 +398,28 @@ abstract class BaseStation extends BaseObject
     } // setGeoY()
 
     /**
+     * Set the value of [zone] column.
+     * 
+     * @param      int $v new value
+     * @return   Station The current object (for fluent API support)
+     */
+    public function setZone($v)
+    {
+		$v = SfcUtils::numberParse($v);
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->zone !== $v) {
+            $this->zone = $v;
+            $this->modifiedColumns[] = StationPeer::ZONE;
+        }
+
+
+        return $this;
+    } // setZone()
+
+    /**
      * Sets the value of [created_at] column to a normalized version of the date/time value specified.
      * 
      * @param      mixed $v string, integer (timestamp), or DateTime value.
@@ -521,10 +560,11 @@ abstract class BaseStation extends BaseObject
             $this->name = ($row[$startcol + 2] !== null) ? (string) $row[$startcol + 2] : null;
             $this->geo_x = ($row[$startcol + 3] !== null) ? (double) $row[$startcol + 3] : null;
             $this->geo_y = ($row[$startcol + 4] !== null) ? (double) $row[$startcol + 4] : null;
-            $this->created_at = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->updated_at = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
-            $this->created_by = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
-            $this->updated_by = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
+            $this->zone = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
+            $this->created_at = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->updated_at = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->created_by = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
+            $this->updated_by = ($row[$startcol + 9] !== null) ? (int) $row[$startcol + 9] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -533,7 +573,7 @@ abstract class BaseStation extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 9; // 9 = StationPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 10; // 10 = StationPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Station object", $e);
@@ -879,6 +919,9 @@ abstract class BaseStation extends BaseObject
         if ($this->isColumnModified(StationPeer::GEO_Y)) {
             $modifiedColumns[':p' . $index++]  = '`GEO_Y`';
         }
+        if ($this->isColumnModified(StationPeer::ZONE)) {
+            $modifiedColumns[':p' . $index++]  = '`ZONE`';
+        }
         if ($this->isColumnModified(StationPeer::CREATED_AT)) {
             $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
         }
@@ -916,6 +959,9 @@ abstract class BaseStation extends BaseObject
                         break;
                     case '`GEO_Y`':
 						$stmt->bindValue($identifier, $this->geo_y, PDO::PARAM_STR);
+                        break;
+                    case '`ZONE`':
+						$stmt->bindValue($identifier, $this->zone, PDO::PARAM_INT);
                         break;
                     case '`CREATED_AT`':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
@@ -1105,15 +1151,18 @@ abstract class BaseStation extends BaseObject
                 return $this->getGeoY();
                 break;
             case 5:
-                return $this->getCreatedAt();
+                return $this->getZone();
                 break;
             case 6:
-                return $this->getUpdatedAt();
+                return $this->getCreatedAt();
                 break;
             case 7:
-                return $this->getCreatedBy();
+                return $this->getUpdatedAt();
                 break;
             case 8:
+                return $this->getCreatedBy();
+                break;
+            case 9:
                 return $this->getUpdatedBy();
                 break;
             default:
@@ -1150,10 +1199,11 @@ abstract class BaseStation extends BaseObject
             $keys[2] => $this->getName(),
             $keys[3] => $this->getGeoX(),
             $keys[4] => $this->getGeoY(),
-            $keys[5] => $this->getCreatedAt(),
-            $keys[6] => $this->getUpdatedAt(),
-            $keys[7] => $this->getCreatedBy(),
-            $keys[8] => $this->getUpdatedBy(),
+            $keys[5] => $this->getZone(),
+            $keys[6] => $this->getCreatedAt(),
+            $keys[7] => $this->getUpdatedAt(),
+            $keys[8] => $this->getCreatedBy(),
+            $keys[9] => $this->getUpdatedBy(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->asfGuardUserRelatedByCreatedBy) {
@@ -1215,15 +1265,18 @@ abstract class BaseStation extends BaseObject
                 $this->setGeoY($value);
                 break;
             case 5:
-                $this->setCreatedAt($value);
+                $this->setZone($value);
                 break;
             case 6:
-                $this->setUpdatedAt($value);
+                $this->setCreatedAt($value);
                 break;
             case 7:
-                $this->setCreatedBy($value);
+                $this->setUpdatedAt($value);
                 break;
             case 8:
+                $this->setCreatedBy($value);
+                break;
+            case 9:
                 $this->setUpdatedBy($value);
                 break;
         } // switch()
@@ -1255,10 +1308,11 @@ abstract class BaseStation extends BaseObject
         if (array_key_exists($keys[2], $arr)) $this->setName($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setGeoX($arr[$keys[3]]);
         if (array_key_exists($keys[4], $arr)) $this->setGeoY($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setCreatedAt($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setUpdatedAt($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setCreatedBy($arr[$keys[7]]);
-        if (array_key_exists($keys[8], $arr)) $this->setUpdatedBy($arr[$keys[8]]);
+        if (array_key_exists($keys[5], $arr)) $this->setZone($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setCreatedAt($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setUpdatedAt($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setUpdatedBy($arr[$keys[9]]);
     }
 
     /**
@@ -1275,6 +1329,7 @@ abstract class BaseStation extends BaseObject
         if ($this->isColumnModified(StationPeer::NAME)) $criteria->add(StationPeer::NAME, $this->name);
         if ($this->isColumnModified(StationPeer::GEO_X)) $criteria->add(StationPeer::GEO_X, $this->geo_x);
         if ($this->isColumnModified(StationPeer::GEO_Y)) $criteria->add(StationPeer::GEO_Y, $this->geo_y);
+        if ($this->isColumnModified(StationPeer::ZONE)) $criteria->add(StationPeer::ZONE, $this->zone);
         if ($this->isColumnModified(StationPeer::CREATED_AT)) $criteria->add(StationPeer::CREATED_AT, $this->created_at);
         if ($this->isColumnModified(StationPeer::UPDATED_AT)) $criteria->add(StationPeer::UPDATED_AT, $this->updated_at);
         if ($this->isColumnModified(StationPeer::CREATED_BY)) $criteria->add(StationPeer::CREATED_BY, $this->created_by);
@@ -1346,6 +1401,7 @@ abstract class BaseStation extends BaseObject
         $copyObj->setName($this->getName());
         $copyObj->setGeoX($this->getGeoX());
         $copyObj->setGeoY($this->getGeoY());
+        $copyObj->setZone($this->getZone());
         $copyObj->setCreatedAt($this->getCreatedAt());
         $copyObj->setUpdatedAt($this->getUpdatedAt());
         $copyObj->setCreatedBy($this->getCreatedBy());
@@ -1734,6 +1790,7 @@ abstract class BaseStation extends BaseObject
         $this->name = null;
         $this->geo_x = null;
         $this->geo_y = null;
+        $this->zone = null;
         $this->created_at = null;
         $this->updated_at = null;
         $this->created_by = null;

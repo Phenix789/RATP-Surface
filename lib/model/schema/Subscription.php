@@ -10,10 +10,4 @@
 
 class Subscription extends BaseSubscription {
 	
-	const HOUR = 1;
-	const DAY = 2;
-	const WEEK = 3;
-	const MONTH = 4;
-	const YEAR = 5;
-	
 }

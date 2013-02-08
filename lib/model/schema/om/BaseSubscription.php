@@ -44,7 +44,7 @@ abstract class BaseSubscription extends BaseObject
 
     /**
      * The value for the price field.
-     * @var        int
+     * @var        double
      */
     protected $price;
 
@@ -53,6 +53,18 @@ abstract class BaseSubscription extends BaseObject
      * @var        int
      */
     protected $duration;
+
+    /**
+     * The value for the zone_begin field.
+     * @var        int
+     */
+    protected $zone_begin;
+
+    /**
+     * The value for the zone_end field.
+     * @var        int
+     */
+    protected $zone_end;
 
     /**
      * The value for the created_at field.
@@ -138,7 +150,7 @@ abstract class BaseSubscription extends BaseObject
     /**
      * Get the [price] column value.
      * 
-     * @return   int
+     * @return   double
      */
     public function getPrice()
     {
@@ -155,6 +167,28 @@ abstract class BaseSubscription extends BaseObject
     {
 
         return $this->duration;
+    }
+
+    /**
+     * Get the [zone_begin] column value.
+     * 
+     * @return   int
+     */
+    public function getZoneBegin()
+    {
+
+        return $this->zone_begin;
+    }
+
+    /**
+     * Get the [zone_end] column value.
+     * 
+     * @return   int
+     */
+    public function getZoneEnd()
+    {
+
+        return $this->zone_end;
     }
 
     /**
@@ -301,14 +335,14 @@ abstract class BaseSubscription extends BaseObject
     /**
      * Set the value of [price] column.
      * 
-     * @param      int $v new value
+     * @param      double $v new value
      * @return   Subscription The current object (for fluent API support)
      */
     public function setPrice($v)
     {
 		$v = SfcUtils::numberParse($v);
         if ($v !== null) {
-            $v = (int) $v;
+            $v = (double) $v;
         }
 
         if ($this->price !== $v) {
@@ -341,6 +375,50 @@ abstract class BaseSubscription extends BaseObject
 
         return $this;
     } // setDuration()
+
+    /**
+     * Set the value of [zone_begin] column.
+     * 
+     * @param      int $v new value
+     * @return   Subscription The current object (for fluent API support)
+     */
+    public function setZoneBegin($v)
+    {
+		$v = SfcUtils::numberParse($v);
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->zone_begin !== $v) {
+            $this->zone_begin = $v;
+            $this->modifiedColumns[] = SubscriptionPeer::ZONE_BEGIN;
+        }
+
+
+        return $this;
+    } // setZoneBegin()
+
+    /**
+     * Set the value of [zone_end] column.
+     * 
+     * @param      int $v new value
+     * @return   Subscription The current object (for fluent API support)
+     */
+    public function setZoneEnd($v)
+    {
+		$v = SfcUtils::numberParse($v);
+        if ($v !== null) {
+            $v = (int) $v;
+        }
+
+        if ($this->zone_end !== $v) {
+            $this->zone_end = $v;
+            $this->modifiedColumns[] = SubscriptionPeer::ZONE_END;
+        }
+
+
+        return $this;
+    } // setZoneEnd()
 
     /**
      * Sets the value of [created_at] column to a normalized version of the date/time value specified.
@@ -480,12 +558,14 @@ abstract class BaseSubscription extends BaseObject
 
             $this->id = ($row[$startcol + 0] !== null) ? (int) $row[$startcol + 0] : null;
             $this->name = ($row[$startcol + 1] !== null) ? (string) $row[$startcol + 1] : null;
-            $this->price = ($row[$startcol + 2] !== null) ? (int) $row[$startcol + 2] : null;
+            $this->price = ($row[$startcol + 2] !== null) ? (double) $row[$startcol + 2] : null;
             $this->duration = ($row[$startcol + 3] !== null) ? (int) $row[$startcol + 3] : null;
-            $this->created_at = ($row[$startcol + 4] !== null) ? (string) $row[$startcol + 4] : null;
-            $this->updated_at = ($row[$startcol + 5] !== null) ? (string) $row[$startcol + 5] : null;
-            $this->created_by = ($row[$startcol + 6] !== null) ? (int) $row[$startcol + 6] : null;
-            $this->updated_by = ($row[$startcol + 7] !== null) ? (int) $row[$startcol + 7] : null;
+            $this->zone_begin = ($row[$startcol + 4] !== null) ? (int) $row[$startcol + 4] : null;
+            $this->zone_end = ($row[$startcol + 5] !== null) ? (int) $row[$startcol + 5] : null;
+            $this->created_at = ($row[$startcol + 6] !== null) ? (string) $row[$startcol + 6] : null;
+            $this->updated_at = ($row[$startcol + 7] !== null) ? (string) $row[$startcol + 7] : null;
+            $this->created_by = ($row[$startcol + 8] !== null) ? (int) $row[$startcol + 8] : null;
+            $this->updated_by = ($row[$startcol + 9] !== null) ? (int) $row[$startcol + 9] : null;
             $this->resetModified();
 
             $this->setNew(false);
@@ -494,7 +574,7 @@ abstract class BaseSubscription extends BaseObject
                 $this->ensureConsistency();
             }
 
-            return $startcol + 8; // 8 = SubscriptionPeer::NUM_HYDRATE_COLUMNS.
+            return $startcol + 10; // 10 = SubscriptionPeer::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException("Error populating Subscription object", $e);
@@ -838,6 +918,12 @@ abstract class BaseSubscription extends BaseObject
         if ($this->isColumnModified(SubscriptionPeer::DURATION)) {
             $modifiedColumns[':p' . $index++]  = '`DURATION`';
         }
+        if ($this->isColumnModified(SubscriptionPeer::ZONE_BEGIN)) {
+            $modifiedColumns[':p' . $index++]  = '`ZONE_BEGIN`';
+        }
+        if ($this->isColumnModified(SubscriptionPeer::ZONE_END)) {
+            $modifiedColumns[':p' . $index++]  = '`ZONE_END`';
+        }
         if ($this->isColumnModified(SubscriptionPeer::CREATED_AT)) {
             $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
         }
@@ -868,10 +954,16 @@ abstract class BaseSubscription extends BaseObject
 						$stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
                         break;
                     case '`PRICE`':
-						$stmt->bindValue($identifier, $this->price, PDO::PARAM_INT);
+						$stmt->bindValue($identifier, $this->price, PDO::PARAM_STR);
                         break;
                     case '`DURATION`':
 						$stmt->bindValue($identifier, $this->duration, PDO::PARAM_INT);
+                        break;
+                    case '`ZONE_BEGIN`':
+						$stmt->bindValue($identifier, $this->zone_begin, PDO::PARAM_INT);
+                        break;
+                    case '`ZONE_END`':
+						$stmt->bindValue($identifier, $this->zone_end, PDO::PARAM_INT);
                         break;
                     case '`CREATED_AT`':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
@@ -1058,15 +1150,21 @@ abstract class BaseSubscription extends BaseObject
                 return $this->getDuration();
                 break;
             case 4:
-                return $this->getCreatedAt();
+                return $this->getZoneBegin();
                 break;
             case 5:
-                return $this->getUpdatedAt();
+                return $this->getZoneEnd();
                 break;
             case 6:
-                return $this->getCreatedBy();
+                return $this->getCreatedAt();
                 break;
             case 7:
+                return $this->getUpdatedAt();
+                break;
+            case 8:
+                return $this->getCreatedBy();
+                break;
+            case 9:
                 return $this->getUpdatedBy();
                 break;
             default:
@@ -1102,10 +1200,12 @@ abstract class BaseSubscription extends BaseObject
             $keys[1] => $this->getName(),
             $keys[2] => $this->getPrice(),
             $keys[3] => $this->getDuration(),
-            $keys[4] => $this->getCreatedAt(),
-            $keys[5] => $this->getUpdatedAt(),
-            $keys[6] => $this->getCreatedBy(),
-            $keys[7] => $this->getUpdatedBy(),
+            $keys[4] => $this->getZoneBegin(),
+            $keys[5] => $this->getZoneEnd(),
+            $keys[6] => $this->getCreatedAt(),
+            $keys[7] => $this->getUpdatedAt(),
+            $keys[8] => $this->getCreatedBy(),
+            $keys[9] => $this->getUpdatedBy(),
         );
         if ($includeForeignObjects) {
             if (null !== $this->asfGuardUserRelatedByCreatedBy) {
@@ -1164,15 +1264,21 @@ abstract class BaseSubscription extends BaseObject
                 $this->setDuration($value);
                 break;
             case 4:
-                $this->setCreatedAt($value);
+                $this->setZoneBegin($value);
                 break;
             case 5:
-                $this->setUpdatedAt($value);
+                $this->setZoneEnd($value);
                 break;
             case 6:
-                $this->setCreatedBy($value);
+                $this->setCreatedAt($value);
                 break;
             case 7:
+                $this->setUpdatedAt($value);
+                break;
+            case 8:
+                $this->setCreatedBy($value);
+                break;
+            case 9:
                 $this->setUpdatedBy($value);
                 break;
         } // switch()
@@ -1203,10 +1309,12 @@ abstract class BaseSubscription extends BaseObject
         if (array_key_exists($keys[1], $arr)) $this->setName($arr[$keys[1]]);
         if (array_key_exists($keys[2], $arr)) $this->setPrice($arr[$keys[2]]);
         if (array_key_exists($keys[3], $arr)) $this->setDuration($arr[$keys[3]]);
-        if (array_key_exists($keys[4], $arr)) $this->setCreatedAt($arr[$keys[4]]);
-        if (array_key_exists($keys[5], $arr)) $this->setUpdatedAt($arr[$keys[5]]);
-        if (array_key_exists($keys[6], $arr)) $this->setCreatedBy($arr[$keys[6]]);
-        if (array_key_exists($keys[7], $arr)) $this->setUpdatedBy($arr[$keys[7]]);
+        if (array_key_exists($keys[4], $arr)) $this->setZoneBegin($arr[$keys[4]]);
+        if (array_key_exists($keys[5], $arr)) $this->setZoneEnd($arr[$keys[5]]);
+        if (array_key_exists($keys[6], $arr)) $this->setCreatedAt($arr[$keys[6]]);
+        if (array_key_exists($keys[7], $arr)) $this->setUpdatedAt($arr[$keys[7]]);
+        if (array_key_exists($keys[8], $arr)) $this->setCreatedBy($arr[$keys[8]]);
+        if (array_key_exists($keys[9], $arr)) $this->setUpdatedBy($arr[$keys[9]]);
     }
 
     /**
@@ -1222,6 +1330,8 @@ abstract class BaseSubscription extends BaseObject
         if ($this->isColumnModified(SubscriptionPeer::NAME)) $criteria->add(SubscriptionPeer::NAME, $this->name);
         if ($this->isColumnModified(SubscriptionPeer::PRICE)) $criteria->add(SubscriptionPeer::PRICE, $this->price);
         if ($this->isColumnModified(SubscriptionPeer::DURATION)) $criteria->add(SubscriptionPeer::DURATION, $this->duration);
+        if ($this->isColumnModified(SubscriptionPeer::ZONE_BEGIN)) $criteria->add(SubscriptionPeer::ZONE_BEGIN, $this->zone_begin);
+        if ($this->isColumnModified(SubscriptionPeer::ZONE_END)) $criteria->add(SubscriptionPeer::ZONE_END, $this->zone_end);
         if ($this->isColumnModified(SubscriptionPeer::CREATED_AT)) $criteria->add(SubscriptionPeer::CREATED_AT, $this->created_at);
         if ($this->isColumnModified(SubscriptionPeer::UPDATED_AT)) $criteria->add(SubscriptionPeer::UPDATED_AT, $this->updated_at);
         if ($this->isColumnModified(SubscriptionPeer::CREATED_BY)) $criteria->add(SubscriptionPeer::CREATED_BY, $this->created_by);
@@ -1292,6 +1402,8 @@ abstract class BaseSubscription extends BaseObject
         $copyObj->setName($this->getName());
         $copyObj->setPrice($this->getPrice());
         $copyObj->setDuration($this->getDuration());
+        $copyObj->setZoneBegin($this->getZoneBegin());
+        $copyObj->setZoneEnd($this->getZoneEnd());
         $copyObj->setCreatedAt($this->getCreatedAt());
         $copyObj->setUpdatedAt($this->getUpdatedAt());
         $copyObj->setCreatedBy($this->getCreatedBy());
@@ -1729,6 +1841,8 @@ abstract class BaseSubscription extends BaseObject
         $this->name = null;
         $this->price = null;
         $this->duration = null;
+        $this->zone_begin = null;
+        $this->zone_end = null;
         $this->created_at = null;
         $this->updated_at = null;
         $this->created_by = null;

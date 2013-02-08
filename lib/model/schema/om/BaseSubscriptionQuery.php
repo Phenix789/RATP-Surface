@@ -10,6 +10,8 @@
  * @method     SubscriptionQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method     SubscriptionQuery orderByPrice($order = Criteria::ASC) Order by the price column
  * @method     SubscriptionQuery orderByDuration($order = Criteria::ASC) Order by the duration column
+ * @method     SubscriptionQuery orderByZoneBegin($order = Criteria::ASC) Order by the zone_begin column
+ * @method     SubscriptionQuery orderByZoneEnd($order = Criteria::ASC) Order by the zone_end column
  * @method     SubscriptionQuery orderByCreatedAt($order = Criteria::ASC) Order by the created_at column
  * @method     SubscriptionQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
  * @method     SubscriptionQuery orderByCreatedBy($order = Criteria::ASC) Order by the created_by column
@@ -19,6 +21,8 @@
  * @method     SubscriptionQuery groupByName() Group by the name column
  * @method     SubscriptionQuery groupByPrice() Group by the price column
  * @method     SubscriptionQuery groupByDuration() Group by the duration column
+ * @method     SubscriptionQuery groupByZoneBegin() Group by the zone_begin column
+ * @method     SubscriptionQuery groupByZoneEnd() Group by the zone_end column
  * @method     SubscriptionQuery groupByCreatedAt() Group by the created_at column
  * @method     SubscriptionQuery groupByUpdatedAt() Group by the updated_at column
  * @method     SubscriptionQuery groupByCreatedBy() Group by the created_by column
@@ -45,8 +49,10 @@
  *
  * @method     Subscription findOneById(int $id) Return the first Subscription filtered by the id column
  * @method     Subscription findOneByName(string $name) Return the first Subscription filtered by the name column
- * @method     Subscription findOneByPrice(int $price) Return the first Subscription filtered by the price column
+ * @method     Subscription findOneByPrice(double $price) Return the first Subscription filtered by the price column
  * @method     Subscription findOneByDuration(int $duration) Return the first Subscription filtered by the duration column
+ * @method     Subscription findOneByZoneBegin(int $zone_begin) Return the first Subscription filtered by the zone_begin column
+ * @method     Subscription findOneByZoneEnd(int $zone_end) Return the first Subscription filtered by the zone_end column
  * @method     Subscription findOneByCreatedAt(string $created_at) Return the first Subscription filtered by the created_at column
  * @method     Subscription findOneByUpdatedAt(string $updated_at) Return the first Subscription filtered by the updated_at column
  * @method     Subscription findOneByCreatedBy(int $created_by) Return the first Subscription filtered by the created_by column
@@ -54,8 +60,10 @@
  *
  * @method     array findById(int $id) Return Subscription objects filtered by the id column
  * @method     array findByName(string $name) Return Subscription objects filtered by the name column
- * @method     array findByPrice(int $price) Return Subscription objects filtered by the price column
+ * @method     array findByPrice(double $price) Return Subscription objects filtered by the price column
  * @method     array findByDuration(int $duration) Return Subscription objects filtered by the duration column
+ * @method     array findByZoneBegin(int $zone_begin) Return Subscription objects filtered by the zone_begin column
+ * @method     array findByZoneEnd(int $zone_end) Return Subscription objects filtered by the zone_end column
  * @method     array findByCreatedAt(string $created_at) Return Subscription objects filtered by the created_at column
  * @method     array findByUpdatedAt(string $updated_at) Return Subscription objects filtered by the updated_at column
  * @method     array findByCreatedBy(int $created_by) Return Subscription objects filtered by the created_by column
@@ -150,7 +158,7 @@ abstract class BaseSubscriptionQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `NAME`, `PRICE`, `DURATION`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `ratp_subscription` WHERE `ID` = :p0';
+        $sql = 'SELECT `ID`, `NAME`, `PRICE`, `DURATION`, `ZONE_BEGIN`, `ZONE_END`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `ratp_subscription` WHERE `ID` = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -375,6 +383,88 @@ abstract class BaseSubscriptionQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(SubscriptionPeer::DURATION, $duration, $comparison);
+    }
+
+    /**
+     * Filter the query on the zone_begin column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByZoneBegin(1234); // WHERE zone_begin = 1234
+     * $query->filterByZoneBegin(array(12, 34)); // WHERE zone_begin IN (12, 34)
+     * $query->filterByZoneBegin(array('min' => 12)); // WHERE zone_begin > 12
+     * </code>
+     *
+     * @param     mixed $zoneBegin The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SubscriptionQuery The current query, for fluid interface
+     */
+    public function filterByZoneBegin($zoneBegin = null, $comparison = null)
+    {
+        if (is_array($zoneBegin)) {
+            $useMinMax = false;
+            if (isset($zoneBegin['min'])) {
+                $this->addUsingAlias(SubscriptionPeer::ZONE_BEGIN, $zoneBegin['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($zoneBegin['max'])) {
+                $this->addUsingAlias(SubscriptionPeer::ZONE_BEGIN, $zoneBegin['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(SubscriptionPeer::ZONE_BEGIN, $zoneBegin, $comparison);
+    }
+
+    /**
+     * Filter the query on the zone_end column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByZoneEnd(1234); // WHERE zone_end = 1234
+     * $query->filterByZoneEnd(array(12, 34)); // WHERE zone_end IN (12, 34)
+     * $query->filterByZoneEnd(array('min' => 12)); // WHERE zone_end > 12
+     * </code>
+     *
+     * @param     mixed $zoneEnd The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return SubscriptionQuery The current query, for fluid interface
+     */
+    public function filterByZoneEnd($zoneEnd = null, $comparison = null)
+    {
+        if (is_array($zoneEnd)) {
+            $useMinMax = false;
+            if (isset($zoneEnd['min'])) {
+                $this->addUsingAlias(SubscriptionPeer::ZONE_END, $zoneEnd['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($zoneEnd['max'])) {
+                $this->addUsingAlias(SubscriptionPeer::ZONE_END, $zoneEnd['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(SubscriptionPeer::ZONE_END, $zoneEnd, $comparison);
     }
 
     /**

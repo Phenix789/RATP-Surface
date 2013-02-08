@@ -111,7 +111,7 @@ generator:
     list:
       title:													Liste des clients
       display:												[ =lastname, =firstname, city ]
-      filters:												[  ]
+      filters:												[ lastname, firstname, city, zip_code ]
       sort:														[ lastname, asc ]
 
 ################################################################################

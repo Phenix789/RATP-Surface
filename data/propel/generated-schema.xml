@@ -6,6 +6,7 @@
 		<column name="name" type="varchar" size="255" />
 		<column name="geo_x" type="double" />
 		<column name="geo_y" type="double" />
+		<column name="zone" type="integer" />
 
 		<column name="created_at" type="timestamp"/>
 		<column name="updated_at" type="timestamp"/>
@@ -52,8 +53,10 @@
 	<table name="ratp_subscription" phpName="Subscription">
 		<column name="id" type="integer" primaryKey="true" required="true" autoIncrement="true" />
 		<column name="name" type="varchar" size="255" />
-		<column name="price" type="integer" />
+		<column name="price" type="double" />
 		<column name="duration" type="integer" />
+		<column name="zone_begin" type="integer" />
+		<column name="zone_end" type="integer" />
 
 		<column name="created_at" type="timestamp"/>
 		<column name="updated_at" type="timestamp"/>

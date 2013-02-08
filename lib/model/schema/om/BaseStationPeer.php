@@ -23,13 +23,13 @@ abstract class BaseStationPeer {
     const TM_CLASS = 'StationTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 9;
+    const NUM_COLUMNS = 10;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 9;
+    const NUM_HYDRATE_COLUMNS = 10;
 
     /** the column name for the ID field */
     const ID = 'ratp_station.ID';
@@ -45,6 +45,9 @@ abstract class BaseStationPeer {
 
     /** the column name for the GEO_Y field */
     const GEO_Y = 'ratp_station.GEO_Y';
+
+    /** the column name for the ZONE field */
+    const ZONE = 'ratp_station.ZONE';
 
     /** the column name for the CREATED_AT field */
     const CREATED_AT = 'ratp_station.CREATED_AT';
@@ -77,12 +80,12 @@ abstract class BaseStationPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'Code', 'Name', 'GeoX', 'GeoY', 'CreatedAt', 'UpdatedAt', 'CreatedBy', 'UpdatedBy', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'code', 'name', 'geoX', 'geoY', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy', ),
-        BasePeer::TYPE_COLNAME => array (self::ID, self::CODE, self::NAME, self::GEO_X, self::GEO_Y, self::CREATED_AT, self::UPDATED_AT, self::CREATED_BY, self::UPDATED_BY, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'CODE', 'NAME', 'GEO_X', 'GEO_Y', 'CREATED_AT', 'UPDATED_AT', 'CREATED_BY', 'UPDATED_BY', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'code', 'name', 'geo_x', 'geo_y', 'created_at', 'updated_at', 'created_by', 'updated_by', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        BasePeer::TYPE_PHPNAME => array ('Id', 'Code', 'Name', 'GeoX', 'GeoY', 'Zone', 'CreatedAt', 'UpdatedAt', 'CreatedBy', 'UpdatedBy', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'code', 'name', 'geoX', 'geoY', 'zone', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy', ),
+        BasePeer::TYPE_COLNAME => array (self::ID, self::CODE, self::NAME, self::GEO_X, self::GEO_Y, self::ZONE, self::CREATED_AT, self::UPDATED_AT, self::CREATED_BY, self::UPDATED_BY, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'CODE', 'NAME', 'GEO_X', 'GEO_Y', 'ZONE', 'CREATED_AT', 'UPDATED_AT', 'CREATED_BY', 'UPDATED_BY', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'code', 'name', 'geo_x', 'geo_y', 'zone', 'created_at', 'updated_at', 'created_by', 'updated_by', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
     );
 
     /**
@@ -92,12 +95,12 @@ abstract class BaseStationPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Code' => 1, 'Name' => 2, 'GeoX' => 3, 'GeoY' => 4, 'CreatedAt' => 5, 'UpdatedAt' => 6, 'CreatedBy' => 7, 'UpdatedBy' => 8, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'code' => 1, 'name' => 2, 'geoX' => 3, 'geoY' => 4, 'createdAt' => 5, 'updatedAt' => 6, 'createdBy' => 7, 'updatedBy' => 8, ),
-        BasePeer::TYPE_COLNAME => array (self::ID => 0, self::CODE => 1, self::NAME => 2, self::GEO_X => 3, self::GEO_Y => 4, self::CREATED_AT => 5, self::UPDATED_AT => 6, self::CREATED_BY => 7, self::UPDATED_BY => 8, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'CODE' => 1, 'NAME' => 2, 'GEO_X' => 3, 'GEO_Y' => 4, 'CREATED_AT' => 5, 'UPDATED_AT' => 6, 'CREATED_BY' => 7, 'UPDATED_BY' => 8, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'code' => 1, 'name' => 2, 'geo_x' => 3, 'geo_y' => 4, 'created_at' => 5, 'updated_at' => 6, 'created_by' => 7, 'updated_by' => 8, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, )
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Code' => 1, 'Name' => 2, 'GeoX' => 3, 'GeoY' => 4, 'Zone' => 5, 'CreatedAt' => 6, 'UpdatedAt' => 7, 'CreatedBy' => 8, 'UpdatedBy' => 9, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'code' => 1, 'name' => 2, 'geoX' => 3, 'geoY' => 4, 'zone' => 5, 'createdAt' => 6, 'updatedAt' => 7, 'createdBy' => 8, 'updatedBy' => 9, ),
+        BasePeer::TYPE_COLNAME => array (self::ID => 0, self::CODE => 1, self::NAME => 2, self::GEO_X => 3, self::GEO_Y => 4, self::ZONE => 5, self::CREATED_AT => 6, self::UPDATED_AT => 7, self::CREATED_BY => 8, self::UPDATED_BY => 9, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'CODE' => 1, 'NAME' => 2, 'GEO_X' => 3, 'GEO_Y' => 4, 'ZONE' => 5, 'CREATED_AT' => 6, 'UPDATED_AT' => 7, 'CREATED_BY' => 8, 'UPDATED_BY' => 9, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'code' => 1, 'name' => 2, 'geo_x' => 3, 'geo_y' => 4, 'zone' => 5, 'created_at' => 6, 'updated_at' => 7, 'created_by' => 8, 'updated_by' => 9, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
     );
 
     /**
@@ -176,6 +179,7 @@ abstract class BaseStationPeer {
 			$criteria->addSelectColumn(StationPeer::NAME);
 			$criteria->addSelectColumn(StationPeer::GEO_X);
 			$criteria->addSelectColumn(StationPeer::GEO_Y);
+			$criteria->addSelectColumn(StationPeer::ZONE);
 			$criteria->addSelectColumn(StationPeer::CREATED_AT);
 			$criteria->addSelectColumn(StationPeer::UPDATED_AT);
 			$criteria->addSelectColumn(StationPeer::CREATED_BY);
@@ -186,6 +190,7 @@ abstract class BaseStationPeer {
 			$criteria->addSelectColumn($alias.'.NAME');
 			$criteria->addSelectColumn($alias.'.GEO_X');
 			$criteria->addSelectColumn($alias.'.GEO_Y');
+			$criteria->addSelectColumn($alias.'.ZONE');
 			$criteria->addSelectColumn($alias.'.CREATED_AT');
 			$criteria->addSelectColumn($alias.'.UPDATED_AT');
 			$criteria->addSelectColumn($alias.'.CREATED_BY');

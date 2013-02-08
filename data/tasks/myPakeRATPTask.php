@@ -1,9 +1,9 @@
 <?php
 
-pake_desc("Load csv data in database");
-pake_task("ratp-load-data", "project_exists");
+pake_desc("Load csv station in database");
+pake_task("ratp-load-station", "project_exists");
 
-function run_ratp_load_data($task, $args) {
+function run_ratp_load_station($task, $args) {
 	
 	//Initialize surface
 	pake_surface_initialize();
@@ -77,5 +77,39 @@ function run_ratp_load_data($task, $args) {
 		$station->save();
 	}
 	pake_echo_comment("Save " . count($stations) . " stations");
+	
+}
+
+pake_desc("Load csv user in database");
+pake_task("ratp-load-user", "project_exists");
+
+function run_ratp_load_user($task, $args) {
+	
+	//Initialize Surface
+	pake_surface_initialize();
+	
+	//Clear database
+	pake_echo("Clear user database");
+	ClientPeer::doDeleteAll();
+	
+	//Search file
+	$file = pake_surface_open_file("FakeNameGenerator.com_c1458542.csv");
+	
+	//file line
+	fgetcsv($file);
+	
+	while ($line = fgetcsv($file)) {
+		
+		$client = new Client();
+		$client->setLastname($line[1]);
+		$client->setFirstname($line[0]);
+		$client->setBirthdate(strtotime($line[7]));
+		$client->setAddress($line[2]);
+		$client->setCity($line[3]);
+		$client->setZipCode($line[4]);
+		
+		$client->save();
+		
+	}
 	
 }

@@ -11,6 +11,7 @@
  * @method     StationQuery orderByName($order = Criteria::ASC) Order by the name column
  * @method     StationQuery orderByGeoX($order = Criteria::ASC) Order by the geo_x column
  * @method     StationQuery orderByGeoY($order = Criteria::ASC) Order by the geo_y column
+ * @method     StationQuery orderByZone($order = Criteria::ASC) Order by the zone column
  * @method     StationQuery orderByCreatedAt($order = Criteria::ASC) Order by the created_at column
  * @method     StationQuery orderByUpdatedAt($order = Criteria::ASC) Order by the updated_at column
  * @method     StationQuery orderByCreatedBy($order = Criteria::ASC) Order by the created_by column
@@ -21,6 +22,7 @@
  * @method     StationQuery groupByName() Group by the name column
  * @method     StationQuery groupByGeoX() Group by the geo_x column
  * @method     StationQuery groupByGeoY() Group by the geo_y column
+ * @method     StationQuery groupByZone() Group by the zone column
  * @method     StationQuery groupByCreatedAt() Group by the created_at column
  * @method     StationQuery groupByUpdatedAt() Group by the updated_at column
  * @method     StationQuery groupByCreatedBy() Group by the created_by column
@@ -50,6 +52,7 @@
  * @method     Station findOneByName(string $name) Return the first Station filtered by the name column
  * @method     Station findOneByGeoX(double $geo_x) Return the first Station filtered by the geo_x column
  * @method     Station findOneByGeoY(double $geo_y) Return the first Station filtered by the geo_y column
+ * @method     Station findOneByZone(int $zone) Return the first Station filtered by the zone column
  * @method     Station findOneByCreatedAt(string $created_at) Return the first Station filtered by the created_at column
  * @method     Station findOneByUpdatedAt(string $updated_at) Return the first Station filtered by the updated_at column
  * @method     Station findOneByCreatedBy(int $created_by) Return the first Station filtered by the created_by column
@@ -60,6 +63,7 @@
  * @method     array findByName(string $name) Return Station objects filtered by the name column
  * @method     array findByGeoX(double $geo_x) Return Station objects filtered by the geo_x column
  * @method     array findByGeoY(double $geo_y) Return Station objects filtered by the geo_y column
+ * @method     array findByZone(int $zone) Return Station objects filtered by the zone column
  * @method     array findByCreatedAt(string $created_at) Return Station objects filtered by the created_at column
  * @method     array findByUpdatedAt(string $updated_at) Return Station objects filtered by the updated_at column
  * @method     array findByCreatedBy(int $created_by) Return Station objects filtered by the created_by column
@@ -154,7 +158,7 @@ abstract class BaseStationQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `CODE`, `NAME`, `GEO_X`, `GEO_Y`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `ratp_station` WHERE `ID` = :p0';
+        $sql = 'SELECT `ID`, `CODE`, `NAME`, `GEO_X`, `GEO_Y`, `ZONE`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `ratp_station` WHERE `ID` = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -408,6 +412,47 @@ abstract class BaseStationQuery extends ModelCriteria
         }
 
         return $this->addUsingAlias(StationPeer::GEO_Y, $geoY, $comparison);
+    }
+
+    /**
+     * Filter the query on the zone column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByZone(1234); // WHERE zone = 1234
+     * $query->filterByZone(array(12, 34)); // WHERE zone IN (12, 34)
+     * $query->filterByZone(array('min' => 12)); // WHERE zone > 12
+     * </code>
+     *
+     * @param     mixed $zone The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return StationQuery The current query, for fluid interface
+     */
+    public function filterByZone($zone = null, $comparison = null)
+    {
+        if (is_array($zone)) {
+            $useMinMax = false;
+            if (isset($zone['min'])) {
+                $this->addUsingAlias(StationPeer::ZONE, $zone['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($zone['max'])) {
+                $this->addUsingAlias(StationPeer::ZONE, $zone['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
+                $comparison = Criteria::IN;
+            }
+        }
+
+        return $this->addUsingAlias(StationPeer::ZONE, $zone, $comparison);
     }
 
     /**

@@ -16,12 +16,16 @@ sfc_menu_generator:
       label:											Stations
       link:												station/list
     
+    subscription_module:
+      label:											Abonnements
+      link:												subscription/list
+    
     transport_type_module:
       label:											Type de Trsp.
       link:												transport_type/list
     
     configuration:
-      items:											[ transport_type_module ]
+      items:											[ subscription_module, transport_type_module ]
 
 ################################################################################
 # EXEMPLE TOUTES OPTIONS #######################################################

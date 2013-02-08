@@ -23,13 +23,13 @@ abstract class BaseSubscriptionPeer {
     const TM_CLASS = 'SubscriptionTableMap';
 
     /** The total number of columns. */
-    const NUM_COLUMNS = 8;
+    const NUM_COLUMNS = 10;
 
     /** The number of lazy-loaded columns. */
     const NUM_LAZY_LOAD_COLUMNS = 0;
 
     /** The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS) */
-    const NUM_HYDRATE_COLUMNS = 8;
+    const NUM_HYDRATE_COLUMNS = 10;
 
     /** the column name for the ID field */
     const ID = 'ratp_subscription.ID';
@@ -42,6 +42,12 @@ abstract class BaseSubscriptionPeer {
 
     /** the column name for the DURATION field */
     const DURATION = 'ratp_subscription.DURATION';
+
+    /** the column name for the ZONE_BEGIN field */
+    const ZONE_BEGIN = 'ratp_subscription.ZONE_BEGIN';
+
+    /** the column name for the ZONE_END field */
+    const ZONE_END = 'ratp_subscription.ZONE_END';
 
     /** the column name for the CREATED_AT field */
     const CREATED_AT = 'ratp_subscription.CREATED_AT';
@@ -74,12 +80,12 @@ abstract class BaseSubscriptionPeer {
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        BasePeer::TYPE_PHPNAME => array ('Id', 'Name', 'Price', 'Duration', 'CreatedAt', 'UpdatedAt', 'CreatedBy', 'UpdatedBy', ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'name', 'price', 'duration', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy', ),
-        BasePeer::TYPE_COLNAME => array (self::ID, self::NAME, self::PRICE, self::DURATION, self::CREATED_AT, self::UPDATED_AT, self::CREATED_BY, self::UPDATED_BY, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'NAME', 'PRICE', 'DURATION', 'CREATED_AT', 'UPDATED_AT', 'CREATED_BY', 'UPDATED_BY', ),
-        BasePeer::TYPE_FIELDNAME => array ('id', 'name', 'price', 'duration', 'created_at', 'updated_at', 'created_by', 'updated_by', ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+        BasePeer::TYPE_PHPNAME => array ('Id', 'Name', 'Price', 'Duration', 'ZoneBegin', 'ZoneEnd', 'CreatedAt', 'UpdatedAt', 'CreatedBy', 'UpdatedBy', ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id', 'name', 'price', 'duration', 'zoneBegin', 'zoneEnd', 'createdAt', 'updatedAt', 'createdBy', 'updatedBy', ),
+        BasePeer::TYPE_COLNAME => array (self::ID, self::NAME, self::PRICE, self::DURATION, self::ZONE_BEGIN, self::ZONE_END, self::CREATED_AT, self::UPDATED_AT, self::CREATED_BY, self::UPDATED_BY, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID', 'NAME', 'PRICE', 'DURATION', 'ZONE_BEGIN', 'ZONE_END', 'CREATED_AT', 'UPDATED_AT', 'CREATED_BY', 'UPDATED_BY', ),
+        BasePeer::TYPE_FIELDNAME => array ('id', 'name', 'price', 'duration', 'zone_begin', 'zone_end', 'created_at', 'updated_at', 'created_by', 'updated_by', ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
     );
 
     /**
@@ -89,12 +95,12 @@ abstract class BaseSubscriptionPeer {
      * e.g. self::$fieldNames[BasePeer::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Name' => 1, 'Price' => 2, 'Duration' => 3, 'CreatedAt' => 4, 'UpdatedAt' => 5, 'CreatedBy' => 6, 'UpdatedBy' => 7, ),
-        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'name' => 1, 'price' => 2, 'duration' => 3, 'createdAt' => 4, 'updatedAt' => 5, 'createdBy' => 6, 'updatedBy' => 7, ),
-        BasePeer::TYPE_COLNAME => array (self::ID => 0, self::NAME => 1, self::PRICE => 2, self::DURATION => 3, self::CREATED_AT => 4, self::UPDATED_AT => 5, self::CREATED_BY => 6, self::UPDATED_BY => 7, ),
-        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'NAME' => 1, 'PRICE' => 2, 'DURATION' => 3, 'CREATED_AT' => 4, 'UPDATED_AT' => 5, 'CREATED_BY' => 6, 'UPDATED_BY' => 7, ),
-        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'name' => 1, 'price' => 2, 'duration' => 3, 'created_at' => 4, 'updated_at' => 5, 'created_by' => 6, 'updated_by' => 7, ),
-        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, )
+        BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Name' => 1, 'Price' => 2, 'Duration' => 3, 'ZoneBegin' => 4, 'ZoneEnd' => 5, 'CreatedAt' => 6, 'UpdatedAt' => 7, 'CreatedBy' => 8, 'UpdatedBy' => 9, ),
+        BasePeer::TYPE_STUDLYPHPNAME => array ('id' => 0, 'name' => 1, 'price' => 2, 'duration' => 3, 'zoneBegin' => 4, 'zoneEnd' => 5, 'createdAt' => 6, 'updatedAt' => 7, 'createdBy' => 8, 'updatedBy' => 9, ),
+        BasePeer::TYPE_COLNAME => array (self::ID => 0, self::NAME => 1, self::PRICE => 2, self::DURATION => 3, self::ZONE_BEGIN => 4, self::ZONE_END => 5, self::CREATED_AT => 6, self::UPDATED_AT => 7, self::CREATED_BY => 8, self::UPDATED_BY => 9, ),
+        BasePeer::TYPE_RAW_COLNAME => array ('ID' => 0, 'NAME' => 1, 'PRICE' => 2, 'DURATION' => 3, 'ZONE_BEGIN' => 4, 'ZONE_END' => 5, 'CREATED_AT' => 6, 'UPDATED_AT' => 7, 'CREATED_BY' => 8, 'UPDATED_BY' => 9, ),
+        BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'name' => 1, 'price' => 2, 'duration' => 3, 'zone_begin' => 4, 'zone_end' => 5, 'created_at' => 6, 'updated_at' => 7, 'created_by' => 8, 'updated_by' => 9, ),
+        BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
     );
 
     /**
@@ -172,6 +178,8 @@ abstract class BaseSubscriptionPeer {
 			$criteria->addSelectColumn(SubscriptionPeer::NAME);
 			$criteria->addSelectColumn(SubscriptionPeer::PRICE);
 			$criteria->addSelectColumn(SubscriptionPeer::DURATION);
+			$criteria->addSelectColumn(SubscriptionPeer::ZONE_BEGIN);
+			$criteria->addSelectColumn(SubscriptionPeer::ZONE_END);
 			$criteria->addSelectColumn(SubscriptionPeer::CREATED_AT);
 			$criteria->addSelectColumn(SubscriptionPeer::UPDATED_AT);
 			$criteria->addSelectColumn(SubscriptionPeer::CREATED_BY);
@@ -181,6 +189,8 @@ abstract class BaseSubscriptionPeer {
 			$criteria->addSelectColumn($alias.'.NAME');
 			$criteria->addSelectColumn($alias.'.PRICE');
 			$criteria->addSelectColumn($alias.'.DURATION');
+			$criteria->addSelectColumn($alias.'.ZONE_BEGIN');
+			$criteria->addSelectColumn($alias.'.ZONE_END');
 			$criteria->addSelectColumn($alias.'.CREATED_AT');
 			$criteria->addSelectColumn($alias.'.UPDATED_AT');
 			$criteria->addSelectColumn($alias.'.CREATED_BY');

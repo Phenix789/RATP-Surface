@@ -43,6 +43,7 @@ class StationTableMap extends TableMap
         $this->addColumn('NAME', 'Name', 'VARCHAR', false, 255, null);
         $this->addColumn('GEO_X', 'GeoX', 'DOUBLE', false, null, null);
         $this->addColumn('GEO_Y', 'GeoY', 'DOUBLE', false, null, null);
+        $this->addColumn('ZONE', 'Zone', 'INTEGER', false, null, null);
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('UPDATED_AT', 'UpdatedAt', 'TIMESTAMP', false, null, null);
         $this->addForeignKey('CREATED_BY', 'CreatedBy', 'INTEGER', 'sf_guard_user', 'ID', false, null, null);

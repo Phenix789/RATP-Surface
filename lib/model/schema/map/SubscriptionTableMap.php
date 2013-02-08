@@ -40,8 +40,10 @@ class SubscriptionTableMap extends TableMap
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('NAME', 'Name', 'VARCHAR', false, 255, null);
-        $this->addColumn('PRICE', 'Price', 'INTEGER', false, null, null);
+        $this->addColumn('PRICE', 'Price', 'DOUBLE', false, null, null);
         $this->addColumn('DURATION', 'Duration', 'INTEGER', false, null, null);
+        $this->addColumn('ZONE_BEGIN', 'ZoneBegin', 'INTEGER', false, null, null);
+        $this->addColumn('ZONE_END', 'ZoneEnd', 'INTEGER', false, null, null);
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('UPDATED_AT', 'UpdatedAt', 'TIMESTAMP', false, null, null);
         $this->addForeignKey('CREATED_BY', 'CreatedBy', 'INTEGER', 'sf_guard_user', 'ID', false, null, null);
