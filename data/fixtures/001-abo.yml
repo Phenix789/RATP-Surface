@@ -1,0 +1,212 @@
+Subscription:
+  1:
+    name:		imagine R
+    price:		314
+    duration:		5
+    zone_begin:		1
+    zone_end:		2
+
+  2:
+    name:		imagine R
+    price:		435.8
+    duration:		5
+    zone_begin:		1
+    zone_end:		3	
+
+  3:
+    name:		imagine R
+    price:		557.6
+    duration:		5
+    zone_begin:		1
+    zone_end:		4	
+
+  4:
+    name:		imagine R
+    price:		680
+    duration:		5
+    zone_begin:		1
+    zone_end:		5
+
+  5:
+    name:		imagine R
+    price:		314
+    duration:		5
+    zone_begin:		2
+    zone_end:		3
+
+  6:
+    name:		imagine R
+    price:		414,8
+    duration:		5
+    zone_begin:		2
+    zone_end:		4
+
+  7:
+    name:		imagine R
+    price:		537,8
+    duration:		5
+    zone_begin:		2
+    zone_end:		5
+
+  8:
+    name:		imagine R
+    price:		314
+    duration:		5
+    zone_begin:		3
+    zone_end:		4
+
+  9:
+    name:		imagine R
+    price:		394,7
+    duration:		5
+    zone_begin:		3
+    zone_end:		5
+
+  10:
+    name:		imagine R
+    price:		314
+    duration:		5
+    zone_begin:		4
+    zone_end:		5
+
+  11:
+    name:		Navigo Mois
+    price:		65.1
+    duration:		4
+    zone_begin:		1
+    zone_end:		2
+
+  12:
+    name:		Navigo Mois
+    price:		84.1
+    duration:		4
+    zone_begin:		1
+    zone_end:		3	
+
+  13:
+    name:		Navigo Mois
+    price:		102.3
+    duration:		4
+    zone_begin:		1
+    zone_end:		4	
+
+  14:
+    name:		Navigo Mois
+    price:		113.2
+    duration:		4
+    zone_begin:		1
+    zone_end:		5
+
+  15:
+    name:		Navigo Mois
+    price:		61.4
+    duration:		4
+    zone_begin:		2
+    zone_end:		3
+
+  16:
+    name:		Navigo Mois
+    price:		77.8
+    duration:		4
+    zone_begin:		2
+    zone_end:		4
+
+  17:
+    name:		Navigo Mois
+    price:		90.1
+    duration:		4
+    zone_begin:		2
+    zone_end:		5
+
+  18:
+    name:		Navigo Mois
+    price:		59.2
+    duration:		4
+    zone_begin:		3
+    zone_end:		4
+
+  19:
+    name:		Navigo Mois
+    price:		72
+    duration:		4
+    zone_begin:		3
+    zone_end:		5
+
+  20:
+    name:		Navigo Mois
+    price:		57.3
+    duration:		4
+    zone_begin:		4
+    zone_end:		5
+
+
+  21:
+    name:		Navigo Annuel
+    price:		679.8
+    duration:		5
+    zone_begin:		1
+    zone_end:		2
+
+  22:
+    name:		Navigo Annuel
+    price:		874.5
+    duration:		5
+    zone_begin:		1
+    zone_end:		3	
+
+  23:
+    name:		Navigo Annuel
+    price:		1061.5
+    duration:		5
+    zone_begin:		1
+    zone_end:		4	
+
+  24:
+    name:		Navigo Annuel
+    price:		1170.4
+    duration:		5
+    zone_begin:		1
+    zone_end:		5
+
+  25:
+    name:		Navigo Annuel
+    price:		639.1
+    duration:		5
+    zone_begin:		2
+    zone_end:		3
+
+  26:
+    name:		Navigo Annuel
+    price:		808.5
+    duration:		5
+    zone_begin:		2
+    zone_end:		4
+
+  27:
+    name:		Navigo Annuel
+    price:		936.1
+    duration:		5
+    zone_begin:		2
+    zone_end:		5
+
+  28:
+    name:		Navigo Annuel
+    price:		617.1
+    duration:		5
+    zone_begin:		3
+    zone_end:		4
+
+  29:
+    name:		Navigo Annuel
+    price:		750.2
+    duration:		5
+    zone_begin:		3
+    zone_end:		5
+
+  30:
+    name:		Navigo Annuel
+    price:		599.5
+    duration:		5
+    zone_begin:		4
+    zone_end:		5
+
