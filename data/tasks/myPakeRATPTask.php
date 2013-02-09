@@ -82,8 +82,8 @@ function run_ratp_load_station($task, $args) {
 pake_desc("Load csv user in database");
 pake_task("ratp-load-user", "project_exists");
 
-function run_ratp_load_user($task, $args) {
-	
+function run_ratp_load_user($task, $args) {	
+
 	//Initialize Surface
 	pake_surface_initialize();
 	
@@ -117,5 +117,14 @@ pake_desc("Add x travel for any user");
 pake_task("ratp-add-travel", "project_exists");
 
 function run_ratp_add_travel() {
+	
+	//Initialize Surface
+	pake_surface_initialize();
+	
+	foreach (ClientPeer::doSelect(new Criteria()) as $client) {
+		for ($i = 0; $i < 10; $i++) {
+			
+		}
+	}
 	
 }

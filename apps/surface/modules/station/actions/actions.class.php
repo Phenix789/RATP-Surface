@@ -15,12 +15,12 @@ class stationActions extends autoStationActions {
 	}
 	
 	public function executeAutocompleteIn() {
-		$this->autocomplete($this->search("travel[station_in_id]"));
+		$this->autocomplete($this->getSearch("travel[station_in_id]"));
 		$this->setTemplate("autocomplete");
 	}
 	
 	public function executeAutocompleteOut() {
-		$this->autocomplete($this->search("travel[station_out_id]"));
+		$this->autocomplete($this->getSearch("travel[station_out_id]"));
 		$this->setTemplate("autocomplete");
 	}
 	
