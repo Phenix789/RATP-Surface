@@ -177,6 +177,16 @@ abstract class BasesfGuardUser extends BaseObject
     protected $collClientSubscriptionsRelatedByUpdatedBy;
 
     /**
+     * @var        PropelObjectCollection|Travel[] Collection to store aggregation of Travel objects.
+     */
+    protected $collTravelsRelatedByCreatedBy;
+
+    /**
+     * @var        PropelObjectCollection|Travel[] Collection to store aggregation of Travel objects.
+     */
+    protected $collTravelsRelatedByUpdatedBy;
+
+    /**
      * @var        PropelObjectCollection|Contact[] Collection to store aggregation of Contact objects.
      */
     protected $collContactsRelatedByCreatedBy;
@@ -384,6 +394,18 @@ abstract class BasesfGuardUser extends BaseObject
      * @var		PropelObjectCollection
      */
     protected $clientSubscriptionsRelatedByUpdatedByScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $travelsRelatedByCreatedByScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $travelsRelatedByUpdatedByScheduledForDeletion = null;
 
     /**
      * An array of objects scheduled for deletion.
@@ -1141,6 +1163,10 @@ abstract class BasesfGuardUser extends BaseObject
 
             $this->collClientSubscriptionsRelatedByUpdatedBy = null;
 
+            $this->collTravelsRelatedByCreatedBy = null;
+
+            $this->collTravelsRelatedByUpdatedBy = null;
+
             $this->collContactsRelatedByCreatedBy = null;
 
             $this->collContactsRelatedByUpdatedBy = null;
@@ -1617,6 +1643,42 @@ abstract class BasesfGuardUser extends BaseObject
 
             if ($this->collClientSubscriptionsRelatedByUpdatedBy !== null) {
                 foreach ($this->collClientSubscriptionsRelatedByUpdatedBy as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->travelsRelatedByCreatedByScheduledForDeletion !== null) {
+                if (!$this->travelsRelatedByCreatedByScheduledForDeletion->isEmpty()) {
+                    foreach ($this->travelsRelatedByCreatedByScheduledForDeletion as $travelRelatedByCreatedBy) {
+                        // need to save related object because we set the relation to null
+                        $travelRelatedByCreatedBy->save($con);
+                    }
+                    $this->travelsRelatedByCreatedByScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collTravelsRelatedByCreatedBy !== null) {
+                foreach ($this->collTravelsRelatedByCreatedBy as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->travelsRelatedByUpdatedByScheduledForDeletion !== null) {
+                if (!$this->travelsRelatedByUpdatedByScheduledForDeletion->isEmpty()) {
+                    foreach ($this->travelsRelatedByUpdatedByScheduledForDeletion as $travelRelatedByUpdatedBy) {
+                        // need to save related object because we set the relation to null
+                        $travelRelatedByUpdatedBy->save($con);
+                    }
+                    $this->travelsRelatedByUpdatedByScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collTravelsRelatedByUpdatedBy !== null) {
+                foreach ($this->collTravelsRelatedByUpdatedBy as $referrerFK) {
                     if (!$referrerFK->isDeleted()) {
                         $affectedRows += $referrerFK->save($con);
                     }
@@ -2320,6 +2382,22 @@ abstract class BasesfGuardUser extends BaseObject
                     }
                 }
 
+                if ($this->collTravelsRelatedByCreatedBy !== null) {
+                    foreach ($this->collTravelsRelatedByCreatedBy as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
+                if ($this->collTravelsRelatedByUpdatedBy !== null) {
+                    foreach ($this->collTravelsRelatedByUpdatedBy as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
                 if ($this->collContactsRelatedByCreatedBy !== null) {
                     foreach ($this->collContactsRelatedByCreatedBy as $referrerFK) {
                         if (!$referrerFK->validate($columns)) {
@@ -2642,6 +2720,12 @@ abstract class BasesfGuardUser extends BaseObject
             }
             if (null !== $this->collClientSubscriptionsRelatedByUpdatedBy) {
                 $result['ClientSubscriptionsRelatedByUpdatedBy'] = $this->collClientSubscriptionsRelatedByUpdatedBy->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collTravelsRelatedByCreatedBy) {
+                $result['TravelsRelatedByCreatedBy'] = $this->collTravelsRelatedByCreatedBy->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collTravelsRelatedByUpdatedBy) {
+                $result['TravelsRelatedByUpdatedBy'] = $this->collTravelsRelatedByUpdatedBy->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collContactsRelatedByCreatedBy) {
                 $result['ContactsRelatedByCreatedBy'] = $this->collContactsRelatedByCreatedBy->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
@@ -3001,6 +3085,18 @@ abstract class BasesfGuardUser extends BaseObject
                 }
             }
 
+            foreach ($this->getTravelsRelatedByCreatedBy() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addTravelRelatedByCreatedBy($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getTravelsRelatedByUpdatedBy() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addTravelRelatedByUpdatedBy($relObj->copy($deepCopy));
+                }
+            }
+
             foreach ($this->getContactsRelatedByCreatedBy() as $relObj) {
                 if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
                     $copyObj->addContactRelatedByCreatedBy($relObj->copy($deepCopy));
@@ -3232,6 +3328,12 @@ abstract class BasesfGuardUser extends BaseObject
         }
         if ('ClientSubscriptionRelatedByUpdatedBy' == $relationName) {
             $this->initClientSubscriptionsRelatedByUpdatedBy();
+        }
+        if ('TravelRelatedByCreatedBy' == $relationName) {
+            $this->initTravelsRelatedByCreatedBy();
+        }
+        if ('TravelRelatedByUpdatedBy' == $relationName) {
+            $this->initTravelsRelatedByUpdatedBy();
         }
         if ('ContactRelatedByCreatedBy' == $relationName) {
             $this->initContactsRelatedByCreatedBy();
@@ -5926,6 +6028,490 @@ abstract class BasesfGuardUser extends BaseObject
         $query->joinWith('Subscription', $join_behavior);
 
         return $this->getClientSubscriptionsRelatedByUpdatedBy($query, $con);
+    }
+
+    /**
+     * Clears out the collTravelsRelatedByCreatedBy collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addTravelsRelatedByCreatedBy()
+     */
+    public function clearTravelsRelatedByCreatedBy()
+    {
+        $this->collTravelsRelatedByCreatedBy = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collTravelsRelatedByCreatedBy collection.
+     *
+     * By default this just sets the collTravelsRelatedByCreatedBy collection to an empty array (like clearcollTravelsRelatedByCreatedBy());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initTravelsRelatedByCreatedBy($overrideExisting = true)
+    {
+        if (null !== $this->collTravelsRelatedByCreatedBy && !$overrideExisting) {
+            return;
+        }
+        $this->collTravelsRelatedByCreatedBy = new PropelObjectCollection();
+        $this->collTravelsRelatedByCreatedBy->setModel('Travel');
+    }
+
+    /**
+     * Gets an array of Travel objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this sfGuardUser is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     * @throws PropelException
+     */
+    public function getTravelsRelatedByCreatedBy($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collTravelsRelatedByCreatedBy || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTravelsRelatedByCreatedBy) {
+                // return empty collection
+                $this->initTravelsRelatedByCreatedBy();
+            } else {
+                $collTravelsRelatedByCreatedBy = TravelQuery::create(null, $criteria)
+                    ->filterBysfGuardUserRelatedByCreatedBy($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collTravelsRelatedByCreatedBy;
+                }
+                $this->collTravelsRelatedByCreatedBy = $collTravelsRelatedByCreatedBy;
+            }
+        }
+
+        return $this->collTravelsRelatedByCreatedBy;
+    }
+
+    /**
+     * Sets a collection of TravelRelatedByCreatedBy objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $travelsRelatedByCreatedBy A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setTravelsRelatedByCreatedBy(PropelCollection $travelsRelatedByCreatedBy, PropelPDO $con = null)
+    {
+        $this->travelsRelatedByCreatedByScheduledForDeletion = $this->getTravelsRelatedByCreatedBy(new Criteria(), $con)->diff($travelsRelatedByCreatedBy);
+
+        foreach ($this->travelsRelatedByCreatedByScheduledForDeletion as $travelRelatedByCreatedByRemoved) {
+            $travelRelatedByCreatedByRemoved->setsfGuardUserRelatedByCreatedBy(null);
+        }
+
+        $this->collTravelsRelatedByCreatedBy = null;
+        foreach ($travelsRelatedByCreatedBy as $travelRelatedByCreatedBy) {
+            $this->addTravelRelatedByCreatedBy($travelRelatedByCreatedBy);
+        }
+
+        $this->collTravelsRelatedByCreatedBy = $travelsRelatedByCreatedBy;
+    }
+
+    /**
+     * Returns the number of related Travel objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Travel objects.
+     * @throws PropelException
+     */
+    public function countTravelsRelatedByCreatedBy(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collTravelsRelatedByCreatedBy || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTravelsRelatedByCreatedBy) {
+                return 0;
+            } else {
+                $query = TravelQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterBysfGuardUserRelatedByCreatedBy($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collTravelsRelatedByCreatedBy);
+        }
+    }
+
+    /**
+     * Method called to associate a Travel object to this object
+     * through the Travel foreign key attribute.
+     *
+     * @param    Travel $l Travel
+     * @return   sfGuardUser The current object (for fluent API support)
+     */
+    public function addTravelRelatedByCreatedBy(Travel $l)
+    {
+        if ($this->collTravelsRelatedByCreatedBy === null) {
+            $this->initTravelsRelatedByCreatedBy();
+        }
+        if (!$this->collTravelsRelatedByCreatedBy->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddTravelRelatedByCreatedBy($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	TravelRelatedByCreatedBy $travelRelatedByCreatedBy The travelRelatedByCreatedBy object to add.
+     */
+    protected function doAddTravelRelatedByCreatedBy($travelRelatedByCreatedBy)
+    {
+        $this->collTravelsRelatedByCreatedBy[]= $travelRelatedByCreatedBy;
+        $travelRelatedByCreatedBy->setsfGuardUserRelatedByCreatedBy($this);
+    }
+
+    /**
+     * @param	TravelRelatedByCreatedBy $travelRelatedByCreatedBy The travelRelatedByCreatedBy object to remove.
+     */
+    public function removeTravelRelatedByCreatedBy($travelRelatedByCreatedBy)
+    {
+        if ($this->getTravelsRelatedByCreatedBy()->contains($travelRelatedByCreatedBy)) {
+            $this->collTravelsRelatedByCreatedBy->remove($this->collTravelsRelatedByCreatedBy->search($travelRelatedByCreatedBy));
+            if (null === $this->travelsRelatedByCreatedByScheduledForDeletion) {
+                $this->travelsRelatedByCreatedByScheduledForDeletion = clone $this->collTravelsRelatedByCreatedBy;
+                $this->travelsRelatedByCreatedByScheduledForDeletion->clear();
+            }
+            $this->travelsRelatedByCreatedByScheduledForDeletion[]= $travelRelatedByCreatedBy;
+            $travelRelatedByCreatedBy->setsfGuardUserRelatedByCreatedBy(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this sfGuardUser is new, it will return
+     * an empty collection; or if this sfGuardUser has previously
+     * been saved, it will retrieve related TravelsRelatedByCreatedBy from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in sfGuardUser.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByCreatedByJoinClient($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('Client', $join_behavior);
+
+        return $this->getTravelsRelatedByCreatedBy($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this sfGuardUser is new, it will return
+     * an empty collection; or if this sfGuardUser has previously
+     * been saved, it will retrieve related TravelsRelatedByCreatedBy from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in sfGuardUser.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByCreatedByJoinStationRelatedByStationInId($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('StationRelatedByStationInId', $join_behavior);
+
+        return $this->getTravelsRelatedByCreatedBy($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this sfGuardUser is new, it will return
+     * an empty collection; or if this sfGuardUser has previously
+     * been saved, it will retrieve related TravelsRelatedByCreatedBy from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in sfGuardUser.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByCreatedByJoinStationRelatedByStationOutId($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('StationRelatedByStationOutId', $join_behavior);
+
+        return $this->getTravelsRelatedByCreatedBy($query, $con);
+    }
+
+    /**
+     * Clears out the collTravelsRelatedByUpdatedBy collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addTravelsRelatedByUpdatedBy()
+     */
+    public function clearTravelsRelatedByUpdatedBy()
+    {
+        $this->collTravelsRelatedByUpdatedBy = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collTravelsRelatedByUpdatedBy collection.
+     *
+     * By default this just sets the collTravelsRelatedByUpdatedBy collection to an empty array (like clearcollTravelsRelatedByUpdatedBy());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initTravelsRelatedByUpdatedBy($overrideExisting = true)
+    {
+        if (null !== $this->collTravelsRelatedByUpdatedBy && !$overrideExisting) {
+            return;
+        }
+        $this->collTravelsRelatedByUpdatedBy = new PropelObjectCollection();
+        $this->collTravelsRelatedByUpdatedBy->setModel('Travel');
+    }
+
+    /**
+     * Gets an array of Travel objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this sfGuardUser is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     * @throws PropelException
+     */
+    public function getTravelsRelatedByUpdatedBy($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collTravelsRelatedByUpdatedBy || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTravelsRelatedByUpdatedBy) {
+                // return empty collection
+                $this->initTravelsRelatedByUpdatedBy();
+            } else {
+                $collTravelsRelatedByUpdatedBy = TravelQuery::create(null, $criteria)
+                    ->filterBysfGuardUserRelatedByUpdatedBy($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collTravelsRelatedByUpdatedBy;
+                }
+                $this->collTravelsRelatedByUpdatedBy = $collTravelsRelatedByUpdatedBy;
+            }
+        }
+
+        return $this->collTravelsRelatedByUpdatedBy;
+    }
+
+    /**
+     * Sets a collection of TravelRelatedByUpdatedBy objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $travelsRelatedByUpdatedBy A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setTravelsRelatedByUpdatedBy(PropelCollection $travelsRelatedByUpdatedBy, PropelPDO $con = null)
+    {
+        $this->travelsRelatedByUpdatedByScheduledForDeletion = $this->getTravelsRelatedByUpdatedBy(new Criteria(), $con)->diff($travelsRelatedByUpdatedBy);
+
+        foreach ($this->travelsRelatedByUpdatedByScheduledForDeletion as $travelRelatedByUpdatedByRemoved) {
+            $travelRelatedByUpdatedByRemoved->setsfGuardUserRelatedByUpdatedBy(null);
+        }
+
+        $this->collTravelsRelatedByUpdatedBy = null;
+        foreach ($travelsRelatedByUpdatedBy as $travelRelatedByUpdatedBy) {
+            $this->addTravelRelatedByUpdatedBy($travelRelatedByUpdatedBy);
+        }
+
+        $this->collTravelsRelatedByUpdatedBy = $travelsRelatedByUpdatedBy;
+    }
+
+    /**
+     * Returns the number of related Travel objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Travel objects.
+     * @throws PropelException
+     */
+    public function countTravelsRelatedByUpdatedBy(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collTravelsRelatedByUpdatedBy || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTravelsRelatedByUpdatedBy) {
+                return 0;
+            } else {
+                $query = TravelQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterBysfGuardUserRelatedByUpdatedBy($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collTravelsRelatedByUpdatedBy);
+        }
+    }
+
+    /**
+     * Method called to associate a Travel object to this object
+     * through the Travel foreign key attribute.
+     *
+     * @param    Travel $l Travel
+     * @return   sfGuardUser The current object (for fluent API support)
+     */
+    public function addTravelRelatedByUpdatedBy(Travel $l)
+    {
+        if ($this->collTravelsRelatedByUpdatedBy === null) {
+            $this->initTravelsRelatedByUpdatedBy();
+        }
+        if (!$this->collTravelsRelatedByUpdatedBy->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddTravelRelatedByUpdatedBy($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	TravelRelatedByUpdatedBy $travelRelatedByUpdatedBy The travelRelatedByUpdatedBy object to add.
+     */
+    protected function doAddTravelRelatedByUpdatedBy($travelRelatedByUpdatedBy)
+    {
+        $this->collTravelsRelatedByUpdatedBy[]= $travelRelatedByUpdatedBy;
+        $travelRelatedByUpdatedBy->setsfGuardUserRelatedByUpdatedBy($this);
+    }
+
+    /**
+     * @param	TravelRelatedByUpdatedBy $travelRelatedByUpdatedBy The travelRelatedByUpdatedBy object to remove.
+     */
+    public function removeTravelRelatedByUpdatedBy($travelRelatedByUpdatedBy)
+    {
+        if ($this->getTravelsRelatedByUpdatedBy()->contains($travelRelatedByUpdatedBy)) {
+            $this->collTravelsRelatedByUpdatedBy->remove($this->collTravelsRelatedByUpdatedBy->search($travelRelatedByUpdatedBy));
+            if (null === $this->travelsRelatedByUpdatedByScheduledForDeletion) {
+                $this->travelsRelatedByUpdatedByScheduledForDeletion = clone $this->collTravelsRelatedByUpdatedBy;
+                $this->travelsRelatedByUpdatedByScheduledForDeletion->clear();
+            }
+            $this->travelsRelatedByUpdatedByScheduledForDeletion[]= $travelRelatedByUpdatedBy;
+            $travelRelatedByUpdatedBy->setsfGuardUserRelatedByUpdatedBy(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this sfGuardUser is new, it will return
+     * an empty collection; or if this sfGuardUser has previously
+     * been saved, it will retrieve related TravelsRelatedByUpdatedBy from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in sfGuardUser.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByUpdatedByJoinClient($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('Client', $join_behavior);
+
+        return $this->getTravelsRelatedByUpdatedBy($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this sfGuardUser is new, it will return
+     * an empty collection; or if this sfGuardUser has previously
+     * been saved, it will retrieve related TravelsRelatedByUpdatedBy from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in sfGuardUser.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByUpdatedByJoinStationRelatedByStationInId($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('StationRelatedByStationInId', $join_behavior);
+
+        return $this->getTravelsRelatedByUpdatedBy($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this sfGuardUser is new, it will return
+     * an empty collection; or if this sfGuardUser has previously
+     * been saved, it will retrieve related TravelsRelatedByUpdatedBy from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in sfGuardUser.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByUpdatedByJoinStationRelatedByStationOutId($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('StationRelatedByStationOutId', $join_behavior);
+
+        return $this->getTravelsRelatedByUpdatedBy($query, $con);
     }
 
     /**
@@ -9972,6 +10558,16 @@ abstract class BasesfGuardUser extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collTravelsRelatedByCreatedBy) {
+                foreach ($this->collTravelsRelatedByCreatedBy as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collTravelsRelatedByUpdatedBy) {
+                foreach ($this->collTravelsRelatedByUpdatedBy as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
             if ($this->collContactsRelatedByCreatedBy) {
                 foreach ($this->collContactsRelatedByCreatedBy as $o) {
                     $o->clearAllReferences($deep);
@@ -10139,6 +10735,14 @@ abstract class BasesfGuardUser extends BaseObject
             $this->collClientSubscriptionsRelatedByUpdatedBy->clearIterator();
         }
         $this->collClientSubscriptionsRelatedByUpdatedBy = null;
+        if ($this->collTravelsRelatedByCreatedBy instanceof PropelCollection) {
+            $this->collTravelsRelatedByCreatedBy->clearIterator();
+        }
+        $this->collTravelsRelatedByCreatedBy = null;
+        if ($this->collTravelsRelatedByUpdatedBy instanceof PropelCollection) {
+            $this->collTravelsRelatedByUpdatedBy->clearIterator();
+        }
+        $this->collTravelsRelatedByUpdatedBy = null;
         if ($this->collContactsRelatedByCreatedBy instanceof PropelCollection) {
             $this->collContactsRelatedByCreatedBy->clearIterator();
         }

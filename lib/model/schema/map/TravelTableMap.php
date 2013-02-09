@@ -3,7 +3,7 @@
 
 
 /**
- * This class defines the structure of the 'ratp_client' table.
+ * This class defines the structure of the 'ratp_travel' table.
  *
  *
  *
@@ -14,13 +14,13 @@
  *
  * @package    propel.generator.lib.model.schema.map
  */
-class ClientTableMap extends TableMap
+class TravelTableMap extends TableMap
 {
 
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'lib.model.schema.map.ClientTableMap';
+    const CLASS_NAME = 'lib.model.schema.map.TravelTableMap';
 
     /**
      * Initialize the table attributes, columns and validators
@@ -32,19 +32,18 @@ class ClientTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('ratp_client');
-        $this->setPhpName('Client');
-        $this->setClassname('Client');
+        $this->setName('ratp_travel');
+        $this->setPhpName('Travel');
+        $this->setClassname('Travel');
         $this->setPackage('lib.model.schema');
         $this->setUseIdGenerator(true);
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('LASTNAME', 'Lastname', 'VARCHAR', false, 255, null);
-        $this->addColumn('FIRSTNAME', 'Firstname', 'VARCHAR', false, 255, null);
-        $this->addColumn('BIRTHDATE', 'Birthdate', 'TIMESTAMP', false, null, null);
-        $this->addColumn('ADDRESS', 'Address', 'VARCHAR', false, 255, null);
-        $this->addColumn('CITY', 'City', 'VARCHAR', false, 255, null);
-        $this->addColumn('ZIP_CODE', 'ZipCode', 'VARCHAR', false, 255, null);
+        $this->addForeignKey('CLIENT_ID', 'ClientId', 'INTEGER', 'ratp_client', 'ID', false, null, null);
+        $this->addForeignKey('STATION_IN_ID', 'StationInId', 'INTEGER', 'ratp_station', 'ID', false, null, null);
+        $this->addForeignKey('STATION_OUT_ID', 'StationOutId', 'INTEGER', 'ratp_station', 'ID', false, null, null);
+        $this->addColumn('DATE_IN', 'DateIn', 'TIMESTAMP', false, null, null);
+        $this->addColumn('DATE_OUT', 'DateOut', 'TIMESTAMP', false, null, null);
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('UPDATED_AT', 'UpdatedAt', 'TIMESTAMP', false, null, null);
         $this->addForeignKey('CREATED_BY', 'CreatedBy', 'INTEGER', 'sf_guard_user', 'ID', false, null, null);
@@ -57,10 +56,11 @@ class ClientTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('Client', 'Client', RelationMap::MANY_TO_ONE, array('client_id' => 'id', ), 'CASCADE', null);
+        $this->addRelation('StationRelatedByStationInId', 'Station', RelationMap::MANY_TO_ONE, array('station_in_id' => 'id', ), 'SET NULL', null);
+        $this->addRelation('StationRelatedByStationOutId', 'Station', RelationMap::MANY_TO_ONE, array('station_out_id' => 'id', ), 'SET NULL', null);
         $this->addRelation('sfGuardUserRelatedByCreatedBy', 'sfGuardUser', RelationMap::MANY_TO_ONE, array('created_by' => 'id', ), 'SET NULL', null);
         $this->addRelation('sfGuardUserRelatedByUpdatedBy', 'sfGuardUser', RelationMap::MANY_TO_ONE, array('updated_by' => 'id', ), 'SET NULL', null);
-        $this->addRelation('ClientSubscription', 'ClientSubscription', RelationMap::ONE_TO_MANY, array('id' => 'client_id', ), 'CASCADE', null, 'ClientSubscriptions');
-        $this->addRelation('Travel', 'Travel', RelationMap::ONE_TO_MANY, array('id' => 'client_id', ), 'CASCADE', null, 'Travels');
     } // buildRelations()
 
-} // ClientTableMap
+} // TravelTableMap

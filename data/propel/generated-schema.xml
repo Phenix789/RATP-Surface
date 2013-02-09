@@ -118,4 +118,34 @@
 		</foreign-key>
 	</table>
 
+	<table name="ratp_travel" phpName="Travel">
+		<column name="id" type="integer" primaryKey="true" required="true" autoIncrement="true" />
+		<column name="client_id" type="integer" />
+		<column name="station_in_id" type="integer" />
+		<column name="station_out_id" type="integer" />
+		<column name="date_in" type="timestamp" />
+		<column name="date_out" type="timestamp" />
+
+		<column name="created_at" type="timestamp"/>
+		<column name="updated_at" type="timestamp"/>
+		<column name="created_by" type="integer"/>
+		<column name="updated_by" type="integer"/>
+
+		<foreign-key foreignTable="ratp_client" onDelete="cascade">
+			<reference local="client_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="ratp_station" onDelete="setnull">
+			<reference local="station_in_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="ratp_station" onDelete="setnull">
+			<reference local="station_out_id" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="created_by" foreign="id"/>
+		</foreign-key>
+		<foreign-key foreignTable="sf_guard_user" onDelete="setnull">
+			<reference local="updated_by" foreign="id"/>
+		</foreign-key>
+	</table>
+
 </database>

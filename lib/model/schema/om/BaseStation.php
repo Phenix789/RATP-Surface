@@ -106,6 +106,16 @@ abstract class BaseStation extends BaseObject
     protected $collStationTypes;
 
     /**
+     * @var        PropelObjectCollection|Travel[] Collection to store aggregation of Travel objects.
+     */
+    protected $collTravelsRelatedByStationInId;
+
+    /**
+     * @var        PropelObjectCollection|Travel[] Collection to store aggregation of Travel objects.
+     */
+    protected $collTravelsRelatedByStationOutId;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      * @var        boolean
@@ -124,6 +134,18 @@ abstract class BaseStation extends BaseObject
      * @var		PropelObjectCollection
      */
     protected $stationTypesScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $travelsRelatedByStationInIdScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var		PropelObjectCollection
+     */
+    protected $travelsRelatedByStationOutIdScheduledForDeletion = null;
 
     /**
      * Get the [id] column value.
@@ -645,6 +667,10 @@ abstract class BaseStation extends BaseObject
             $this->asfGuardUserRelatedByUpdatedBy = null;
             $this->collStationTypes = null;
 
+            $this->collTravelsRelatedByStationInId = null;
+
+            $this->collTravelsRelatedByStationOutId = null;
+
         } // if (deep)
     }
 
@@ -878,6 +904,42 @@ abstract class BaseStation extends BaseObject
                 }
             }
 
+            if ($this->travelsRelatedByStationInIdScheduledForDeletion !== null) {
+                if (!$this->travelsRelatedByStationInIdScheduledForDeletion->isEmpty()) {
+                    foreach ($this->travelsRelatedByStationInIdScheduledForDeletion as $travelRelatedByStationInId) {
+                        // need to save related object because we set the relation to null
+                        $travelRelatedByStationInId->save($con);
+                    }
+                    $this->travelsRelatedByStationInIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collTravelsRelatedByStationInId !== null) {
+                foreach ($this->collTravelsRelatedByStationInId as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->travelsRelatedByStationOutIdScheduledForDeletion !== null) {
+                if (!$this->travelsRelatedByStationOutIdScheduledForDeletion->isEmpty()) {
+                    foreach ($this->travelsRelatedByStationOutIdScheduledForDeletion as $travelRelatedByStationOutId) {
+                        // need to save related object because we set the relation to null
+                        $travelRelatedByStationOutId->save($con);
+                    }
+                    $this->travelsRelatedByStationOutIdScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collTravelsRelatedByStationOutId !== null) {
+                foreach ($this->collTravelsRelatedByStationOutId as $referrerFK) {
+                    if (!$referrerFK->isDeleted()) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
             $this->alreadyInSave = false;
 
         }
@@ -1100,6 +1162,22 @@ abstract class BaseStation extends BaseObject
                     }
                 }
 
+                if ($this->collTravelsRelatedByStationInId !== null) {
+                    foreach ($this->collTravelsRelatedByStationInId as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
+                if ($this->collTravelsRelatedByStationOutId !== null) {
+                    foreach ($this->collTravelsRelatedByStationOutId as $referrerFK) {
+                        if (!$referrerFK->validate($columns)) {
+                            $failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+                        }
+                    }
+                }
+
 
             $this->alreadyInValidation = false;
         }
@@ -1214,6 +1292,12 @@ abstract class BaseStation extends BaseObject
             }
             if (null !== $this->collStationTypes) {
                 $result['StationTypes'] = $this->collStationTypes->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collTravelsRelatedByStationInId) {
+                $result['TravelsRelatedByStationInId'] = $this->collTravelsRelatedByStationInId->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collTravelsRelatedByStationOutId) {
+                $result['TravelsRelatedByStationOutId'] = $this->collTravelsRelatedByStationOutId->toArray(null, true, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
 
@@ -1420,6 +1504,18 @@ abstract class BaseStation extends BaseObject
                 }
             }
 
+            foreach ($this->getTravelsRelatedByStationInId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addTravelRelatedByStationInId($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getTravelsRelatedByStationOutId() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addTravelRelatedByStationOutId($relObj->copy($deepCopy));
+                }
+            }
+
             //unflag object copy
             $this->startCopy = false;
         } // if ($deepCopy)
@@ -1585,6 +1681,12 @@ abstract class BaseStation extends BaseObject
     {
         if ('StationType' == $relationName) {
             $this->initStationTypes();
+        }
+        if ('TravelRelatedByStationInId' == $relationName) {
+            $this->initTravelsRelatedByStationInId();
+        }
+        if ('TravelRelatedByStationOutId' == $relationName) {
+            $this->initTravelsRelatedByStationOutId();
         }
     }
 
@@ -1781,6 +1883,490 @@ abstract class BaseStation extends BaseObject
     }
 
     /**
+     * Clears out the collTravelsRelatedByStationInId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addTravelsRelatedByStationInId()
+     */
+    public function clearTravelsRelatedByStationInId()
+    {
+        $this->collTravelsRelatedByStationInId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collTravelsRelatedByStationInId collection.
+     *
+     * By default this just sets the collTravelsRelatedByStationInId collection to an empty array (like clearcollTravelsRelatedByStationInId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initTravelsRelatedByStationInId($overrideExisting = true)
+    {
+        if (null !== $this->collTravelsRelatedByStationInId && !$overrideExisting) {
+            return;
+        }
+        $this->collTravelsRelatedByStationInId = new PropelObjectCollection();
+        $this->collTravelsRelatedByStationInId->setModel('Travel');
+    }
+
+    /**
+     * Gets an array of Travel objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Station is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     * @throws PropelException
+     */
+    public function getTravelsRelatedByStationInId($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collTravelsRelatedByStationInId || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTravelsRelatedByStationInId) {
+                // return empty collection
+                $this->initTravelsRelatedByStationInId();
+            } else {
+                $collTravelsRelatedByStationInId = TravelQuery::create(null, $criteria)
+                    ->filterByStationRelatedByStationInId($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collTravelsRelatedByStationInId;
+                }
+                $this->collTravelsRelatedByStationInId = $collTravelsRelatedByStationInId;
+            }
+        }
+
+        return $this->collTravelsRelatedByStationInId;
+    }
+
+    /**
+     * Sets a collection of TravelRelatedByStationInId objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $travelsRelatedByStationInId A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setTravelsRelatedByStationInId(PropelCollection $travelsRelatedByStationInId, PropelPDO $con = null)
+    {
+        $this->travelsRelatedByStationInIdScheduledForDeletion = $this->getTravelsRelatedByStationInId(new Criteria(), $con)->diff($travelsRelatedByStationInId);
+
+        foreach ($this->travelsRelatedByStationInIdScheduledForDeletion as $travelRelatedByStationInIdRemoved) {
+            $travelRelatedByStationInIdRemoved->setStationRelatedByStationInId(null);
+        }
+
+        $this->collTravelsRelatedByStationInId = null;
+        foreach ($travelsRelatedByStationInId as $travelRelatedByStationInId) {
+            $this->addTravelRelatedByStationInId($travelRelatedByStationInId);
+        }
+
+        $this->collTravelsRelatedByStationInId = $travelsRelatedByStationInId;
+    }
+
+    /**
+     * Returns the number of related Travel objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Travel objects.
+     * @throws PropelException
+     */
+    public function countTravelsRelatedByStationInId(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collTravelsRelatedByStationInId || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTravelsRelatedByStationInId) {
+                return 0;
+            } else {
+                $query = TravelQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByStationRelatedByStationInId($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collTravelsRelatedByStationInId);
+        }
+    }
+
+    /**
+     * Method called to associate a Travel object to this object
+     * through the Travel foreign key attribute.
+     *
+     * @param    Travel $l Travel
+     * @return   Station The current object (for fluent API support)
+     */
+    public function addTravelRelatedByStationInId(Travel $l)
+    {
+        if ($this->collTravelsRelatedByStationInId === null) {
+            $this->initTravelsRelatedByStationInId();
+        }
+        if (!$this->collTravelsRelatedByStationInId->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddTravelRelatedByStationInId($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	TravelRelatedByStationInId $travelRelatedByStationInId The travelRelatedByStationInId object to add.
+     */
+    protected function doAddTravelRelatedByStationInId($travelRelatedByStationInId)
+    {
+        $this->collTravelsRelatedByStationInId[]= $travelRelatedByStationInId;
+        $travelRelatedByStationInId->setStationRelatedByStationInId($this);
+    }
+
+    /**
+     * @param	TravelRelatedByStationInId $travelRelatedByStationInId The travelRelatedByStationInId object to remove.
+     */
+    public function removeTravelRelatedByStationInId($travelRelatedByStationInId)
+    {
+        if ($this->getTravelsRelatedByStationInId()->contains($travelRelatedByStationInId)) {
+            $this->collTravelsRelatedByStationInId->remove($this->collTravelsRelatedByStationInId->search($travelRelatedByStationInId));
+            if (null === $this->travelsRelatedByStationInIdScheduledForDeletion) {
+                $this->travelsRelatedByStationInIdScheduledForDeletion = clone $this->collTravelsRelatedByStationInId;
+                $this->travelsRelatedByStationInIdScheduledForDeletion->clear();
+            }
+            $this->travelsRelatedByStationInIdScheduledForDeletion[]= $travelRelatedByStationInId;
+            $travelRelatedByStationInId->setStationRelatedByStationInId(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Station is new, it will return
+     * an empty collection; or if this Station has previously
+     * been saved, it will retrieve related TravelsRelatedByStationInId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Station.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByStationInIdJoinClient($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('Client', $join_behavior);
+
+        return $this->getTravelsRelatedByStationInId($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Station is new, it will return
+     * an empty collection; or if this Station has previously
+     * been saved, it will retrieve related TravelsRelatedByStationInId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Station.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByStationInIdJoinsfGuardUserRelatedByCreatedBy($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('sfGuardUserRelatedByCreatedBy', $join_behavior);
+
+        return $this->getTravelsRelatedByStationInId($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Station is new, it will return
+     * an empty collection; or if this Station has previously
+     * been saved, it will retrieve related TravelsRelatedByStationInId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Station.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByStationInIdJoinsfGuardUserRelatedByUpdatedBy($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('sfGuardUserRelatedByUpdatedBy', $join_behavior);
+
+        return $this->getTravelsRelatedByStationInId($query, $con);
+    }
+
+    /**
+     * Clears out the collTravelsRelatedByStationOutId collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addTravelsRelatedByStationOutId()
+     */
+    public function clearTravelsRelatedByStationOutId()
+    {
+        $this->collTravelsRelatedByStationOutId = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Initializes the collTravelsRelatedByStationOutId collection.
+     *
+     * By default this just sets the collTravelsRelatedByStationOutId collection to an empty array (like clearcollTravelsRelatedByStationOutId());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initTravelsRelatedByStationOutId($overrideExisting = true)
+    {
+        if (null !== $this->collTravelsRelatedByStationOutId && !$overrideExisting) {
+            return;
+        }
+        $this->collTravelsRelatedByStationOutId = new PropelObjectCollection();
+        $this->collTravelsRelatedByStationOutId->setModel('Travel');
+    }
+
+    /**
+     * Gets an array of Travel objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this Station is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     * @throws PropelException
+     */
+    public function getTravelsRelatedByStationOutId($criteria = null, PropelPDO $con = null)
+    {
+        if (null === $this->collTravelsRelatedByStationOutId || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTravelsRelatedByStationOutId) {
+                // return empty collection
+                $this->initTravelsRelatedByStationOutId();
+            } else {
+                $collTravelsRelatedByStationOutId = TravelQuery::create(null, $criteria)
+                    ->filterByStationRelatedByStationOutId($this)
+                    ->find($con);
+                if (null !== $criteria) {
+                    return $collTravelsRelatedByStationOutId;
+                }
+                $this->collTravelsRelatedByStationOutId = $collTravelsRelatedByStationOutId;
+            }
+        }
+
+        return $this->collTravelsRelatedByStationOutId;
+    }
+
+    /**
+     * Sets a collection of TravelRelatedByStationOutId objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      PropelCollection $travelsRelatedByStationOutId A Propel collection.
+     * @param      PropelPDO $con Optional connection object
+     */
+    public function setTravelsRelatedByStationOutId(PropelCollection $travelsRelatedByStationOutId, PropelPDO $con = null)
+    {
+        $this->travelsRelatedByStationOutIdScheduledForDeletion = $this->getTravelsRelatedByStationOutId(new Criteria(), $con)->diff($travelsRelatedByStationOutId);
+
+        foreach ($this->travelsRelatedByStationOutIdScheduledForDeletion as $travelRelatedByStationOutIdRemoved) {
+            $travelRelatedByStationOutIdRemoved->setStationRelatedByStationOutId(null);
+        }
+
+        $this->collTravelsRelatedByStationOutId = null;
+        foreach ($travelsRelatedByStationOutId as $travelRelatedByStationOutId) {
+            $this->addTravelRelatedByStationOutId($travelRelatedByStationOutId);
+        }
+
+        $this->collTravelsRelatedByStationOutId = $travelsRelatedByStationOutId;
+    }
+
+    /**
+     * Returns the number of related Travel objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      PropelPDO $con
+     * @return int             Count of related Travel objects.
+     * @throws PropelException
+     */
+    public function countTravelsRelatedByStationOutId(Criteria $criteria = null, $distinct = false, PropelPDO $con = null)
+    {
+        if (null === $this->collTravelsRelatedByStationOutId || null !== $criteria) {
+            if ($this->isNew() && null === $this->collTravelsRelatedByStationOutId) {
+                return 0;
+            } else {
+                $query = TravelQuery::create(null, $criteria);
+                if ($distinct) {
+                    $query->distinct();
+                }
+
+                return $query
+                    ->filterByStationRelatedByStationOutId($this)
+                    ->count($con);
+            }
+        } else {
+            return count($this->collTravelsRelatedByStationOutId);
+        }
+    }
+
+    /**
+     * Method called to associate a Travel object to this object
+     * through the Travel foreign key attribute.
+     *
+     * @param    Travel $l Travel
+     * @return   Station The current object (for fluent API support)
+     */
+    public function addTravelRelatedByStationOutId(Travel $l)
+    {
+        if ($this->collTravelsRelatedByStationOutId === null) {
+            $this->initTravelsRelatedByStationOutId();
+        }
+        if (!$this->collTravelsRelatedByStationOutId->contains($l)) { // only add it if the **same** object is not already associated
+            $this->doAddTravelRelatedByStationOutId($l);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param	TravelRelatedByStationOutId $travelRelatedByStationOutId The travelRelatedByStationOutId object to add.
+     */
+    protected function doAddTravelRelatedByStationOutId($travelRelatedByStationOutId)
+    {
+        $this->collTravelsRelatedByStationOutId[]= $travelRelatedByStationOutId;
+        $travelRelatedByStationOutId->setStationRelatedByStationOutId($this);
+    }
+
+    /**
+     * @param	TravelRelatedByStationOutId $travelRelatedByStationOutId The travelRelatedByStationOutId object to remove.
+     */
+    public function removeTravelRelatedByStationOutId($travelRelatedByStationOutId)
+    {
+        if ($this->getTravelsRelatedByStationOutId()->contains($travelRelatedByStationOutId)) {
+            $this->collTravelsRelatedByStationOutId->remove($this->collTravelsRelatedByStationOutId->search($travelRelatedByStationOutId));
+            if (null === $this->travelsRelatedByStationOutIdScheduledForDeletion) {
+                $this->travelsRelatedByStationOutIdScheduledForDeletion = clone $this->collTravelsRelatedByStationOutId;
+                $this->travelsRelatedByStationOutIdScheduledForDeletion->clear();
+            }
+            $this->travelsRelatedByStationOutIdScheduledForDeletion[]= $travelRelatedByStationOutId;
+            $travelRelatedByStationOutId->setStationRelatedByStationOutId(null);
+        }
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Station is new, it will return
+     * an empty collection; or if this Station has previously
+     * been saved, it will retrieve related TravelsRelatedByStationOutId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Station.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByStationOutIdJoinClient($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('Client', $join_behavior);
+
+        return $this->getTravelsRelatedByStationOutId($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Station is new, it will return
+     * an empty collection; or if this Station has previously
+     * been saved, it will retrieve related TravelsRelatedByStationOutId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Station.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByStationOutIdJoinsfGuardUserRelatedByCreatedBy($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('sfGuardUserRelatedByCreatedBy', $join_behavior);
+
+        return $this->getTravelsRelatedByStationOutId($query, $con);
+    }
+
+
+    /**
+     * If this collection has already been initialized with
+     * an identical criteria, it returns the collection.
+     * Otherwise if this Station is new, it will return
+     * an empty collection; or if this Station has previously
+     * been saved, it will retrieve related TravelsRelatedByStationOutId from storage.
+     *
+     * This method is protected by default in order to keep the public
+     * api reasonable.  You can provide public methods for those you
+     * actually need in Station.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      PropelPDO $con optional connection object
+     * @param      string $join_behavior optional join type to use (defaults to Criteria::LEFT_JOIN)
+     * @return PropelObjectCollection|Travel[] List of Travel objects
+     */
+    public function getTravelsRelatedByStationOutIdJoinsfGuardUserRelatedByUpdatedBy($criteria = null, $con = null, $join_behavior = Criteria::LEFT_JOIN)
+    {
+        $query = TravelQuery::create(null, $criteria);
+        $query->joinWith('sfGuardUserRelatedByUpdatedBy', $join_behavior);
+
+        return $this->getTravelsRelatedByStationOutId($query, $con);
+    }
+
+    /**
      * Clears the current object and sets all attributes to their default values
      */
     public function clear()
@@ -1820,12 +2406,30 @@ abstract class BaseStation extends BaseObject
                     $o->clearAllReferences($deep);
                 }
             }
+            if ($this->collTravelsRelatedByStationInId) {
+                foreach ($this->collTravelsRelatedByStationInId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collTravelsRelatedByStationOutId) {
+                foreach ($this->collTravelsRelatedByStationOutId as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
         if ($this->collStationTypes instanceof PropelCollection) {
             $this->collStationTypes->clearIterator();
         }
         $this->collStationTypes = null;
+        if ($this->collTravelsRelatedByStationInId instanceof PropelCollection) {
+            $this->collTravelsRelatedByStationInId->clearIterator();
+        }
+        $this->collTravelsRelatedByStationInId = null;
+        if ($this->collTravelsRelatedByStationOutId instanceof PropelCollection) {
+            $this->collTravelsRelatedByStationOutId->clearIterator();
+        }
+        $this->collTravelsRelatedByStationOutId = null;
         $this->asfGuardUserRelatedByCreatedBy = null;
         $this->asfGuardUserRelatedByUpdatedBy = null;
     }

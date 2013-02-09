@@ -1,0 +1,9 @@
+TransportType:
+  bus:
+    type:										bus
+  metro:
+    type:										metro
+  rer:
+    type:										rer
+  tram:
+    type:										tram

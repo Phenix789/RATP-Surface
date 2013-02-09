@@ -1,0 +1,1 @@
+<?php echo SubscriptionPeer::getSubscriptionDurationLabel($subscription->getDuration()) ?>

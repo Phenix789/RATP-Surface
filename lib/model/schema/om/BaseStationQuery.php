@@ -44,6 +44,14 @@
  * @method     StationQuery rightJoinStationType($relationAlias = null) Adds a RIGHT JOIN clause to the query using the StationType relation
  * @method     StationQuery innerJoinStationType($relationAlias = null) Adds a INNER JOIN clause to the query using the StationType relation
  *
+ * @method     StationQuery leftJoinTravelRelatedByStationInId($relationAlias = null) Adds a LEFT JOIN clause to the query using the TravelRelatedByStationInId relation
+ * @method     StationQuery rightJoinTravelRelatedByStationInId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TravelRelatedByStationInId relation
+ * @method     StationQuery innerJoinTravelRelatedByStationInId($relationAlias = null) Adds a INNER JOIN clause to the query using the TravelRelatedByStationInId relation
+ *
+ * @method     StationQuery leftJoinTravelRelatedByStationOutId($relationAlias = null) Adds a LEFT JOIN clause to the query using the TravelRelatedByStationOutId relation
+ * @method     StationQuery rightJoinTravelRelatedByStationOutId($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TravelRelatedByStationOutId relation
+ * @method     StationQuery innerJoinTravelRelatedByStationOutId($relationAlias = null) Adds a INNER JOIN clause to the query using the TravelRelatedByStationOutId relation
+ *
  * @method     Station findOne(PropelPDO $con = null) Return the first Station matching the query
  * @method     Station findOneOrCreate(PropelPDO $con = null) Return the first Station matching the query, or a new Station object populated from the query conditions when no match is found
  *
@@ -851,6 +859,154 @@ abstract class BaseStationQuery extends ModelCriteria
         return $this
             ->joinStationType($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'StationType', 'StationTypeQuery');
+    }
+
+    /**
+     * Filter the query by a related Travel object
+     *
+     * @param   Travel|PropelObjectCollection $travel  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   StationQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByTravelRelatedByStationInId($travel, $comparison = null)
+    {
+        if ($travel instanceof Travel) {
+            return $this
+                ->addUsingAlias(StationPeer::ID, $travel->getStationInId(), $comparison);
+        } elseif ($travel instanceof PropelObjectCollection) {
+            return $this
+                ->useTravelRelatedByStationInIdQuery()
+                ->filterByPrimaryKeys($travel->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByTravelRelatedByStationInId() only accepts arguments of type Travel or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the TravelRelatedByStationInId relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return StationQuery The current query, for fluid interface
+     */
+    public function joinTravelRelatedByStationInId($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('TravelRelatedByStationInId');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'TravelRelatedByStationInId');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the TravelRelatedByStationInId relation Travel object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   TravelQuery A secondary query class using the current class as primary query
+     */
+    public function useTravelRelatedByStationInIdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinTravelRelatedByStationInId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'TravelRelatedByStationInId', 'TravelQuery');
+    }
+
+    /**
+     * Filter the query by a related Travel object
+     *
+     * @param   Travel|PropelObjectCollection $travel  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   StationQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByTravelRelatedByStationOutId($travel, $comparison = null)
+    {
+        if ($travel instanceof Travel) {
+            return $this
+                ->addUsingAlias(StationPeer::ID, $travel->getStationOutId(), $comparison);
+        } elseif ($travel instanceof PropelObjectCollection) {
+            return $this
+                ->useTravelRelatedByStationOutIdQuery()
+                ->filterByPrimaryKeys($travel->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByTravelRelatedByStationOutId() only accepts arguments of type Travel or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the TravelRelatedByStationOutId relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return StationQuery The current query, for fluid interface
+     */
+    public function joinTravelRelatedByStationOutId($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('TravelRelatedByStationOutId');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'TravelRelatedByStationOutId');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the TravelRelatedByStationOutId relation Travel object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   TravelQuery A secondary query class using the current class as primary query
+     */
+    public function useTravelRelatedByStationOutIdQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinTravelRelatedByStationOutId($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'TravelRelatedByStationOutId', 'TravelQuery');
     }
 
     /**

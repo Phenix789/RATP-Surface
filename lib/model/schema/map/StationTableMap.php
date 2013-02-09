@@ -59,6 +59,8 @@ class StationTableMap extends TableMap
         $this->addRelation('sfGuardUserRelatedByCreatedBy', 'sfGuardUser', RelationMap::MANY_TO_ONE, array('created_by' => 'id', ), 'SET NULL', null);
         $this->addRelation('sfGuardUserRelatedByUpdatedBy', 'sfGuardUser', RelationMap::MANY_TO_ONE, array('updated_by' => 'id', ), 'SET NULL', null);
         $this->addRelation('StationType', 'StationType', RelationMap::ONE_TO_MANY, array('id' => 'station_id', ), 'CASCADE', null, 'StationTypes');
+        $this->addRelation('TravelRelatedByStationInId', 'Travel', RelationMap::ONE_TO_MANY, array('id' => 'station_in_id', ), 'SET NULL', null, 'TravelsRelatedByStationInId');
+        $this->addRelation('TravelRelatedByStationOutId', 'Travel', RelationMap::ONE_TO_MANY, array('id' => 'station_out_id', ), 'SET NULL', null, 'TravelsRelatedByStationOutId');
     } // buildRelations()
 
 } // StationTableMap

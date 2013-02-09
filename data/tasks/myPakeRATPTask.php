@@ -12,15 +12,14 @@ function run_ratp_load_station($task, $args) {
 	pake_echo_comment("Clear database");
 	StationTypePeer::doDeleteAll();
 	StationPeer::doDeleteAll();
-	TransportTypePeer::doDeleteAll();
 	
 	//Insert base transport type
 	$types = array();
-	foreach (array("bus", "metro", "rer", "tram") as $name) {
-		$type = new TransportType();
-		$type->setType($name);
-		$type->save();
-		$types[$name] = $type;
+	foreach (TransportTypePeer::doSelect(new Criteria()) as $type) {
+		$types[$type->getType()] = $type;
+	}
+	if (count($types) == 0) {
+		throw new Exception("No transport type found");
 	}
 	
 	$stations = array();
@@ -111,5 +110,12 @@ function run_ratp_load_user($task, $args) {
 		$client->save();
 		
 	}
+	
+}
+
+pake_desc("Add x travel for any user");
+pake_task("ratp-add-travel", "project_exists");
+
+function run_ratp_add_travel() {
 	
 }

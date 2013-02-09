@@ -444,6 +444,12 @@ abstract class BasesfGuardUserPeer {
         // Invalidate objects in ClientSubscriptionPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ClientSubscriptionPeer::clearInstancePool();
+        // Invalidate objects in TravelPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        TravelPeer::clearInstancePool();
+        // Invalidate objects in TravelPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        TravelPeer::clearInstancePool();
         // Invalidate objects in ContactPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ContactPeer::clearInstancePool();
@@ -995,6 +1001,22 @@ abstract class BasesfGuardUserPeer {
             $updateValues = new Criteria(sfGuardUserPeer::DATABASE_NAME);
             $selectCriteria->add(ClientSubscriptionPeer::UPDATED_BY, $obj->getId());
             $updateValues->add(ClientSubscriptionPeer::UPDATED_BY, null);
+
+            BasePeer::doUpdate($selectCriteria, $updateValues, $con); // use BasePeer because generated Peer doUpdate() methods only update using pkey
+
+            // set fkey col in related Travel rows to NULL
+            $selectCriteria = new Criteria(sfGuardUserPeer::DATABASE_NAME);
+            $updateValues = new Criteria(sfGuardUserPeer::DATABASE_NAME);
+            $selectCriteria->add(TravelPeer::CREATED_BY, $obj->getId());
+            $updateValues->add(TravelPeer::CREATED_BY, null);
+
+            BasePeer::doUpdate($selectCriteria, $updateValues, $con); // use BasePeer because generated Peer doUpdate() methods only update using pkey
+
+            // set fkey col in related Travel rows to NULL
+            $selectCriteria = new Criteria(sfGuardUserPeer::DATABASE_NAME);
+            $updateValues = new Criteria(sfGuardUserPeer::DATABASE_NAME);
+            $selectCriteria->add(TravelPeer::UPDATED_BY, $obj->getId());
+            $updateValues->add(TravelPeer::UPDATED_BY, null);
 
             BasePeer::doUpdate($selectCriteria, $updateValues, $con); // use BasePeer because generated Peer doUpdate() methods only update using pkey
 

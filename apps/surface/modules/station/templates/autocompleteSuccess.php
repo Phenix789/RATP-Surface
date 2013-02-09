@@ -1,0 +1,1 @@
+<?php echo surface_autocomplete_success_tag($values, $search) ?>

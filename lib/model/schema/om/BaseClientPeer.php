@@ -402,6 +402,9 @@ abstract class BaseClientPeer {
         // Invalidate objects in ClientSubscriptionPeer instance pool,
         // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
         ClientSubscriptionPeer::clearInstancePool();
+        // Invalidate objects in TravelPeer instance pool,
+        // since one or more of them may be deleted by ON DELETE CASCADE/SETNULL rule.
+        TravelPeer::clearInstancePool();
     }
 
     /**
@@ -1342,6 +1345,12 @@ abstract class BaseClientPeer {
             
             $criteria->add(ClientSubscriptionPeer::CLIENT_ID, $obj->getId());
             $affectedRows += ClientSubscriptionPeer::doDelete($criteria, $con);
+
+            // delete related Travel objects
+            $criteria = new Criteria(TravelPeer::DATABASE_NAME);
+            
+            $criteria->add(TravelPeer::CLIENT_ID, $obj->getId());
+            $affectedRows += TravelPeer::doDelete($criteria, $con);
         }
 
         return $affectedRows;

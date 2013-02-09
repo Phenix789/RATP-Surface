@@ -1,0 +1,1 @@
+<?php echo $subscription->getZoneBegin() ?: "~" ?> - <?php echo $subscription->getZoneEnd() ?: "~" ?>

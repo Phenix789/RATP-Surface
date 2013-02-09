@@ -94,6 +94,14 @@
  * @method     sfGuardUserQuery rightJoinClientSubscriptionRelatedByUpdatedBy($relationAlias = null) Adds a RIGHT JOIN clause to the query using the ClientSubscriptionRelatedByUpdatedBy relation
  * @method     sfGuardUserQuery innerJoinClientSubscriptionRelatedByUpdatedBy($relationAlias = null) Adds a INNER JOIN clause to the query using the ClientSubscriptionRelatedByUpdatedBy relation
  *
+ * @method     sfGuardUserQuery leftJoinTravelRelatedByCreatedBy($relationAlias = null) Adds a LEFT JOIN clause to the query using the TravelRelatedByCreatedBy relation
+ * @method     sfGuardUserQuery rightJoinTravelRelatedByCreatedBy($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TravelRelatedByCreatedBy relation
+ * @method     sfGuardUserQuery innerJoinTravelRelatedByCreatedBy($relationAlias = null) Adds a INNER JOIN clause to the query using the TravelRelatedByCreatedBy relation
+ *
+ * @method     sfGuardUserQuery leftJoinTravelRelatedByUpdatedBy($relationAlias = null) Adds a LEFT JOIN clause to the query using the TravelRelatedByUpdatedBy relation
+ * @method     sfGuardUserQuery rightJoinTravelRelatedByUpdatedBy($relationAlias = null) Adds a RIGHT JOIN clause to the query using the TravelRelatedByUpdatedBy relation
+ * @method     sfGuardUserQuery innerJoinTravelRelatedByUpdatedBy($relationAlias = null) Adds a INNER JOIN clause to the query using the TravelRelatedByUpdatedBy relation
+ *
  * @method     sfGuardUserQuery leftJoinContactRelatedByCreatedBy($relationAlias = null) Adds a LEFT JOIN clause to the query using the ContactRelatedByCreatedBy relation
  * @method     sfGuardUserQuery rightJoinContactRelatedByCreatedBy($relationAlias = null) Adds a RIGHT JOIN clause to the query using the ContactRelatedByCreatedBy relation
  * @method     sfGuardUserQuery innerJoinContactRelatedByCreatedBy($relationAlias = null) Adds a INNER JOIN clause to the query using the ContactRelatedByCreatedBy relation
@@ -1842,6 +1850,154 @@ abstract class BasesfGuardUserQuery extends ModelCriteria
         return $this
             ->joinClientSubscriptionRelatedByUpdatedBy($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'ClientSubscriptionRelatedByUpdatedBy', 'ClientSubscriptionQuery');
+    }
+
+    /**
+     * Filter the query by a related Travel object
+     *
+     * @param   Travel|PropelObjectCollection $travel  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   sfGuardUserQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByTravelRelatedByCreatedBy($travel, $comparison = null)
+    {
+        if ($travel instanceof Travel) {
+            return $this
+                ->addUsingAlias(sfGuardUserPeer::ID, $travel->getCreatedBy(), $comparison);
+        } elseif ($travel instanceof PropelObjectCollection) {
+            return $this
+                ->useTravelRelatedByCreatedByQuery()
+                ->filterByPrimaryKeys($travel->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByTravelRelatedByCreatedBy() only accepts arguments of type Travel or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the TravelRelatedByCreatedBy relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return sfGuardUserQuery The current query, for fluid interface
+     */
+    public function joinTravelRelatedByCreatedBy($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('TravelRelatedByCreatedBy');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'TravelRelatedByCreatedBy');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the TravelRelatedByCreatedBy relation Travel object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   TravelQuery A secondary query class using the current class as primary query
+     */
+    public function useTravelRelatedByCreatedByQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinTravelRelatedByCreatedBy($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'TravelRelatedByCreatedBy', 'TravelQuery');
+    }
+
+    /**
+     * Filter the query by a related Travel object
+     *
+     * @param   Travel|PropelObjectCollection $travel  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   sfGuardUserQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByTravelRelatedByUpdatedBy($travel, $comparison = null)
+    {
+        if ($travel instanceof Travel) {
+            return $this
+                ->addUsingAlias(sfGuardUserPeer::ID, $travel->getUpdatedBy(), $comparison);
+        } elseif ($travel instanceof PropelObjectCollection) {
+            return $this
+                ->useTravelRelatedByUpdatedByQuery()
+                ->filterByPrimaryKeys($travel->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByTravelRelatedByUpdatedBy() only accepts arguments of type Travel or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the TravelRelatedByUpdatedBy relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return sfGuardUserQuery The current query, for fluid interface
+     */
+    public function joinTravelRelatedByUpdatedBy($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('TravelRelatedByUpdatedBy');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'TravelRelatedByUpdatedBy');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the TravelRelatedByUpdatedBy relation Travel object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   TravelQuery A secondary query class using the current class as primary query
+     */
+    public function useTravelRelatedByUpdatedByQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinTravelRelatedByUpdatedBy($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'TravelRelatedByUpdatedBy', 'TravelQuery');
     }
 
     /**

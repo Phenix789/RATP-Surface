@@ -15,6 +15,10 @@ sfc_menu_generator:
     station_module:
       label:											Stations
       link:												station/list
+      
+    travel_module:
+      label:											Voyages
+      link:												travel/list
     
     subscription_module:
       label:											Abonnements
@@ -52,7 +56,7 @@ sfc_menu_generator:
   menus:
     
     app_navigation:
-      items:											[ nav_tg_center, client_module, station_module, configuration ]
+      items:											[ nav_tg_center, client_module, station_module, travel_module, configuration ]
 
 ################################################################################
 # EXEMPLE TOUTES OPTIONS #######################################################

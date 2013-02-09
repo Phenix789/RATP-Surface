@@ -72,6 +72,8 @@ class sfGuardUserTableMap extends TableMap
         $this->addRelation('ClientRelatedByUpdatedBy', 'Client', RelationMap::ONE_TO_MANY, array('id' => 'updated_by', ), 'SET NULL', null, 'ClientsRelatedByUpdatedBy');
         $this->addRelation('ClientSubscriptionRelatedByCreatedBy', 'ClientSubscription', RelationMap::ONE_TO_MANY, array('id' => 'created_by', ), 'SET NULL', null, 'ClientSubscriptionsRelatedByCreatedBy');
         $this->addRelation('ClientSubscriptionRelatedByUpdatedBy', 'ClientSubscription', RelationMap::ONE_TO_MANY, array('id' => 'updated_by', ), 'SET NULL', null, 'ClientSubscriptionsRelatedByUpdatedBy');
+        $this->addRelation('TravelRelatedByCreatedBy', 'Travel', RelationMap::ONE_TO_MANY, array('id' => 'created_by', ), 'SET NULL', null, 'TravelsRelatedByCreatedBy');
+        $this->addRelation('TravelRelatedByUpdatedBy', 'Travel', RelationMap::ONE_TO_MANY, array('id' => 'updated_by', ), 'SET NULL', null, 'TravelsRelatedByUpdatedBy');
         $this->addRelation('ContactRelatedByCreatedBy', 'Contact', RelationMap::ONE_TO_MANY, array('id' => 'created_by', ), 'SET NULL', null, 'ContactsRelatedByCreatedBy');
         $this->addRelation('ContactRelatedByUpdatedBy', 'Contact', RelationMap::ONE_TO_MANY, array('id' => 'updated_by', ), 'SET NULL', null, 'ContactsRelatedByUpdatedBy');
         $this->addRelation('MaillingListRelatedByCreatedBy', 'MaillingList', RelationMap::ONE_TO_MANY, array('id' => 'created_by', ), 'SET NULL', null, 'MaillingListsRelatedByCreatedBy');

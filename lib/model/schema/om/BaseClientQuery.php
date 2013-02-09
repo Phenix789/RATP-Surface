@@ -46,6 +46,10 @@
  * @method     ClientQuery rightJoinClientSubscription($relationAlias = null) Adds a RIGHT JOIN clause to the query using the ClientSubscription relation
  * @method     ClientQuery innerJoinClientSubscription($relationAlias = null) Adds a INNER JOIN clause to the query using the ClientSubscription relation
  *
+ * @method     ClientQuery leftJoinTravel($relationAlias = null) Adds a LEFT JOIN clause to the query using the Travel relation
+ * @method     ClientQuery rightJoinTravel($relationAlias = null) Adds a RIGHT JOIN clause to the query using the Travel relation
+ * @method     ClientQuery innerJoinTravel($relationAlias = null) Adds a INNER JOIN clause to the query using the Travel relation
+ *
  * @method     Client findOne(PropelPDO $con = null) Return the first Client matching the query
  * @method     Client findOneOrCreate(PropelPDO $con = null) Return the first Client matching the query, or a new Client object populated from the query conditions when no match is found
  *
@@ -862,6 +866,80 @@ abstract class BaseClientQuery extends ModelCriteria
         return $this
             ->joinClientSubscription($relationAlias, $joinType)
             ->useQuery($relationAlias ? $relationAlias : 'ClientSubscription', 'ClientSubscriptionQuery');
+    }
+
+    /**
+     * Filter the query by a related Travel object
+     *
+     * @param   Travel|PropelObjectCollection $travel  the related object to use as filter
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return   ClientQuery The current query, for fluid interface
+     * @throws   PropelException - if the provided filter is invalid.
+     */
+    public function filterByTravel($travel, $comparison = null)
+    {
+        if ($travel instanceof Travel) {
+            return $this
+                ->addUsingAlias(ClientPeer::ID, $travel->getClientId(), $comparison);
+        } elseif ($travel instanceof PropelObjectCollection) {
+            return $this
+                ->useTravelQuery()
+                ->filterByPrimaryKeys($travel->getPrimaryKeys())
+                ->endUse();
+        } else {
+            throw new PropelException('filterByTravel() only accepts arguments of type Travel or PropelCollection');
+        }
+    }
+
+    /**
+     * Adds a JOIN clause to the query using the Travel relation
+     *
+     * @param     string $relationAlias optional alias for the relation
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return ClientQuery The current query, for fluid interface
+     */
+    public function joinTravel($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        $tableMap = $this->getTableMap();
+        $relationMap = $tableMap->getRelation('Travel');
+
+        // create a ModelJoin object for this join
+        $join = new ModelJoin();
+        $join->setJoinType($joinType);
+        $join->setRelationMap($relationMap, $this->useAliasInSQL ? $this->getModelAlias() : null, $relationAlias);
+        if ($previousJoin = $this->getPreviousJoin()) {
+            $join->setPreviousJoin($previousJoin);
+        }
+
+        // add the ModelJoin to the current object
+        if ($relationAlias) {
+            $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
+            $this->addJoinObject($join, $relationAlias);
+        } else {
+            $this->addJoinObject($join, 'Travel');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Use the Travel relation Travel object
+     *
+     * @see       useQuery()
+     *
+     * @param     string $relationAlias optional alias for the relation,
+     *                                   to be used as main alias in the secondary query
+     * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
+     *
+     * @return   TravelQuery A secondary query class using the current class as primary query
+     */
+    public function useTravelQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    {
+        return $this
+            ->joinTravel($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'Travel', 'TravelQuery');
     }
 
     /**
