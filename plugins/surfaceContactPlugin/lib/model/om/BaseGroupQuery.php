@@ -130,7 +130,7 @@ abstract class BaseGroupQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `NAME`, `CODE_NAME`, `COMMENT`, `NAME_SPACE` FROM `sfc_abk_group` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, NAME, CODE_NAME, COMMENT, NAME_SPACE FROM sfc_abk_group WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

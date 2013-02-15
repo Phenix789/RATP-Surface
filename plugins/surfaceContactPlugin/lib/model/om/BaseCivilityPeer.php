@@ -623,7 +623,6 @@ abstract class BaseCivilityPeer {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            CivilityPeer::doOnDeleteSetNull(new Criteria(CivilityPeer::DATABASE_NAME), $con);
             $affectedRows += BasePeer::doDeleteAll(CivilityPeer::TABLE_NAME, $con, CivilityPeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
@@ -657,14 +656,24 @@ abstract class BaseCivilityPeer {
         }
 
         if ($values instanceof Criteria) {
+            // invalidate the cache for all objects of this type, since we have no
+            // way of knowing (without running a query) what objects should be invalidated
+            // from the cache based on this Criteria.
+            CivilityPeer::clearInstancePool();
             // rename for clarity
             $criteria = clone $values;
         } elseif ($values instanceof Civility) { // it's a model object
+            // invalidate the cache for this single object
+            CivilityPeer::removeInstanceFromPool($values);
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(self::DATABASE_NAME);
             $criteria->add(CivilityPeer::ID, (array) $values, Criteria::IN);
+            // invalidate the cache for this object(s)
+            foreach ((array) $values as $singleval) {
+                CivilityPeer::removeInstanceFromPool($singleval);
+            }
         }
 
         // Set the correct dbName
@@ -677,23 +686,6 @@ abstract class BaseCivilityPeer {
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
             
-            // cloning the Criteria in case it's modified by doSelect() or doSelectStmt()
-            $c = clone $criteria;
-            CivilityPeer::doOnDeleteSetNull($c, $con);
-            
-            // Because this db requires some delete cascade/set null emulation, we have to
-            // clear the cached instance *after* the emulation has happened (since
-            // instances get re-added by the select statement contained therein).
-            if ($values instanceof Criteria) {
-                CivilityPeer::clearInstancePool();
-            } elseif ($values instanceof Civility) { // it's a model object
-                CivilityPeer::removeInstanceFromPool($values);
-            } else { // it's a primary key, or an array of pks
-                foreach ((array) $values as $singleval) {
-                    CivilityPeer::removeInstanceFromPool($singleval);
-                }
-            }
-            
             $affectedRows += BasePeer::doDelete($criteria, $con);
             CivilityPeer::clearRelatedInstancePool();
             $con->commit();
@@ -702,37 +694,6 @@ abstract class BaseCivilityPeer {
         } catch (PropelException $e) {
             $con->rollBack();
             throw $e;
-        }
-    }
-
-    /**
-     * This is a method for emulating ON DELETE SET NULL DBs that don't support this
-     * feature (like MySQL or SQLite).
-     *
-     * This method is not very speedy because it must perform a query first to get
-     * the implicated records and then perform the deletes by calling those Peer classes.
-     *
-     * This method should be used within a transaction if possible.
-     *
-     * @param      Criteria $criteria
-     * @param      PropelPDO $con
-     * @return void
-     */
-    protected static function doOnDeleteSetNull(Criteria $criteria, PropelPDO $con)
-    {
-
-        // first find the objects that are implicated by the $criteria
-        $objects = CivilityPeer::doSelect($criteria, $con);
-        foreach ($objects as $obj) {
-
-            // set fkey col in related Contact rows to NULL
-            $selectCriteria = new Criteria(CivilityPeer::DATABASE_NAME);
-            $updateValues = new Criteria(CivilityPeer::DATABASE_NAME);
-            $selectCriteria->add(ContactPeer::CIVILITY_ID, $obj->getId());
-            $updateValues->add(ContactPeer::CIVILITY_ID, null);
-
-            BasePeer::doUpdate($selectCriteria, $updateValues, $con); // use BasePeer because generated Peer doUpdate() methods only update using pkey
-
         }
     }
 

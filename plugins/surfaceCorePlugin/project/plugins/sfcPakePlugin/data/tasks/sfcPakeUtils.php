@@ -21,6 +21,9 @@ function pake_surface_initialize($app = null){
 
 		$databaseManager = new sfDatabaseManager();
 		$databaseManager->initialize();
+		
+		//ob_start is call in initialization of symfony
+		ob_end_flush();
 	}
 }
 

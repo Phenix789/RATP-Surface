@@ -37,6 +37,7 @@ class HistoryContactTableMap extends TableMap
         $this->setClassname('HistoryContact');
         $this->setPackage('plugins.surfaceHistoryBehaviorPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('plugin_history_contact_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('HISTORY_ID', 'HistoryId', 'INTEGER', 'plugin_history', 'ID', false, null, null);

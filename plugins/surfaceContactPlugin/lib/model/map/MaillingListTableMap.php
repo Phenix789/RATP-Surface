@@ -37,12 +37,13 @@ class MaillingListTableMap extends TableMap
         $this->setClassname('MaillingList');
         $this->setPackage('plugins.surfaceContactPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_abk_mailling_list_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('NAME', 'Name', 'VARCHAR', true, 255, null);
-        $this->addColumn('COMMENT', 'Comment', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('IS_PRIVATE', 'IsPrivate', 'BOOLEAN', false, 1, false);
-        $this->addColumn('ARCHIVE', 'Archive', 'BOOLEAN', false, 1, false);
+        $this->addColumn('COMMENT', 'Comment', 'LONGVARCHAR', false, 2000, null);
+        $this->addColumn('IS_PRIVATE', 'IsPrivate', 'BOOLEAN_EMU', false, 1, '0');
+        $this->addColumn('ARCHIVE', 'Archive', 'BOOLEAN_EMU', false, 1, '0');
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addForeignKey('CREATED_BY', 'CreatedBy', 'INTEGER', 'sf_guard_user', 'ID', false, null, null);
         $this->addColumn('UPDATED_AT', 'UpdatedAt', 'TIMESTAMP', false, null, null);

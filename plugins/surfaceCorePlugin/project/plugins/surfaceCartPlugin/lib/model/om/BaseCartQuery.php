@@ -162,7 +162,7 @@ abstract class BaseCartQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `NAME`, `DESCRIPTION`, `SELECTED`, `ARCHIVE`, `USER_ID`, `CREATED_AT`, `CREATED_BY`, `UPDATED_AT`, `UPDATED_BY` FROM `plugin_cart` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, NAME, DESCRIPTION, SELECTED, ARCHIVE, USER_ID, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY FROM plugin_cart WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

@@ -138,7 +138,7 @@ abstract class BaseDashboardMessageQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `MESSAGE`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `sfc_dashboard_message` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, MESSAGE, CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY FROM sfc_dashboard_message WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

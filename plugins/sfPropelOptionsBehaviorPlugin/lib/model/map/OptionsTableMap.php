@@ -37,6 +37,7 @@ class OptionsTableMap extends TableMap
         $this->setClassname('Options');
         $this->setPackage('plugins.sfPropelOptionsBehaviorPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('plugin_options_behavior_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('MODEL_NAME', 'ModelName', 'VARCHAR', false, 255, null);

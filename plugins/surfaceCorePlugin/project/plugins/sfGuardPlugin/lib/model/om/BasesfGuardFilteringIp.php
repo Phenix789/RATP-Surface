@@ -485,23 +485,33 @@ abstract class BasesfGuardFilteringIp extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . sfGuardFilteringIpPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT sf_guard_filtering_ip_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(sfGuardFilteringIpPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(sfGuardFilteringIpPeer::IP)) {
-            $modifiedColumns[':p' . $index++]  = '`IP`';
+            $modifiedColumns[':p' . $index++]  = 'IP';
         }
         if ($this->isColumnModified(sfGuardFilteringIpPeer::OBJECT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`OBJECT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'OBJECT_ID';
         }
         if ($this->isColumnModified(sfGuardFilteringIpPeer::OBJECT_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`OBJECT_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'OBJECT_NAME';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sf_guard_filtering_ip` (%s) VALUES (%s)',
+            'INSERT INTO sf_guard_filtering_ip (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -510,16 +520,16 @@ abstract class BasesfGuardFilteringIp extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`IP`':
+                    case 'IP':
 						$stmt->bindValue($identifier, $this->ip, PDO::PARAM_STR);
                         break;
-                    case '`OBJECT_ID`':
+                    case 'OBJECT_ID':
 						$stmt->bindValue($identifier, $this->object_id, PDO::PARAM_INT);
                         break;
-                    case '`OBJECT_NAME`':
+                    case 'OBJECT_NAME':
 						$stmt->bindValue($identifier, $this->object_name, PDO::PARAM_STR);
                         break;
                 }
@@ -529,13 +539,6 @@ abstract class BasesfGuardFilteringIp extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

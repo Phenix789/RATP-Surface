@@ -511,23 +511,33 @@ abstract class BaseHistoryContact extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . HistoryContactPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT plugin_history_contact_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(HistoryContactPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(HistoryContactPeer::HISTORY_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`HISTORY_ID`';
+            $modifiedColumns[':p' . $index++]  = 'HISTORY_ID';
         }
         if ($this->isColumnModified(HistoryContactPeer::CONTACT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`CONTACT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'CONTACT_ID';
         }
         if ($this->isColumnModified(HistoryContactPeer::CONTACT_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`CONTACT_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'CONTACT_NAME';
         }
 
         $sql = sprintf(
-            'INSERT INTO `plugin_history_contact` (%s) VALUES (%s)',
+            'INSERT INTO plugin_history_contact (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -536,16 +546,16 @@ abstract class BaseHistoryContact extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`HISTORY_ID`':
+                    case 'HISTORY_ID':
 						$stmt->bindValue($identifier, $this->history_id, PDO::PARAM_INT);
                         break;
-                    case '`CONTACT_ID`':
+                    case 'CONTACT_ID':
 						$stmt->bindValue($identifier, $this->contact_id, PDO::PARAM_INT);
                         break;
-                    case '`CONTACT_NAME`':
+                    case 'CONTACT_NAME':
 						$stmt->bindValue($identifier, $this->contact_name, PDO::PARAM_STR);
                         break;
                 }
@@ -555,13 +565,6 @@ abstract class BaseHistoryContact extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

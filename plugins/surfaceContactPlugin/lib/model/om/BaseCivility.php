@@ -555,26 +555,36 @@ abstract class BaseCivility extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . CivilityPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT sfc_abk_civility_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(CivilityPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(CivilityPeer::SHORT_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`SHORT_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'SHORT_NAME';
         }
         if ($this->isColumnModified(CivilityPeer::LONG_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`LONG_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'LONG_NAME';
         }
         if ($this->isColumnModified(CivilityPeer::GENRE)) {
-            $modifiedColumns[':p' . $index++]  = '`GENRE`';
+            $modifiedColumns[':p' . $index++]  = 'GENRE';
         }
         if ($this->isColumnModified(CivilityPeer::NAME_SPACE)) {
-            $modifiedColumns[':p' . $index++]  = '`NAME_SPACE`';
+            $modifiedColumns[':p' . $index++]  = 'NAME_SPACE';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sfc_abk_civility` (%s) VALUES (%s)',
+            'INSERT INTO sfc_abk_civility (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -583,19 +593,19 @@ abstract class BaseCivility extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`SHORT_NAME`':
+                    case 'SHORT_NAME':
 						$stmt->bindValue($identifier, $this->short_name, PDO::PARAM_STR);
                         break;
-                    case '`LONG_NAME`':
+                    case 'LONG_NAME':
 						$stmt->bindValue($identifier, $this->long_name, PDO::PARAM_STR);
                         break;
-                    case '`GENRE`':
+                    case 'GENRE':
 						$stmt->bindValue($identifier, $this->genre, PDO::PARAM_INT);
                         break;
-                    case '`NAME_SPACE`':
+                    case 'NAME_SPACE':
 						$stmt->bindValue($identifier, $this->name_space, PDO::PARAM_STR);
                         break;
                 }
@@ -605,13 +615,6 @@ abstract class BaseCivility extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

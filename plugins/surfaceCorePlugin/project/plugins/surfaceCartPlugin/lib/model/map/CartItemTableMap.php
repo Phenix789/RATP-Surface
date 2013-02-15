@@ -37,6 +37,7 @@ class CartItemTableMap extends TableMap
         $this->setClassname('CartItem');
         $this->setPackage('plugins.surfaceCartPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('plugin_cart_item_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('CART_ID', 'CartId', 'INTEGER', 'plugin_cart', 'ID', false, null, null);

@@ -88,7 +88,7 @@ generator:
 ################################################################################
     show:
       title:													Voyage
-      display:												[ client_id, station_in_id, date_in, station_out_id, date_out, duration ]
+      display:												[ client_id, station_in_id, date_in, station_out_id, date_out, _duration ]
 
 ################################################################################
 # Edit #########################################################################
@@ -104,7 +104,7 @@ generator:
 ################################################################################
     delete_confirm:
       title:													Supprimer le voyage ?
-      display:												[ client_id, station_in_id, date_in, station_out_id, date_out, duration ]
+      display:												[ client_id, station_in_id, date_in, station_out_id, date_out, _duration ]
 
 ################################################################################
 # List #########################################################################
@@ -112,7 +112,7 @@ generator:
 ################################################################################
     list:
       title:													Liste des voyages
-      display:												[ =client, station_in, station_out, duration ]
+      display:												[ =client, station_in, station_out, _duration ]
       filters:												[  ]
       sort:														[ date_in, asc ]
 

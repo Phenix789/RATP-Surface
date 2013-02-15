@@ -37,11 +37,12 @@ class AlertTableMap extends TableMap
         $this->setClassname('Alert');
         $this->setPackage('plugins.sfSurfaceAlertPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_plugin_alert_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('RECIPIENT_ID', 'RecipientId', 'INTEGER', 'collaborator', 'ID', false, null, null);
         $this->addColumn('TRIGGER_AT', 'TriggerAt', 'DATE', false, null, null);
-        $this->addColumn('MESSAGE', 'Message', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('MESSAGE', 'Message', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('MODEL_ID', 'ModelId', 'INTEGER', false, null, null);
         $this->addColumn('MODEL_CLASS', 'ModelClass', 'VARCHAR', false, 45, null);
         $this->addColumn('SENT', 'Sent', 'TIMESTAMP', false, null, null);

@@ -154,7 +154,7 @@ abstract class BaseMaillingListQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `NAME`, `COMMENT`, `IS_PRIVATE`, `ARCHIVE`, `CREATED_AT`, `CREATED_BY`, `UPDATED_AT`, `UPDATED_BY` FROM `sfc_abk_mailling_list` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, NAME, COMMENT, IS_PRIVATE, ARCHIVE, CREATED_AT, CREATED_BY, UPDATED_AT, UPDATED_BY FROM sfc_abk_mailling_list WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

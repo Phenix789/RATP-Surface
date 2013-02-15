@@ -492,20 +492,30 @@ abstract class BasesfGuardUserProfile extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . sfGuardUserProfilePeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT sf_guard_user_profile_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(sfGuardUserProfilePeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(sfGuardUserProfilePeer::USER_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`USER_ID`';
+            $modifiedColumns[':p' . $index++]  = 'USER_ID';
         }
         if ($this->isColumnModified(sfGuardUserProfilePeer::COLLABORATOR_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`COLLABORATOR_ID`';
+            $modifiedColumns[':p' . $index++]  = 'COLLABORATOR_ID';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sf_guard_user_profile` (%s) VALUES (%s)',
+            'INSERT INTO sf_guard_user_profile (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -514,13 +524,13 @@ abstract class BasesfGuardUserProfile extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`USER_ID`':
+                    case 'USER_ID':
 						$stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
-                    case '`COLLABORATOR_ID`':
+                    case 'COLLABORATOR_ID':
 						$stmt->bindValue($identifier, $this->collaborator_id, PDO::PARAM_INT);
                         break;
                 }
@@ -530,13 +540,6 @@ abstract class BasesfGuardUserProfile extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

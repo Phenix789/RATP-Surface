@@ -619,7 +619,7 @@ abstract class BasesfGuardUser extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getCreatedAt($format = 'Y-m-d H:i:s')
@@ -629,16 +629,11 @@ abstract class BasesfGuardUser extends BaseObject
         }
 
 
-        if ($this->created_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->created_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->created_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
         }
 
         if ($format === null) {
@@ -657,7 +652,7 @@ abstract class BasesfGuardUser extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getLastLogin($format = 'Y-m-d H:i:s')
@@ -667,16 +662,11 @@ abstract class BasesfGuardUser extends BaseObject
         }
 
 
-        if ($this->last_login === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->last_login);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->last_login, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->last_login);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->last_login, true), $x);
         }
 
         if ($format === null) {
@@ -2084,44 +2074,54 @@ abstract class BasesfGuardUser extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . sfGuardUserPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT sf_guard_user_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(sfGuardUserPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(sfGuardUserPeer::USERNAME)) {
-            $modifiedColumns[':p' . $index++]  = '`USERNAME`';
+            $modifiedColumns[':p' . $index++]  = 'USERNAME';
         }
         if ($this->isColumnModified(sfGuardUserPeer::ALGORITHM)) {
-            $modifiedColumns[':p' . $index++]  = '`ALGORITHM`';
+            $modifiedColumns[':p' . $index++]  = 'ALGORITHM';
         }
         if ($this->isColumnModified(sfGuardUserPeer::SALT)) {
-            $modifiedColumns[':p' . $index++]  = '`SALT`';
+            $modifiedColumns[':p' . $index++]  = 'SALT';
         }
         if ($this->isColumnModified(sfGuardUserPeer::PASSWORD)) {
-            $modifiedColumns[':p' . $index++]  = '`PASSWORD`';
+            $modifiedColumns[':p' . $index++]  = 'PASSWORD';
         }
         if ($this->isColumnModified(sfGuardUserPeer::CREATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_AT';
         }
         if ($this->isColumnModified(sfGuardUserPeer::LAST_LOGIN)) {
-            $modifiedColumns[':p' . $index++]  = '`LAST_LOGIN`';
+            $modifiedColumns[':p' . $index++]  = 'LAST_LOGIN';
         }
         if ($this->isColumnModified(sfGuardUserPeer::IS_ACTIVE)) {
-            $modifiedColumns[':p' . $index++]  = '`IS_ACTIVE`';
+            $modifiedColumns[':p' . $index++]  = 'IS_ACTIVE';
         }
         if ($this->isColumnModified(sfGuardUserPeer::IS_SUPER_ADMIN)) {
-            $modifiedColumns[':p' . $index++]  = '`IS_SUPER_ADMIN`';
+            $modifiedColumns[':p' . $index++]  = 'IS_SUPER_ADMIN';
         }
         if ($this->isColumnModified(sfGuardUserPeer::IS_SUDOER)) {
-            $modifiedColumns[':p' . $index++]  = '`IS_SUDOER`';
+            $modifiedColumns[':p' . $index++]  = 'IS_SUDOER';
         }
         if ($this->isColumnModified(sfGuardUserPeer::TIME_SUDOER)) {
-            $modifiedColumns[':p' . $index++]  = '`TIME_SUDOER`';
+            $modifiedColumns[':p' . $index++]  = 'TIME_SUDOER';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sf_guard_user` (%s) VALUES (%s)',
+            'INSERT INTO sf_guard_user (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -2130,37 +2130,37 @@ abstract class BasesfGuardUser extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`USERNAME`':
+                    case 'USERNAME':
 						$stmt->bindValue($identifier, $this->username, PDO::PARAM_STR);
                         break;
-                    case '`ALGORITHM`':
+                    case 'ALGORITHM':
 						$stmt->bindValue($identifier, $this->algorithm, PDO::PARAM_STR);
                         break;
-                    case '`SALT`':
+                    case 'SALT':
 						$stmt->bindValue($identifier, $this->salt, PDO::PARAM_STR);
                         break;
-                    case '`PASSWORD`':
+                    case 'PASSWORD':
 						$stmt->bindValue($identifier, $this->password, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_AT`':
+                    case 'CREATED_AT':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
                         break;
-                    case '`LAST_LOGIN`':
+                    case 'LAST_LOGIN':
 						$stmt->bindValue($identifier, $this->last_login, PDO::PARAM_STR);
                         break;
-                    case '`IS_ACTIVE`':
-						$stmt->bindValue($identifier, (int) $this->is_active, PDO::PARAM_INT);
+                    case 'IS_ACTIVE':
+						$stmt->bindValue($identifier, $this->is_active, PDO::PARAM_INT);
                         break;
-                    case '`IS_SUPER_ADMIN`':
-						$stmt->bindValue($identifier, (int) $this->is_super_admin, PDO::PARAM_INT);
+                    case 'IS_SUPER_ADMIN':
+						$stmt->bindValue($identifier, $this->is_super_admin, PDO::PARAM_INT);
                         break;
-                    case '`IS_SUDOER`':
-						$stmt->bindValue($identifier, (int) $this->is_sudoer, PDO::PARAM_INT);
+                    case 'IS_SUDOER':
+						$stmt->bindValue($identifier, $this->is_sudoer, PDO::PARAM_INT);
                         break;
-                    case '`TIME_SUDOER`':
+                    case 'TIME_SUDOER':
 						$stmt->bindValue($identifier, $this->time_sudoer, PDO::PARAM_INT);
                         break;
                 }
@@ -2170,13 +2170,6 @@ abstract class BasesfGuardUser extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

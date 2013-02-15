@@ -170,7 +170,7 @@ abstract class BaseAlert extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getTriggerAt($format = '%x')
@@ -180,16 +180,11 @@ abstract class BaseAlert extends BaseObject
         }
 
 
-        if ($this->trigger_at === '0000-00-00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->trigger_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->trigger_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->trigger_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->trigger_at, true), $x);
         }
 
         if ($format === null) {
@@ -241,7 +236,7 @@ abstract class BaseAlert extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getSent($format = 'Y-m-d H:i:s')
@@ -251,16 +246,11 @@ abstract class BaseAlert extends BaseObject
         }
 
 
-        if ($this->sent === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->sent);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->sent, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->sent);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->sent, true), $x);
         }
 
         if ($format === null) {
@@ -279,7 +269,7 @@ abstract class BaseAlert extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getAcquittedAt($format = '%x')
@@ -289,16 +279,11 @@ abstract class BaseAlert extends BaseObject
         }
 
 
-        if ($this->acquitted_at === '0000-00-00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->acquitted_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->acquitted_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->acquitted_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->acquitted_at, true), $x);
         }
 
         if ($format === null) {
@@ -328,7 +313,7 @@ abstract class BaseAlert extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getCreatedAt($format = 'Y-m-d H:i:s')
@@ -338,16 +323,11 @@ abstract class BaseAlert extends BaseObject
         }
 
 
-        if ($this->created_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->created_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->created_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
         }
 
         if ($format === null) {
@@ -366,7 +346,7 @@ abstract class BaseAlert extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getUpdatedAt($format = 'Y-m-d H:i:s')
@@ -376,16 +356,11 @@ abstract class BaseAlert extends BaseObject
         }
 
 
-        if ($this->updated_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->updated_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->updated_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
         }
 
         if ($format === null) {
@@ -1125,50 +1100,60 @@ abstract class BaseAlert extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . AlertPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT sfc_plugin_alert_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(AlertPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(AlertPeer::RECIPIENT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`RECIPIENT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'RECIPIENT_ID';
         }
         if ($this->isColumnModified(AlertPeer::TRIGGER_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`TRIGGER_AT`';
+            $modifiedColumns[':p' . $index++]  = 'TRIGGER_AT';
         }
         if ($this->isColumnModified(AlertPeer::MESSAGE)) {
-            $modifiedColumns[':p' . $index++]  = '`MESSAGE`';
+            $modifiedColumns[':p' . $index++]  = 'MESSAGE';
         }
         if ($this->isColumnModified(AlertPeer::MODEL_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`MODEL_ID`';
+            $modifiedColumns[':p' . $index++]  = 'MODEL_ID';
         }
         if ($this->isColumnModified(AlertPeer::MODEL_CLASS)) {
-            $modifiedColumns[':p' . $index++]  = '`MODEL_CLASS`';
+            $modifiedColumns[':p' . $index++]  = 'MODEL_CLASS';
         }
         if ($this->isColumnModified(AlertPeer::SENT)) {
-            $modifiedColumns[':p' . $index++]  = '`SENT`';
+            $modifiedColumns[':p' . $index++]  = 'SENT';
         }
         if ($this->isColumnModified(AlertPeer::ACQUITTED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`ACQUITTED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'ACQUITTED_AT';
         }
         if ($this->isColumnModified(AlertPeer::ACQUITTED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`ACQUITTED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'ACQUITTED_BY';
         }
         if ($this->isColumnModified(AlertPeer::CREATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_AT';
         }
         if ($this->isColumnModified(AlertPeer::UPDATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_AT';
         }
         if ($this->isColumnModified(AlertPeer::CREATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_BY';
         }
         if ($this->isColumnModified(AlertPeer::UPDATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_BY';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sfc_plugin_alert` (%s) VALUES (%s)',
+            'INSERT INTO sfc_plugin_alert (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -1177,43 +1162,43 @@ abstract class BaseAlert extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`RECIPIENT_ID`':
+                    case 'RECIPIENT_ID':
 						$stmt->bindValue($identifier, $this->recipient_id, PDO::PARAM_INT);
                         break;
-                    case '`TRIGGER_AT`':
+                    case 'TRIGGER_AT':
 						$stmt->bindValue($identifier, $this->trigger_at, PDO::PARAM_STR);
                         break;
-                    case '`MESSAGE`':
+                    case 'MESSAGE':
 						$stmt->bindValue($identifier, $this->message, PDO::PARAM_STR);
                         break;
-                    case '`MODEL_ID`':
+                    case 'MODEL_ID':
 						$stmt->bindValue($identifier, $this->model_id, PDO::PARAM_INT);
                         break;
-                    case '`MODEL_CLASS`':
+                    case 'MODEL_CLASS':
 						$stmt->bindValue($identifier, $this->model_class, PDO::PARAM_STR);
                         break;
-                    case '`SENT`':
+                    case 'SENT':
 						$stmt->bindValue($identifier, $this->sent, PDO::PARAM_STR);
                         break;
-                    case '`ACQUITTED_AT`':
+                    case 'ACQUITTED_AT':
 						$stmt->bindValue($identifier, $this->acquitted_at, PDO::PARAM_STR);
                         break;
-                    case '`ACQUITTED_BY`':
+                    case 'ACQUITTED_BY':
 						$stmt->bindValue($identifier, $this->acquitted_by, PDO::PARAM_INT);
                         break;
-                    case '`CREATED_AT`':
+                    case 'CREATED_AT':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
                         break;
-                    case '`UPDATED_AT`':
+                    case 'UPDATED_AT':
 						$stmt->bindValue($identifier, $this->updated_at, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_BY`':
+                    case 'CREATED_BY':
 						$stmt->bindValue($identifier, $this->created_by, PDO::PARAM_INT);
                         break;
-                    case '`UPDATED_BY`':
+                    case 'UPDATED_BY':
 						$stmt->bindValue($identifier, $this->updated_by, PDO::PARAM_INT);
                         break;
                 }
@@ -1223,13 +1208,6 @@ abstract class BaseAlert extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

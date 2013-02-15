@@ -123,7 +123,7 @@ abstract class BasesfGuardUserGroupQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `USER_ID`, `GROUP_ID` FROM `sf_guard_user_group` WHERE `USER_ID` = :p0 AND `GROUP_ID` = :p1';
+        $sql = 'SELECT USER_ID, GROUP_ID FROM sf_guard_user_group WHERE USER_ID = :p0 AND GROUP_ID = :p1';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

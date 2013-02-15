@@ -37,6 +37,7 @@ class ServiceTableMap extends TableMap
         $this->setClassname('Service');
         $this->setPackage('plugins.surfaceContactPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_abk_service_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('SHORT_NAME', 'ShortName', 'VARCHAR', false, 255, null);

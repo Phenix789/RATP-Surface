@@ -166,7 +166,7 @@ abstract class BaseTravelQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `CLIENT_ID`, `STATION_IN_ID`, `STATION_OUT_ID`, `DATE_IN`, `DATE_OUT`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `ratp_travel` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, CLIENT_ID, STATION_IN_ID, STATION_OUT_ID, DATE_IN, DATE_OUT, CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY FROM ratp_travel WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

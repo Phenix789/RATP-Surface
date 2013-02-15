@@ -641,35 +641,45 @@ abstract class BaseFileAssociated extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . FileAssociatedPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT file_associated_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(FileAssociatedPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(FileAssociatedPeer::CLASS_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`CLASS_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'CLASS_NAME';
         }
         if ($this->isColumnModified(FileAssociatedPeer::CATEGORY)) {
-            $modifiedColumns[':p' . $index++]  = '`CATEGORY`';
+            $modifiedColumns[':p' . $index++]  = 'CATEGORY';
         }
         if ($this->isColumnModified(FileAssociatedPeer::FIELD_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`FIELD_ID`';
+            $modifiedColumns[':p' . $index++]  = 'FIELD_ID';
         }
         if ($this->isColumnModified(FileAssociatedPeer::FILEPATH)) {
-            $modifiedColumns[':p' . $index++]  = '`FILEPATH`';
+            $modifiedColumns[':p' . $index++]  = 'FILEPATH';
         }
         if ($this->isColumnModified(FileAssociatedPeer::FILENAME)) {
-            $modifiedColumns[':p' . $index++]  = '`FILENAME`';
+            $modifiedColumns[':p' . $index++]  = 'FILENAME';
         }
         if ($this->isColumnModified(FileAssociatedPeer::ORGINAL_FILENAME)) {
-            $modifiedColumns[':p' . $index++]  = '`ORGINAL_FILENAME`';
+            $modifiedColumns[':p' . $index++]  = 'ORGINAL_FILENAME';
         }
         if ($this->isColumnModified(FileAssociatedPeer::TITLE)) {
-            $modifiedColumns[':p' . $index++]  = '`TITLE`';
+            $modifiedColumns[':p' . $index++]  = 'TITLE';
         }
 
         $sql = sprintf(
-            'INSERT INTO `file_associated` (%s) VALUES (%s)',
+            'INSERT INTO file_associated (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -678,28 +688,28 @@ abstract class BaseFileAssociated extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`CLASS_NAME`':
+                    case 'CLASS_NAME':
 						$stmt->bindValue($identifier, $this->class_name, PDO::PARAM_STR);
                         break;
-                    case '`CATEGORY`':
+                    case 'CATEGORY':
 						$stmt->bindValue($identifier, $this->category, PDO::PARAM_STR);
                         break;
-                    case '`FIELD_ID`':
+                    case 'FIELD_ID':
 						$stmt->bindValue($identifier, $this->field_id, PDO::PARAM_INT);
                         break;
-                    case '`FILEPATH`':
+                    case 'FILEPATH':
 						$stmt->bindValue($identifier, $this->filepath, PDO::PARAM_STR);
                         break;
-                    case '`FILENAME`':
+                    case 'FILENAME':
 						$stmt->bindValue($identifier, $this->filename, PDO::PARAM_STR);
                         break;
-                    case '`ORGINAL_FILENAME`':
+                    case 'ORGINAL_FILENAME':
 						$stmt->bindValue($identifier, $this->orginal_filename, PDO::PARAM_STR);
                         break;
-                    case '`TITLE`':
+                    case 'TITLE':
 						$stmt->bindValue($identifier, $this->title, PDO::PARAM_STR);
                         break;
                 }
@@ -709,13 +719,6 @@ abstract class BaseFileAssociated extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

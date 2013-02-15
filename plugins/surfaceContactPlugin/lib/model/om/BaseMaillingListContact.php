@@ -451,14 +451,14 @@ abstract class BaseMaillingListContact extends BaseObject
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(MaillingListContactPeer::CONTACT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`CONTACT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'CONTACT_ID';
         }
         if ($this->isColumnModified(MaillingListContactPeer::MAILLING_LIST_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`MAILLING_LIST_ID`';
+            $modifiedColumns[':p' . $index++]  = 'MAILLING_LIST_ID';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sfc_abk_mailling_list_contact` (%s) VALUES (%s)',
+            'INSERT INTO sfc_abk_mailling_list_contact (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -467,10 +467,10 @@ abstract class BaseMaillingListContact extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`CONTACT_ID`':
+                    case 'CONTACT_ID':
 						$stmt->bindValue($identifier, $this->contact_id, PDO::PARAM_INT);
                         break;
-                    case '`MAILLING_LIST_ID`':
+                    case 'MAILLING_LIST_ID':
 						$stmt->bindValue($identifier, $this->mailling_list_id, PDO::PARAM_INT);
                         break;
                 }

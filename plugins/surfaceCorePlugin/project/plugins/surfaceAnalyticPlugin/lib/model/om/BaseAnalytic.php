@@ -350,7 +350,7 @@ abstract class BaseAnalytic extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getCreatedAt($format = 'Y-m-d H:i:s')
@@ -360,16 +360,11 @@ abstract class BaseAnalytic extends BaseObject
         }
 
 
-        if ($this->created_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->created_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->created_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
         }
 
         if ($format === null) {
@@ -1115,65 +1110,75 @@ abstract class BaseAnalytic extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . AnalyticPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT sfc_plugin_analytic_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(AnalyticPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(AnalyticPeer::USERNAME)) {
-            $modifiedColumns[':p' . $index++]  = '`USERNAME`';
+            $modifiedColumns[':p' . $index++]  = 'USERNAME';
         }
         if ($this->isColumnModified(AnalyticPeer::USER_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`USER_ID`';
+            $modifiedColumns[':p' . $index++]  = 'USER_ID';
         }
         if ($this->isColumnModified(AnalyticPeer::CONNECTION)) {
-            $modifiedColumns[':p' . $index++]  = '`CONNECTION`';
+            $modifiedColumns[':p' . $index++]  = 'CONNECTION';
         }
         if ($this->isColumnModified(AnalyticPeer::IP)) {
-            $modifiedColumns[':p' . $index++]  = '`IP`';
+            $modifiedColumns[':p' . $index++]  = 'IP';
         }
         if ($this->isColumnModified(AnalyticPeer::USER_AGENT)) {
-            $modifiedColumns[':p' . $index++]  = '`USER_AGENT`';
+            $modifiedColumns[':p' . $index++]  = 'USER_AGENT';
         }
         if ($this->isColumnModified(AnalyticPeer::SCREEN_WIDTH)) {
-            $modifiedColumns[':p' . $index++]  = '`SCREEN_WIDTH`';
+            $modifiedColumns[':p' . $index++]  = 'SCREEN_WIDTH';
         }
         if ($this->isColumnModified(AnalyticPeer::SCREEN_HEIGHT)) {
-            $modifiedColumns[':p' . $index++]  = '`SCREEN_HEIGHT`';
+            $modifiedColumns[':p' . $index++]  = 'SCREEN_HEIGHT';
         }
         if ($this->isColumnModified(AnalyticPeer::SCREEN_INNER_WIDTH)) {
-            $modifiedColumns[':p' . $index++]  = '`SCREEN_INNER_WIDTH`';
+            $modifiedColumns[':p' . $index++]  = 'SCREEN_INNER_WIDTH';
         }
         if ($this->isColumnModified(AnalyticPeer::SCREEN_INNER_HEIGHT)) {
-            $modifiedColumns[':p' . $index++]  = '`SCREEN_INNER_HEIGHT`';
+            $modifiedColumns[':p' . $index++]  = 'SCREEN_INNER_HEIGHT';
         }
         if ($this->isColumnModified(AnalyticPeer::COOKIE_ENABLED)) {
-            $modifiedColumns[':p' . $index++]  = '`COOKIE_ENABLED`';
+            $modifiedColumns[':p' . $index++]  = 'COOKIE_ENABLED';
         }
         if ($this->isColumnModified(AnalyticPeer::LANGUAGE)) {
-            $modifiedColumns[':p' . $index++]  = '`LANGUAGE`';
+            $modifiedColumns[':p' . $index++]  = 'LANGUAGE';
         }
         if ($this->isColumnModified(AnalyticPeer::PLATFORM)) {
-            $modifiedColumns[':p' . $index++]  = '`PLATFORM`';
+            $modifiedColumns[':p' . $index++]  = 'PLATFORM';
         }
         if ($this->isColumnModified(AnalyticPeer::PRODUCT)) {
-            $modifiedColumns[':p' . $index++]  = '`PRODUCT`';
+            $modifiedColumns[':p' . $index++]  = 'PRODUCT';
         }
         if ($this->isColumnModified(AnalyticPeer::PRODUCT_SUB)) {
-            $modifiedColumns[':p' . $index++]  = '`PRODUCT_SUB`';
+            $modifiedColumns[':p' . $index++]  = 'PRODUCT_SUB';
         }
         if ($this->isColumnModified(AnalyticPeer::VENDOR)) {
-            $modifiedColumns[':p' . $index++]  = '`VENDOR`';
+            $modifiedColumns[':p' . $index++]  = 'VENDOR';
         }
         if ($this->isColumnModified(AnalyticPeer::VENDOR_SUB)) {
-            $modifiedColumns[':p' . $index++]  = '`VENDOR_SUB`';
+            $modifiedColumns[':p' . $index++]  = 'VENDOR_SUB';
         }
         if ($this->isColumnModified(AnalyticPeer::CREATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_AT';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sfc_plugin_analytic` (%s) VALUES (%s)',
+            'INSERT INTO sfc_plugin_analytic (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -1182,58 +1187,58 @@ abstract class BaseAnalytic extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`USERNAME`':
+                    case 'USERNAME':
 						$stmt->bindValue($identifier, $this->username, PDO::PARAM_STR);
                         break;
-                    case '`USER_ID`':
+                    case 'USER_ID':
 						$stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
-                    case '`CONNECTION`':
+                    case 'CONNECTION':
 						$stmt->bindValue($identifier, $this->connection, PDO::PARAM_INT);
                         break;
-                    case '`IP`':
+                    case 'IP':
 						$stmt->bindValue($identifier, $this->ip, PDO::PARAM_STR);
                         break;
-                    case '`USER_AGENT`':
+                    case 'USER_AGENT':
 						$stmt->bindValue($identifier, $this->user_agent, PDO::PARAM_STR);
                         break;
-                    case '`SCREEN_WIDTH`':
+                    case 'SCREEN_WIDTH':
 						$stmt->bindValue($identifier, $this->screen_width, PDO::PARAM_INT);
                         break;
-                    case '`SCREEN_HEIGHT`':
+                    case 'SCREEN_HEIGHT':
 						$stmt->bindValue($identifier, $this->screen_height, PDO::PARAM_INT);
                         break;
-                    case '`SCREEN_INNER_WIDTH`':
+                    case 'SCREEN_INNER_WIDTH':
 						$stmt->bindValue($identifier, $this->screen_inner_width, PDO::PARAM_INT);
                         break;
-                    case '`SCREEN_INNER_HEIGHT`':
+                    case 'SCREEN_INNER_HEIGHT':
 						$stmt->bindValue($identifier, $this->screen_inner_height, PDO::PARAM_INT);
                         break;
-                    case '`COOKIE_ENABLED`':
-						$stmt->bindValue($identifier, (int) $this->cookie_enabled, PDO::PARAM_INT);
+                    case 'COOKIE_ENABLED':
+						$stmt->bindValue($identifier, $this->cookie_enabled, PDO::PARAM_INT);
                         break;
-                    case '`LANGUAGE`':
+                    case 'LANGUAGE':
 						$stmt->bindValue($identifier, $this->language, PDO::PARAM_STR);
                         break;
-                    case '`PLATFORM`':
+                    case 'PLATFORM':
 						$stmt->bindValue($identifier, $this->platform, PDO::PARAM_STR);
                         break;
-                    case '`PRODUCT`':
+                    case 'PRODUCT':
 						$stmt->bindValue($identifier, $this->product, PDO::PARAM_STR);
                         break;
-                    case '`PRODUCT_SUB`':
+                    case 'PRODUCT_SUB':
 						$stmt->bindValue($identifier, $this->product_sub, PDO::PARAM_STR);
                         break;
-                    case '`VENDOR`':
+                    case 'VENDOR':
 						$stmt->bindValue($identifier, $this->vendor, PDO::PARAM_STR);
                         break;
-                    case '`VENDOR_SUB`':
+                    case 'VENDOR_SUB':
 						$stmt->bindValue($identifier, $this->vendor_sub, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_AT`':
+                    case 'CREATED_AT':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
                         break;
                 }
@@ -1243,13 +1248,6 @@ abstract class BaseAnalytic extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

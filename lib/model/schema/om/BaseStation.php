@@ -219,7 +219,7 @@ abstract class BaseStation extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getCreatedAt($format = 'Y-m-d H:i:s')
@@ -229,16 +229,11 @@ abstract class BaseStation extends BaseObject
         }
 
 
-        if ($this->created_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->created_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->created_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
         }
 
         if ($format === null) {
@@ -257,7 +252,7 @@ abstract class BaseStation extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getUpdatedAt($format = 'Y-m-d H:i:s')
@@ -267,16 +262,11 @@ abstract class BaseStation extends BaseObject
         }
 
 
-        if ($this->updated_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->updated_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->updated_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
         }
 
         if ($format === null) {
@@ -964,41 +954,51 @@ abstract class BaseStation extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . StationPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT ratp_station_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(StationPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(StationPeer::CODE)) {
-            $modifiedColumns[':p' . $index++]  = '`CODE`';
+            $modifiedColumns[':p' . $index++]  = 'CODE';
         }
         if ($this->isColumnModified(StationPeer::NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`NAME`';
+            $modifiedColumns[':p' . $index++]  = 'NAME';
         }
         if ($this->isColumnModified(StationPeer::GEO_X)) {
-            $modifiedColumns[':p' . $index++]  = '`GEO_X`';
+            $modifiedColumns[':p' . $index++]  = 'GEO_X';
         }
         if ($this->isColumnModified(StationPeer::GEO_Y)) {
-            $modifiedColumns[':p' . $index++]  = '`GEO_Y`';
+            $modifiedColumns[':p' . $index++]  = 'GEO_Y';
         }
         if ($this->isColumnModified(StationPeer::ZONE)) {
-            $modifiedColumns[':p' . $index++]  = '`ZONE`';
+            $modifiedColumns[':p' . $index++]  = 'ZONE';
         }
         if ($this->isColumnModified(StationPeer::CREATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_AT';
         }
         if ($this->isColumnModified(StationPeer::UPDATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_AT';
         }
         if ($this->isColumnModified(StationPeer::CREATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_BY';
         }
         if ($this->isColumnModified(StationPeer::UPDATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_BY';
         }
 
         $sql = sprintf(
-            'INSERT INTO `ratp_station` (%s) VALUES (%s)',
+            'INSERT INTO ratp_station (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -1007,34 +1007,34 @@ abstract class BaseStation extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`CODE`':
+                    case 'CODE':
 						$stmt->bindValue($identifier, $this->code, PDO::PARAM_STR);
                         break;
-                    case '`NAME`':
+                    case 'NAME':
 						$stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
                         break;
-                    case '`GEO_X`':
+                    case 'GEO_X':
 						$stmt->bindValue($identifier, $this->geo_x, PDO::PARAM_STR);
                         break;
-                    case '`GEO_Y`':
+                    case 'GEO_Y':
 						$stmt->bindValue($identifier, $this->geo_y, PDO::PARAM_STR);
                         break;
-                    case '`ZONE`':
+                    case 'ZONE':
 						$stmt->bindValue($identifier, $this->zone, PDO::PARAM_INT);
                         break;
-                    case '`CREATED_AT`':
+                    case 'CREATED_AT':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
                         break;
-                    case '`UPDATED_AT`':
+                    case 'UPDATED_AT':
 						$stmt->bindValue($identifier, $this->updated_at, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_BY`':
+                    case 'CREATED_BY':
 						$stmt->bindValue($identifier, $this->created_by, PDO::PARAM_INT);
                         break;
-                    case '`UPDATED_BY`':
+                    case 'UPDATED_BY':
 						$stmt->bindValue($identifier, $this->updated_by, PDO::PARAM_INT);
                         break;
                 }
@@ -1044,13 +1044,6 @@ abstract class BaseStation extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

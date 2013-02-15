@@ -158,7 +158,7 @@ abstract class BaseSubscriptionQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `NAME`, `PRICE`, `DURATION`, `ZONE_BEGIN`, `ZONE_END`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `ratp_subscription` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, NAME, PRICE, DURATION, ZONE_BEGIN, ZONE_END, CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY FROM ratp_subscription WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

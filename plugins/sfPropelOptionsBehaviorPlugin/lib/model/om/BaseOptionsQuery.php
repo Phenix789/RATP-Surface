@@ -126,7 +126,7 @@ abstract class BaseOptionsQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `MODEL_NAME`, `MODEL_ID`, `NAME`, `VALUE` FROM `plugin_options_behavior` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, MODEL_NAME, MODEL_ID, NAME, VALUE FROM plugin_options_behavior WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

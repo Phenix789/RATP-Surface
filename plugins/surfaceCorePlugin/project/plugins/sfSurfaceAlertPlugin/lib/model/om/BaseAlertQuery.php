@@ -174,7 +174,7 @@ abstract class BaseAlertQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `RECIPIENT_ID`, `TRIGGER_AT`, `MESSAGE`, `MODEL_ID`, `MODEL_CLASS`, `SENT`, `ACQUITTED_AT`, `ACQUITTED_BY`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `sfc_plugin_alert` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, RECIPIENT_ID, TRIGGER_AT, MESSAGE, MODEL_ID, MODEL_CLASS, SENT, ACQUITTED_AT, ACQUITTED_BY, CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY FROM sfc_plugin_alert WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

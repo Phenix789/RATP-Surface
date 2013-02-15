@@ -126,7 +126,7 @@ abstract class BasesfGuardEntityQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `NAME`, `DISCRIMINANT` FROM `sf_guard_entity` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, NAME, DISCRIMINANT FROM sf_guard_entity WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

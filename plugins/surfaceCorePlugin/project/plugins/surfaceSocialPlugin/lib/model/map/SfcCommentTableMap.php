@@ -37,12 +37,13 @@ class SfcCommentTableMap extends TableMap
         $this->setClassname('SfcComment');
         $this->setPackage('plugins.surfaceSocialPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_social_comment_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('OBJECT_NAME', 'ObjectName', 'VARCHAR', false, 100, null);
         $this->addColumn('OBJECT_ID', 'ObjectId', 'INTEGER', false, null, null);
         $this->addColumn('CATEGORY', 'Category', 'VARCHAR', false, 100, null);
-        $this->addColumn('COMMENT', 'Comment', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('COMMENT', 'Comment', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('DATE_REF', 'DateRef', 'TIMESTAMP', false, null, null);
         $this->addForeignKey('COLLABORATOR_ID', 'CollaboratorId', 'INTEGER', 'collaborator', 'ID', false, null, null);
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);

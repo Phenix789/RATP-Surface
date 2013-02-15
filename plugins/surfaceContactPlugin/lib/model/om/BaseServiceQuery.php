@@ -126,7 +126,7 @@ abstract class BaseServiceQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `SHORT_NAME`, `LONG_NAME`, `NAME_SPACE` FROM `sfc_abk_service` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, SHORT_NAME, LONG_NAME, NAME_SPACE FROM sfc_abk_service WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

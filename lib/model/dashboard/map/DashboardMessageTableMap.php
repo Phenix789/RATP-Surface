@@ -37,9 +37,10 @@ class DashboardMessageTableMap extends TableMap
         $this->setClassname('DashboardMessage');
         $this->setPackage('lib.model.dashboard');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_dashboard_message_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('MESSAGE', 'Message', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('MESSAGE', 'Message', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('UPDATED_AT', 'UpdatedAt', 'TIMESTAMP', false, null, null);
         $this->addForeignKey('CREATED_BY', 'CreatedBy', 'INTEGER', 'sf_guard_user', 'ID', false, null, null);

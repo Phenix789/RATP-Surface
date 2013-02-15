@@ -37,6 +37,7 @@ class ContinueFieldTableMap extends TableMap
         $this->setClassname('ContinueField');
         $this->setPackage('plugins.surfaceStatPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('stat_continue_field_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('DATASOURCE_ID', 'DatasourceId', 'INTEGER', 'stat_datasource', 'ID', true, null, null);

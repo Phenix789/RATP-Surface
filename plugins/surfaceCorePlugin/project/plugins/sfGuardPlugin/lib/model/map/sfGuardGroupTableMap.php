@@ -37,10 +37,11 @@ class sfGuardGroupTableMap extends TableMap
         $this->setClassname('sfGuardGroup');
         $this->setPackage('plugins.sfGuardPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sf_guard_group_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('NAME', 'Name', 'VARCHAR', true, 255, null);
-        $this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', false, 2000, null);
         // validators
     } // initialize()
 

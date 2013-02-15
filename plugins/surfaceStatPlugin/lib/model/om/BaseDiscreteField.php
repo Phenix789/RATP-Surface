@@ -680,29 +680,39 @@ abstract class BaseDiscreteField extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . DiscreteFieldPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT stat_discrete_field_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(DiscreteFieldPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(DiscreteFieldPeer::DATASOURCE_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`DATASOURCE_ID`';
+            $modifiedColumns[':p' . $index++]  = 'DATASOURCE_ID';
         }
         if ($this->isColumnModified(DiscreteFieldPeer::CODE_FIELD)) {
-            $modifiedColumns[':p' . $index++]  = '`CODE_FIELD`';
+            $modifiedColumns[':p' . $index++]  = 'CODE_FIELD';
         }
         if ($this->isColumnModified(DiscreteFieldPeer::LABEL_FIELD)) {
-            $modifiedColumns[':p' . $index++]  = '`LABEL_FIELD`';
+            $modifiedColumns[':p' . $index++]  = 'LABEL_FIELD';
         }
         if ($this->isColumnModified(DiscreteFieldPeer::NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`NAME`';
+            $modifiedColumns[':p' . $index++]  = 'NAME';
         }
         if ($this->isColumnModified(DiscreteFieldPeer::TYPE)) {
-            $modifiedColumns[':p' . $index++]  = '`TYPE`';
+            $modifiedColumns[':p' . $index++]  = 'TYPE';
         }
 
         $sql = sprintf(
-            'INSERT INTO `stat_discrete_field` (%s) VALUES (%s)',
+            'INSERT INTO stat_discrete_field (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -711,22 +721,22 @@ abstract class BaseDiscreteField extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`DATASOURCE_ID`':
+                    case 'DATASOURCE_ID':
 						$stmt->bindValue($identifier, $this->datasource_id, PDO::PARAM_INT);
                         break;
-                    case '`CODE_FIELD`':
+                    case 'CODE_FIELD':
 						$stmt->bindValue($identifier, $this->code_field, PDO::PARAM_STR);
                         break;
-                    case '`LABEL_FIELD`':
+                    case 'LABEL_FIELD':
 						$stmt->bindValue($identifier, $this->label_field, PDO::PARAM_STR);
                         break;
-                    case '`NAME`':
+                    case 'NAME':
 						$stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
                         break;
-                    case '`TYPE`':
+                    case 'TYPE':
 						$stmt->bindValue($identifier, $this->type, PDO::PARAM_INT);
                         break;
                 }
@@ -736,13 +746,6 @@ abstract class BaseDiscreteField extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

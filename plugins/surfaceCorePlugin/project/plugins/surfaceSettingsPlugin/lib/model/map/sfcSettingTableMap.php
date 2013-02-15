@@ -37,14 +37,15 @@ class sfcSettingTableMap extends TableMap
         $this->setClassname('sfcSetting');
         $this->setPackage('plugins.surfaceSettingsPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_setting_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('NAME', 'Name', 'VARCHAR', false, 255, null);
         $this->addColumn('TYPE', 'Type', 'VARCHAR', false, 255, null);
-        $this->addColumn('OPTIONS', 'Options', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('VALUE', 'Value', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('OPTIONS', 'Options', 'LONGVARCHAR', false, 2000, null);
+        $this->addColumn('VALUE', 'Value', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('CATEGORY', 'Category', 'VARCHAR', false, 255, null);
-        $this->addColumn('DEFAULT_VALUE', 'DefaultValue', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('DEFAULT_VALUE', 'DefaultValue', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('UPDATED_AT', 'UpdatedAt', 'TIMESTAMP', false, null, null);
         $this->addForeignKey('CREATED_BY', 'CreatedBy', 'INTEGER', 'sf_guard_user', 'ID', false, null, null);

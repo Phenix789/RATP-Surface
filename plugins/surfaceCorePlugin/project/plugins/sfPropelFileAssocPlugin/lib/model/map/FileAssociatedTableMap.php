@@ -37,6 +37,7 @@ class FileAssociatedTableMap extends TableMap
         $this->setClassname('FileAssociated');
         $this->setPackage('plugins.sfPropelFileAssocPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('file_associated_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('CLASS_NAME', 'ClassName', 'VARCHAR', false, 100, null);

@@ -490,17 +490,17 @@ abstract class BaseContactMultiple extends BaseObject
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(ContactMultiplePeer::CONTACT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`CONTACT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'CONTACT_ID';
         }
         if ($this->isColumnModified(ContactMultiplePeer::PARENT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`PARENT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'PARENT_ID';
         }
         if ($this->isColumnModified(ContactMultiplePeer::ROLE)) {
-            $modifiedColumns[':p' . $index++]  = '`ROLE`';
+            $modifiedColumns[':p' . $index++]  = 'ROLE';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sfc_abk_contact_multiple` (%s) VALUES (%s)',
+            'INSERT INTO sfc_abk_contact_multiple (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -509,13 +509,13 @@ abstract class BaseContactMultiple extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`CONTACT_ID`':
+                    case 'CONTACT_ID':
 						$stmt->bindValue($identifier, $this->contact_id, PDO::PARAM_INT);
                         break;
-                    case '`PARENT_ID`':
+                    case 'PARENT_ID':
 						$stmt->bindValue($identifier, $this->parent_id, PDO::PARAM_INT);
                         break;
-                    case '`ROLE`':
+                    case 'ROLE':
 						$stmt->bindValue($identifier, $this->role, PDO::PARAM_STR);
                         break;
                 }

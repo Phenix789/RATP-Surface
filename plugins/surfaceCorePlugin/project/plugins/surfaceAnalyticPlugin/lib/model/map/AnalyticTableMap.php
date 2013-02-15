@@ -37,6 +37,7 @@ class AnalyticTableMap extends TableMap
         $this->setClassname('Analytic');
         $this->setPackage('plugins.surfaceAnalyticPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_plugin_analytic_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('USERNAME', 'Username', 'VARCHAR', false, 255, null);
@@ -48,7 +49,7 @@ class AnalyticTableMap extends TableMap
         $this->addColumn('SCREEN_HEIGHT', 'ScreenHeight', 'INTEGER', false, null, null);
         $this->addColumn('SCREEN_INNER_WIDTH', 'ScreenInnerWidth', 'INTEGER', false, null, null);
         $this->addColumn('SCREEN_INNER_HEIGHT', 'ScreenInnerHeight', 'INTEGER', false, null, null);
-        $this->addColumn('COOKIE_ENABLED', 'CookieEnabled', 'BOOLEAN', false, 1, null);
+        $this->addColumn('COOKIE_ENABLED', 'CookieEnabled', 'BOOLEAN_EMU', false, 1, null);
         $this->addColumn('LANGUAGE', 'Language', 'VARCHAR', false, 255, null);
         $this->addColumn('PLATFORM', 'Platform', 'VARCHAR', false, 255, null);
         $this->addColumn('PRODUCT', 'Product', 'VARCHAR', false, 255, null);

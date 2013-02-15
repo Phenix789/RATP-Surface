@@ -466,17 +466,27 @@ abstract class BaseDataSource extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . DataSourcePeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT stat_datasource_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(DataSourcePeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(DataSourcePeer::TABLE_REF)) {
-            $modifiedColumns[':p' . $index++]  = '`TABLE_REF`';
+            $modifiedColumns[':p' . $index++]  = 'TABLE_REF';
         }
 
         $sql = sprintf(
-            'INSERT INTO `stat_datasource` (%s) VALUES (%s)',
+            'INSERT INTO stat_datasource (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -485,10 +495,10 @@ abstract class BaseDataSource extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`TABLE_REF`':
+                    case 'TABLE_REF':
 						$stmt->bindValue($identifier, $this->table_ref, PDO::PARAM_STR);
                         break;
                 }
@@ -498,13 +508,6 @@ abstract class BaseDataSource extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

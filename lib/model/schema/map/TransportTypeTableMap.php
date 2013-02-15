@@ -37,6 +37,7 @@ class TransportTypeTableMap extends TableMap
         $this->setClassname('TransportType');
         $this->setPackage('lib.model.schema');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('ratp_transport_type_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('TYPE', 'Type', 'VARCHAR', false, 255, null);

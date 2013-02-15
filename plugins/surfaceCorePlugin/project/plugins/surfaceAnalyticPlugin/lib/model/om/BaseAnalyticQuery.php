@@ -182,7 +182,7 @@ abstract class BaseAnalyticQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `USERNAME`, `USER_ID`, `CONNECTION`, `IP`, `USER_AGENT`, `SCREEN_WIDTH`, `SCREEN_HEIGHT`, `SCREEN_INNER_WIDTH`, `SCREEN_INNER_HEIGHT`, `COOKIE_ENABLED`, `LANGUAGE`, `PLATFORM`, `PRODUCT`, `PRODUCT_SUB`, `VENDOR`, `VENDOR_SUB`, `CREATED_AT` FROM `sfc_plugin_analytic` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, USERNAME, USER_ID, CONNECTION, IP, USER_AGENT, SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_INNER_WIDTH, SCREEN_INNER_HEIGHT, COOKIE_ENABLED, LANGUAGE, PLATFORM, PRODUCT, PRODUCT_SUB, VENDOR, VENDOR_SUB, CREATED_AT FROM sfc_plugin_analytic WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

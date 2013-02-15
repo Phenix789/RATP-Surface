@@ -130,7 +130,7 @@ abstract class BaseCivilityQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `SHORT_NAME`, `LONG_NAME`, `GENRE`, `NAME_SPACE` FROM `sfc_abk_civility` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, SHORT_NAME, LONG_NAME, GENRE, NAME_SPACE FROM sfc_abk_civility WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

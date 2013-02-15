@@ -162,7 +162,7 @@ abstract class BaseSfcCommentQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `OBJECT_NAME`, `OBJECT_ID`, `CATEGORY`, `COMMENT`, `DATE_REF`, `COLLABORATOR_ID`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `sfc_social_comment` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, OBJECT_NAME, OBJECT_ID, CATEGORY, COMMENT, DATE_REF, COLLABORATOR_ID, CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY FROM sfc_social_comment WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

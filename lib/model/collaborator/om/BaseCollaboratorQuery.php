@@ -210,7 +210,7 @@ abstract class BaseCollaboratorQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `IS_ACTIVE`, `FIRST_NAME`, `LAST_NAME`, `EMAIL`, `SIGNATURE`, `JOB_ROLE`, `ADDRESS`, `CITY`, `POSTAL_CODE`, `COUNTRY`, `PHONE_NUMBER`, `MOBILE_NUMBER`, `FAX_NUMBER`, `COMMENT`, `CONFIDENTIAL`, `CREATED_AT`, `UPDATED_AT`, `CREATED_BY`, `UPDATED_BY` FROM `collaborator` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, IS_ACTIVE, FIRST_NAME, LAST_NAME, EMAIL, SIGNATURE, JOB_ROLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE_NUMBER, MOBILE_NUMBER, FAX_NUMBER, COMMENT, CONFIDENTIAL, CREATED_AT, UPDATED_AT, CREATED_BY, UPDATED_BY FROM collaborator WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

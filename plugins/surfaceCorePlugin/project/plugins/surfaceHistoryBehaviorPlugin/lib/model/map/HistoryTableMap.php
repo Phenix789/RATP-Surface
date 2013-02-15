@@ -37,10 +37,11 @@ class HistoryTableMap extends TableMap
         $this->setClassname('History');
         $this->setPackage('plugins.surfaceHistoryBehaviorPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('plugin_history_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('DATE_REF', 'DateRef', 'TIMESTAMP', false, null, null);
-        $this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('OBJECT_ID', 'ObjectId', 'INTEGER', false, null, null);
         $this->addColumn('OBJECT_NAME', 'ObjectName', 'VARCHAR', false, 255, null);
         $this->addColumn('TYPE', 'Type', 'VARCHAR', false, 255, null);

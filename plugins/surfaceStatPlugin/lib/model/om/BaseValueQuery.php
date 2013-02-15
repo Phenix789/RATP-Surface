@@ -123,7 +123,7 @@ abstract class BaseValueQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `WORKSHEET_ID`, `CONTINUE_FIELD_ID` FROM `stat_value` WHERE `WORKSHEET_ID` = :p0 AND `CONTINUE_FIELD_ID` = :p1';
+        $sql = 'SELECT WORKSHEET_ID, CONTINUE_FIELD_ID FROM stat_value WHERE WORKSHEET_ID = :p0 AND CONTINUE_FIELD_ID = :p1';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

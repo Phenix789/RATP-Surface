@@ -37,12 +37,13 @@ class CartTableMap extends TableMap
         $this->setClassname('Cart');
         $this->setPackage('plugins.surfaceCartPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('plugin_cart_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('NAME', 'Name', 'VARCHAR', false, 255, null);
-        $this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('SELECTED', 'Selected', 'BOOLEAN', false, 1, null);
-        $this->addColumn('ARCHIVE', 'Archive', 'BOOLEAN', false, 1, null);
+        $this->addColumn('DESCRIPTION', 'Description', 'LONGVARCHAR', false, 2000, null);
+        $this->addColumn('SELECTED', 'Selected', 'BOOLEAN_EMU', false, 1, null);
+        $this->addColumn('ARCHIVE', 'Archive', 'BOOLEAN_EMU', false, 1, null);
         $this->addForeignKey('USER_ID', 'UserId', 'INTEGER', 'sf_guard_user', 'ID', false, null, null);
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addForeignKey('CREATED_BY', 'CreatedBy', 'INTEGER', 'sf_guard_user', 'ID', false, null, null);

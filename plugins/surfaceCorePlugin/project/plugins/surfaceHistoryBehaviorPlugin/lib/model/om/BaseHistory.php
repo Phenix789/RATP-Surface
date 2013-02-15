@@ -154,7 +154,7 @@ abstract class BaseHistory extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getDateRef($format = 'Y-m-d H:i:s')
@@ -164,16 +164,11 @@ abstract class BaseHistory extends BaseObject
         }
 
 
-        if ($this->date_ref === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->date_ref);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->date_ref, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->date_ref);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->date_ref, true), $x);
         }
 
         if ($format === null) {
@@ -258,7 +253,7 @@ abstract class BaseHistory extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getCreatedAt($format = 'Y-m-d H:i:s')
@@ -268,16 +263,11 @@ abstract class BaseHistory extends BaseObject
         }
 
 
-        if ($this->created_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->created_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->created_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
         }
 
         if ($format === null) {
@@ -307,7 +297,7 @@ abstract class BaseHistory extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getUpdatedAt($format = 'Y-m-d H:i:s')
@@ -317,16 +307,11 @@ abstract class BaseHistory extends BaseObject
         }
 
 
-        if ($this->updated_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->updated_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->updated_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
         }
 
         if ($format === null) {
@@ -1012,47 +997,57 @@ abstract class BaseHistory extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . HistoryPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT plugin_history_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(HistoryPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(HistoryPeer::DATE_REF)) {
-            $modifiedColumns[':p' . $index++]  = '`DATE_REF`';
+            $modifiedColumns[':p' . $index++]  = 'DATE_REF';
         }
         if ($this->isColumnModified(HistoryPeer::DESCRIPTION)) {
-            $modifiedColumns[':p' . $index++]  = '`DESCRIPTION`';
+            $modifiedColumns[':p' . $index++]  = 'DESCRIPTION';
         }
         if ($this->isColumnModified(HistoryPeer::OBJECT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`OBJECT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'OBJECT_ID';
         }
         if ($this->isColumnModified(HistoryPeer::OBJECT_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`OBJECT_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'OBJECT_NAME';
         }
         if ($this->isColumnModified(HistoryPeer::TYPE)) {
-            $modifiedColumns[':p' . $index++]  = '`TYPE`';
+            $modifiedColumns[':p' . $index++]  = 'TYPE';
         }
         if ($this->isColumnModified(HistoryPeer::NAME_SPACE)) {
-            $modifiedColumns[':p' . $index++]  = '`NAME_SPACE`';
+            $modifiedColumns[':p' . $index++]  = 'NAME_SPACE';
         }
         if ($this->isColumnModified(HistoryPeer::GROUP_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`GROUP_ID`';
+            $modifiedColumns[':p' . $index++]  = 'GROUP_ID';
         }
         if ($this->isColumnModified(HistoryPeer::CREATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_AT';
         }
         if ($this->isColumnModified(HistoryPeer::CREATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_BY';
         }
         if ($this->isColumnModified(HistoryPeer::UPDATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_AT';
         }
         if ($this->isColumnModified(HistoryPeer::UPDATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_BY';
         }
 
         $sql = sprintf(
-            'INSERT INTO `plugin_history` (%s) VALUES (%s)',
+            'INSERT INTO plugin_history (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -1061,40 +1056,40 @@ abstract class BaseHistory extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`DATE_REF`':
+                    case 'DATE_REF':
 						$stmt->bindValue($identifier, $this->date_ref, PDO::PARAM_STR);
                         break;
-                    case '`DESCRIPTION`':
+                    case 'DESCRIPTION':
 						$stmt->bindValue($identifier, $this->description, PDO::PARAM_STR);
                         break;
-                    case '`OBJECT_ID`':
+                    case 'OBJECT_ID':
 						$stmt->bindValue($identifier, $this->object_id, PDO::PARAM_INT);
                         break;
-                    case '`OBJECT_NAME`':
+                    case 'OBJECT_NAME':
 						$stmt->bindValue($identifier, $this->object_name, PDO::PARAM_STR);
                         break;
-                    case '`TYPE`':
+                    case 'TYPE':
 						$stmt->bindValue($identifier, $this->type, PDO::PARAM_STR);
                         break;
-                    case '`NAME_SPACE`':
+                    case 'NAME_SPACE':
 						$stmt->bindValue($identifier, $this->name_space, PDO::PARAM_STR);
                         break;
-                    case '`GROUP_ID`':
+                    case 'GROUP_ID':
 						$stmt->bindValue($identifier, $this->group_id, PDO::PARAM_INT);
                         break;
-                    case '`CREATED_AT`':
+                    case 'CREATED_AT':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_BY`':
+                    case 'CREATED_BY':
 						$stmt->bindValue($identifier, $this->created_by, PDO::PARAM_INT);
                         break;
-                    case '`UPDATED_AT`':
+                    case 'UPDATED_AT':
 						$stmt->bindValue($identifier, $this->updated_at, PDO::PARAM_STR);
                         break;
-                    case '`UPDATED_BY`':
+                    case 'UPDATED_BY':
 						$stmt->bindValue($identifier, $this->updated_by, PDO::PARAM_INT);
                         break;
                 }
@@ -1104,13 +1099,6 @@ abstract class BaseHistory extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

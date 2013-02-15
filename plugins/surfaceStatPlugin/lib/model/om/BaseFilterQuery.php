@@ -123,7 +123,7 @@ abstract class BaseFilterQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `WORKSHEET_ID`, `DISCRETE_FIELD_ID` FROM `stat_filter` WHERE `WORKSHEET_ID` = :p0 AND `DISCRETE_FIELD_ID` = :p1';
+        $sql = 'SELECT WORKSHEET_ID, DISCRETE_FIELD_ID FROM stat_filter WHERE WORKSHEET_ID = :p0 AND DISCRETE_FIELD_ID = :p1';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

@@ -37,6 +37,7 @@ class ClientSubscriptionTableMap extends TableMap
         $this->setClassname('ClientSubscription');
         $this->setPackage('lib.model.schema');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('ratp_client_subscription_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('CLIENT_ID', 'ClientId', 'INTEGER', 'ratp_client', 'ID', false, null, null);

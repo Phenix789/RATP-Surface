@@ -131,7 +131,7 @@ abstract class BasesfGuardGroupPermissionQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `GROUP_ID`, `PERMISSION_ID`, `ENTITY_ID` FROM `sf_guard_group_permission` WHERE `GROUP_ID` = :p0 AND `PERMISSION_ID` = :p1 AND `ENTITY_ID` = :p2';
+        $sql = 'SELECT GROUP_ID, PERMISSION_ID, ENTITY_ID FROM sf_guard_group_permission WHERE GROUP_ID = :p0 AND PERMISSION_ID = :p1 AND ENTITY_ID = :p2';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

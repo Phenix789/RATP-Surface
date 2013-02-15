@@ -580,26 +580,36 @@ abstract class BaseContinueField extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . ContinueFieldPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT stat_continue_field_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(ContinueFieldPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(ContinueFieldPeer::DATASOURCE_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`DATASOURCE_ID`';
+            $modifiedColumns[':p' . $index++]  = 'DATASOURCE_ID';
         }
         if ($this->isColumnModified(ContinueFieldPeer::FIELD)) {
-            $modifiedColumns[':p' . $index++]  = '`FIELD`';
+            $modifiedColumns[':p' . $index++]  = 'FIELD';
         }
         if ($this->isColumnModified(ContinueFieldPeer::NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`NAME`';
+            $modifiedColumns[':p' . $index++]  = 'NAME';
         }
         if ($this->isColumnModified(ContinueFieldPeer::OPERATOR)) {
-            $modifiedColumns[':p' . $index++]  = '`OPERATOR`';
+            $modifiedColumns[':p' . $index++]  = 'OPERATOR';
         }
 
         $sql = sprintf(
-            'INSERT INTO `stat_continue_field` (%s) VALUES (%s)',
+            'INSERT INTO stat_continue_field (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -608,19 +618,19 @@ abstract class BaseContinueField extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`DATASOURCE_ID`':
+                    case 'DATASOURCE_ID':
 						$stmt->bindValue($identifier, $this->datasource_id, PDO::PARAM_INT);
                         break;
-                    case '`FIELD`':
+                    case 'FIELD':
 						$stmt->bindValue($identifier, $this->field, PDO::PARAM_STR);
                         break;
-                    case '`NAME`':
+                    case 'NAME':
 						$stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
                         break;
-                    case '`OPERATOR`':
+                    case 'OPERATOR':
 						$stmt->bindValue($identifier, $this->operator, PDO::PARAM_INT);
                         break;
                 }
@@ -630,13 +640,6 @@ abstract class BaseContinueField extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

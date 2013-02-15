@@ -673,7 +673,7 @@ abstract class BaseContact extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getBirthDate($format = '%x')
@@ -683,16 +683,11 @@ abstract class BaseContact extends BaseObject
         }
 
 
-        if ($this->birth_date === '0000-00-00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->birth_date);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->birth_date, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->birth_date);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->birth_date, true), $x);
         }
 
         if ($format === null) {
@@ -744,7 +739,7 @@ abstract class BaseContact extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getArchiveDate($format = '%x')
@@ -754,16 +749,11 @@ abstract class BaseContact extends BaseObject
         }
 
 
-        if ($this->archive_date === '0000-00-00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->archive_date);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->archive_date, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->archive_date);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->archive_date, true), $x);
         }
 
         if ($format === null) {
@@ -859,7 +849,7 @@ abstract class BaseContact extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getCreatedAt($format = 'Y-m-d H:i:s')
@@ -869,16 +859,11 @@ abstract class BaseContact extends BaseObject
         }
 
 
-        if ($this->created_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->created_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->created_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
         }
 
         if ($format === null) {
@@ -908,7 +893,7 @@ abstract class BaseContact extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getUpdatedAt($format = 'Y-m-d H:i:s')
@@ -918,16 +903,11 @@ abstract class BaseContact extends BaseObject
         }
 
 
-        if ($this->updated_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->updated_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->updated_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
         }
 
         if ($format === null) {
@@ -2392,134 +2372,144 @@ abstract class BaseContact extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . ContactPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT sfc_abk_contact_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(ContactPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(ContactPeer::PARENT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`PARENT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'PARENT_ID';
         }
         if ($this->isColumnModified(ContactPeer::CIVILITY_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`CIVILITY_ID`';
+            $modifiedColumns[':p' . $index++]  = 'CIVILITY_ID';
         }
         if ($this->isColumnModified(ContactPeer::SERVICE_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`SERVICE_ID`';
+            $modifiedColumns[':p' . $index++]  = 'SERVICE_ID';
         }
         if ($this->isColumnModified(ContactPeer::ROLE)) {
-            $modifiedColumns[':p' . $index++]  = '`ROLE`';
+            $modifiedColumns[':p' . $index++]  = 'ROLE';
         }
         if ($this->isColumnModified(ContactPeer::TITLE)) {
-            $modifiedColumns[':p' . $index++]  = '`TITLE`';
+            $modifiedColumns[':p' . $index++]  = 'TITLE';
         }
         if ($this->isColumnModified(ContactPeer::FIRST_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`FIRST_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'FIRST_NAME';
         }
         if ($this->isColumnModified(ContactPeer::LAST_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`LAST_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'LAST_NAME';
         }
         if ($this->isColumnModified(ContactPeer::MAIDEN_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`MAIDEN_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'MAIDEN_NAME';
         }
         if ($this->isColumnModified(ContactPeer::COMPLEMENT_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`COMPLEMENT_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'COMPLEMENT_NAME';
         }
         if ($this->isColumnModified(ContactPeer::NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`NAME`';
+            $modifiedColumns[':p' . $index++]  = 'NAME';
         }
         if ($this->isColumnModified(ContactPeer::SHORT_NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`SHORT_NAME`';
+            $modifiedColumns[':p' . $index++]  = 'SHORT_NAME';
         }
         if ($this->isColumnModified(ContactPeer::ZONE_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ZONE_ID`';
+            $modifiedColumns[':p' . $index++]  = 'ZONE_ID';
         }
         if ($this->isColumnModified(ContactPeer::ADDRESS1)) {
-            $modifiedColumns[':p' . $index++]  = '`ADDRESS1`';
+            $modifiedColumns[':p' . $index++]  = 'ADDRESS1';
         }
         if ($this->isColumnModified(ContactPeer::ADDRESS2)) {
-            $modifiedColumns[':p' . $index++]  = '`ADDRESS2`';
+            $modifiedColumns[':p' . $index++]  = 'ADDRESS2';
         }
         if ($this->isColumnModified(ContactPeer::CITY)) {
-            $modifiedColumns[':p' . $index++]  = '`CITY`';
+            $modifiedColumns[':p' . $index++]  = 'CITY';
         }
         if ($this->isColumnModified(ContactPeer::POSTAL_CODE)) {
-            $modifiedColumns[':p' . $index++]  = '`POSTAL_CODE`';
+            $modifiedColumns[':p' . $index++]  = 'POSTAL_CODE';
         }
         if ($this->isColumnModified(ContactPeer::COUNTRY)) {
-            $modifiedColumns[':p' . $index++]  = '`COUNTRY`';
+            $modifiedColumns[':p' . $index++]  = 'COUNTRY';
         }
         if ($this->isColumnModified(ContactPeer::PHONE)) {
-            $modifiedColumns[':p' . $index++]  = '`PHONE`';
+            $modifiedColumns[':p' . $index++]  = 'PHONE';
         }
         if ($this->isColumnModified(ContactPeer::FAX)) {
-            $modifiedColumns[':p' . $index++]  = '`FAX`';
+            $modifiedColumns[':p' . $index++]  = 'FAX';
         }
         if ($this->isColumnModified(ContactPeer::MOBILE)) {
-            $modifiedColumns[':p' . $index++]  = '`MOBILE`';
+            $modifiedColumns[':p' . $index++]  = 'MOBILE';
         }
         if ($this->isColumnModified(ContactPeer::EMAIL)) {
-            $modifiedColumns[':p' . $index++]  = '`EMAIL`';
+            $modifiedColumns[':p' . $index++]  = 'EMAIL';
         }
         if ($this->isColumnModified(ContactPeer::WEB)) {
-            $modifiedColumns[':p' . $index++]  = '`WEB`';
+            $modifiedColumns[':p' . $index++]  = 'WEB';
         }
         if ($this->isColumnModified(ContactPeer::COMMENT)) {
-            $modifiedColumns[':p' . $index++]  = '`COMMENT`';
+            $modifiedColumns[':p' . $index++]  = 'COMMENT';
         }
         if ($this->isColumnModified(ContactPeer::HIDDEN_COMMENT)) {
-            $modifiedColumns[':p' . $index++]  = '`HIDDEN_COMMENT`';
+            $modifiedColumns[':p' . $index++]  = 'HIDDEN_COMMENT';
         }
         if ($this->isColumnModified(ContactPeer::BIRTH_DATE)) {
-            $modifiedColumns[':p' . $index++]  = '`BIRTH_DATE`';
+            $modifiedColumns[':p' . $index++]  = 'BIRTH_DATE';
         }
         if ($this->isColumnModified(ContactPeer::BIRTH_PLACE)) {
-            $modifiedColumns[':p' . $index++]  = '`BIRTH_PLACE`';
+            $modifiedColumns[':p' . $index++]  = 'BIRTH_PLACE';
         }
         if ($this->isColumnModified(ContactPeer::BIRTH_PLACE_CODE)) {
-            $modifiedColumns[':p' . $index++]  = '`BIRTH_PLACE_CODE`';
+            $modifiedColumns[':p' . $index++]  = 'BIRTH_PLACE_CODE';
         }
         if ($this->isColumnModified(ContactPeer::IS_ARCHIVE)) {
-            $modifiedColumns[':p' . $index++]  = '`IS_ARCHIVE`';
+            $modifiedColumns[':p' . $index++]  = 'IS_ARCHIVE';
         }
         if ($this->isColumnModified(ContactPeer::ARCHIVE_DATE)) {
-            $modifiedColumns[':p' . $index++]  = '`ARCHIVE_DATE`';
+            $modifiedColumns[':p' . $index++]  = 'ARCHIVE_DATE';
         }
         if ($this->isColumnModified(ContactPeer::ARCHIVE_COMMENT)) {
-            $modifiedColumns[':p' . $index++]  = '`ARCHIVE_COMMENT`';
+            $modifiedColumns[':p' . $index++]  = 'ARCHIVE_COMMENT';
         }
         if ($this->isColumnModified(ContactPeer::SECU_NUMBER)) {
-            $modifiedColumns[':p' . $index++]  = '`SECU_NUMBER`';
+            $modifiedColumns[':p' . $index++]  = 'SECU_NUMBER';
         }
         if ($this->isColumnModified(ContactPeer::SIRET)) {
-            $modifiedColumns[':p' . $index++]  = '`SIRET`';
+            $modifiedColumns[':p' . $index++]  = 'SIRET';
         }
         if ($this->isColumnModified(ContactPeer::SIREN)) {
-            $modifiedColumns[':p' . $index++]  = '`SIREN`';
+            $modifiedColumns[':p' . $index++]  = 'SIREN';
         }
         if ($this->isColumnModified(ContactPeer::NAF_CODE)) {
-            $modifiedColumns[':p' . $index++]  = '`NAF_CODE`';
+            $modifiedColumns[':p' . $index++]  = 'NAF_CODE';
         }
         if ($this->isColumnModified(ContactPeer::APE_CODE)) {
-            $modifiedColumns[':p' . $index++]  = '`APE_CODE`';
+            $modifiedColumns[':p' . $index++]  = 'APE_CODE';
         }
         if ($this->isColumnModified(ContactPeer::TYPE)) {
-            $modifiedColumns[':p' . $index++]  = '`TYPE`';
+            $modifiedColumns[':p' . $index++]  = 'TYPE';
         }
         if ($this->isColumnModified(ContactPeer::CREATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_AT';
         }
         if ($this->isColumnModified(ContactPeer::CREATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_BY';
         }
         if ($this->isColumnModified(ContactPeer::UPDATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_AT';
         }
         if ($this->isColumnModified(ContactPeer::UPDATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_BY';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sfc_abk_contact` (%s) VALUES (%s)',
+            'INSERT INTO sfc_abk_contact (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -2528,127 +2518,127 @@ abstract class BaseContact extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`PARENT_ID`':
+                    case 'PARENT_ID':
 						$stmt->bindValue($identifier, $this->parent_id, PDO::PARAM_INT);
                         break;
-                    case '`CIVILITY_ID`':
+                    case 'CIVILITY_ID':
 						$stmt->bindValue($identifier, $this->civility_id, PDO::PARAM_INT);
                         break;
-                    case '`SERVICE_ID`':
+                    case 'SERVICE_ID':
 						$stmt->bindValue($identifier, $this->service_id, PDO::PARAM_INT);
                         break;
-                    case '`ROLE`':
+                    case 'ROLE':
 						$stmt->bindValue($identifier, $this->role, PDO::PARAM_STR);
                         break;
-                    case '`TITLE`':
+                    case 'TITLE':
 						$stmt->bindValue($identifier, $this->title, PDO::PARAM_STR);
                         break;
-                    case '`FIRST_NAME`':
+                    case 'FIRST_NAME':
 						$stmt->bindValue($identifier, $this->first_name, PDO::PARAM_STR);
                         break;
-                    case '`LAST_NAME`':
+                    case 'LAST_NAME':
 						$stmt->bindValue($identifier, $this->last_name, PDO::PARAM_STR);
                         break;
-                    case '`MAIDEN_NAME`':
+                    case 'MAIDEN_NAME':
 						$stmt->bindValue($identifier, $this->maiden_name, PDO::PARAM_STR);
                         break;
-                    case '`COMPLEMENT_NAME`':
+                    case 'COMPLEMENT_NAME':
 						$stmt->bindValue($identifier, $this->complement_name, PDO::PARAM_STR);
                         break;
-                    case '`NAME`':
+                    case 'NAME':
 						$stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
                         break;
-                    case '`SHORT_NAME`':
+                    case 'SHORT_NAME':
 						$stmt->bindValue($identifier, $this->short_name, PDO::PARAM_STR);
                         break;
-                    case '`ZONE_ID`':
+                    case 'ZONE_ID':
 						$stmt->bindValue($identifier, $this->zone_id, PDO::PARAM_INT);
                         break;
-                    case '`ADDRESS1`':
+                    case 'ADDRESS1':
 						$stmt->bindValue($identifier, $this->address1, PDO::PARAM_STR);
                         break;
-                    case '`ADDRESS2`':
+                    case 'ADDRESS2':
 						$stmt->bindValue($identifier, $this->address2, PDO::PARAM_STR);
                         break;
-                    case '`CITY`':
+                    case 'CITY':
 						$stmt->bindValue($identifier, $this->city, PDO::PARAM_STR);
                         break;
-                    case '`POSTAL_CODE`':
+                    case 'POSTAL_CODE':
 						$stmt->bindValue($identifier, $this->postal_code, PDO::PARAM_STR);
                         break;
-                    case '`COUNTRY`':
+                    case 'COUNTRY':
 						$stmt->bindValue($identifier, $this->country, PDO::PARAM_STR);
                         break;
-                    case '`PHONE`':
+                    case 'PHONE':
 						$stmt->bindValue($identifier, $this->phone, PDO::PARAM_STR);
                         break;
-                    case '`FAX`':
+                    case 'FAX':
 						$stmt->bindValue($identifier, $this->fax, PDO::PARAM_STR);
                         break;
-                    case '`MOBILE`':
+                    case 'MOBILE':
 						$stmt->bindValue($identifier, $this->mobile, PDO::PARAM_STR);
                         break;
-                    case '`EMAIL`':
+                    case 'EMAIL':
 						$stmt->bindValue($identifier, $this->email, PDO::PARAM_STR);
                         break;
-                    case '`WEB`':
+                    case 'WEB':
 						$stmt->bindValue($identifier, $this->web, PDO::PARAM_STR);
                         break;
-                    case '`COMMENT`':
+                    case 'COMMENT':
 						$stmt->bindValue($identifier, $this->comment, PDO::PARAM_STR);
                         break;
-                    case '`HIDDEN_COMMENT`':
+                    case 'HIDDEN_COMMENT':
 						$stmt->bindValue($identifier, $this->hidden_comment, PDO::PARAM_STR);
                         break;
-                    case '`BIRTH_DATE`':
+                    case 'BIRTH_DATE':
 						$stmt->bindValue($identifier, $this->birth_date, PDO::PARAM_STR);
                         break;
-                    case '`BIRTH_PLACE`':
+                    case 'BIRTH_PLACE':
 						$stmt->bindValue($identifier, $this->birth_place, PDO::PARAM_STR);
                         break;
-                    case '`BIRTH_PLACE_CODE`':
+                    case 'BIRTH_PLACE_CODE':
 						$stmt->bindValue($identifier, $this->birth_place_code, PDO::PARAM_STR);
                         break;
-                    case '`IS_ARCHIVE`':
-						$stmt->bindValue($identifier, (int) $this->is_archive, PDO::PARAM_INT);
+                    case 'IS_ARCHIVE':
+						$stmt->bindValue($identifier, $this->is_archive, PDO::PARAM_INT);
                         break;
-                    case '`ARCHIVE_DATE`':
+                    case 'ARCHIVE_DATE':
 						$stmt->bindValue($identifier, $this->archive_date, PDO::PARAM_STR);
                         break;
-                    case '`ARCHIVE_COMMENT`':
+                    case 'ARCHIVE_COMMENT':
 						$stmt->bindValue($identifier, $this->archive_comment, PDO::PARAM_STR);
                         break;
-                    case '`SECU_NUMBER`':
+                    case 'SECU_NUMBER':
 						$stmt->bindValue($identifier, $this->secu_number, PDO::PARAM_STR);
                         break;
-                    case '`SIRET`':
+                    case 'SIRET':
 						$stmt->bindValue($identifier, $this->siret, PDO::PARAM_STR);
                         break;
-                    case '`SIREN`':
+                    case 'SIREN':
 						$stmt->bindValue($identifier, $this->siren, PDO::PARAM_STR);
                         break;
-                    case '`NAF_CODE`':
+                    case 'NAF_CODE':
 						$stmt->bindValue($identifier, $this->naf_code, PDO::PARAM_STR);
                         break;
-                    case '`APE_CODE`':
+                    case 'APE_CODE':
 						$stmt->bindValue($identifier, $this->ape_code, PDO::PARAM_STR);
                         break;
-                    case '`TYPE`':
+                    case 'TYPE':
 						$stmt->bindValue($identifier, $this->type, PDO::PARAM_INT);
                         break;
-                    case '`CREATED_AT`':
+                    case 'CREATED_AT':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_BY`':
+                    case 'CREATED_BY':
 						$stmt->bindValue($identifier, $this->created_by, PDO::PARAM_INT);
                         break;
-                    case '`UPDATED_AT`':
+                    case 'UPDATED_AT':
 						$stmt->bindValue($identifier, $this->updated_at, PDO::PARAM_STR);
                         break;
-                    case '`UPDATED_BY`':
+                    case 'UPDATED_BY':
 						$stmt->bindValue($identifier, $this->updated_by, PDO::PARAM_INT);
                         break;
                 }
@@ -2658,13 +2648,6 @@ abstract class BaseContact extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

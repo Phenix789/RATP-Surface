@@ -127,7 +127,7 @@ abstract class BaseContactMultipleQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `CONTACT_ID`, `PARENT_ID`, `ROLE` FROM `sfc_abk_contact_multiple` WHERE `CONTACT_ID` = :p0 AND `PARENT_ID` = :p1';
+        $sql = 'SELECT CONTACT_ID, PARENT_ID, ROLE FROM sfc_abk_contact_multiple WHERE CONTACT_ID = :p0 AND PARENT_ID = :p1';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

@@ -112,7 +112,7 @@ abstract class BasesfGuardRememberKey extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getCreatedAt($format = 'Y-m-d H:i:s')
@@ -122,16 +122,11 @@ abstract class BasesfGuardRememberKey extends BaseObject
         }
 
 
-        if ($this->created_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->created_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->created_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
         }
 
         if ($format === null) {
@@ -554,20 +549,20 @@ abstract class BasesfGuardRememberKey extends BaseObject
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(sfGuardRememberKeyPeer::USER_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`USER_ID`';
+            $modifiedColumns[':p' . $index++]  = 'USER_ID';
         }
         if ($this->isColumnModified(sfGuardRememberKeyPeer::REMEMBER_KEY)) {
-            $modifiedColumns[':p' . $index++]  = '`REMEMBER_KEY`';
+            $modifiedColumns[':p' . $index++]  = 'REMEMBER_KEY';
         }
         if ($this->isColumnModified(sfGuardRememberKeyPeer::IP_ADDRESS)) {
-            $modifiedColumns[':p' . $index++]  = '`IP_ADDRESS`';
+            $modifiedColumns[':p' . $index++]  = 'IP_ADDRESS';
         }
         if ($this->isColumnModified(sfGuardRememberKeyPeer::CREATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_AT';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sf_guard_remember_key` (%s) VALUES (%s)',
+            'INSERT INTO sf_guard_remember_key (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -576,16 +571,16 @@ abstract class BasesfGuardRememberKey extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`USER_ID`':
+                    case 'USER_ID':
 						$stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
-                    case '`REMEMBER_KEY`':
+                    case 'REMEMBER_KEY':
 						$stmt->bindValue($identifier, $this->remember_key, PDO::PARAM_STR);
                         break;
-                    case '`IP_ADDRESS`':
+                    case 'IP_ADDRESS':
 						$stmt->bindValue($identifier, $this->ip_address, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_AT`':
+                    case 'CREATED_AT':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
                         break;
                 }

@@ -37,6 +37,7 @@ class DiscreteFieldTableMap extends TableMap
         $this->setClassname('DiscreteField');
         $this->setPackage('plugins.surfaceStatPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('stat_discrete_field_SEQ');
         $this->setSingleTableInheritance(true);
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);

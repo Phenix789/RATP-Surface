@@ -451,14 +451,14 @@ abstract class BaseStationType extends BaseObject
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(StationTypePeer::STATION_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`STATION_ID`';
+            $modifiedColumns[':p' . $index++]  = 'STATION_ID';
         }
         if ($this->isColumnModified(StationTypePeer::TYPE_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`TYPE_ID`';
+            $modifiedColumns[':p' . $index++]  = 'TYPE_ID';
         }
 
         $sql = sprintf(
-            'INSERT INTO `ratp_station_type` (%s) VALUES (%s)',
+            'INSERT INTO ratp_station_type (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -467,10 +467,10 @@ abstract class BaseStationType extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`STATION_ID`':
+                    case 'STATION_ID':
 						$stmt->bindValue($identifier, $this->station_id, PDO::PARAM_INT);
                         break;
-                    case '`TYPE_ID`':
+                    case 'TYPE_ID':
 						$stmt->bindValue($identifier, $this->type_id, PDO::PARAM_INT);
                         break;
                 }

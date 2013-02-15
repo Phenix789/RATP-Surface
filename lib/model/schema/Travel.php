@@ -18,7 +18,7 @@ class Travel extends BaseTravel {
 	}
 	
 	public function getDuration() {
-		return $this->getDateOut(null) - $this->getDateIn(null);
+		return $this->getDateOut(null)->getTimestamp() - $this->getDateIn(null)->getTimestamp();
 	}
 	
 }

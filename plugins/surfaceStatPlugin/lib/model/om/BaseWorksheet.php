@@ -622,23 +622,33 @@ abstract class BaseWorksheet extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . WorksheetPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT stat_worksheet_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(WorksheetPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(WorksheetPeer::NAME)) {
-            $modifiedColumns[':p' . $index++]  = '`NAME`';
+            $modifiedColumns[':p' . $index++]  = 'NAME';
         }
         if ($this->isColumnModified(WorksheetPeer::FIRST_PARAM)) {
-            $modifiedColumns[':p' . $index++]  = '`FIRST_PARAM`';
+            $modifiedColumns[':p' . $index++]  = 'FIRST_PARAM';
         }
         if ($this->isColumnModified(WorksheetPeer::SECOND_PARAM)) {
-            $modifiedColumns[':p' . $index++]  = '`SECOND_PARAM`';
+            $modifiedColumns[':p' . $index++]  = 'SECOND_PARAM';
         }
 
         $sql = sprintf(
-            'INSERT INTO `stat_worksheet` (%s) VALUES (%s)',
+            'INSERT INTO stat_worksheet (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -647,16 +657,16 @@ abstract class BaseWorksheet extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`NAME`':
+                    case 'NAME':
 						$stmt->bindValue($identifier, $this->name, PDO::PARAM_STR);
                         break;
-                    case '`FIRST_PARAM`':
+                    case 'FIRST_PARAM':
 						$stmt->bindValue($identifier, $this->first_param, PDO::PARAM_INT);
                         break;
-                    case '`SECOND_PARAM`':
+                    case 'SECOND_PARAM':
 						$stmt->bindValue($identifier, $this->second_param, PDO::PARAM_INT);
                         break;
                 }
@@ -666,13 +676,6 @@ abstract class BaseWorksheet extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

@@ -37,9 +37,10 @@ class CollaboratorTableMap extends TableMap
         $this->setClassname('Collaborator');
         $this->setPackage('lib.model.collaborator');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('collaborator_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
-        $this->addColumn('IS_ACTIVE', 'IsActive', 'BOOLEAN', false, 1, true);
+        $this->addColumn('IS_ACTIVE', 'IsActive', 'BOOLEAN_EMU', false, 1, '1');
         $this->addColumn('FIRST_NAME', 'FirstName', 'VARCHAR', false, 60, null);
         $this->addColumn('LAST_NAME', 'LastName', 'VARCHAR', true, 60, null);
         $this->addColumn('EMAIL', 'Email', 'VARCHAR', false, 255, null);

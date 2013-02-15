@@ -302,7 +302,7 @@ abstract class BasesfGuardUserQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `USERNAME`, `ALGORITHM`, `SALT`, `PASSWORD`, `CREATED_AT`, `LAST_LOGIN`, `IS_ACTIVE`, `IS_SUPER_ADMIN`, `IS_SUDOER`, `TIME_SUDOER` FROM `sf_guard_user` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, USERNAME, ALGORITHM, SALT, PASSWORD, CREATED_AT, LAST_LOGIN, IS_ACTIVE, IS_SUPER_ADMIN, IS_SUDOER, TIME_SUDOER FROM sf_guard_user WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

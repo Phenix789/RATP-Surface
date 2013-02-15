@@ -37,6 +37,7 @@ class sfGuardUserProfileTableMap extends TableMap
         $this->setClassname('sfGuardUserProfile');
         $this->setPackage('lib.model.collaborator');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sf_guard_user_profile_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addForeignKey('USER_ID', 'UserId', 'INTEGER', 'sf_guard_user', 'ID', true, null, null);

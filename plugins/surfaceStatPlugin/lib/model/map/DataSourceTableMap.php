@@ -37,6 +37,7 @@ class DataSourceTableMap extends TableMap
         $this->setClassname('DataSource');
         $this->setPackage('plugins.surfaceStatPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('stat_datasource_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('TABLE_REF', 'TableRef', 'VARCHAR', false, 255, null);

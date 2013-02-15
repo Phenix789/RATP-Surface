@@ -127,7 +127,7 @@ abstract class BasesfGuardRememberKeyQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `USER_ID`, `REMEMBER_KEY`, `IP_ADDRESS`, `CREATED_AT` FROM `sf_guard_remember_key` WHERE `USER_ID` = :p0 AND `IP_ADDRESS` = :p1';
+        $sql = 'SELECT USER_ID, REMEMBER_KEY, IP_ADDRESS, CREATED_AT FROM sf_guard_remember_key WHERE USER_ID = :p0 AND IP_ADDRESS = :p1';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

@@ -37,6 +37,7 @@ class sfGuardUserTableMap extends TableMap
         $this->setClassname('sfGuardUser');
         $this->setPackage('plugins.sfGuardPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sf_guard_user_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('USERNAME', 'Username', 'VARCHAR', true, 128, null);
@@ -45,9 +46,9 @@ class sfGuardUserTableMap extends TableMap
         $this->addColumn('PASSWORD', 'Password', 'VARCHAR', true, 128, null);
         $this->addColumn('CREATED_AT', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('LAST_LOGIN', 'LastLogin', 'TIMESTAMP', false, null, null);
-        $this->addColumn('IS_ACTIVE', 'IsActive', 'BOOLEAN', true, 1, true);
-        $this->addColumn('IS_SUPER_ADMIN', 'IsSuperAdmin', 'BOOLEAN', true, 1, false);
-        $this->addColumn('IS_SUDOER', 'IsSudoer', 'BOOLEAN', false, 1, false);
+        $this->addColumn('IS_ACTIVE', 'IsActive', 'BOOLEAN_EMU', true, 1, '1');
+        $this->addColumn('IS_SUPER_ADMIN', 'IsSuperAdmin', 'BOOLEAN_EMU', true, 1, '0');
+        $this->addColumn('IS_SUDOER', 'IsSudoer', 'BOOLEAN_EMU', false, 1, '0');
         $this->addColumn('TIME_SUDOER', 'TimeSudoer', 'INTEGER', false, null, 60);
         // validators
     } // initialize()

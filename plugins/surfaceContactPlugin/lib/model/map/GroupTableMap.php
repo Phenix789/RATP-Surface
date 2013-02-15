@@ -37,11 +37,12 @@ class GroupTableMap extends TableMap
         $this->setClassname('Group');
         $this->setPackage('plugins.surfaceContactPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_abk_group_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('NAME', 'Name', 'VARCHAR', false, 255, null);
         $this->addColumn('CODE_NAME', 'CodeName', 'VARCHAR', false, 255, null);
-        $this->addColumn('COMMENT', 'Comment', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('COMMENT', 'Comment', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('NAME_SPACE', 'NameSpace', 'VARCHAR', false, 255, null);
         // validators
     } // initialize()

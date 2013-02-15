@@ -2527,8 +2527,6 @@ abstract class BaseContactPeer {
             // use transaction because $criteria could contain info
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
-            $affectedRows += ContactPeer::doOnDeleteCascade(new Criteria(ContactPeer::DATABASE_NAME), $con);
-            ContactPeer::doOnDeleteSetNull(new Criteria(ContactPeer::DATABASE_NAME), $con);
             $affectedRows += BasePeer::doDeleteAll(ContactPeer::TABLE_NAME, $con, ContactPeer::DATABASE_NAME);
             // Because this db requires some delete cascade/set null emulation, we have to
             // clear the cached instance *after* the emulation has happened (since
@@ -2562,14 +2560,24 @@ abstract class BaseContactPeer {
         }
 
         if ($values instanceof Criteria) {
+            // invalidate the cache for all objects of this type, since we have no
+            // way of knowing (without running a query) what objects should be invalidated
+            // from the cache based on this Criteria.
+            ContactPeer::clearInstancePool();
             // rename for clarity
             $criteria = clone $values;
         } elseif ($values instanceof Contact) { // it's a model object
+            // invalidate the cache for this single object
+            ContactPeer::removeInstanceFromPool($values);
             // create criteria based on pk values
             $criteria = $values->buildPkeyCriteria();
         } else { // it's a primary key, or an array of pks
             $criteria = new Criteria(self::DATABASE_NAME);
             $criteria->add(ContactPeer::ID, (array) $values, Criteria::IN);
+            // invalidate the cache for this object(s)
+            foreach ((array) $values as $singleval) {
+                ContactPeer::removeInstanceFromPool($singleval);
+            }
         }
 
         // Set the correct dbName
@@ -2582,27 +2590,6 @@ abstract class BaseContactPeer {
             // for more than one table or we could emulating ON DELETE CASCADE, etc.
             $con->beginTransaction();
             
-            // cloning the Criteria in case it's modified by doSelect() or doSelectStmt()
-            $c = clone $criteria;
-            $affectedRows += ContactPeer::doOnDeleteCascade($c, $con);
-            
-            // cloning the Criteria in case it's modified by doSelect() or doSelectStmt()
-            $c = clone $criteria;
-            ContactPeer::doOnDeleteSetNull($c, $con);
-            
-            // Because this db requires some delete cascade/set null emulation, we have to
-            // clear the cached instance *after* the emulation has happened (since
-            // instances get re-added by the select statement contained therein).
-            if ($values instanceof Criteria) {
-                ContactPeer::clearInstancePool();
-            } elseif ($values instanceof Contact) { // it's a model object
-                ContactPeer::removeInstanceFromPool($values);
-            } else { // it's a primary key, or an array of pks
-                foreach ((array) $values as $singleval) {
-                    ContactPeer::removeInstanceFromPool($singleval);
-                }
-            }
-            
             $affectedRows += BasePeer::doDelete($criteria, $con);
             ContactPeer::clearRelatedInstancePool();
             $con->commit();
@@ -2611,88 +2598,6 @@ abstract class BaseContactPeer {
         } catch (PropelException $e) {
             $con->rollBack();
             throw $e;
-        }
-    }
-
-    /**
-     * This is a method for emulating ON DELETE CASCADE for DBs that don't support this
-     * feature (like MySQL or SQLite).
-     *
-     * This method is not very speedy because it must perform a query first to get
-     * the implicated records and then perform the deletes by calling those Peer classes.
-     *
-     * This method should be used within a transaction if possible.
-     *
-     * @param      Criteria $criteria
-     * @param      PropelPDO $con
-     * @return int The number of affected rows (if supported by underlying database driver).
-     */
-    protected static function doOnDeleteCascade(Criteria $criteria, PropelPDO $con)
-    {
-        // initialize var to track total num of affected rows
-        $affectedRows = 0;
-
-        // first find the objects that are implicated by the $criteria
-        $objects = ContactPeer::doSelect($criteria, $con);
-        foreach ($objects as $obj) {
-
-
-            // delete related ContactMultiple objects
-            $criteria = new Criteria(ContactMultiplePeer::DATABASE_NAME);
-            
-            $criteria->add(ContactMultiplePeer::CONTACT_ID, $obj->getId());
-            $affectedRows += ContactMultiplePeer::doDelete($criteria, $con);
-
-            // delete related ContactMultiple objects
-            $criteria = new Criteria(ContactMultiplePeer::DATABASE_NAME);
-            
-            $criteria->add(ContactMultiplePeer::PARENT_ID, $obj->getId());
-            $affectedRows += ContactMultiplePeer::doDelete($criteria, $con);
-
-            // delete related ContactGroup objects
-            $criteria = new Criteria(ContactGroupPeer::DATABASE_NAME);
-            
-            $criteria->add(ContactGroupPeer::CONTACT_ID, $obj->getId());
-            $affectedRows += ContactGroupPeer::doDelete($criteria, $con);
-
-            // delete related MaillingListContact objects
-            $criteria = new Criteria(MaillingListContactPeer::DATABASE_NAME);
-            
-            $criteria->add(MaillingListContactPeer::CONTACT_ID, $obj->getId());
-            $affectedRows += MaillingListContactPeer::doDelete($criteria, $con);
-        }
-
-        return $affectedRows;
-    }
-
-    /**
-     * This is a method for emulating ON DELETE SET NULL DBs that don't support this
-     * feature (like MySQL or SQLite).
-     *
-     * This method is not very speedy because it must perform a query first to get
-     * the implicated records and then perform the deletes by calling those Peer classes.
-     *
-     * This method should be used within a transaction if possible.
-     *
-     * @param      Criteria $criteria
-     * @param      PropelPDO $con
-     * @return void
-     */
-    protected static function doOnDeleteSetNull(Criteria $criteria, PropelPDO $con)
-    {
-
-        // first find the objects that are implicated by the $criteria
-        $objects = ContactPeer::doSelect($criteria, $con);
-        foreach ($objects as $obj) {
-
-            // set fkey col in related Contact rows to NULL
-            $selectCriteria = new Criteria(ContactPeer::DATABASE_NAME);
-            $updateValues = new Criteria(ContactPeer::DATABASE_NAME);
-            $selectCriteria->add(ContactPeer::PARENT_ID, $obj->getId());
-            $updateValues->add(ContactPeer::PARENT_ID, null);
-
-            BasePeer::doUpdate($selectCriteria, $updateValues, $con); // use BasePeer because generated Peer doUpdate() methods only update using pkey
-
         }
     }
 

@@ -511,17 +511,17 @@ abstract class BasesfGuardGroupPermission extends BaseObject
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(sfGuardGroupPermissionPeer::GROUP_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`GROUP_ID`';
+            $modifiedColumns[':p' . $index++]  = 'GROUP_ID';
         }
         if ($this->isColumnModified(sfGuardGroupPermissionPeer::PERMISSION_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`PERMISSION_ID`';
+            $modifiedColumns[':p' . $index++]  = 'PERMISSION_ID';
         }
         if ($this->isColumnModified(sfGuardGroupPermissionPeer::ENTITY_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ENTITY_ID`';
+            $modifiedColumns[':p' . $index++]  = 'ENTITY_ID';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sf_guard_group_permission` (%s) VALUES (%s)',
+            'INSERT INTO sf_guard_group_permission (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -530,13 +530,13 @@ abstract class BasesfGuardGroupPermission extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`GROUP_ID`':
+                    case 'GROUP_ID':
 						$stmt->bindValue($identifier, $this->group_id, PDO::PARAM_INT);
                         break;
-                    case '`PERMISSION_ID`':
+                    case 'PERMISSION_ID':
 						$stmt->bindValue($identifier, $this->permission_id, PDO::PARAM_INT);
                         break;
-                    case '`ENTITY_ID`':
+                    case 'ENTITY_ID':
 						$stmt->bindValue($identifier, $this->entity_id, PDO::PARAM_INT);
                         break;
                 }

@@ -37,6 +37,7 @@ class ClientTableMap extends TableMap
         $this->setClassname('Client');
         $this->setPackage('lib.model.schema');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('ratp_client_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('LASTNAME', 'Lastname', 'VARCHAR', false, 255, null);

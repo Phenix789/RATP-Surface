@@ -37,6 +37,7 @@ class StationTableMap extends TableMap
         $this->setClassname('Station');
         $this->setPackage('lib.model.schema');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('ratp_station_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('CODE', 'Code', 'VARCHAR', false, 20, null);

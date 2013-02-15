@@ -37,6 +37,7 @@ class WorksheetTableMap extends TableMap
         $this->setClassname('Worksheet');
         $this->setPackage('plugins.surfaceStatPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('stat_worksheet_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('NAME', 'Name', 'VARCHAR', true, 255, null);

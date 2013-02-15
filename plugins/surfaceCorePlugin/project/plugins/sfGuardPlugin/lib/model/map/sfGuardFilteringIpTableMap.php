@@ -37,6 +37,7 @@ class sfGuardFilteringIpTableMap extends TableMap
         $this->setClassname('sfGuardFilteringIp');
         $this->setPackage('plugins.sfGuardPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sf_guard_filtering_ip_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('IP', 'Ip', 'VARCHAR', false, 100, null);

@@ -126,7 +126,7 @@ abstract class BaseHistoryContactQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `ID`, `HISTORY_ID`, `CONTACT_ID`, `CONTACT_NAME` FROM `plugin_history_contact` WHERE `ID` = :p0';
+        $sql = 'SELECT ID, HISTORY_ID, CONTACT_ID, CONTACT_NAME FROM plugin_history_contact WHERE ID = :p0';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key, PDO::PARAM_INT);

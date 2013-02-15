@@ -123,7 +123,7 @@ abstract class BaseContactGroupQuery extends ModelCriteria
      */
     protected function findPkSimple($key, $con)
     {
-        $sql = 'SELECT `CONTACT_ID`, `GROUP_ID` FROM `sfc_abk_contact_group` WHERE `CONTACT_ID` = :p0 AND `GROUP_ID` = :p1';
+        $sql = 'SELECT CONTACT_ID, GROUP_ID FROM sfc_abk_contact_group WHERE CONTACT_ID = :p0 AND GROUP_ID = :p1';
         try {
             $stmt = $con->prepare($sql);
 			$stmt->bindValue(':p0', $key[0], PDO::PARAM_INT);

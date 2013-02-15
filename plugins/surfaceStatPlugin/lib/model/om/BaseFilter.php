@@ -451,14 +451,14 @@ abstract class BaseFilter extends BaseObject
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(FilterPeer::WORKSHEET_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`WORKSHEET_ID`';
+            $modifiedColumns[':p' . $index++]  = 'WORKSHEET_ID';
         }
         if ($this->isColumnModified(FilterPeer::DISCRETE_FIELD_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`DISCRETE_FIELD_ID`';
+            $modifiedColumns[':p' . $index++]  = 'DISCRETE_FIELD_ID';
         }
 
         $sql = sprintf(
-            'INSERT INTO `stat_filter` (%s) VALUES (%s)',
+            'INSERT INTO stat_filter (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -467,10 +467,10 @@ abstract class BaseFilter extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`WORKSHEET_ID`':
+                    case 'WORKSHEET_ID':
 						$stmt->bindValue($identifier, $this->worksheet_id, PDO::PARAM_INT);
                         break;
-                    case '`DISCRETE_FIELD_ID`':
+                    case 'DISCRETE_FIELD_ID':
 						$stmt->bindValue($identifier, $this->discrete_field_id, PDO::PARAM_INT);
                         break;
                 }

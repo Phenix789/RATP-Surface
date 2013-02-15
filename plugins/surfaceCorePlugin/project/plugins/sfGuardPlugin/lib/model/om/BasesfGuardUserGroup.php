@@ -451,14 +451,14 @@ abstract class BasesfGuardUserGroup extends BaseObject
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(sfGuardUserGroupPeer::USER_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`USER_ID`';
+            $modifiedColumns[':p' . $index++]  = 'USER_ID';
         }
         if ($this->isColumnModified(sfGuardUserGroupPeer::GROUP_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`GROUP_ID`';
+            $modifiedColumns[':p' . $index++]  = 'GROUP_ID';
         }
 
         $sql = sprintf(
-            'INSERT INTO `sf_guard_user_group` (%s) VALUES (%s)',
+            'INSERT INTO sf_guard_user_group (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -467,10 +467,10 @@ abstract class BasesfGuardUserGroup extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`USER_ID`':
+                    case 'USER_ID':
 						$stmt->bindValue($identifier, $this->user_id, PDO::PARAM_INT);
                         break;
-                    case '`GROUP_ID`':
+                    case 'GROUP_ID':
 						$stmt->bindValue($identifier, $this->group_id, PDO::PARAM_INT);
                         break;
                 }

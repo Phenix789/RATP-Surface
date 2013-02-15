@@ -37,6 +37,7 @@ class ContactTableMap extends TableMap
         $this->setClassname('Contact');
         $this->setPackage('plugins.surfaceContactPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sfc_abk_contact_SEQ');
         $this->setSingleTableInheritance(true);
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
@@ -62,14 +63,14 @@ class ContactTableMap extends TableMap
         $this->addColumn('MOBILE', 'Mobile', 'VARCHAR', false, 255, null);
         $this->addColumn('EMAIL', 'Email', 'VARCHAR', false, 255, null);
         $this->addColumn('WEB', 'Web', 'VARCHAR', false, 255, null);
-        $this->addColumn('COMMENT', 'Comment', 'LONGVARCHAR', false, null, null);
-        $this->addColumn('HIDDEN_COMMENT', 'HiddenComment', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('COMMENT', 'Comment', 'LONGVARCHAR', false, 2000, null);
+        $this->addColumn('HIDDEN_COMMENT', 'HiddenComment', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('BIRTH_DATE', 'BirthDate', 'DATE', false, null, null);
         $this->addColumn('BIRTH_PLACE', 'BirthPlace', 'VARCHAR', false, 255, null);
         $this->addColumn('BIRTH_PLACE_CODE', 'BirthPlaceCode', 'VARCHAR', false, 255, null);
-        $this->addColumn('IS_ARCHIVE', 'IsArchive', 'BOOLEAN', false, 1, false);
+        $this->addColumn('IS_ARCHIVE', 'IsArchive', 'BOOLEAN_EMU', false, 1, '0');
         $this->addColumn('ARCHIVE_DATE', 'ArchiveDate', 'DATE', false, null, null);
-        $this->addColumn('ARCHIVE_COMMENT', 'ArchiveComment', 'LONGVARCHAR', false, null, null);
+        $this->addColumn('ARCHIVE_COMMENT', 'ArchiveComment', 'LONGVARCHAR', false, 2000, null);
         $this->addColumn('SECU_NUMBER', 'SecuNumber', 'VARCHAR', false, 255, null);
         $this->addColumn('SIRET', 'Siret', 'VARCHAR', false, 255, null);
         $this->addColumn('SIREN', 'Siren', 'VARCHAR', false, 255, null);

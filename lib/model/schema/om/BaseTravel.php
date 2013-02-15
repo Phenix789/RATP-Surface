@@ -179,7 +179,7 @@ abstract class BaseTravel extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getDateIn($format = 'Y-m-d H:i:s')
@@ -189,16 +189,11 @@ abstract class BaseTravel extends BaseObject
         }
 
 
-        if ($this->date_in === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->date_in);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->date_in, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->date_in);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->date_in, true), $x);
         }
 
         if ($format === null) {
@@ -217,7 +212,7 @@ abstract class BaseTravel extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getDateOut($format = 'Y-m-d H:i:s')
@@ -227,16 +222,11 @@ abstract class BaseTravel extends BaseObject
         }
 
 
-        if ($this->date_out === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->date_out);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->date_out, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->date_out);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->date_out, true), $x);
         }
 
         if ($format === null) {
@@ -255,7 +245,7 @@ abstract class BaseTravel extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getCreatedAt($format = 'Y-m-d H:i:s')
@@ -265,16 +255,11 @@ abstract class BaseTravel extends BaseObject
         }
 
 
-        if ($this->created_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->created_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->created_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->created_at, true), $x);
         }
 
         if ($format === null) {
@@ -293,7 +278,7 @@ abstract class BaseTravel extends BaseObject
      *
      * @param      string $format The date/time format string (either date()-style or strftime()-style).
      *							If format is NULL, then the raw DateTime object will be returned.
-     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL, and 0 if column value is 0000-00-00 00:00:00
+     * @return mixed Formatted date/time value as string or DateTime object (if format is NULL), NULL if column is NULL
      * @throws PropelException - if unable to parse/validate the date/time value.
      */
     public function getUpdatedAt($format = 'Y-m-d H:i:s')
@@ -303,16 +288,11 @@ abstract class BaseTravel extends BaseObject
         }
 
 
-        if ($this->updated_at === '0000-00-00 00:00:00') {
-            // while technically this is not a default value of NULL,
-            // this seems to be closest in meaning.
-            return null;
-        } else {
-            try {
-                $dt = new DateTime($this->updated_at);
-            } catch (Exception $x) {
-                throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
-            }
+
+        try {
+            $dt = new DateTime($this->updated_at);
+        } catch (Exception $x) {
+            throw new PropelException("Internally stored date/time/timestamp value could not be converted to DateTime: " . var_export($this->updated_at, true), $x);
         }
 
         if ($format === null) {
@@ -996,41 +976,51 @@ abstract class BaseTravel extends BaseObject
         if (null !== $this->id) {
             throw new PropelException('Cannot insert a value for auto-increment primary key (' . TravelPeer::ID . ')');
         }
+        if (null === $this->id) {
+            try {				
+				$stmt = $con->query('SELECT ratp_travel_SEQ.nextval FROM dual');
+				$row = $stmt->fetch(PDO::FETCH_NUM);
+				$this->id = $row[0];
+            } catch (Exception $e) {
+                throw new PropelException('Unable to get sequence id.', $e);
+            }
+        }
+
 
          // check the columns in natural order for more readable SQL queries
         if ($this->isColumnModified(TravelPeer::ID)) {
-            $modifiedColumns[':p' . $index++]  = '`ID`';
+            $modifiedColumns[':p' . $index++]  = 'ID';
         }
         if ($this->isColumnModified(TravelPeer::CLIENT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`CLIENT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'CLIENT_ID';
         }
         if ($this->isColumnModified(TravelPeer::STATION_IN_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`STATION_IN_ID`';
+            $modifiedColumns[':p' . $index++]  = 'STATION_IN_ID';
         }
         if ($this->isColumnModified(TravelPeer::STATION_OUT_ID)) {
-            $modifiedColumns[':p' . $index++]  = '`STATION_OUT_ID`';
+            $modifiedColumns[':p' . $index++]  = 'STATION_OUT_ID';
         }
         if ($this->isColumnModified(TravelPeer::DATE_IN)) {
-            $modifiedColumns[':p' . $index++]  = '`DATE_IN`';
+            $modifiedColumns[':p' . $index++]  = 'DATE_IN';
         }
         if ($this->isColumnModified(TravelPeer::DATE_OUT)) {
-            $modifiedColumns[':p' . $index++]  = '`DATE_OUT`';
+            $modifiedColumns[':p' . $index++]  = 'DATE_OUT';
         }
         if ($this->isColumnModified(TravelPeer::CREATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_AT';
         }
         if ($this->isColumnModified(TravelPeer::UPDATED_AT)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_AT`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_AT';
         }
         if ($this->isColumnModified(TravelPeer::CREATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`CREATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'CREATED_BY';
         }
         if ($this->isColumnModified(TravelPeer::UPDATED_BY)) {
-            $modifiedColumns[':p' . $index++]  = '`UPDATED_BY`';
+            $modifiedColumns[':p' . $index++]  = 'UPDATED_BY';
         }
 
         $sql = sprintf(
-            'INSERT INTO `ratp_travel` (%s) VALUES (%s)',
+            'INSERT INTO ratp_travel (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -1039,34 +1029,34 @@ abstract class BaseTravel extends BaseObject
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case '`ID`':
+                    case 'ID':
 						$stmt->bindValue($identifier, $this->id, PDO::PARAM_INT);
                         break;
-                    case '`CLIENT_ID`':
+                    case 'CLIENT_ID':
 						$stmt->bindValue($identifier, $this->client_id, PDO::PARAM_INT);
                         break;
-                    case '`STATION_IN_ID`':
+                    case 'STATION_IN_ID':
 						$stmt->bindValue($identifier, $this->station_in_id, PDO::PARAM_INT);
                         break;
-                    case '`STATION_OUT_ID`':
+                    case 'STATION_OUT_ID':
 						$stmt->bindValue($identifier, $this->station_out_id, PDO::PARAM_INT);
                         break;
-                    case '`DATE_IN`':
+                    case 'DATE_IN':
 						$stmt->bindValue($identifier, $this->date_in, PDO::PARAM_STR);
                         break;
-                    case '`DATE_OUT`':
+                    case 'DATE_OUT':
 						$stmt->bindValue($identifier, $this->date_out, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_AT`':
+                    case 'CREATED_AT':
 						$stmt->bindValue($identifier, $this->created_at, PDO::PARAM_STR);
                         break;
-                    case '`UPDATED_AT`':
+                    case 'UPDATED_AT':
 						$stmt->bindValue($identifier, $this->updated_at, PDO::PARAM_STR);
                         break;
-                    case '`CREATED_BY`':
+                    case 'CREATED_BY':
 						$stmt->bindValue($identifier, $this->created_by, PDO::PARAM_INT);
                         break;
-                    case '`UPDATED_BY`':
+                    case 'UPDATED_BY':
 						$stmt->bindValue($identifier, $this->updated_by, PDO::PARAM_INT);
                         break;
                 }
@@ -1076,13 +1066,6 @@ abstract class BaseTravel extends BaseObject
             Propel::log($e->getMessage(), Propel::LOG_ERR);
             throw new PropelException(sprintf('Unable to execute INSERT statement [%s]', $sql), $e);
         }
-
-        try {
-			$pk = $con->lastInsertId();
-        } catch (Exception $e) {
-            throw new PropelException('Unable to get autoincrement id.', $e);
-        }
-        $this->setId($pk);
 
         $this->setNew(false);
     }

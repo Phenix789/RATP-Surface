@@ -37,6 +37,7 @@ class sfGuardEntityTableMap extends TableMap
         $this->setClassname('sfGuardEntity');
         $this->setPackage('plugins.sfGuardPlugin.lib.model');
         $this->setUseIdGenerator(true);
+        $this->setPrimaryKeyMethodInfo('sf_guard_entity_SEQ');
         // columns
         $this->addPrimaryKey('ID', 'Id', 'INTEGER', true, null, null);
         $this->addColumn('NAME', 'Name', 'VARCHAR', true, 50, null);
